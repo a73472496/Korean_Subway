@@ -1,190 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>問題回報後台 · 首爾地鐵</title>
-<style>
-:root{--bg:#E7EAEE;--line:#DDE1E6;--card:#fff;--ink:#14171C;--muted:#68717D;--hair:#D3D8DE;--blue:#1B3A8C}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--ink);background:var(--bg);
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:46px 46px;line-height:1.6}
-.wrap{max-width:980px;margin:0 auto;padding:22px 16px 70px}
-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
-.eyebrow{font-size:11px;letter-spacing:.32em;color:#8B939E;font-weight:800}
-h1{font-size:clamp(28px,7vw,42px);line-height:1.1;letter-spacing:-.03em}
-a{color:var(--blue);font-weight:800;text-decoration:none}
-.toolbar,.card{background:var(--card);border:1px solid var(--hair);border-radius:5px;padding:16px;margin-bottom:12px}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-button,select,textarea{font:inherit}
-button{border:1px solid var(--hair);background:#fff;border-radius:4px;padding:9px 12px;font-weight:800;cursor:pointer;color:var(--muted)}
-button:hover{background:#F2F4F6;color:var(--ink)}
-button.active{background:var(--ink);border-color:var(--ink);color:#fff}
-.danger{color:#9B231E}
-.count{font-size:13px;color:var(--muted);font-weight:800}
-.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:var(--muted);font-weight:800}
-.tag{background:#F2F4F6;border-radius:3px;padding:3px 8px}
-.new{color:#9B231E}.doing{color:#99610F}.done{color:#236B35}
-.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-h2{font-size:19px;line-height:1.25}
-.body{white-space:pre-wrap;font-size:15px;margin:10px 0}
-.small{font-size:12px;color:var(--muted);word-break:break-all}
-.row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;margin-top:12px}
-textarea{width:100%;min-height:74px;border:1px solid var(--hair);border-radius:4px;padding:10px;resize:vertical}
-.empty{color:var(--muted);font-weight:800;text-align:center;padding:26px}
-@media(max-width:620px){.row{grid-template-columns:1fr}.row button{width:100%}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>管理後台｜首爾地鐵小幫手</title>
+  <style>
+    :root { --ink:#172033; --muted:#667085; --line:#d0d5dd; --bg:#f8fafc; --brand:#1d4ed8; --danger:#b42318; }
+    * { box-sizing:border-box; } body { margin:0; font-family:system-ui,"Noto Sans TC",sans-serif; color:var(--ink); background:var(--bg); }
+    main { max-width:960px; margin:auto; padding:32px 16px 72px; } .bar,.card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:16px; }
+    .bar { display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap; } h1,h2,p { margin-top:0; } .muted { color:var(--muted); }
+    input,textarea,select,button { font:inherit; } input,textarea,select { width:100%; padding:10px; border:1px solid var(--line); border-radius:8px; margin:5px 0 12px; }
+    button { border:0; border-radius:8px; padding:10px 14px; cursor:pointer; background:var(--brand); color:white; font-weight:700; } button.secondary { background:#e8eefc; color:#1e40af; } button.danger { background:#fee4e2; color:var(--danger); }
+    .hidden { display:none; } .report-head,.actions { display:flex; gap:10px; justify-content:space-between; align-items:start; flex-wrap:wrap; } .meta { color:var(--muted); font-size:.9rem; }
+    .message { color:var(--danger); min-height:1.5em; } .tabs { display:flex; gap:8px; flex-wrap:wrap; }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div>
-      <div class="eyebrow">SEOUL METRO</div>
-      <h1>問題回報後台</h1>
-    </div>
-    <a href="/">回到前台</a>
-  </header>
+  <main>
+    <header class="bar">
+      <div><h1>回報管理後台</h1><p class="muted">只有授權的 Supabase 管理員可以讀取或修改回報。</p></div>
+      <a href="index.html">返回首頁</a>
+    </header>
 
-  <section class="toolbar">
-    <div class="tabs">
-      <button class="active" data-filter="all">全部</button>
-      <button data-filter="new">未處理</button>
-      <button data-filter="doing">處理中</button>
-      <button data-filter="done">已完成</button>
-    </div>
-    <button id="refresh">重新整理</button>
-    <div class="count" id="count">載入中</div>
-  </section>
+    <section id="login" class="card">
+      <h2>管理員登入</h2>
+      <form id="loginForm">
+        <label>Email<input id="email" type="email" autocomplete="email" required></label>
+        <label>密碼<input id="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">登入</button>
+      </form>
+      <p id="loginMessage" class="message"></p>
+    </section>
 
-  <main id="list"></main>
-</div>
-
-<script>
-const $ = s => document.querySelector(s);
-const list = $('#list');
-let reports = [];
-let filter = 'all';
-const statusLabel = { new: '未處理', doing: '處理中', done: '已完成' };
-
-function fmtTime(value) {
-  if (!value) return '';
-  return new Date(value).toLocaleString('zh-Hant', { hour12: false });
-}
-
-async function api(path, options) {
-  const res = await fetch(path, {
-    headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPin() },
-    ...options
-  });
-  if (res.status === 401) {
-    localStorage.removeItem('metro-admin-pin');
-    throw new Error('pin-required');
-  }
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
-}
-
-function adminPin() {
-  let pin = localStorage.getItem('metro-admin-pin');
-  if (!pin) {
-    pin = prompt('請輸入管理 PIN') || '';
-    if (pin) localStorage.setItem('metro-admin-pin', pin);
-  }
-  return pin;
-}
-
-function render() {
-  const shown = reports.filter(r => filter === 'all' || r.status === filter);
-  $('#count').textContent = `${shown.length} / ${reports.length} 筆`;
-  list.replaceChildren();
-  if (!shown.length) {
-    const empty = document.createElement('div');
-    empty.className = 'card empty';
-    empty.textContent = '目前沒有符合的回報。';
-    list.appendChild(empty);
-    return;
-  }
-  shown.forEach(report => list.appendChild(card(report)));
-}
-
-function card(report) {
-  const el = document.createElement('section');
-  el.className = 'card';
-  el.innerHTML = `
-    <div class="head">
-      <div>
-        <h2>${escapeHtml(report.type || '問題回報')}</h2>
-        <div class="meta">
-          <span class="tag ${report.status}">${statusLabel[report.status] || report.status}</span>
-          <span class="tag">${escapeHtml(report.station || '未填車站')}</span>
-          <span class="tag">${fmtTime(report.createdAt)}</span>
-        </div>
+    <section id="dashboard" class="hidden">
+      <div class="bar">
+        <div class="tabs"><button class="secondary filter" data-status="all">全部</button><button class="secondary filter" data-status="new">新增</button><button class="secondary filter" data-status="doing">處理中</button><button class="secondary filter" data-status="done">已完成</button></div>
+        <div><button id="refresh" class="secondary">重新整理</button> <button id="logout" class="danger">登出</button></div>
       </div>
-      <select aria-label="狀態">
-        <option value="new">未處理</option>
-        <option value="doing">處理中</option>
-        <option value="done">已完成</option>
-      </select>
-    </div>
-    <div class="body">${escapeHtml(report.body)}</div>
-    <div class="small">聯絡方式：${escapeHtml(report.contact || '未填')}</div>
-    <div class="small">頁面：${escapeHtml(report.page || '')}</div>
-    <div class="small">瀏覽器：${escapeHtml(report.userAgent || '')}</div>
-    <div class="row">
-      <textarea placeholder="管理備註">${escapeHtml(report.note || '')}</textarea>
-      <div>
-        <button class="save">儲存</button>
-        <button class="danger">刪除</button>
-      </div>
-    </div>`;
-  const select = el.querySelector('select');
-  select.value = report.status || 'new';
-  const note = el.querySelector('textarea');
-  select.onchange = async () => {
-    await update(report.id, { status: select.value, note: note.value });
-  };
-  el.querySelector('.save').onclick = async () => {
-    await update(report.id, { status: select.value, note: note.value });
-  };
-  el.querySelector('.danger').onclick = async () => {
-    if (!confirm('確定刪除這筆回報？')) return;
-    await api('/api/reports/' + report.id, { method: 'DELETE' });
-    reports = reports.filter(item => item.id !== report.id);
-    render();
-  };
-  return el;
-}
-
-async function update(id, patch) {
-  const updated = await api('/api/reports/' + id, { method: 'PATCH', body: JSON.stringify(patch) });
-  reports = reports.map(item => item.id === id ? updated : item);
-  render();
-}
-
-function escapeHtml(value) {
-  return String(value || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-async function load() {
-  list.innerHTML = '<div class="card empty">載入中</div>';
-  reports = await api('/api/reports');
-  render();
-}
-
-document.querySelectorAll('[data-filter]').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('[data-filter]').forEach(x => x.classList.remove('active'));
-    btn.classList.add('active');
-    filter = btn.dataset.filter;
-    render();
-  };
-});
-$('#refresh').onclick = load;
-load().catch(() => {
-  list.innerHTML = '<div class="card empty">後台讀取失敗，請確認 PIN 是否正確，或伺服器是否有啟動。</div>';
-});
-</script>
+      <p id="dashboardMessage" class="message"></p>
+      <div id="reports"></div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script>
+    const $ = selector => document.querySelector(selector);
+    let client, reports = [], selectedStatus = 'all';
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const message = (id, text = '') => $(id).textContent = text;
+    const isAdmin = async () => { const { data, error } = await client.rpc('is_admin'); return !error && data === true; };
+    async function loadReports() {
+      message('#dashboardMessage', '');
+      const { data, error } = await client.from('reports').select('*').order('created_at', { ascending:false });
+      if (error) { message('#dashboardMessage', '無法讀取回報：' + error.message); return; }
+      reports = data; render();
+    }
+    function render() {
+      const shown = reports.filter(r => selectedStatus === 'all' || r.status === selectedStatus);
+      $('#reports').innerHTML = shown.length ? shown.map(r => `<article class="card" data-id="${r.id}"><div class="report-head"><div><h2>${esc(r.type)}</h2><p class="meta">${esc(r.station || '未填站名')} · ${new Date(r.created_at).toLocaleString('zh-TW')}</p></div><select class="status"><option value="new">新增</option><option value="doing">處理中</option><option value="done">已完成</option></select></div><p>${esc(r.body)}</p><p class="meta">聯絡方式：${esc(r.contact || '未提供')}</p><textarea class="note" placeholder="管理備註">${esc(r.note)}</textarea><div class="actions"><button class="save">儲存</button><button class="danger remove">刪除</button></div></article>`).join('') : '<section class="card muted">目前沒有回報。</section>';
+      shown.forEach(r => { const card = document.querySelector(`[data-id="${r.id}"]`); card.querySelector('.status').value = r.status; card.querySelector('.save').onclick = () => save(r.id, card); card.querySelector('.remove').onclick = () => remove(r.id); });
+    }
+    async function save(id, card) {
+      const { error } = await client.from('reports').update({ status:card.querySelector('.status').value, note:card.querySelector('.note').value, updated_at:new Date().toISOString() }).eq('id', id);
+      if (error) return message('#dashboardMessage', '儲存失敗：' + error.message); await loadReports();
+    }
+    async function remove(id) { if (!confirm('確定要刪除此回報？')) return; const { error } = await client.from('reports').delete().eq('id', id); if (error) return message('#dashboardMessage', '刪除失敗：' + error.message); await loadReports(); }
+    $('#loginForm').onsubmit = async event => { event.preventDefault(); message('#loginMessage', ''); const { error } = await client.auth.signInWithPassword({ email:$('#email').value, password:$('#password').value }); if (error) return message('#loginMessage', error.message); await showDashboard(); };
+    $('.filter').onclick = () => {}; document.querySelectorAll('.filter').forEach(btn => btn.onclick = () => { selectedStatus = btn.dataset.status; render(); });
+    $('#refresh').onclick = loadReports; $('#logout').onclick = async () => { await client.auth.signOut(); $('#dashboard').classList.add('hidden'); $('#login').classList.remove('hidden'); };
+    async function showDashboard() { if (!(await isAdmin())) { await client.auth.signOut(); return message('#loginMessage', '此帳號沒有管理員權限。'); } $('#login').classList.add('hidden'); $('#dashboard').classList.remove('hidden'); await loadReports(); }
+    (async () => { try { client = await window.supabaseReady; const { data:{session} } = await client.auth.getSession(); if (session) await showDashboard(); } catch (error) { message('#loginMessage', error.message); } })();
+  </script>
 </body>
 </html>

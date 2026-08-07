@@ -737,7 +737,7 @@ function reportPayload() {
     body: $('#rBody').value.trim(),
     contact: $('#rContact').value.trim(),
     page: location.href,
-    userAgent: navigator.userAgent
+    user_agent: navigator.userAgent
   };
 }
 $('#sendReport').onclick = async () => {
@@ -746,12 +746,9 @@ $('#sendReport').onclick = async () => {
   btn.disabled = true;
   btn.textContent = '送出中…';
   try {
-    const res = await fetch('/api/reports', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(reportPayload())
-    });
-    if (!res.ok) throw new Error('submit-failed');
+    await window.supabaseReady;
+    const { error } = await window.supabaseClient.from('reports').insert(reportPayload());
+    if (error) throw error;
     $('#rBody').value = '';
     reportStatus('已收到回報，謝謝你幫忙修正這個工具。', true);
   } catch (e) {
@@ -793,5 +790,8 @@ LINES.forEach(l => {
   $('#chips').appendChild(c);
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-client.js"></script>
 </body>
 </html>
