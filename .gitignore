@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+__MACOSX/
+node_modules/
+.env
+.env.*
+!.env.example
+npm-debug.log*
+outputs/
+data/reports.json
