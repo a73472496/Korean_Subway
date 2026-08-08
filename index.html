@@ -46,7 +46,7 @@ body{
 .hit{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
 .roundels{display:flex;gap:7px;flex-shrink:0;flex-wrap:wrap}
 .rd{width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;
-  justify-content:center;font-size:15px;border-width:4px;border-style:solid;flex-shrink:0}
+  justify-content:center;font-size:15px;line-height:1;white-space:nowrap;border-width:4px;border-style:solid;flex-shrink:0}
 .rd.sm{width:32px;height:32px;font-size:11px;border-width:3px}
 .name-zh{font-size:32px;font-weight:900;letter-spacing:-.02em;line-height:1.15}
 .name-ko{font-size:15px;color:var(--ink-2);font-weight:600}
@@ -496,9 +496,15 @@ function plan(from, to) {
 
 /* ---------- shared bits ---------- */
 function roundel(lineId, code, small) {
-  const d = el('div', 'rd num' + (small ? ' sm' : ''), code);
+  const d = el('div', 'rd num' + (small ? ' sm' : ''), shortCode(lineId, code));
   d.style.borderColor = LMAP[lineId].color; d.style.color = LMAP[lineId].color;
   return d;
+}
+function shortCode(lineId, code) {
+  const match = String(code).match(/-(\d+)$/);
+  if (!LMAP[lineId].city || !match) return code;
+  const prefix = { B1: '1', B2: '2', B3: '3', B4: '4', BGL: 'G', DH: 'D' }[lineId] || lineId;
+  return prefix + match[1].padStart(2, '0');
 }
 function row(st, meters) {
   const b = el('button', 'srow');
@@ -530,7 +536,7 @@ function stripFor(lineId, idx) {
     if (o === 0) cell.appendChild(el('div', 'youare', '▼ 你在這'));
     cell.appendChild(el('div', 'tick'));
     cell.appendChild(el('span', 'lbl', s[2]));
-    cell.appendChild(el('span', 'code num', s[0]));
+    cell.appendChild(el('span', 'code num', shortCode(L.id, s[0])));
     cell.onclick = () => show(stationFor(L, s));
     track.appendChild(cell);
   });
