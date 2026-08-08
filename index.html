@@ -476,13 +476,38 @@ const stationFor = (line, station) => STATIONS[(line.city || 'seoul') + ':' + (s
 const $ = s => document.querySelector(s);
 const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; };
 
+const naverMapWebSearch = query => 'https://map.naver.com/p/search/' + encodeURIComponent(query);
+const isMobileDevice = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+function openNaverMap(query) {
+  const webUrl = naverMapWebSearch(query);
+  if (!isMobileDevice()) {
+    window.open(webUrl, '_blank', 'noopener');
+    return;
+  }
+
+  let appOpened = false;
+  const markAppOpened = () => { if (document.hidden) appOpened = true; };
+  document.addEventListener('visibilitychange', markAppOpened, { once: true });
+  window.location.href = 'nmap://search?query=' + encodeURIComponent(query) + '&appname=com.kmetrobuddy.web';
+  setTimeout(() => {
+    document.removeEventListener('visibilitychange', markAppOpened);
+    if (!appOpened) window.location.href = webUrl;
+  }, 1400);
+}
+
 function facLinks(st) {
   const box = el('div', 'fac');
   const query = st.ko + '역';
   const mk = (icon, label, kw, className = '') => {
     const a = el('a', className, icon + ' ' + label);
-    a.href = 'https://map.naver.com/p/search/' + encodeURIComponent(kw ? query + ' ' + kw : query);
+    const search = kw ? query + ' ' + kw : query;
+    a.href = naverMapWebSearch(search);
     a.target = '_blank'; a.rel = 'noopener';
+    a.addEventListener('click', event => {
+      if (!isMobileDevice()) return;
+      event.preventDefault();
+      openNaverMap(search);
+    });
     return a;
   };
   const actions = el('div', 'fac-actions');
