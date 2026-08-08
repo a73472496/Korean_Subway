@@ -727,7 +727,8 @@ function locate({ automatic = false } = {}) {
     });
     if (best.d > 20000) {
       clearAutoLocationTimer();
-      eb.appendChild(el('div', 'err', '目前位置不在首爾都會區（最近的首爾站約 ' + fmt(best.d) + '）。你仍可使用下方搜尋或路線規劃，查詢首爾、釜山站。'));
+      const city = best.s.city === 'busan' ? '釜山' : '首爾';
+      eb.appendChild(el('div', 'err', '目前位置距離首爾、釜山地鐵站較遠（最近的是' + city + '「' + best.s.zh + '」站，約 ' + fmt(best.d) + '）。你仍可使用下方搜尋或路線規劃。'));
       return;
     }
     lastLocatedAt = Date.now();
