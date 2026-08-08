@@ -63,10 +63,7 @@ body{
 .fac-actions{display:flex;gap:8px;flex-wrap:wrap}
 .fac a,.fac button{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;font:inherit;font-size:12.5px;
   font-weight:800;color:var(--ink-2);border:1px solid var(--hair);background:#fff;border-radius:8px;padding:8px 10px;cursor:pointer}
-.fac .fac-map{background:#03c75a;border-color:#03c75a;color:#fff}
 .fac a:hover,.fac button:hover{background:#eaf2ff;color:var(--ink)}
-.fac .fac-map:hover{background:#00ae4f;color:#fff}
-.fac-copy-note{width:100%;font-size:11.5px;color:var(--ink-3);margin:2px 0 0}
 
 .strip{margin-top:22px;padding-top:18px;border-top:1px dashed var(--hair)}
 .strip-h{font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:14px;display:flex;
@@ -511,25 +508,11 @@ function facLinks(st) {
     return a;
   };
   const actions = el('div', 'fac-actions');
-  const copy = el('button', 'fac-copy', '💬 複製韓文詢問句');
-  const phrase = query + '에서 엘리베이터와 화장실이 어디에 있나요?';
-  copy.type = 'button';
-  copy.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(phrase);
-      copy.textContent = '✓ 已複製，可直接詢問站務員';
-      setTimeout(() => copy.textContent = '💬 複製韓文詢問句', 2200);
-    } catch (e) {
-      copy.textContent = '無法自動複製';
-    }
-  };
   actions.append(
-    mk('🗺', '在 Naver Map 開啟此站', '', 'fac-map'),
     mk('♿', '查無障礙設施', '엘리베이터 위치'),
-    mk('🚻', '查洗手間位置', '화장실 위치'),
-    copy
+    mk('🚻', '查洗手間位置', '화장실 위치')
   );
-  box.append(el('div', 'fac-title', '站內設施'), actions, el('p', 'fac-copy-note', '找不到設施時，複製韓文句子直接詢問站務員最快。'));
+  box.append(el('div', 'fac-title', '由 Naver Map 開啟站內設施'), actions);
   return box;
 }
 
