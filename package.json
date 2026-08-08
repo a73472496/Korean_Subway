@@ -1,8 +1,8 @@
 {
-  "name": "seoul-metro-station-helper",
+  "name": "k-metro-buddy",
   "version": "1.0.0",
   "private": true,
-  "description": "Seoul Metro station helper with a reporting dashboard.",
+  "description": "Korean metro station helper for Seoul and Busan with a reporting dashboard.",
   "scripts": {
     "start": "node server.js"
   }

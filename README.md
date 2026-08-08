@@ -1,6 +1,6 @@
-# Seoul Metro Station Helper
+# K-Metro Buddy
 
-A small web app for looking up Seoul Metro station information and submitting reports. It includes a separate admin page for managing submitted reports.
+A small web app for looking up Seoul and Busan metro station information, planning routes, and submitting reports. It includes a separate admin page for managing submitted reports.
 
 ## Requirements
 
