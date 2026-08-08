@@ -490,6 +490,12 @@ const el = (t, c, x) => { const n = document.createElement(t); if (c) n.classNam
 
 const naverMapWebSearch = query => 'https://map.naver.com/p/search/' + encodeURIComponent(query);
 const isMobileDevice = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+function naverMapAppSearch(query) {
+  const params = 'query=' + encodeURIComponent(query) + '&appname=com.kmetrobuddy.web';
+  return /Android/i.test(navigator.userAgent)
+    ? 'intent://search?' + params + '#Intent;scheme=nmap;package=com.nhn.android.nmap;end'
+    : 'nmap://search?' + params;
+}
 function facilityIcon(kind) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'fac-icon'); svg.setAttribute('viewBox', '0 0 24 24');
@@ -508,13 +514,13 @@ function facLinks(st) {
     const a = el('a', className);
     a.append(facilityIcon(icon), document.createTextNode(label));
     const search = kw ? query + ' ' + kw : query;
-    a.href = naverMapWebSearch(search);
-    a.target = '_blank'; a.rel = 'noopener';
-    a.addEventListener('click', event => {
-      if (!isMobileDevice()) return;
-      event.preventDefault();
-      window.location.href = 'nmap://search?query=' + encodeURIComponent(search) + '&appname=com.kmetrobuddy.web';
-    });
+    if (isMobileDevice()) {
+      a.href = naverMapAppSearch(search);
+      a.target = '_self';
+    } else {
+      a.href = naverMapWebSearch(search);
+      a.target = '_blank'; a.rel = 'noopener';
+    }
     return a;
   };
   const actions = el('div', 'fac-actions');
