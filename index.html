@@ -207,6 +207,10 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
 @media (min-width:900px){
   .wrap>section:nth-of-type(3),.wrap>section:nth-of-type(4){min-height:0;align-self:start}
   .wrap>section:nth-of-type(4){padding-bottom:18px}
+  .wrap>section:nth-of-type(5),#report{grid-column:1/-1;align-self:start}
+  .wrap>section:nth-of-type(7),.wrap>section:nth-of-type(8){align-self:start}
+  #report .report-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+  #report .report-grid>.field:nth-child(3),#report .report-grid>.field:nth-child(4){grid-column:1/-1}
 }
 </style>
 </head>
