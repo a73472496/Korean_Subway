@@ -641,7 +641,7 @@ function locate() {
       if (!best || d < best.d) best = { s, d };
     });
     if (best.d > 20000) {
-      eb.appendChild(el('div', 'err', '你目前不在首爾都會區（最近的車站在 ' + fmt(best.d) + ' 外）。可以先用下方搜尋查你想去的站。'));
+      eb.appendChild(el('div', 'err', '目前位置不在首爾都會區（最近的首爾站約 ' + fmt(best.d) + '）。你仍可使用下方搜尋或路線規劃，查詢首爾、釜山站。'));
       return;
     }
     show(best.s, best.d);
