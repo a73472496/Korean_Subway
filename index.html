@@ -91,6 +91,9 @@ body{
 .srow:hover{background:var(--tile)}
 .srow .zh{font-weight:800;font-size:16px}
 .srow .sub{font-size:12px;color:var(--ink-3)}
+.citytag{display:inline-flex;align-items:center;margin:3px 0 2px;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.08em;line-height:1.25}
+.citytag.seoul{background:#e9f1ff;color:#1454a7}
+.citytag.busan{background:#fff0e8;color:#c54e00}
 .srow .far{margin-left:auto;font-size:12px;color:var(--ink-3);font-weight:700;white-space:nowrap}
 input[type=search],input[type=text],input[type=email],select,textarea{width:100%;font:inherit;font-size:16px;padding:13px 14px;
   border:1px solid var(--hair);border-radius:4px;background:#fff;color:inherit}
@@ -431,11 +434,20 @@ const BUSAN_ENGLISH_LINES = {
   BGL: "Kaya Univ.|Presbyterian Univ.|Yeonji Park|Museum|Royal Tomb of King Suro|Bonghwang|Buwon|Gimhae City Hall|Inje Univ.|Gimhae College|Jinae|Buram|Daesa|Pyeonggang|Daejeo|Deunggu|Deokdu|Gimhae International Airport|Seobusan Yutongjigu|Gwaebeop Renecite|Sasang",
   DH: "Bujeon|Geojehaemaji|Geoje|Busan Nat’l Univ. of Edu.|Dongnae|Allak|Busanwondong|Jaesong|Centum|BEXCO|Sinhaeundae|Songjeong|OSIRIA|Gijang|Ilgwang|Jwacheon|Wollae|Seosaeng|Namchang|Mangyang|Deokha|Gaeunpo|Taehwagang"
 };
+const busanStationCode = (lineId, index) => {
+  if (lineId === 'B1') return String(134 - index).padStart(3, '0');
+  if (lineId === 'B2') return String(243 - index);
+  if (lineId === 'B3') return String(301 + index);
+  if (lineId === 'B4') return String(401 + index);
+  if (lineId === 'BGL') return String(21 - index);
+  if (lineId === 'DH') return String(8001 + index);
+  return String(index + 1);
+};
 BUSAN_LINES.forEach(([id, zh, ko, color, stations]) => {
   const names = stations.split('|');
   const englishNames = BUSAN_ENGLISH_LINES[id].split('|');
   LINES.push({ id, zh, ko, color, city: 'busan', loop: false, a: names[0], b: names[names.length - 1],
-    st: names.map((name, index) => [`${id}-${String(index + 1).padStart(2, '0')}`, name, BUSAN_NAME_OVERRIDES[name] || name, englishNames[index], null, null])
+    st: names.map((name, index) => [busanStationCode(id, index), name, BUSAN_NAME_OVERRIDES[name] || name, englishNames[index], null, null])
   });
 });
 // KRIC's current Donghae-line record uses 월내역; fix the legacy spelling before indexing.
@@ -534,6 +546,8 @@ function plan(from, to) {
 function roundel(lineId, code, small) {
   const d = el('div', 'rd num' + (small ? ' sm' : '') + (String(code).includes('-') ? ' long' : ''), code);
   d.style.borderColor = LMAP[lineId].color; d.style.color = LMAP[lineId].color;
+  d.title = (LMAP[lineId].city === 'busan' ? '釜山站號 ' : '首爾站號 ') + code;
+  d.setAttribute('aria-label', d.title);
   return d;
 }
 function row(st, meters) {
@@ -542,6 +556,7 @@ function row(st, meters) {
   st.on.slice(0, 3).forEach(o => rds.appendChild(roundel(o.line, o.code, true)));
   const t = el('div');
   t.appendChild(el('div', 'zh', st.zh));
+  t.appendChild(el('span', 'citytag ' + st.city, st.city === 'busan' ? '釜山' : '首爾'));
   t.appendChild(el('div', 'sub', st.ko + ' · ' + st.rom));
   b.append(rds, t);
   if (meters != null) b.appendChild(el('div', 'far', fmt(meters)));
@@ -587,6 +602,7 @@ function show(st, meters) {
   st.on.forEach(o => rds.appendChild(roundel(o.line, o.code)));
   const txt = el('div');
   txt.appendChild(el('div', 'name-zh', st.zh));
+  txt.appendChild(el('span', 'citytag ' + st.city, st.city === 'busan' ? '釜山' : '首爾'));
   txt.appendChild(el('div', 'name-ko', st.ko + '역'));
   txt.appendChild(el('div', 'name-rom rom', st.rom));
   if (meters != null) txt.appendChild(el('div', 'dist', '直線距離約 ' + fmt(meters)));
