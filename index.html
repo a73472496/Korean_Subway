@@ -232,7 +232,7 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
   </header>
 
   <section class="card" id="location-panel">
-    <button class="locate" id="btn"><span class="dot"></span>定位我現在的位置</button>
+    <button class="locate" id="btn"><span class="dot"></span>更新目前位置</button>
     <div class="note" id="note">第一次需要按一下並允許取用位置，之後再打開就會自動定位。地下月台訊號弱時可能有誤差。</div>
     <div id="errbox"></div>
   </section>
@@ -625,14 +625,34 @@ function locationHelpMessage() {
   if (isLineBrowser()) return 'LINE 內建瀏覽器常會擋定位。請點右下角「⋯」後選「以 Safari 開啟」或「以瀏覽器開啟」，再允許位置權限。';
   return '定位權限被拒絕了。請在瀏覽器或系統設定中允許此頁面存取位置，或直接用下方搜尋。';
 }
-function locate() {
+const AUTO_LOCATION_NEARBY_METERS = 1000;
+const AUTO_LOCATION_INTERVAL = 5 * 60 * 1000;
+const RETURN_LOCATION_REFRESH_AGE = 3 * 60 * 1000;
+let autoLocationTimer = null;
+let lastLocatedAt = 0;
+let locating = false;
+const clearAutoLocationTimer = () => {
+  if (autoLocationTimer) window.clearTimeout(autoLocationTimer);
+  autoLocationTimer = null;
+};
+const scheduleAutoLocation = distance => {
+  clearAutoLocationTimer();
+  if (distance > AUTO_LOCATION_NEARBY_METERS) return;
+  autoLocationTimer = window.setTimeout(() => locate({ automatic: true }), AUTO_LOCATION_INTERVAL);
+};
+
+function locate({ automatic = false } = {}) {
   const btn = $('#btn'), eb = $('#errbox');
+  if (locating) return;
+  locating = true;
+  if (!automatic) clearAutoLocationTimer();
   eb.replaceChildren();
   if (!navigator.geolocation) { eb.appendChild(el('div', 'err', '這個瀏覽器不支援定位功能，請改用下方的站名搜尋。')); return; }
   if (!window.isSecureContext) { eb.appendChild(el('div', 'err', locationHelpMessage())); return; }
   btn.disabled = true; btn.lastChild.textContent = '定位中…';
   navigator.geolocation.getCurrentPosition(pos => {
-    btn.disabled = false; btn.lastChild.textContent = '重新定位';
+    locating = false;
+    btn.disabled = false; btn.lastChild.textContent = '更新目前位置';
     const { latitude: la, longitude: lo } = pos.coords;
     let best = null;
     ALL.forEach(s => {
@@ -641,17 +661,28 @@ function locate() {
       if (!best || d < best.d) best = { s, d };
     });
     if (best.d > 20000) {
+      clearAutoLocationTimer();
       eb.appendChild(el('div', 'err', '目前位置不在首爾都會區（最近的首爾站約 ' + fmt(best.d) + '）。你仍可使用下方搜尋或路線規劃，查詢首爾、釜山站。'));
       return;
     }
+    lastLocatedAt = Date.now();
+    $('#note').textContent = best.d <= AUTO_LOCATION_NEARBY_METERS
+      ? '已取得目前位置。你在地鐵站附近時，系統會每 5 分鐘自動更新。'
+      : '已取得目前位置。距離地鐵站較遠時不會持續定位；需要時可手動更新。';
+    scheduleAutoLocation(best.d);
     show(best.s, best.d);
   }, err => {
+    locating = false;
     btn.disabled = false; btn.lastChild.textContent = '再試一次';
     const msg = { 1: locationHelpMessage(), 2: '抓不到位置訊號，在地下月台常會這樣。走到閘門或出入口附近再試一次。', 3: '定位逾時了，請再按一次。' };
     eb.appendChild(el('div', 'err', msg[err.code] || '定位失敗，請改用下方的站名搜尋。'));
   }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 });
 }
 $('#btn').onclick = locate;
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible' || !lastLocatedAt) return;
+  if (Date.now() - lastLocatedAt >= RETURN_LOCATION_REFRESH_AGE) locate({ automatic: true });
+});
 (function autoLocate() {
   if (!window.isSecureContext) {
     $('#note').textContent = '手機定位需要 HTTPS。若用 192.168 開頭的網址，請改開 HTTPS 測試網址。';
@@ -660,7 +691,7 @@ $('#btn').onclick = locate;
   if (isLineBrowser()) $('#note').textContent = 'LINE 內建瀏覽器可能會擋定位；建議用 Safari 或 Chrome 開啟。';
   if (!navigator.geolocation || !navigator.permissions) return;
   navigator.permissions.query({ name: 'geolocation' }).then(p => {
-    if (p.state === 'granted') { $('#note').textContent = '已自動定位。換站後可以按上面重新定位。'; locate(); }
+    if (p.state === 'granted') { $('#note').textContent = '正在取得目前位置…'; locate(); }
     p.onchange = () => { if (p.state === 'granted') locate(); };
   }).catch(() => { });
 })();
