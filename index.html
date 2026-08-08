@@ -224,6 +224,21 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
   #location-panel #errbox{grid-column:1/-1;grid-row:2}
   #location-panel #errbox:empty{display:none}
 }
+
+/* Professional SaaS design system */
+:root{--canvas:#fafafa;--surface:#fff;--surface-subtle:#f6f7f9;--surface-hover:#f1f5ff;--text:#171717;--text-muted:#616161;--text-faint:#8a8a8a;--border:#e5e5e5;--border-strong:#d4d4d4;--accent:#2563eb;--accent-hover:#1d4ed8;--accent-soft:#eff6ff;--success:#15803d;--danger:#b42318;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;--sans:Inter,"Noto Sans TC","PingFang TC","Microsoft JhengHei",ui-sans-serif,system-ui,sans-serif}
+body{font-family:var(--sans);color:var(--text);background:var(--canvas);line-height:1.6}.wrap{max-width:1180px;padding:32px 20px 80px;gap:18px}.num,.rd,.stop .code,.stat,.pill{font-family:var(--mono);font-variant-numeric:tabular-nums}.rom{font-family:var(--sans);font-style:normal}
+.masthead{min-height:0;margin-bottom:22px;padding:28px 30px 22px;border:1px solid var(--border);border-radius:10px;color:var(--text);background:var(--surface);box-shadow:none}.masthead::before,.masthead::after{display:none}.eyebrow{color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em}.masthead h1{max-width:none;margin:10px 0 6px;color:var(--text);font-size:clamp(28px,4vw,42px);font-weight:750;letter-spacing:-.045em;line-height:1.2}.masthead p{max-width:680px;color:var(--text-muted);font-size:15px;line-height:1.7}.railbar{position:relative;left:auto;right:auto;bottom:auto;height:4px;margin-top:20px;border-radius:2px;box-shadow:none;opacity:.72}
+.card{padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:none;transition:border-color .16s ease,box-shadow .16s ease}.card:hover{border-color:var(--border-strong);box-shadow:0 4px 14px rgba(0,0,0,.035)}.card-t{margin-bottom:16px;color:var(--text);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.locate,.go{min-height:44px;border-radius:7px;background:var(--accent);box-shadow:none;font-size:14px;letter-spacing:0}.locate:hover,.go:hover{background:var(--accent-hover);box-shadow:none;transform:none}.locate:disabled{background:#a3a3a3}.dot{width:8px;height:8px;background:#bbf7d0;box-shadow:0 0 0 4px rgba(187,247,208,.24)}.note{color:var(--text-muted);font-size:12px}.err{border-color:#fecaca;background:#fff7f7;color:var(--danger);border-radius:7px}
+input[type=search],input[type=text],input[type=email],select,textarea{min-height:44px;padding:11px 12px;border-color:var(--border-strong);border-radius:7px;box-shadow:none;background:var(--surface);font-size:15px;transition:border-color .16s ease,box-shadow .16s ease}input[type=search]:hover,input[type=text]:hover,input[type=email]:hover,select:hover,textarea:hover{border-color:#bdbdbd}input[type=search]:focus,input[type=text]:focus,input[type=email]:focus,select:focus,textarea:focus{border-color:var(--accent);outline:3px solid rgba(37,99,235,.14);box-shadow:none}.field{margin-bottom:13px}.field label{top:-8px;background:var(--surface);color:var(--text-muted);font-family:var(--mono);font-size:10px;letter-spacing:.04em}
+.rowbtns{gap:8px;margin-top:14px}.swap,.ghost{min-height:44px;border-color:var(--border-strong);border-radius:7px;color:var(--text-muted);box-shadow:none}.swap{padding:0 15px}.swap:hover,.ghost:hover{background:var(--surface-subtle);color:var(--text)}.report-actions{gap:8px}.report-hint{border:1px solid var(--border);border-radius:7px;background:var(--surface-subtle);color:var(--text-muted)}.sugg{border-color:var(--border);border-radius:7px;box-shadow:0 12px 28px rgba(0,0,0,.10)}
+.srow{min-height:56px;padding:10px 8px;border-bottom-color:var(--border);border-radius:7px}.srow:hover{background:var(--surface-hover)}.srow .zh{font-size:15px}.srow .sub{color:var(--text-faint)}.citytag{margin:3px 0 1px;border:1px solid currentColor;border-radius:4px;background:transparent!important;font-family:var(--mono);font-size:9px;letter-spacing:.05em}.citytag.seoul{color:#2563eb}.citytag.busan{color:#c2410c}.rd{border-width:3px;box-shadow:none}.rd.sm{border-width:2px}.rd.long{border-radius:6px}.name-zh{font-size:32px;font-weight:750;letter-spacing:-.035em}.name-ko{color:var(--text-muted);font-weight:600}.name-rom{color:var(--text-faint)}.dist,.stat{border:1px solid var(--border);border-radius:5px;background:var(--surface-subtle);color:var(--text-muted)}
+.mini{min-height:40px;border-color:var(--border-strong);border-radius:7px;color:var(--text-muted);box-shadow:none}.mini:hover{border-color:#93b4f8;background:var(--accent-soft);color:var(--accent)}.hit .mini + .mini{border-color:var(--accent);background:var(--accent);box-shadow:none}.hit .mini + .mini:hover{background:var(--accent-hover);box-shadow:none}.fac{border-color:var(--border);border-radius:7px;background:var(--surface-subtle)}.fac-title{color:var(--text-muted);font-family:var(--mono);font-size:10px;letter-spacing:.06em}.fac a,.fac button{min-height:38px;border-color:var(--border-strong);border-radius:6px;color:var(--text-muted);background:var(--surface);font-size:12px}.fac-icon{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.fac a:hover,.fac button:hover{border-color:#93b4f8;background:var(--accent-soft);color:var(--accent)}
+.chips{gap:8px}.chip{min-height:36px;border-width:1px;border-radius:6px;padding:6px 10px;background:var(--surface);font-family:var(--mono);font-size:12px;transition:background .16s ease,transform .16s ease}.chip:hover{background:var(--surface-subtle);transform:translateY(-1px)}.summary{gap:7px}.stat{padding:6px 9px;font-size:12px}.stat span{font-family:var(--mono);color:var(--text-faint)}.ride{border:1px solid var(--border);border-radius:7px;background:var(--surface-subtle);color:var(--text-muted)}.trendtag{border-color:var(--border-strong);border-radius:4px;background:var(--surface)}.strip{border-top-color:var(--border)}.strip-h,.dir{color:var(--text-muted)}.pill{border-radius:4px}.track::before{height:4px}.tick{border-width:2px}.stop .lbl{color:var(--text-muted)}.stop.here .lbl{color:var(--text)}
+details{border-bottom-color:var(--border)}summary{min-height:52px;padding:12px 2px;color:var(--text);font-size:14px}summary::after{font-family:var(--mono);font-size:16px}.body{max-width:78ch;color:var(--text-muted);font-size:14px;line-height:1.75}.body b{color:var(--text)}.ok{border-color:#bbf7d0;border-radius:7px;background:#f0fdf4;color:var(--success)}footer{color:var(--text-faint);font-size:11px}
+@media (min-width:900px){.wrap{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.masthead,#location-panel,#result,footer{grid-column:1/-1}#route-panel,#station-search-panel{grid-column:span 1}#line-browser-panel,#report{grid-column:1/-1}#travel-guide-panel,#disclosure-panel{grid-column:span 1}#location-panel{padding:18px 22px}}
+@media (max-width:620px){.wrap{padding:16px 14px 84px}.masthead{padding:22px 20px 18px;border-radius:8px}.masthead h1{font-size:29px}.masthead p{font-size:14px}.card{padding:18px;border-radius:8px}.locate,.go,.ghost,.swap{min-height:48px}.rowbtns{flex-wrap:nowrap}.go{min-width:0}.fac-actions{display:grid;grid-template-columns:1fr 1fr}.fac a{min-height:44px;text-align:center}.chip{min-height:40px}.mini{min-height:44px}}
 </style>
 </head>
 <body>
@@ -244,7 +259,7 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
 
   <section id="result" hidden></section>
 
-  <section class="card">
+  <section class="card" id="route-panel">
     <div class="card-t">路線規劃</div>
     <div class="field"><label for="fFrom">起點</label>
       <input type="text" id="fFrom" placeholder="輸入站名，例如 明洞 / 홍대 / 424" autocomplete="off"></div>
@@ -257,13 +272,13 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
     <div id="routeres"></div>
   </section>
 
-  <section class="card">
+  <section class="card" id="station-search-panel">
     <div class="card-t">找站名</div>
     <input type="search" id="q" placeholder="輸入中文、韓文、拼音或站號" autocomplete="off">
     <div id="qres"></div>
   </section>
 
-  <section class="card">
+  <section class="card" id="line-browser-panel">
     <div class="card-t">按路線瀏覽</div>
     <div class="chips" id="chips"></div>
     <div id="lineres"></div>
@@ -296,9 +311,9 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
     <div id="reportMsg"></div>
   </section>
 
-  <section class="card">
+  <section class="card" id="travel-guide-panel">
     <div class="card-t">搭車須知</div>
-    <details open><summary>車票與交通卡</summary><div class="body">
+    <details><summary>車票與交通卡</summary><div class="body">
       <b>T-money</b> 是最通用的儲值交通卡，便利商店（CU、GS25、7-11）都能買和加值，地鐵、公車、計程車、超商都能刷。
       <ul>
         <li>單程票需另付 <b>₩500 押金</b>，出站後在「保證金退還機」退回。</li>
@@ -346,7 +361,7 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
     </div></details>
   </section>
 
-  <section class="card">
+  <section class="card" id="disclosure-panel">
     <div class="card-t">使用須知與免責聲明</div>
 
     <details><summary>非官方服務</summary><div class="body">
@@ -474,12 +489,23 @@ const $ = s => document.querySelector(s);
 const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; };
 
 const naverMapWebSearch = query => 'https://map.naver.com/p/search/' + encodeURIComponent(query);
+function facilityIcon(kind) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'fac-icon'); svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  const paths = kind === 'accessibility'
+    ? ['M12 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z', 'M10 7h3l2 3', 'M11 7 8 12h4l2 8', 'M8 12l-3 5', 'M13 16h5']
+    : ['M8 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z', 'M16 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z', 'M5 22v-9a3 3 0 0 1 6 0v9', 'M14 22v-9a3 3 0 0 1 6 0v9'];
+  paths.forEach(d => { const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', d); svg.appendChild(path); });
+  return svg;
+}
 
 function facLinks(st) {
   const box = el('div', 'fac');
   const query = st.ko + '역';
   const mk = (icon, label, kw, className = '') => {
-    const a = el('a', className, icon + ' ' + label);
+    const a = el('a', className);
+    a.append(facilityIcon(icon), document.createTextNode(label));
     const search = kw ? query + ' ' + kw : query;
     a.href = naverMapWebSearch(search);
     a.target = '_blank'; a.rel = 'noopener';
@@ -487,8 +513,8 @@ function facLinks(st) {
   };
   const actions = el('div', 'fac-actions');
   actions.append(
-    mk('♿', '查無障礙設施', '엘리베이터 위치'),
-    mk('🚻', '查洗手間位置', '화장실 위치')
+    mk('accessibility', '查無障礙設施', '엘리베이터 위치'),
+    mk('restroom', '查洗手間位置', '화장실 위치')
   );
   box.append(el('div', 'fac-title', '由 Naver Map 開啟站內設施'), actions);
   return box;
