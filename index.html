@@ -489,21 +489,7 @@ const $ = s => document.querySelector(s);
 const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; };
 
 const naverMapWebSearch = query => 'https://map.naver.com/p/search/' + encodeURIComponent(query);
-const naverSearchFallback = query => 'https://search.naver.com/search.naver?query=' + encodeURIComponent(query);
 const isMobileDevice = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-function openNaverMapAppSearch(query) {
-  const popup = window.open('about:blank', '_blank');
-  if (!popup) return false;
-  let appOpened = false;
-  const onVisibilityChange = () => { if (document.hidden) appOpened = true; };
-  document.addEventListener('visibilitychange', onVisibilityChange, { once: true });
-  popup.location.href = 'nmap://search?query=' + encodeURIComponent(query) + '&appname=com.kmetrobuddy.web';
-  window.setTimeout(() => {
-    document.removeEventListener('visibilitychange', onVisibilityChange);
-    if (!appOpened && !popup.closed) popup.location.href = naverSearchFallback(query);
-  }, 1400);
-  return true;
-}
 function facilityIcon(kind) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'fac-icon'); svg.setAttribute('viewBox', '0 0 24 24');
@@ -526,7 +512,8 @@ function facLinks(st) {
     a.target = '_blank'; a.rel = 'noopener';
     a.addEventListener('click', event => {
       if (!isMobileDevice()) return;
-      if (openNaverMapAppSearch(search)) event.preventDefault();
+      event.preventDefault();
+      window.location.href = 'nmap://search?query=' + encodeURIComponent(search) + '&appname=com.kmetrobuddy.web';
     });
     return a;
   };
