@@ -211,6 +211,11 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
   .wrap>section:nth-of-type(7),.wrap>section:nth-of-type(8){align-self:start}
   #report .report-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
   #report .report-grid>.field:nth-child(3),#report .report-grid>.field:nth-child(4){grid-column:1/-1}
+  #location-panel{grid-template-columns:minmax(270px,.9fr) 1.8fr;grid-template-rows:auto auto;gap:12px 24px}
+  #location-panel .locate{grid-column:1;grid-row:1;min-height:60px}
+  #location-panel .note{grid-column:2;grid-row:1;margin:0;text-align:left}
+  #location-panel #errbox{grid-column:1/-1;grid-row:2}
+  #location-panel #errbox:empty{display:none}
 }
 </style>
 </head>
@@ -224,7 +229,7 @@ input[type=search]:focus,input[type=text]:focus,textarea:focus{border-color:#65a
     <div class="railbar" id="railbar"></div>
   </header>
 
-  <section class="card">
+  <section class="card" id="location-panel">
     <button class="locate" id="btn"><span class="dot"></span>定位我現在的位置</button>
     <div class="note" id="note">第一次需要按一下並允許取用位置，之後再打開就會自動定位。地下月台訊號弱時可能有誤差。</div>
     <div id="errbox"></div>
