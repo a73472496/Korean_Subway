@@ -481,9 +481,7 @@ function facLinks(st) {
   const query = st.ko + '역';
   const mk = (icon, label, kw, className = '') => {
     const a = el('a', className, icon + ' ' + label);
-    a.href = kw
-      ? 'https://search.naver.com/search.naver?query=' + encodeURIComponent(query + ' ' + kw)
-      : 'https://map.naver.com/p/search/' + encodeURIComponent(query);
+    a.href = 'https://map.naver.com/p/search/' + encodeURIComponent(kw ? query + ' ' + kw : query);
     a.target = '_blank'; a.rel = 'noopener';
     return a;
   };
