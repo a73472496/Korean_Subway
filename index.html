@@ -471,6 +471,13 @@ function show(st, meters) {
   const setFrom = el('button', 'mini', '以這站為起點規劃路線');
   setFrom.onclick = () => { setPick('from', st); $('#fTo').focus(); $('#fTo').scrollIntoView({ block: 'center' }); };
   txt.appendChild(setFrom);
+  const setTo = el('button', 'mini', '以這站為終點規劃路線');
+  setTo.onclick = () => {
+    setPick('to', st);
+    $('#fFrom').focus();
+    $('#fFrom').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  txt.appendChild(setTo);
   hit.append(rds, txt);
   wrap.appendChild(hit);
   st.on.forEach(o => wrap.appendChild(stripFor(o.line, o.si)));
