@@ -512,10 +512,10 @@ const BUSAN_ENGLISH_LINES = {
 const busanStationCode = (lineId, index) => {
   if (lineId === 'B1') return String(134 - index).padStart(3, '0');
   if (lineId === 'B2') return String(243 - index);
-  if (lineId === 'B3') return String(301 + index);
-  if (lineId === 'B4') return String(401 + index);
-  if (lineId === 'BGL') return String(21 - index);
-  if (lineId === 'DH') return String(8001 + index);
+  if (lineId === 'B3') return String(317 - index);
+  if (lineId === 'B4') return String(414 - index);
+  if (lineId === 'BGL') return String(121 - index);
+  if (lineId === 'DH') return 'K' + String(110 + index);
   return String(index + 1);
 };
 BUSAN_LINES.forEach(([id, zh, ko, color, stations]) => {
@@ -1071,6 +1071,19 @@ $('#copyReport').onclick = async () => {
 };
 
 /* ---------- line browser ---------- */
+const stationCodeSortKey = code => {
+  const value = String(code);
+  // A'REX branch codes such as A042 mean A04-2, rather than station 42.
+  const arex = /^A(\d{2})(\d)?$/.exec(value);
+  if (arex) return [Number(arex[1]), Number(arex[2] || 0)];
+  const match = /(\d+)(?:-(\d+))?$/.exec(value);
+  return [Number(match?.[1] || 0), Number(match?.[2] || 0)];
+};
+const compareStationCodes = (a, b) => {
+  const [aMain, aBranch] = stationCodeSortKey(a[0]);
+  const [bMain, bBranch] = stationCodeSortKey(b[0]);
+  return aMain - bMain || aBranch - bBranch;
+};
 LINES.forEach(l => {
   const c = el('button', 'chip', l.zh);
   c.style.borderColor = l.color; c.style.color = l.color;
@@ -1084,7 +1097,7 @@ LINES.forEach(l => {
     if (open) return;
     c.setAttribute('aria-pressed', 'true'); c.style.background = l.color; c.style.color = '#fff';
     const w = el('div'); w.style.marginTop = '12px';
-    l.st.forEach(s => w.appendChild(row(stationFor(l, s))));
+    l.st.slice().sort(compareStationCodes).forEach(s => w.appendChild(row(stationFor(l, s))));
     box.appendChild(w);
   };
   $(l.city === 'busan' ? '#busan-chips' : '#seoul-chips').appendChild(c);
