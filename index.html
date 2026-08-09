@@ -465,6 +465,10 @@ Object.assign(LINE_8, { a: '別內', b: '牡丹', st: [
 LINES.find(line => line.id === 'UI').st.forEach((station, index) => {
   station[0] = 'S' + (110 + index);
 });
+// Keep the current two-digit Shinbundang display format (D07–D10).
+LINES.find(line => line.id === 'D').st.forEach(station => {
+  station[0] = 'D' + station[0].slice(1).padStart(2, '0');
+});
 
 /* ---------- Busan metro regional network ---------- */
 const BUSAN_LINES = [
