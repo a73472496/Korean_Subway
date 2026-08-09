@@ -18,7 +18,7 @@
 <body>
   <main>
     <header class="bar">
-      <div><h1>回報管理後台</h1><p class="muted">只有授權的 Supabase 管理員可以讀取或修改回報。</p></div>
+      <div><h1>回報管理後台</h1><p class="muted">登入後可查看、更新或刪除使用者回報。</p></div>
       <a href="index.html">返回首頁</a>
     </header>
 
@@ -53,7 +53,7 @@
     async function loadReports() {
       message('#dashboardMessage', '');
       const { data, error } = await client.from('reports').select('*').order('created_at', { ascending:false });
-      if (error) { message('#dashboardMessage', '無法讀取回報：' + error.message); return; }
+      if (error) { message('#dashboardMessage', '目前無法載入回報，請重新整理後再試。'); return; }
       reports = data; render();
     }
     function render() {
@@ -63,14 +63,14 @@
     }
     async function save(id, card) {
       const { error } = await client.from('reports').update({ status:card.querySelector('.status').value, note:card.querySelector('.note').value, updated_at:new Date().toISOString() }).eq('id', id);
-      if (error) return message('#dashboardMessage', '儲存失敗：' + error.message); await loadReports();
+      if (error) return message('#dashboardMessage', '儲存沒有成功，請再試一次。'); await loadReports();
     }
-    async function remove(id) { if (!confirm('確定要刪除此回報？')) return; const { error } = await client.from('reports').delete().eq('id', id); if (error) return message('#dashboardMessage', '刪除失敗：' + error.message); await loadReports(); }
-    $('#loginForm').onsubmit = async event => { event.preventDefault(); message('#loginMessage', ''); const { error } = await client.auth.signInWithPassword({ email:$('#email').value, password:$('#password').value }); if (error) return message('#loginMessage', error.message); await showDashboard(); };
+    async function remove(id) { if (!confirm('要刪除這則回報嗎？')) return; const { error } = await client.from('reports').delete().eq('id', id); if (error) return message('#dashboardMessage', '刪除沒有成功，請再試一次。'); await loadReports(); }
+    $('#loginForm').onsubmit = async event => { event.preventDefault(); message('#loginMessage', ''); const { error } = await client.auth.signInWithPassword({ email:$('#email').value, password:$('#password').value }); if (error) return message('#loginMessage', '登入沒有成功，請確認 Email、密碼與網路連線後再試。'); await showDashboard(); };
     $('.filter').onclick = () => {}; document.querySelectorAll('.filter').forEach(btn => btn.onclick = () => { selectedStatus = btn.dataset.status; render(); });
     $('#refresh').onclick = loadReports; $('#logout').onclick = async () => { await client.auth.signOut(); $('#dashboard').classList.add('hidden'); $('#login').classList.remove('hidden'); };
-    async function showDashboard() { if (!(await isAdmin())) { await client.auth.signOut(); return message('#loginMessage', '此帳號沒有管理員權限。'); } $('#login').classList.add('hidden'); $('#dashboard').classList.remove('hidden'); await loadReports(); }
-    (async () => { try { client = await window.supabaseReady; const { data:{session} } = await client.auth.getSession(); if (session) await showDashboard(); } catch (error) { message('#loginMessage', error.message); } })();
+    async function showDashboard() { if (!(await isAdmin())) { await client.auth.signOut(); return message('#loginMessage', '這個帳號沒有後台權限。'); } $('#login').classList.add('hidden'); $('#dashboard').classList.remove('hidden'); await loadReports(); }
+    (async () => { try { client = await window.supabaseReady; const { data:{session} } = await client.auth.getSession(); if (session) await showDashboard(); } catch (error) { message('#loginMessage', '系統暫時無法啟動，請重新整理後再試。'); } })();
   </script>
 </body>
 </html>

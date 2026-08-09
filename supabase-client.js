@@ -4,7 +4,7 @@
     !config.publishableKey || config.publishableKey.includes('YOUR_SUPABASE');
 
   if (missingConfig) {
-    window.supabaseReady = Promise.reject(new Error('Supabase 尚未設定。請更新 supabase-config.js。'));
+    window.supabaseReady = Promise.reject(new Error('服務尚未設定完成，請確認 Supabase 設定。'));
     return;
   }
 

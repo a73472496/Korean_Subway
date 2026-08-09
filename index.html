@@ -274,7 +274,7 @@ details{border-bottom-color:var(--border)}summary{min-height:52px;padding:12px 2
 
   <section class="card" id="location-panel">
     <button class="locate" id="btn"><span class="dot"></span>更新目前位置</button>
-    <div class="note" id="note">第一次需要按一下並允許取用位置，之後再打開就會自動定位。地下月台訊號弱時可能有誤差。</div>
+    <div class="note" id="note">第一次使用請允許定位。之後再次開啟時會自動更新附近車站；地下月台訊號較弱，結果可能不準。</div>
     <div id="errbox"></div>
   </section>
 
@@ -335,7 +335,7 @@ details{border-bottom-color:var(--border)}summary{min-height:52px;padding:12px 2
       <button class="go" id="sendReport">送出回報</button>
       <button class="ghost" id="copyReport">複製回報內容</button>
     </div>
-    <div class="report-hint">送出後會安全儲存於系統後台，管理員可在管理頁查看與處理。</div>
+    <div class="report-hint">送出後，管理者會在後台查看與處理。</div>
     <div id="reportMsg"></div>
   </section>
 
@@ -373,7 +373,6 @@ details{border-bottom-color:var(--border)}summary{min-height:52px;padding:12px 2
         <svg class="gicon" viewBox="0 0 24 24"><circle cx="8" cy="5" r="2"/><path d="M5 21v-7H4v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5h-1v7"/><circle cx="17" cy="5" r="2"/><path d="M14.5 21v-6h-1v-5.2c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V15h-1v6"/></svg>
         <div><b>洗手間</b>幾乎每站都有，位置大多在<b>閘門內側</b>，進站刷卡後再找最方便；月台上通常也有指標牌。</div>
       </div>
-      <div class="icon-note">這兩個是通用示意圖示，不是每一站的實際位置資料。首爾市有開放電梯位置資料集，但需要申請 API 金鑰才能存取，目前這個工具還沒串接，之後有機會再補上真正的逐站資料。</div>
     </div></details>
 
     <details><summary>車廂禮儀與實用小事</summary><div class="body">
@@ -764,9 +763,9 @@ function isLineBrowser() {
   return /Line\//i.test(navigator.userAgent);
 }
 function locationHelpMessage() {
-  if (!window.isSecureContext) return '目前用的是 HTTP 位址，手機瀏覽器會直接擋定位。請改用 HTTPS 測試網址，或在電腦本機用 localhost 開啟。';
-  if (isLineBrowser()) return 'LINE 內建瀏覽器常會擋定位。請點右下角「⋯」後選「以 Safari 開啟」或「以瀏覽器開啟」，再允許位置權限。';
-  return '定位權限被拒絕了。請在瀏覽器或系統設定中允許此頁面存取位置，或直接用下方搜尋。';
+  if (!window.isSecureContext) return '此頁面不是 HTTPS，瀏覽器無法提供定位。請改用 https 網址或本機 localhost。';
+  if (isLineBrowser()) return 'LINE 內建瀏覽器通常無法定位。請以 Safari 或瀏覽器開啟，再允許位置權限。';
+  return '尚未允許定位。請在瀏覽器設定開啟位置權限，或改用下方站名搜尋。';
 }
 const AUTO_LOCATION_NEARBY_METERS = 1000;
 const AUTO_LOCATION_INTERVAL = 5 * 60 * 1000;
@@ -790,7 +789,7 @@ function locate({ automatic = false } = {}) {
   locating = true;
   if (!automatic) clearAutoLocationTimer();
   eb.replaceChildren();
-  if (!navigator.geolocation) { eb.appendChild(el('div', 'err', '這個瀏覽器不支援定位功能，請改用下方的站名搜尋。')); return; }
+  if (!navigator.geolocation) { eb.appendChild(el('div', 'err', '這個瀏覽器無法使用定位，請改用下方站名搜尋。')); return; }
   if (!window.isSecureContext) { eb.appendChild(el('div', 'err', locationHelpMessage())); return; }
   btn.disabled = true; btn.lastChild.textContent = '定位中…';
   navigator.geolocation.getCurrentPosition(pos => {
@@ -806,20 +805,20 @@ function locate({ automatic = false } = {}) {
     if (best.d > 20000) {
       clearAutoLocationTimer();
       const city = best.s.city === 'busan' ? '釜山' : '首爾';
-      eb.appendChild(el('div', 'err', '目前位置距離首爾、釜山地鐵站較遠（最近的是' + city + '「' + best.s.zh + '」站，約 ' + fmt(best.d) + '）。你仍可使用下方搜尋或路線規劃。'));
+      eb.appendChild(el('div', 'err', '附近找不到首爾或釜山地鐵站。最近的是' + city + '「' + best.s.zh + '」站，約 ' + fmt(best.d) + '；你仍可使用下方搜尋或路線規劃。'));
       return;
     }
     lastLocatedAt = Date.now();
     $('#note').textContent = best.d <= AUTO_LOCATION_NEARBY_METERS
-      ? '已取得目前位置。你在地鐵站附近時，系統會每 5 分鐘自動更新。'
-      : '已取得目前位置。距離地鐵站較遠時不會持續定位；需要時可手動更新。';
+      ? '已更新目前位置。靠近地鐵站時，每 5 分鐘會再更新一次。'
+      : '已更新目前位置。離地鐵站較遠，暫不自動更新；需要時可手動更新。';
     scheduleAutoLocation(best.d);
     show(best.s, best.d);
   }, err => {
     locating = false;
     btn.disabled = false; btn.lastChild.textContent = '再試一次';
-    const msg = { 1: locationHelpMessage(), 2: '抓不到位置訊號，在地下月台常會這樣。走到閘門或出入口附近再試一次。', 3: '定位逾時了，請再按一次。' };
-    eb.appendChild(el('div', 'err', msg[err.code] || '定位失敗，請改用下方的站名搜尋。'));
+    const msg = { 1: locationHelpMessage(), 2: '收不到定位訊號。可走到閘門或出入口附近後再試。', 3: '定位逾時，請再試一次。' };
+    eb.appendChild(el('div', 'err', msg[err.code] || '無法取得位置，請改用下方站名搜尋。'));
   }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 });
 }
 $('#btn').onclick = locate;
@@ -829,10 +828,10 @@ document.addEventListener('visibilitychange', () => {
 });
 (function autoLocate() {
   if (!window.isSecureContext) {
-    $('#note').textContent = '手機定位需要 HTTPS。若用 192.168 開頭的網址，請改開 HTTPS 測試網址。';
+    $('#note').textContent = '定位需要 HTTPS。請改用 https 網址或本機 localhost。';
     return;
   }
-  if (isLineBrowser()) $('#note').textContent = 'LINE 內建瀏覽器可能會擋定位；建議用 Safari 或 Chrome 開啟。';
+  if (isLineBrowser()) $('#note').textContent = 'LINE 內建瀏覽器可能無法定位；建議改用 Safari 或 Chrome 開啟。';
   if (!navigator.geolocation || !navigator.permissions) return;
   navigator.permissions.query({ name: 'geolocation' }).then(p => {
     if (p.state === 'granted') { $('#note').textContent = '正在取得目前位置…'; locate(); }
@@ -852,7 +851,7 @@ $('#q').oninput = e => {
   const box = $('#qres'); box.replaceChildren();
   if (!e.target.value.trim()) return;
   const hits = match(e.target.value).slice(0, 8);
-  if (!hits.length) { box.appendChild(el('div', 'empty', '找不到符合的車站。試試中文站名（明洞）、韓文（명동）或站號（424）。')); return; }
+  if (!hits.length) { box.appendChild(el('div', 'empty', '找不到這個站。可試中文（明洞）、韓文（명동）或站號（424）。')); return; }
   const w = el('div'); w.style.marginTop = '8px';
   hits.forEach(s => w.appendChild(row(s)));
   box.appendChild(w);
@@ -899,10 +898,10 @@ $('#go').onclick = () => {
   const box = $('#routeres'); box.replaceChildren();
   const pick = w => PICK[w] || (match((w === 'from' ? $('#fFrom') : $('#fTo')).value)[0] || null);
   const a = pick('from'), b = pick('to');
-  if (!a || !b) { box.appendChild(el('div', 'err', '請先從建議清單選出起點和終點。')); return; }
-  if (a.ko === b.ko) { box.appendChild(el('div', 'err', '起點和終點是同一站。')); return; }
+  if (!a || !b) { box.appendChild(el('div', 'err', '請從下方建議選擇起點與終點。')); return; }
+  if (a.ko === b.ko) { box.appendChild(el('div', 'err', '起點與終點相同，請換一站。')); return; }
   const res = plan(a, b);
-  if (!res) { box.appendChild(el('div', 'err', '找不到路線，這兩站可能不在收錄範圍內。')); return; }
+  if (!res) { box.appendChild(el('div', 'err', '查不到可用路線，請確認兩站名稱後再試。')); return; }
 
   // group path into legs by line
   const legs = [];
@@ -913,7 +912,7 @@ $('#go').onclick = () => {
     else legs.push({ li, idx: [si] });
   });
   const real = legs.filter(l => l.idx.length > 1);
-  if (!real.length) { box.appendChild(el('div', 'err', '這兩站相鄰或同站轉乘，直接走過去就好。')); return; }
+  if (!real.length) { box.appendChild(el('div', 'err', '這兩站相鄰或可直接轉乘，不用規劃路線。')); return; }
 
   let km = 0, stops = 0;
   real.forEach(l => {
@@ -1036,7 +1035,7 @@ function reportStatus(message, ok) {
 }
 function validateReport() {
   if ($('#rBody').value.trim().length < 4) {
-    reportStatus('請先簡單描述遇到的問題，再送出或複製。', false);
+    reportStatus('請寫下遇到的狀況（至少 4 個字），再送出或複製。', false);
     $('#rBody').focus();
     return false;
   }
@@ -1062,9 +1061,9 @@ $('#sendReport').onclick = async () => {
     const { error } = await window.supabaseClient.from('reports').insert(reportPayload());
     if (error) throw error;
     $('#rBody').value = '';
-    reportStatus('已收到回報，謝謝你幫忙修正這個工具。', true);
+    reportStatus('回報已送出，謝謝。', true);
   } catch (e) {
-    reportStatus('送出失敗。請確認目前是用本機服務開啟，不是直接打開 HTML 檔。', false);
+    reportStatus('暫時無法送出，請檢查網路後再試；若持續發生，可改用「複製回報內容」。', false);
   } finally {
     btn.disabled = false;
     btn.textContent = '送出回報';
@@ -1075,10 +1074,10 @@ $('#copyReport').onclick = async () => {
   const text = reportText();
   try {
     await navigator.clipboard.writeText(text);
-    reportStatus('已複製回報內容，可以貼到 LINE、Email 或備忘錄。', true);
+    reportStatus('已複製，可貼到 LINE、Email 或備忘錄。', true);
   } catch (e) {
     $('#rBody').value = text;
-    reportStatus('這個瀏覽器不能直接複製，我已把整理好的內容放到說明欄，請長按選取複製。', false);
+    reportStatus('無法直接複製，內容已放進說明欄；請長按選取後複製。', false);
   }
 };
 
