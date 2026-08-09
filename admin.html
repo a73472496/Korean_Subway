@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>管理後台｜KSW-METRO</title>
   <style>
-    :root { --ink:#172033; --muted:#667085; --line:#d0d5dd; --bg:#f8fafc; --brand:#1d4ed8; --danger:#b42318; }
-    * { box-sizing:border-box; } body { margin:0; font-family:system-ui,"Noto Sans TC",sans-serif; color:var(--ink); background:var(--bg); }
-    main { max-width:960px; margin:auto; padding:32px 16px 72px; } .bar,.card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:16px; }
+    :root { --ink:#20302f; --muted:#647270; --line:rgba(255,255,255,.78); --bg:#edf4f3; --brand:#287c73; --brand-hover:#1e685f; --danger:#a84a4a; --glass:rgba(255,255,255,.68); --glass-shadow:0 14px 34px rgba(36,79,73,.10); }
+    * { box-sizing:border-box; } body { margin:0; font-family:system-ui,"Noto Sans TC",sans-serif; color:var(--ink); background:radial-gradient(50rem 32rem at -12% 9%,rgba(192,226,219,.72),transparent 62%),radial-gradient(46rem 30rem at 108% 28%,rgba(220,233,244,.85),transparent 60%),linear-gradient(180deg,#f4f9f8 0%,#edf4f3 54%,#f7faf9 100%); }
+    main { max-width:960px; margin:auto; padding:32px 16px 72px; } .bar,.card { background:linear-gradient(135deg,rgba(255,255,255,.82),var(--glass)); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:16px; box-shadow:var(--glass-shadow); backdrop-filter:blur(16px) saturate(132%); -webkit-backdrop-filter:blur(16px) saturate(132%); }
     .bar { display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap; } h1,h2,p { margin-top:0; } .muted { color:var(--muted); }
-    input,textarea,select,button { font:inherit; } input,textarea,select { width:100%; padding:10px; border:1px solid var(--line); border-radius:8px; margin:5px 0 12px; }
-    button { border:0; border-radius:8px; padding:10px 14px; cursor:pointer; background:var(--brand); color:white; font-weight:700; } button.secondary { background:#e8eefc; color:#1e40af; } button.danger { background:#fee4e2; color:var(--danger); }
+    input,textarea,select,button { font:inherit; } input,textarea,select { width:100%; padding:10px; border:1px solid rgba(196,216,211,.9); border-radius:8px; margin:5px 0 12px; background:rgba(255,255,255,.78); } input:focus,textarea:focus,select:focus { border-color:var(--brand); outline:3px solid rgba(40,124,115,.18); }
+    button { min-height:44px; border:0; border-radius:8px; padding:10px 14px; cursor:pointer; background:var(--brand); color:white; font-weight:700; } button:hover { background:var(--brand-hover); } button.secondary { background:rgba(255,255,255,.72); color:var(--brand); border:1px solid rgba(176,208,201,.92); } button.secondary:hover { background:rgba(234,244,241,.92); } button.danger { background:#fff5f4; color:var(--danger); border:1px solid #ebc8c4; } button.danger:hover { background:#fee8e6; }
     .hidden { display:none; } .report-head,.actions { display:flex; gap:10px; justify-content:space-between; align-items:start; flex-wrap:wrap; } .meta { color:var(--muted); font-size:.9rem; }
-    .message { color:var(--danger); min-height:1.5em; } .tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .message { color:var(--danger); min-height:1.5em; } .tabs { display:flex; gap:8px; flex-wrap:wrap; } a { color:var(--brand); font-weight:700; } :focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .bar,.card { background:rgba(255,255,255,.92); } }
   </style>
 </head>
 <body>
