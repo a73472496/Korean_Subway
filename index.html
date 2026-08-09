@@ -254,13 +254,12 @@ details{border-bottom-color:var(--border)}summary{min-height:52px;padding:12px 2
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
 
 /* Frosted platform glass: quiet surfaces over a pale transit-map haze. */
-:root{--glass:rgba(255,255,255,.50);--glass-strong:rgba(255,255,255,.76);--glass-border:rgba(255,255,255,.76);--glass-shadow:0 14px 34px rgba(36,79,73,.10)}
+:root{--glass:rgba(255,255,255,.68);--glass-strong:rgba(255,255,255,.82);--glass-border:rgba(255,255,255,.8);--glass-shadow:0 14px 34px rgba(36,79,73,.10)}
 body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,.74),rgba(237,244,243,.88)),url('assets/metro-glass-pattern.png');background-position:center,center;background-size:cover,cover;background-repeat:no-repeat;background-attachment:fixed,fixed}
-.card{background:linear-gradient(135deg,rgba(255,255,255,.64),var(--glass));border-color:var(--glass-border);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px) saturate(132%);-webkit-backdrop-filter:blur(18px) saturate(132%);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.82),var(--glass));border-color:var(--glass-border);box-shadow:var(--glass-shadow);backdrop-filter:blur(16px) saturate(132%);-webkit-backdrop-filter:blur(16px) saturate(132%);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .card:hover{border-color:rgba(177,211,203,.9);box-shadow:0 18px 40px rgba(36,79,73,.13);transform:translateY(-1px)}
-#location-panel{background:linear-gradient(135deg,rgba(240,251,248,.62),rgba(255,255,255,.46));border-color:rgba(189,220,213,.82)}
-.fac,.report-hint,.dist,.stat,.ride{background:rgba(255,255,255,.40);border-color:rgba(205,224,219,.82)}
-.transfer-guide{margin-top:12px;padding:12px 13px;border:1px solid rgba(181,214,205,.92);border-left:3px solid var(--accent);border-radius:8px;background:rgba(239,249,246,.58);color:var(--text);letter-spacing:0}.transfer-label{color:var(--text-muted);font-size:12px;font-weight:700}.transfer-route{display:flex;align-items:center;gap:8px;margin-top:7px}.transfer-route .pill{color:#fff;font-size:11px}.transfer-route strong{font-size:14px}.transfer-detail{margin-top:7px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:600;line-height:1.6}
+#location-panel{background:linear-gradient(135deg,rgba(240,251,248,.86),rgba(255,255,255,.68));border-color:rgba(189,220,213,.88)}
+.fac,.report-hint,.dist,.stat,.ride{background:rgba(255,255,255,.46);border-color:rgba(205,224,219,.86)}
 input[type=search],input[type=text],input[type=email],select,textarea,.swap,.ghost,.mini,.fac a,.fac button,.chip,.trendtag{background:rgba(255,255,255,.78)}
 @media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.png');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:var(--glass-strong)}}
@@ -947,8 +946,8 @@ $('#go').onclick = () => {
 
   const holder = el('div');
   real.forEach((l, k) => {
-    const nextLeg = k < real.length - 1 ? real[k + 1] : null;
-    holder.appendChild(legBlock(LINES[l.li], l.idx, nextLeg));
+    const nextLine = k < real.length - 1 ? LINES[real[k + 1].li] : null;
+    holder.appendChild(legBlock(LINES[l.li], l.idx, nextLine));
   });
   const lastLeg = real[real.length - 1], lastL = LINES[lastLeg.li];
   holder.appendChild(endBlock(lastL, lastL.st[lastLeg.idx.slice(-1)[0]]));
@@ -998,7 +997,7 @@ function stopList(L, idx) {
   list.append(summary, items);
   return list;
 }
-function legBlock(L, idx, nextLeg) {
+function legBlock(L, idx, nextLine) {
   const n = L.st.length;
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
   const fwd = L.loop ? (idx[1] === (idx[0] + 1) % n) : idx[1] > idx[0];
@@ -1027,28 +1026,15 @@ function legBlock(L, idx, nextLeg) {
   bd.appendChild(ride);
   bd.appendChild(stopList(L, idx));
 
-  if (nextLeg) {
-    bd.appendChild(transferBlock(off, nextLeg));
+  if (nextLine) {
+    const x = el('div', 'xfer');
+    x.append(el('span', null, '↓ 在 ' + off[2] + ' ' + off[0] + ' 下車，轉 '),
+             el('b', null, nextLine.zh));
+    bd.appendChild(x);
     bd.appendChild(facLinks(stationFor(L, off)));
   }
   g.append(spine(L), bd);
   return g;
-}
-function transferBlock(station, nextLeg) {
-  const nextLine = LINES[nextLeg.li];
-  const boardIndex = nextLeg.idx[0], followingIndex = nextLeg.idx[1];
-  const board = nextLine.st[boardIndex], following = nextLine.st[followingIndex];
-  const forward = nextLine.loop ? followingIndex === (boardIndex + 1) % nextLine.st.length : followingIndex > boardIndex;
-  const destination = nextLine.loop ? following[2] : (forward ? nextLine.b : nextLine.a);
-  const x = el('div', 'xfer transfer-guide');
-  const label = el('div', 'transfer-label', '在 ' + station[2] + ' ' + station[0] + ' 下車後轉乘');
-  const route = el('div', 'transfer-route');
-  const badge = el('span', 'pill', nextLine.zh);
-  badge.style.background = nextLine.color;
-  route.append(badge, el('strong', null, '改搭往 ' + destination + ' 方向'));
-  const detail = el('div', 'transfer-detail', '上車站：' + board[2] + ' ' + board[0] + ' ・ 下一站：' + following[2] + ' ' + following[0]);
-  x.append(label, route, detail);
-  return x;
 }
 function endBlock(L, s) {
   const g = el('div', 'leg');
