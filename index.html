@@ -263,6 +263,7 @@ body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,
 input[type=search],input[type=text],input[type=email],select,textarea,.swap,.ghost,.mini,.fac a,.fac button,.chip,.trendtag{background:rgba(255,255,255,.78)}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:var(--glass-strong)}}
 @media (max-width:620px){body{background-size:cover,720px;background-position:center,center top}}
+.stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
 </style>
 </head>
 <body>
@@ -973,6 +974,29 @@ function spine(L, end) {
   sp.style.color = L.color; sp.appendChild(el('div', 'node'));
   return sp;
 }
+function stopList(L, idx) {
+  const list = el('details', 'stop-list');
+  const summary = el('summary');
+  summary.append(
+    el('span', null, '沿途 ' + idx.length + ' 個站點・搭 ' + (idx.length - 1) + ' 站'),
+    el('span', null, '展開查看')
+  );
+  const items = el('ol', 'stop-list-items');
+  idx.forEach((stationIndex, position) => {
+    const s = L.st[stationIndex];
+    const item = el('li', 'stop-list-item');
+    const mark = el('span', 'stop-list-mark');
+    mark.style.borderColor = L.color;
+    if (position === 0 || position === idx.length - 1) mark.style.background = L.color;
+    const names = el('div', 'stop-list-names');
+    names.append(el('strong', null, s[2]), el('span', null, s[1]));
+    const state = position === 0 ? '上車' : position === idx.length - 1 ? '下車' : '';
+    item.append(mark, el('span', 'stop-list-code', s[0]), names, el('span', 'stop-list-state', state));
+    items.appendChild(item);
+  });
+  list.append(summary, items);
+  return list;
+}
 function legBlock(L, idx, nextLine) {
   const n = L.st.length;
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
@@ -1000,6 +1024,7 @@ function legBlock(L, idx, nextLine) {
   }
   ride.appendChild(r2);
   bd.appendChild(ride);
+  bd.appendChild(stopList(L, idx));
 
   if (nextLine) {
     const x = el('div', 'xfer');
