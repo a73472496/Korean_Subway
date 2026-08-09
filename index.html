@@ -260,6 +260,7 @@ body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,
 .card:hover{border-color:rgba(255,255,255,.92);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),inset 0 -1px 0 rgba(123,174,162,.12),0 22px 48px rgba(28,71,63,.15),0 2px 8px rgba(28,71,63,.05);transform:translateY(-1px)}
 #location-panel{background:linear-gradient(135deg,rgba(237,253,248,.66),rgba(255,255,255,.38) 58%,rgba(239,250,247,.32));border-color:rgba(255,255,255,.76)}
 .fac,.report-hint,.dist,.stat,.ride{background:rgba(255,255,255,.34);border-color:rgba(255,255,255,.60);box-shadow:inset 0 1px 0 rgba(255,255,255,.48)}
+.timing-note{margin:8px 0 14px;color:var(--text-muted);font-size:11px;line-height:1.65}.ride-time{margin-top:8px;padding-top:8px;border-top:1px solid rgba(205,224,219,.72);color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:700}.xfer small{display:block;margin-top:4px;color:var(--text-muted);font-size:11px;font-weight:600;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
 input[type=search],input[type=text],input[type=email],select,textarea{background:rgba(255,255,255,.88);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.90);color:var(--text)}.field label{background:rgba(250,255,253,.90)}
 .swap,.ghost,.mini,.fac a,.fac button{background:rgba(255,255,255,.82);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.84);color:var(--accent)}
 .locate,.go{border:1px solid rgba(21,93,84,.78);background:#287c73;box-shadow:0 7px 16px rgba(25,100,90,.22),inset 0 1px 0 rgba(255,255,255,.18)}.locate:hover,.go:hover{background:#1e685f;box-shadow:0 9px 18px rgba(25,100,90,.25),inset 0 1px 0 rgba(255,255,255,.18)}
@@ -636,22 +637,28 @@ function dist(a1, o1, a2, o2) {
 const fmt = m => m < 1000 ? Math.round(m / 10) * 10 + ' 公尺' : (m / 1000).toFixed(1) + ' 公里';
 
 /* ---------- graph ---------- */
-const XFER = 7;                     // 轉乘步行＋候車，估 7 分鐘
+const TRANSFER_WALK = 4;             // 站內換月台、找指標的預留時間
+const TRANSFER_WAIT = 3;             // 轉乘後等下一班車的平均預留時間
+const XFER = TRANSFER_WALK + TRANSFER_WAIT;
 const DWELL = 0.5;                  // 每站停靠
-const PACE = { A: .92, D: 1.09, UI: 2.14, BGL: 1.9, DH: 1.5 };   // 分鐘/公里，未列者用一般地鐵速度
+// 以公開時刻／端到端行車時間校正；其餘路線以一般都市地鐵站距模型估算。
+const PACE = { A: 1.06, B1: 1.55, D: 1.09, UI: 2.14, BGL: 1.9, DH: 1.5 };
 const pace = id => PACE[id] || 1.71;
+function hopMinutes(line, i, j) {
+  const a = line.st[i], b = line.st[j];
+  return Number.isFinite(a[4]) && Number.isFinite(a[5]) && Number.isFinite(b[4]) && Number.isFinite(b[5])
+    ? DWELL + dist(a[4], a[5], b[4], b[5]) / 1000 * pace(line.id)
+    : DWELL + 2;
+}
+const wholeMinutes = value => Math.max(1, Math.round(value));
+const legMinutes = (line, indices) => indices.slice(0, -1).reduce((sum, stationIndex, position) => sum + hopMinutes(line, stationIndex, indices[position + 1]), 0);
 const nid = (li, si) => li * 1000 + si;
 const NODE = [], ADJ = {};
 LINES.forEach((l, li) => l.st.forEach((s, si) => { NODE[nid(li, si)] = { li, si }; ADJ[nid(li, si)] = []; }));
 function link(a, b, w, kind) { ADJ[a].push({ to: b, w, kind }); ADJ[b].push({ to: a, w, kind }); }
 LINES.forEach((l, li) => {
-  const n = l.st.length, pc = pace(l.id);
-  const hop = (i, j) => {
-    const a = l.st[i], b = l.st[j];
-    return Number.isFinite(a[4]) && Number.isFinite(a[5]) && Number.isFinite(b[4]) && Number.isFinite(b[5])
-      ? DWELL + dist(a[4], a[5], b[4], b[5]) / 1000 * pc
-      : DWELL + 2;
-  };
+  const n = l.st.length;
+  const hop = (i, j) => hopMinutes(l, i, j);
   for (let i = 0; i + 1 < n; i++) link(nid(li, i), nid(li, i + 1), hop(i, i + 1), 'ride');
   if (l.loop && n > 2) link(nid(li, n - 1), nid(li, 0), hop(n - 1, 0), 'ride');
 });
@@ -941,10 +948,17 @@ $('#go').onclick = () => {
   });
   km *= 1.15;
 
+  const transferCount = real.length - 1;
+  const inTrain = real.reduce((sum, l) => sum + legMinutes(LINES[l.li], l.idx), 0);
+  const stationWalk = transferCount * TRANSFER_WALK;
+  const transferWait = transferCount * TRANSFER_WAIT;
+  const totalMinutes = wholeMinutes(inTrain + stationWalk + transferWait);
+
   const sum = el('div', 'summary');
   const stat = (lbl, v) => { const d = el('div', 'stat'); d.append(el('span', null, lbl), document.createTextNode(v)); return d; };
-  sum.append(stat('約', Math.round(res.mins) + ' 分鐘'), stat('共', stats(stops) ), stat('轉乘', (real.length - 1) + ' 次'), stat('約', fare(km)));
+  sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('車上約', wholeMinutes(inTrain) + ' 分'), stat('步行約', stationWalk ? stationWalk + ' 分' : '—'), stat('等候約', transferWait ? transferWait + ' 分' : '—'), stat('共', stats(stops) ), stat('約', fare(km)));
   box.appendChild(sum);
+  box.appendChild(el('div', 'timing-note', '時間為行車與轉乘預估；每次轉乘預留站內步行 ' + TRANSFER_WALK + ' 分鐘、等候下一班車 ' + TRANSFER_WAIT + ' 分鐘，不含第一次等車、尖峰人潮或施工。'));
 
   const holder = el('div');
   real.forEach((l, k) => {
@@ -1025,13 +1039,15 @@ function legBlock(L, idx, nextLine) {
     if (idx.length > 2) r2.appendChild(el('span', null, '下一站 ' + next[2] + ' ' + next[0]));
   }
   ride.appendChild(r2);
+  ride.appendChild(el('div', 'ride-time', '車上行駛約 ' + wholeMinutes(legMinutes(L, idx)) + ' 分鐘（不含等車）'));
   bd.appendChild(ride);
   bd.appendChild(stopList(L, idx));
 
   if (nextLine) {
     const x = el('div', 'xfer');
     x.append(el('span', null, '↓ 在 ' + off[2] + ' ' + off[0] + ' 下車，轉 '),
-             el('b', null, nextLine.zh));
+             el('b', null, nextLine.zh),
+             el('small', null, '（站內步行約 ' + TRANSFER_WALK + ' 分鐘＋等候約 ' + TRANSFER_WAIT + ' 分鐘）'));
     bd.appendChild(x);
     bd.appendChild(facLinks(stationFor(L, off)));
   }
