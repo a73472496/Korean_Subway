@@ -1,4 +1,4 @@
-# K-Metro Buddy
+# KSW-METRO
 
 A small web app for looking up Seoul and Busan metro station information, planning routes, and submitting reports. It includes a separate admin page for managing submitted reports.
 
