@@ -460,6 +460,11 @@ Object.assign(LINE_8, { a: '別內', b: '牡丹', st: [
   ['824','단대오거리','丹垈五岔路口','Dandaeogeori',37.445057,127.156735], ['825','신흥','新興','Sinheung',37.440952,127.14759],
   ['826','수진','壽進','Sujin',37.437575,127.140936], ['827','모란','牡丹','Moran',37.433988,127.129921]
 ] });
+// Ui–Sinseol uses the current S110–S122 signage code series, not the older
+// 941–953 numbers found in legacy station datasets.
+LINES.find(line => line.id === 'UI').st.forEach((station, index) => {
+  station[0] = 'S' + (110 + index);
+});
 
 /* ---------- Busan metro regional network ---------- */
 const BUSAN_LINES = [
