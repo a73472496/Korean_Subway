@@ -6,7 +6,7 @@
   <title>管理後台｜KSW-METRO</title>
   <style>
     :root { --ink:#20302f; --muted:#647270; --line:rgba(255,255,255,.78); --bg:#edf4f3; --brand:#287c73; --brand-hover:#1e685f; --danger:#a84a4a; --glass:rgba(255,255,255,.68); --glass-shadow:0 14px 34px rgba(36,79,73,.10); }
-    * { box-sizing:border-box; } body { margin:0; font-family:system-ui,"Noto Sans TC",sans-serif; color:var(--ink); background-color:#edf4f3; background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.png'); background-position:center,center 24px; background-size:cover,clamp(720px,78vw,980px); background-repeat:no-repeat; background-attachment:scroll,scroll; }
+    * { box-sizing:border-box; } body { margin:0; font-family:system-ui,"Noto Sans TC",sans-serif; color:var(--ink); background-color:#edf4f3; background-image:linear-gradient(rgba(244,249,248,.74),rgba(237,244,243,.88)),url('assets/metro-glass-pattern.png'); background-position:center,center; background-size:cover,cover; background-repeat:no-repeat; background-attachment:fixed,fixed; }
     main { max-width:960px; margin:auto; padding:32px 16px 72px; } .bar,.card { background:linear-gradient(135deg,rgba(255,255,255,.82),var(--glass)); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:16px; box-shadow:var(--glass-shadow); backdrop-filter:blur(16px) saturate(132%); -webkit-backdrop-filter:blur(16px) saturate(132%); }
     .bar { display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap; } h1,h2,p { margin-top:0; } .muted { color:var(--muted); }
     input,textarea,select,button { font:inherit; } input,textarea,select { width:100%; padding:10px; border:1px solid rgba(196,216,211,.9); border-radius:8px; margin:5px 0 12px; background:rgba(255,255,255,.78); } input:focus,textarea:focus,select:focus { border-color:var(--brand); outline:3px solid rgba(40,124,115,.18); }
@@ -14,7 +14,6 @@
     .hidden { display:none; } .report-head,.actions { display:flex; gap:10px; justify-content:space-between; align-items:start; flex-wrap:wrap; } .meta { color:var(--muted); font-size:.9rem; }
     .message { color:var(--danger); min-height:1.5em; } .tabs { display:flex; gap:8px; flex-wrap:wrap; } a { color:var(--brand); font-weight:700; } :focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .bar,.card { background:rgba(255,255,255,.92); } }
-    @media (max-width:620px) { body { background-size:cover,720px; background-position:center,center top; } }
   </style>
 </head>
 <body>
