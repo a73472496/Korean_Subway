@@ -424,7 +424,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
     </div></details>
 
     <details><summary>外部連結</summary><div class="body">
-      「在 Naver Map 開啟這一站」會開啟 Naver 等<b>第三方網站</b>的車站搜尋結果。
+      「查電梯位置」「查廁所位置」等按鈕會開啟 Naver 等<b>第三方網站</b>的搜尋結果。
       這些內容由第三方提供與維護，本頁面不對其正確性、可用性或內容負責，開啟前請自行判斷。
     </div></details>
 
@@ -597,26 +597,28 @@ function facilityIcon(kind) {
 function facLinks(st) {
   const box = el('div', 'fac');
   const query = st.ko + '역';
-  const mk = (icon, label, className = '') => {
+  const mk = (icon, label, kw, className = '') => {
     const a = el('a', className);
     a.append(facilityIcon(icon), document.createTextNode(label));
+    const search = kw ? query + ' ' + kw : query;
     if (isMobileDevice()) {
-      a.href = naverMapAppSearch(query);
+      a.href = naverMapAppSearch(search);
       a.target = '_self';
     } else {
-      a.href = naverMapWebSearch(query);
+      a.href = naverMapWebSearch(search);
       a.target = '_blank'; a.rel = 'noopener';
     }
     return a;
   };
   const actions = el('div', 'fac-actions');
   actions.append(
-    mk('accessibility', '在 Naver Map 開啟這一站')
+    mk('accessibility', '查無障礙設施', '엘리베이터 위치'),
+    mk('restroom', '查洗手間位置', '화장실 위치')
   );
   box.append(
-    el('div', 'fac-title', '在 Naver Map 查看車站'),
+    el('div', 'fac-title', '由 Naver Map 開啟站內設施'),
     actions,
-    el('div', 'fac-note', '※ 站內廁所與電梯多未列為可搜尋地點；開啟車站後請依現場 화장실／엘리베이터 指標。')
+    el('div', 'fac-note', '※ 手機需先安裝 Naver Map App；未安裝時可能無法開啟。')
   );
   return box;
 }
