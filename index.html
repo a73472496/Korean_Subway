@@ -260,7 +260,7 @@ body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,
 .card:hover{border-color:rgba(255,255,255,.92);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),inset 0 -1px 0 rgba(123,174,162,.12),0 22px 48px rgba(28,71,63,.15),0 2px 8px rgba(28,71,63,.05);transform:translateY(-1px)}
 #location-panel{background:linear-gradient(135deg,rgba(237,253,248,.66),rgba(255,255,255,.38) 58%,rgba(239,250,247,.32));border-color:rgba(255,255,255,.76)}
 .fac,.report-hint,.dist,.stat,.ride{background:rgba(255,255,255,.34);border-color:rgba(255,255,255,.60);box-shadow:inset 0 1px 0 rgba(255,255,255,.48)}
-.timing-note{margin:8px 0 14px;color:var(--text-muted);font-size:11px;line-height:1.65}.ride-time{margin-top:8px;padding-top:8px;border-top:1px solid rgba(205,224,219,.72);color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:700}.xfer small{display:block;margin-top:4px;color:var(--text-muted);font-size:11px;font-weight:600;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
+.timing-note{margin:8px 0 14px;color:var(--text-muted);font-size:11px;line-height:1.65}.timing-note strong{margin-right:5px;color:var(--text);font-size:11px}.ride-duration{margin-left:auto;color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:800;white-space:nowrap}.transfer-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.transfer-times span{padding:3px 7px;border:1px solid rgba(211,130,116,.48);border-radius:4px;background:rgba(255,255,255,.52);color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
 input[type=search],input[type=text],input[type=email],select,textarea{background:rgba(255,255,255,.88);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.90);color:var(--text)}.field label{background:rgba(250,255,253,.90)}
 .swap,.ghost,.mini,.fac a,.fac button{background:rgba(255,255,255,.82);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.84);color:var(--accent)}
 .locate,.go{border:1px solid rgba(21,93,84,.78);background:#287c73;box-shadow:0 7px 16px rgba(25,100,90,.22),inset 0 1px 0 rgba(255,255,255,.18)}.locate:hover,.go:hover{background:#1e685f;box-shadow:0 9px 18px rgba(25,100,90,.25),inset 0 1px 0 rgba(255,255,255,.18)}
@@ -955,9 +955,13 @@ $('#go').onclick = () => {
 
   const sum = el('div', 'summary');
   const stat = (lbl, v) => { const d = el('div', 'stat'); d.append(el('span', null, lbl), document.createTextNode(v)); return d; };
-  sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('車上約', wholeMinutes(inTrain) + ' 分'), stat('步行約', stationWalk ? stationWalk + ' 分' : '—'), stat('等候約', transferWait ? transferWait + ' 分' : '—'), stat('共', stats(stops) ), stat('約', fare(km)));
+  sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('路程', stats(stops) + '・轉乘 ' + transferCount + ' 次'), stat('約', fare(km)));
   box.appendChild(sum);
-  box.appendChild(el('div', 'timing-note', '時間為行車與轉乘預估；每次轉乘預留站內步行 ' + TRANSFER_WALK + ' 分鐘、等候下一班車 ' + TRANSFER_WAIT + ' 分鐘，不含第一次等車、尖峰人潮或施工。'));
+  const timing = el('div', 'timing-note');
+  timing.append(el('strong', null, '時間拆解'), document.createTextNode(' 行駛約 ' + wholeMinutes(inTrain) + ' 分鐘'));
+  if (transferCount) timing.append(document.createTextNode(' ＋ 轉乘預留約 ' + (stationWalk + transferWait) + ' 分鐘（步行 ' + stationWalk + ' 分鐘、等候 ' + transferWait + ' 分鐘）'));
+  timing.append(document.createTextNode('。不含第一次等車與尖峰人潮。'));
+  box.appendChild(timing);
 
   const holder = el('div');
   real.forEach((l, k) => {
@@ -1023,7 +1027,8 @@ function legBlock(L, idx, nextLine) {
   const r1 = el('div', 'r1');
   const p = el('span', 'pill', L.zh); p.style.background = L.color;
   r1.append(p, el('span', null, '往 ' + (L.loop ? next[2] : (fwd ? L.b : L.a)) + ' 方向'),
-            el('span', null, '搭 ' + (idx.length - 1) + ' 站'));
+            el('span', null, '搭 ' + (idx.length - 1) + ' 站'),
+            el('span', 'ride-duration', '行駛約 ' + wholeMinutes(legMinutes(L, idx)) + ' 分鐘'));
   ride.appendChild(r1);
 
   // 站號走向：月台上最快的確認方式
@@ -1038,15 +1043,16 @@ function legBlock(L, idx, nextLine) {
     if (idx.length > 2) r2.appendChild(el('span', null, '下一站 ' + next[2] + ' ' + next[0]));
   }
   ride.appendChild(r2);
-  ride.appendChild(el('div', 'ride-time', '車上行駛約 ' + wholeMinutes(legMinutes(L, idx)) + ' 分鐘（不含等車）'));
   bd.appendChild(ride);
   bd.appendChild(stopList(L, idx));
 
   if (nextLine) {
     const x = el('div', 'xfer');
     x.append(el('span', null, '↓ 在 ' + off[2] + ' ' + off[0] + ' 下車，轉 '),
-             el('b', null, nextLine.zh),
-             el('small', null, '（站內步行約 ' + TRANSFER_WALK + ' 分鐘＋等候約 ' + TRANSFER_WAIT + ' 分鐘）'));
+             el('b', null, nextLine.zh));
+    const transferTimes = el('div', 'transfer-times');
+    transferTimes.append(el('span', null, '步行／找月台 約 ' + TRANSFER_WALK + ' 分'), el('span', null, '等候下一班 約 ' + TRANSFER_WAIT + ' 分'));
+    x.appendChild(transferTimes);
     bd.appendChild(x);
     bd.appendChild(facLinks(stationFor(L, off)));
   }
