@@ -636,9 +636,37 @@ function dist(a1, o1, a2, o2) {
 const fmt = m => m < 1000 ? Math.round(m / 10) * 10 + ' 公尺' : (m / 1000).toFixed(1) + ' 公里';
 
 /* ---------- graph ---------- */
-const TRANSFER_WALK = 4;             // 站內換月台、找指標的預留時間
-const TRANSFER_WAIT = 3;             // 轉乘後等下一班車的平均預留時間
-const XFER = TRANSFER_WALK + TRANSFER_WAIT;
+// 以韓國時間判斷目前時段；使用者未指定出發時間時，以現在的班距做估算。
+function servicePeriod() {
+  const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Seoul', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(new Date());
+  const hour = Number(parts.find(p => p.type === 'hour').value) % 24;
+  const weekday = !['Sat', 'Sun'].includes(parts.find(p => p.type === 'weekday').value);
+  if (weekday && ((hour >= 7 && hour < 10) || (hour >= 17 && hour < 20))) return 'rush';
+  return hour >= 21 || hour < 6 ? 'late' : 'normal';
+}
+// 班距（分鐘）：釜山 1–4 號線採官方尖峰／一般／離峰區間中值；A’REX 採官方一般列車時刻表。
+// 其餘首爾線在尚未串接即時到站 API 前，採都市地鐵保守基準。
+const HEADWAY = {
+  default: { rush: 4, normal: 6, late: 8 },
+  A: { rush: 7, normal: 10, late: 12 },
+  B1: { rush: 4.5, normal: 6.25, late: 9.5 }, B2: { rush: 4.75, normal: 6.5, late: 10 },
+  B3: { rush: 5, normal: 6.5, late: 10.25 }, B4: { rush: 5, normal: 8, late: 9 },
+  BGL: { rush: 7, normal: 10, late: 12 }, DH: { rush: 12, normal: 18, late: 24 }
+};
+const TRANSFER_WALK_OVERRIDES = {
+  'seoul:서울역': 7, 'seoul:종로3가': 6, 'seoul:동대문역사문화공원': 6, 'seoul:왕십리': 6,
+  'seoul:고속터미널': 6, 'seoul:신도림': 5, 'seoul:사당': 5, 'seoul:공덕': 5, 'seoul:김포공항': 5,
+  'seoul:디지털미디어시티': 5, 'seoul:홍대입구': 5, 'seoul:삼각지': 5, 'seoul:여의도': 5, 'seoul:충정로': 5,
+  'busan:서면': 5, 'busan:덕천': 5, 'busan:연산': 5, 'busan:동래': 5, 'busan:수영': 5,
+  'busan:대저': 5, 'busan:미남': 5, 'busan:사상': 5
+};
+const expectedWait = line => Math.max(1, Math.round((HEADWAY[line.id] || HEADWAY.default)[servicePeriod()] / 2));
+function transferWalk(station) {
+  const key = station.city + ':' + station.ko;
+  if (TRANSFER_WALK_OVERRIDES[key]) return TRANSFER_WALK_OVERRIDES[key];
+  return new Set(station.on.map(connection => connection.line)).size >= 3 ? 5 : 4;
+}
+const XFER = 7; // 路徑尋找的固定權重；顯示總時間改由上方的逐站模型計算。
 const DWELL = 0.5;                  // 每站停靠
 // 以公開時刻／端到端行車時間校正；其餘路線以一般都市地鐵站距模型估算。
 const PACE = { A: 1.06, B1: 1.55, D: 1.09, UI: 2.14, BGL: 1.9, DH: 1.5 };
@@ -949,24 +977,31 @@ $('#go').onclick = () => {
 
   const transferCount = real.length - 1;
   const inTrain = real.reduce((sum, l) => sum + legMinutes(LINES[l.li], l.idx), 0);
-  const stationWalk = transferCount * TRANSFER_WALK;
-  const transferWait = transferCount * TRANSFER_WAIT;
-  const totalMinutes = wholeMinutes(inTrain + stationWalk + transferWait);
+  const startWait = expectedWait(LINES[real[0].li]);
+  const transfers = real.slice(0, -1).map((leg, position) => {
+    const line = LINES[leg.li];
+    const off = line.st[leg.idx[leg.idx.length - 1]];
+    const station = stationFor(line, off);
+    return { station, walk: transferWalk(station), wait: expectedWait(LINES[real[position + 1].li]) };
+  });
+  const stationWalk = transfers.reduce((sum, transfer) => sum + transfer.walk, 0);
+  const transferWait = transfers.reduce((sum, transfer) => sum + transfer.wait, 0);
+  const totalMinutes = wholeMinutes(inTrain + startWait + stationWalk + transferWait);
 
   const sum = el('div', 'summary');
   const stat = (lbl, v) => { const d = el('div', 'stat'); d.append(el('span', null, lbl), document.createTextNode(v)); return d; };
   sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('路程', stats(stops) + '・轉乘 ' + transferCount + ' 次'), stat('約', fare(km)));
   box.appendChild(sum);
   const timing = el('div', 'timing-note');
-  timing.append(el('strong', null, '時間拆解'), document.createTextNode(' 行駛約 ' + wholeMinutes(inTrain) + ' 分鐘'));
-  if (transferCount) timing.append(document.createTextNode(' ＋ 轉乘預留約 ' + (stationWalk + transferWait) + ' 分鐘（步行 ' + stationWalk + ' 分鐘、等候 ' + transferWait + ' 分鐘）'));
-  timing.append(document.createTextNode('。不含第一次等車與尖峰人潮。'));
+  timing.append(el('strong', null, '時間拆解'), document.createTextNode(' 行駛約 ' + wholeMinutes(inTrain) + ' 分鐘＋起點等候約 ' + startWait + ' 分鐘'));
+  if (transferCount) timing.append(document.createTextNode(' ＋ 轉乘預留約 ' + (stationWalk + transferWait) + ' 分鐘（站內步行 ' + stationWalk + ' 分鐘、等候 ' + transferWait + ' 分鐘）'));
+  timing.append(document.createTextNode('。依目前韓國時段的班距估算，非即時到站時間。'));
   box.appendChild(timing);
 
   const holder = el('div');
   real.forEach((l, k) => {
     const nextLine = k < real.length - 1 ? LINES[real[k + 1].li] : null;
-    holder.appendChild(legBlock(LINES[l.li], l.idx, nextLine));
+    holder.appendChild(legBlock(LINES[l.li], l.idx, nextLine, transfers[k] || null));
   });
   const lastLeg = real[real.length - 1], lastL = LINES[lastLeg.li];
   holder.appendChild(endBlock(lastL, lastL.st[lastLeg.idx.slice(-1)[0]]));
@@ -1016,7 +1051,7 @@ function stopList(L, idx) {
   list.append(summary, items);
   return list;
 }
-function legBlock(L, idx, nextLine) {
+function legBlock(L, idx, nextLine, transfer) {
   const n = L.st.length;
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
   const fwd = L.loop ? (idx[1] === (idx[0] + 1) % n) : idx[1] > idx[0];
@@ -1051,7 +1086,10 @@ function legBlock(L, idx, nextLine) {
     x.append(el('span', null, '↓ 在 ' + off[2] + ' ' + off[0] + ' 下車，轉 '),
              el('b', null, nextLine.zh));
     const transferTimes = el('div', 'transfer-times');
-    transferTimes.append(el('span', null, '步行／找月台 約 ' + TRANSFER_WALK + ' 分'), el('span', null, '等候下一班 約 ' + TRANSFER_WAIT + ' 分'));
+    transferTimes.append(
+      el('span', null, '站內步行 約 ' + transfer.walk + ' 分'),
+      el('span', null, '等候下一班 約 ' + transfer.wait + ' 分')
+    );
     x.appendChild(transferTimes);
     bd.appendChild(x);
     bd.appendChild(facLinks(stationFor(L, off)));
