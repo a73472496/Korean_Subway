@@ -1549,7 +1549,13 @@ function movementInstruction(movement, place) {
 }
 function directionForStation(context, stationIndex) {
   if (stationIndex === context.boardIndex) return '目前位置';
-  if (context.loop) return context.routeIndexes.includes(stationIndex) ? '路線方向' : '反方向';
+  if (context.loop) {
+    const count = context.stations.length;
+    const routeHops = context.forward ? (stationIndex - context.boardIndex + count) % count : (context.boardIndex - stationIndex + count) % count;
+    const reverseHops = count - routeHops;
+    if (routeHops === reverseHops) return '方向不明';
+    return routeHops < reverseHops ? '路線方向' : '反方向';
+  }
   return (context.forward ? stationIndex > context.boardIndex : stationIndex < context.boardIndex) ? '路線方向' : '反方向';
 }
 function terminalAliasMentions(items, imageWidth, context) {
@@ -1565,7 +1571,7 @@ function terminalAliasMentions(items, imageWidth, context) {
     if (value.length < 2) return;
     routes.forEach(route => route.values.forEach(([ko, zh]) => {
       if (!matchesSignToken(value, ko, SIGN_ALIAS_ENGLISH[ko])) return;
-      const candidate = { station: [ko, ko, zh], stationIndex: -1, side: sideFromBox(item.bbox, imageWidth), direction: route.direction, quality: item.bbox ? (item.precision || 1) : 0, itemIndex, bbox: item.bbox || null };
+      const candidate = { station: [ko, ko, zh], stationIndex: -1, side: sideFromBox(item.bbox, imageWidth), direction: route.direction, quality: item.bbox ? (item.precision || 1) : 0, itemIndex, bbox: item.bbox || null, matchName: true, matchCode: false };
       const key = ko;
       const previous = matches.get(key);
       if (!previous || candidate.quality > previous.quality) matches.set(key, candidate);
@@ -1581,13 +1587,21 @@ function photoStationMentions(items, imageWidth, context) {
     context.stations.forEach((station, stationIndex) => {
       const code = cleanSignText(station[0]);
       const matchesName = matchesSignToken(value, station[1], station[3]);
-      const matchesCode = code.length >= 3 && value === code;
+      const validStationCode = /^(?:\d{3,4}|[a-z]{1,3}\d{1,4})$/.test(code);
+      const matchesCode = validStationCode && value === code;
       if (!matchesName && !matchesCode) return;
       const quality = item.bbox ? (item.precision || 1) : 0;
       const key = station[0];
-      const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex, bbox: item.bbox || null };
+      const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex, bbox: item.bbox || null, matchName: matchesName, matchCode: matchesCode };
       const previous = mentions.get(key);
-      if (!previous || candidate.quality > previous.quality) mentions.set(key, candidate);
+      if (!previous || candidate.quality > previous.quality) {
+        candidate.matchName ||= !!previous?.matchName;
+        candidate.matchCode ||= !!previous?.matchCode;
+        mentions.set(key, candidate);
+      } else {
+        previous.matchName ||= candidate.matchName;
+        previous.matchCode ||= candidate.matchCode;
+      }
     });
   });
   terminalAliasMentions(items, imageWidth, context).forEach(candidate => {
@@ -1627,8 +1641,17 @@ function lineBadgeCode(lineId) {
   const id = String(lineId || '').toUpperCase();
   if (/^[1-9]$/.test(id)) return id;
   if (/^B[1-4]$/.test(id)) return id.slice(1);
+  if (/^1[PGS]$/.test(id)) return '1';
   if (/^2[BC]$/.test(id)) return '2';
+  if (id === '5M') return '5';
   return null;
+}
+function lineFamilyId(lineId) {
+  const id = String(lineId || '').toUpperCase();
+  if (/^1[PGS]$/.test(id)) return '1';
+  if (/^2[BC]$/.test(id)) return '2';
+  if (id === '5M') return '5';
+  return id;
 }
 function codeTokenMatchesStation(token, stationCode) {
   const tokenValue = String(token || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
@@ -1680,6 +1703,8 @@ function signReading(data, contexts) {
   const lineBadgeMatches = context => {
     if (!context) return false;
     const id = String(context.id || '');
+    const contextLine = LINES.find(line => line.id === id && line.st === context.stations) || LINES.find(line => line.id === id);
+    if (/부산/.test(compact) && contextLine && contextLine.city !== 'busan') return false;
     const badge = lineBadgeCode(id) || id;
     const fullName = new RegExp(badge.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:호선|line)', 'i');
     return fullName.test(compact) || codeTokens.includes(String(badge).toUpperCase());
@@ -1689,6 +1714,7 @@ function signReading(data, contexts) {
   });
   LINES.forEach(line => {
     const lineName = String(line.ko || '').replace(/\s+/g, '').toLowerCase();
+    if (/부산/.test(compact) && line.city !== 'busan') return;
     if (lineName.length > 2 && compact.includes(lineName)) addLine(line);
   });
   if (lineBadgeMatches(platformContext)) addLine(LINES.find(line => line.id === platformContext.id));
@@ -1723,7 +1749,7 @@ function signReading(data, contexts) {
     });
   });
   const stations = [...stationMatches.values()].sort((a, b) => Number(b.onRoute) - Number(a.onRoute) || b.quality - a.quality || a.itemIndex - b.itemIndex).slice(0, 3);
-  return { items, compact, raw, korean, labels, routeLines, routeLineIds, codeTokens, stations, isExit: hasExit, isTransfer: labels.includes('轉乘') || lineBadgeMatches(transferContext) };
+  return { items, compact, raw, korean, labels, routeLines, routeLineIds, codeTokens, stations, isExit: hasExit, isTransfer: hasTransfer };
 }
 function analyzePhotoSign(data, imageWidth, context) {
   const items = ocrItems(data);
@@ -1738,16 +1764,19 @@ function analyzePhotoSign(data, imageWidth, context) {
       mention.sideSource = 'arrow';
     }
   });
-  const positioned = mentions.filter(item => item.bbox && item.direction !== '目前位置');
-  if (positioned.length >= 2) {
-    const xs = positioned.map(item => boxCenter(item.bbox).x);
-    const minX = Math.min(...xs), maxX = Math.max(...xs);
-    if (maxX - minX >= Math.max(24, imageWidth * .055)) {
-      positioned.forEach(item => {
-        if (item.sideSource === 'arrow') return;
-        const x = boxCenter(item.bbox).x;
-        item.side = Math.abs(x - minX) <= Math.abs(x - maxX) ? '左側' : '右側';
-        item.sideSource = 'relative';
+  const positionedPlanned = mentions.filter(item => item.bbox && item.direction === '路線方向');
+  const positionedOpposite = mentions.filter(item => item.bbox && item.direction === '反方向');
+  if (positionedPlanned.length && positionedOpposite.length) {
+    const averageX = list => list.reduce((sum, item) => sum + boxCenter(item.bbox).x, 0) / list.length;
+    const plannedX = averageX(positionedPlanned), oppositeX = averageX(positionedOpposite);
+    if (Math.abs(plannedX - oppositeX) >= Math.max(24, imageWidth * .055)) {
+      const plannedSide = plannedX < oppositeX ? '左側' : '右側';
+      const oppositeSide = plannedSide === '左側' ? '右側' : '左側';
+      positionedPlanned.forEach(item => {
+        if (item.sideSource !== 'arrow') { item.side = plannedSide; item.sideSource = 'relative'; }
+      });
+      positionedOpposite.forEach(item => {
+        if (item.sideSource !== 'arrow') { item.side = oppositeSide; item.sideSource = 'relative'; }
       });
     }
   }
@@ -1759,12 +1788,13 @@ function analyzePhotoSign(data, imageWidth, context) {
     : null;
   return { signKind, mentions, planned, opposite, clear, pairedOpposite };
 }
-function photoComparison(reading, analysis, context) {
+function photoComparison(reading, analysis, context, allowedLineIds) {
   const target = analysis.planned[0] || null;
   const reverse = analysis.opposite[0] || null;
   const expectedLineCode = context && lineBadgeCode(context.id);
   const lineMatched = !!context && (reading.routeLineIds.includes(context.id) || !!expectedLineCode && reading.codeTokens.includes(expectedLineCode));
-  const otherLine = context && reading.routeLineIds.find(id => id !== context.id && lineBadgeCode(id) !== expectedLineCode);
+  const allowedLines = new Set((allowedLineIds || [context && context.id]).filter(Boolean));
+  const otherLine = context && reading.routeLineIds.find(id => !allowedLines.has(id) && lineFamilyId(id) !== lineFamilyId(context.id));
   const targetMatched = !!target;
   const reverseMatched = !!reverse;
   const stationCodeMatches = context ? context.stations.map((station, stationIndex) => ({ station, stationIndex, direction: directionForStation(context, stationIndex) }))
@@ -1772,13 +1802,14 @@ function photoComparison(reading, analysis, context) {
   const plannedCode = stationCodeMatches.find(item => item.direction === '路線方向') || null;
   const reverseCode = stationCodeMatches.find(item => item.direction === '反方向') || null;
   const currentCode = stationCodeMatches.find(item => item.direction === '目前位置') || null;
-  const lineCheck = otherLine
+  const lineConflict = !!otherLine && !lineMatched;
+  const lineCheck = lineConflict
     ? { label: '線號', value: '讀到' + (LINES.find(line => line.id === otherLine)?.zh || otherLine), state: 'bad' }
     : { label: '線號', value: lineMatched ? (expectedLineCode || context.line) : '未讀到', state: lineMatched ? 'ok' : 'missing' };
   const numberCheck = plannedCode
     ? { label: '站號', value: plannedCode.station[0] + '・方向正確', state: 'ok' }
     : reverseCode
-      ? { label: '站號', value: reverseCode.station[0] + '・反方向', state: 'bad' }
+      ? { label: '站號', value: reverseCode.station[0] + (target ? '・反向參考' : '・反方向'), state: target ? 'missing' : 'bad' }
       : currentCode
         ? { label: '站號', value: currentCode.station[0] + '・目前站', state: 'missing' }
         : { label: '站號', value: '未讀到', state: 'missing' };
@@ -1789,7 +1820,24 @@ function photoComparison(reading, analysis, context) {
     { label: '反向', value: reverseMatched ? reverse.station[2] : '未讀到', state: reverseMatched ? 'ok' : 'missing' }
   ];
   if (reading.isExit) checks.unshift({ label: '牌面', value: '出口', state: 'bad' });
-  return { target, reverse, lineMatched, targetMatched, reverseMatched, plannedCode, reverseCode, checks, isExit: reading.isExit };
+  return { target, reverse, lineMatched, targetMatched, reverseMatched, plannedCode, reverseCode, currentCode, otherLine, lineConflict, checks, isExit: reading.isExit };
+}
+function strictDirectionDecision(analysis, comparison) {
+  const target = analysis.planned[0] || null;
+  const movement = movementForMention(target);
+  const paired = analysis.pairedOpposite || null;
+  const hasArrow = !!target && target.sideSource === 'arrow' && !!target.pathDirection;
+  const hasName = !!target?.matchName;
+  const hasCode = !!target?.matchCode || !!comparison?.plannedCode;
+  const pairedNames = !!paired && !!target?.matchName && !!paired.matchName;
+  const lineConflict = !!comparison?.lineConflict;
+  const numberConflict = !!comparison?.reverseCode && !comparison?.plannedCode && !analysis.planned.length;
+  if (lineConflict || numberConflict) return { reliable: false, conflict: true, movement, target, paired, reason: 'conflict' };
+  if (!movement) return { reliable: false, conflict: false, movement: null, target, paired, reason: 'no-movement' };
+  if (hasArrow && hasName) return { reliable: true, conflict: false, movement, target, paired, reason: 'name-arrow' };
+  if (hasArrow && hasCode && comparison?.lineMatched) return { reliable: true, conflict: false, movement, target, paired, reason: 'number-line-arrow' };
+  if (pairedNames) return { reliable: true, conflict: false, movement, target, paired, reason: 'paired-names' };
+  return { reliable: false, conflict: false, movement, target, paired, reason: hasCode ? 'number-only' : 'single-evidence' };
 }
 function appendPhotoChecks(result, checks) {
   const list = el('div', 'photo-checks');
@@ -1876,14 +1924,23 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       result.replaceChildren(); result.hidden = false;
       const place = analysis.signKind === 'transfer' ? '轉乘通道' : '月台';
       const directionContext = analysis.signKind === 'transfer' ? transferContext : platformContext;
-      const comparison = directionContext ? photoComparison(reading, analysis, directionContext) : null;
+      const allowedLineIds = analysis.signKind === 'transfer' ? [platformContext.id, transferContext && transferContext.id] : [platformContext.id];
+      const comparison = directionContext ? photoComparison(reading, analysis, directionContext, allowedLineIds) : null;
+      const decision = comparison ? strictDirectionDecision(analysis, comparison) : null;
       if (analysis.signKind === 'transfer' && !transferContext) {
         result.classList.add('warn');
         result.append(el('div', 'photo-result-label', '這是轉乘指示牌'), el('strong', null, '目前這一段不用轉車'), el('p', null, '請拍月台上的方向牌，讓下一站或終點站名稱一起入鏡。'));
       } else if (comparison && comparison.isExit) {
         result.classList.add('warn');
         result.append(el('div', 'photo-result-label', '這是出口指示牌'), el('strong', null, '不能用來判斷搭車方向'), el('p', null, '請改拍月台、轉乘通道上的方向牌，並讓箭頭和站名一起入鏡。'));
-      } else if (analysis.clear && analysis.pairedOpposite) {
+      } else if (decision && decision.conflict) {
+        result.classList.add('warn');
+        result.append(
+          el('div', 'photo-result-label', '辨識資料不一致'),
+          el('strong', null, '不要依這張照片前進'),
+          el('p', null, '圖片中的線號、站號或站名和規劃路線互相衝突。請重新拍攝完整指示牌。')
+        );
+      } else if (decision && decision.reliable && analysis.clear && analysis.pairedOpposite) {
         const direction = analysis.clear;
         const opposite = analysis.pairedOpposite;
         result.classList.remove('warn');
@@ -1892,23 +1949,26 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
           el('strong', null, '往' + direction.side + '側' + place + '走'),
           el('p', null, direction.side + '：' + direction.station[1] + '（' + direction.station[2] + '）｜' + opposite.side + '：' + opposite.station[1] + '（' + opposite.station[2] + '）')
         );
-      } else if (analysis.planned.length) {
+      } else if (decision && decision.reliable && analysis.planned.length) {
         const direction = analysis.planned[0];
         const movement = movementForMention(direction);
-        result.classList.toggle('warn', !movement);
-        if (movement) {
-          result.append(
-            el('div', 'photo-result-label', '找到正確方向'),
-            el('strong', null, movementInstruction(movement, place)),
-            el('p', null, '讀到 ' + direction.station[1] + '（' + direction.station[2] + '）。另一側資訊不足，請到月台前再確認。')
-          );
-        } else {
-          result.append(
-            el('div', 'photo-result-label', '站名正確，箭頭不清楚'),
-            el('strong', null, '暫時無法確認左或右'),
-            el('p', null, '已讀到 ' + direction.station[1] + '（' + direction.station[2] + '）。請把同一方向的箭頭一起框進來再試。')
-          );
-        }
+        result.classList.remove('warn');
+        result.append(
+          el('div', 'photo-result-label', '方向已通過交叉比對'),
+          el('strong', null, movementInstruction(movement, place)),
+          el('p', null, '已比對 ' + direction.station[1] + '（' + direction.station[2] + '）與箭頭' + (decision.reason === 'number-line-arrow' ? '、線號及站號。' : '。'))
+        );
+      } else if (analysis.planned.length) {
+        const direction = analysis.planned[0];
+        result.classList.add('warn');
+        const numberOnly = decision && decision.reason === 'number-only';
+        result.append(
+          el('div', 'photo-result-label', '證據不足'),
+          el('strong', null, '暫時不判斷方向'),
+          el('p', null, numberOnly
+            ? '已讀到 ' + direction.station[0] + '，但還需要相符的線號與箭頭。請重新拍完整指示牌。'
+            : '已讀到 ' + direction.station[1] + '（' + direction.station[2] + '），但箭頭或另一側站名不夠清楚。請重新拍攝。')
+        );
       } else if (analysis.opposite.length) {
         const opposite = analysis.opposite[0];
         result.classList.add('warn');
