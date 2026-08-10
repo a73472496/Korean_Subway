@@ -297,6 +297,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 .photo-guide{margin-top:10px;overflow:hidden;border:1px solid rgba(171,207,198,.78);border-bottom:2px solid rgba(143,192,181,.82);border-radius:8px;background:rgba(244,251,249,.56)}.photo-guide-summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0;cursor:pointer;list-style:none}.photo-guide-summary::-webkit-details-marker{display:none}.photo-guide-summary::after{content:'+';margin-left:0;color:var(--accent);font:700 14px/1 var(--mono)}.photo-guide[open] .photo-guide-summary{border-bottom:1px solid rgba(171,207,198,.6)}.photo-guide[open] .photo-guide-summary::after{content:'−'}.photo-guide-content{padding:12px 12px 14px}.photo-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}.photo-example{min-width:0}.photo-example-art{position:relative;display:grid;place-items:center;height:82px;overflow:hidden;border:1px solid rgba(171,207,198,.7);border-radius:6px;background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign{display:flex;align-items:center;justify-content:space-around;width:78%;height:42%;padding:0 7px;border-radius:3px;background:#34413f;color:#f8fffc;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.03em}.photo-example-sign i{display:block;width:1px;height:20px;background:rgba(255,255,255,.55)}.photo-example-sign b{font-size:16px;font-weight:500}.photo-example.bad .photo-example-sign{justify-content:center;width:54%;transform:translateX(31%);opacity:.62;white-space:nowrap}.photo-example.bad .photo-example-sign b,.photo-example.bad .photo-example-sign i{display:none}.photo-example-mark{position:absolute;right:7px;bottom:7px;display:grid;width:25px;height:25px;place-items:center;border-radius:50%;font:800 17px/1 var(--sans)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}.photo-example p{margin:5px 0 0;color:var(--text-muted);font-size:10px;line-height:1.4}.photo-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;width:100%;padding:0 12px;border:1px solid var(--accent);border-radius:7px;background:rgba(255,255,255,.8);color:var(--accent);font:700 13px var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.photo-action:hover{background:var(--accent);color:#fff}.photo-action:disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait}.photo-status{margin-top:8px;color:var(--text-faint);font-size:10px;line-height:1.55}.photo-result{margin-top:10px;padding:10px;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;background:rgba(255,255,255,.62)}.photo-result-label{color:var(--accent);font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}.photo-result strong{display:block;margin-top:2px;color:var(--text);font-size:15px;line-height:1.4}.photo-result p{margin:3px 0 0;color:var(--text-muted);font-size:11px;line-height:1.6}.photo-result.warn{border-left-color:#a86f26}.photo-result.warn .photo-result-label{color:#8e5e1f}.crop-sheet{position:fixed;z-index:70;inset:0;display:grid;place-items:center;padding:16px;background:rgba(15,31,29,.75)}.crop-panel{width:min(100%,640px);max-height:calc(100vh - 32px);overflow:auto;border:1px solid rgba(255,255,255,.4);border-radius:12px;background:#f8fcfb;box-shadow:0 24px 70px rgba(0,0,0,.32)}.crop-panel h2{margin:0;padding:14px 16px 3px;color:var(--text);font-size:16px;line-height:1.4}.crop-help{margin:0;padding:0 16px 12px;color:var(--text-muted);font-size:12px;line-height:1.55}.crop-viewport{display:grid;max-height:62vh;padding:0 12px;place-items:center;overflow:auto;background:#e5eeeb}.crop-wrap{position:relative;display:inline-block;max-width:100%;line-height:0}.crop-wrap img{display:block;max-width:100%;max-height:62vh;width:auto;height:auto}.crop-frame{position:absolute;border:2px solid #e9fff9;border-radius:4px;box-shadow:0 0 0 9999px rgba(8,21,19,.48),0 0 0 1px rgba(20,94,82,.8) inset;touch-action:none;cursor:move}.crop-frame::before{content:'把箭頭和站名一起框進來';position:absolute;top:-28px;left:50%;width:max-content;transform:translateX(-50%);color:#fff;font:700 11px/1.3 var(--sans);text-shadow:0 1px 3px rgba(0,0,0,.72)}.crop-handle{position:absolute;width:18px;height:18px;border:2px solid #e9fff9;border-radius:50%;background:var(--accent);touch-action:none}.crop-handle.nw{top:-10px;left:-10px}.crop-handle.ne{top:-10px;right:-10px}.crop-handle.sw{bottom:-10px;left:-10px}.crop-handle.se{right:-10px;bottom:-10px}.crop-controls{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;padding:12px}.crop-controls button{min-height:44px;border:1px solid var(--border-strong);border-radius:7px;background:#fff;color:var(--text-muted);font:700 13px var(--sans);cursor:pointer}.crop-controls .crop-confirm{border-color:var(--accent);background:var(--accent);color:#fff}@media (max-width:620px){.photo-guide-summary{min-height:44px;padding:10px 11px;font-size:10px}.photo-guide-content{padding:11px 11px 13px}.photo-action{min-height:46px}.crop-sheet{padding:0}.crop-panel{max-height:100vh;border-radius:0}.crop-viewport,.crop-wrap img{max-height:58vh}.crop-frame::before{top:-25px;font-size:10px}}
 .photo-guide{position:relative;box-shadow:inset 0 -2px 0 rgba(143,192,181,.92)}
 .photo-guide::after{content:'';position:absolute;z-index:2;right:0;bottom:0;left:0;height:2px;pointer-events:none;background:rgba(143,192,181,.92)}
+.photo-examples{grid-template-columns:repeat(3,minmax(0,1fr))}.photo-example.column .photo-example-art{background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign.column{width:52%;height:68%;padding:5px 3px;flex-wrap:wrap;align-content:center;gap:2px}.photo-example-sign.column i{height:16px}.photo-example.column .photo-example-mark{background:var(--accent);color:#fff}@media (max-width:620px){.photo-examples{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-example.bad{grid-column:1/-1}.photo-example.bad .photo-example-art{height:64px}.photo-example.column .photo-example-art{height:82px}}
 </style>
 </head>
 <body>
@@ -1669,22 +1670,28 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     const opposite = platformContext.stations[platformContext.forward ? 0 : platformContext.stations.length - 1];
     photoAim.append(
       el('strong', null, '拍什麼：'),
+      document.createTextNode('吊掛、柱面或牆面方向牌都可以，重點是箭頭和站名一起入鏡。'),
       document.createTextNode('拍「往 ' + platformContext.terminal[2] + '（' + platformContext.terminal[0] + '）」的月台方向牌。'),
       document.createTextNode('牌上有「' + platformContext.next[2] + '／' + platformContext.off[2] + '」也可以；不要拍「往 ' + opposite[2] + '」或出口牌。')
     );
   }
   const examples = el('div', 'photo-examples');
-  const example = (good, label) => {
-    const item = el('div', 'photo-example ' + (good ? 'good' : 'bad'));
+  const example = (type, label) => {
+    const good = type !== 'bad';
+    const item = el('div', 'photo-example ' + type);
     const art = el('div', 'photo-example-art');
-    const sign = el('div', 'photo-example-sign');
+    const sign = el('div', 'photo-example-sign ' + type);
     if (good) sign.append(el('b', null, '←'), el('span', null, '역명'), el('i'), el('span', null, 'Station'), el('b', null, '→'));
     else sign.append(el('span', null, 'Station'));
     art.append(sign, el('span', 'photo-example-mark', good ? '✓' : '×'));
     item.append(art, el('p', null, label));
     return item;
   };
-  examples.append(example(true, '整塊指示牌清楚入鏡'), example(false, '不要只拍一個站名或局部'));
+  examples.append(
+    example('hanging', '吊掛式：箭頭與站名一起入鏡'),
+    example('column', '柱面／牆面：拍完整方向區塊'),
+    example('bad', '不要只拍站名、出口或局部')
+  );
   const input = document.createElement('input');
   input.type = 'file'; input.accept = 'image/*'; input.hidden = true;
   const photoAction = el('button', 'photo-action', '選擇指示牌照片'); photoAction.type = 'button';
