@@ -293,6 +293,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 @media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.png');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:var(--glass-strong)}}
 .stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
+.photo-guide{margin-top:10px;padding:12px;border:1px solid rgba(171,207,198,.78);border-radius:8px;background:rgba(244,251,249,.56)}.photo-guide-head{display:flex;align-items:flex-start;gap:9px}.photo-guide-icon{display:grid;flex:0 0 auto;width:30px;height:30px;place-items:center;border:1px solid rgba(117,170,158,.55);border-radius:7px;color:var(--accent);background:rgba(255,255,255,.72)}.photo-guide-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.photo-guide-head strong{display:block;color:var(--text);font-size:13px;line-height:1.35}.photo-guide-head p{margin:2px 0 0;color:var(--text-muted);font-size:11px;line-height:1.55}.photo-route-proof{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 9px}.photo-route-proof span{padding:3px 6px;border:1px solid rgba(171,207,198,.72);border-radius:4px;background:rgba(255,255,255,.6);color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700}.photo-route-proof .photo-line{color:var(--accent)}.photo-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;width:100%;padding:0 12px;border:1px solid var(--accent);border-radius:7px;background:rgba(255,255,255,.8);color:var(--accent);font:700 13px var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.photo-action:hover{background:var(--accent);color:#fff}.photo-action:disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait}.photo-status{margin-top:8px;color:var(--text-faint);font-size:10px;line-height:1.55}.photo-result{margin-top:10px;padding:10px;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;background:rgba(255,255,255,.62)}.photo-result-label{color:var(--accent);font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}.photo-result strong{display:block;margin-top:2px;color:var(--text);font-size:15px;line-height:1.4}.photo-result p{margin:3px 0 0;color:var(--text-muted);font-size:11px;line-height:1.6}.photo-result.warn{border-left-color:#a86f26}.photo-result.warn .photo-result-label{color:#8e5e1f}@media (max-width:620px){.photo-guide{padding:11px}.photo-action{min-height:46px}.photo-guide-head strong{font-size:13px}}
 </style>
 </head>
 <body>
@@ -1077,6 +1078,131 @@ function stopList(L, idx) {
   list.append(summary, items);
   return list;
 }
+let tesseractLoader;
+function cameraIcon() {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true');
+  ['M4 7h3l1.4-2h7.2L17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z', 'M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z'].forEach(d => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', d); svg.appendChild(path);
+  });
+  return svg;
+}
+function loadTesseract() {
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+  if (tesseractLoader) return tesseractLoader;
+  tesseractLoader = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js';
+    script.async = true;
+    script.onload = () => {
+      if (window.Tesseract) resolve(window.Tesseract);
+      else { tesseractLoader = null; reject(new Error('OCR 模組沒有完成載入。')); }
+    };
+    script.onerror = () => { tesseractLoader = null; reject(new Error('無法下載韓文辨識工具。請確認網路後再試。')); };
+    document.head.appendChild(script);
+  });
+  return tesseractLoader;
+}
+function shrinkForOcr(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const imageUrl = URL.createObjectURL(file);
+    image.onload = () => {
+      URL.revokeObjectURL(imageUrl);
+      const scale = Math.min(1, 1600 / Math.max(image.naturalWidth, image.naturalHeight));
+      const width = Math.max(1, Math.round(image.naturalWidth * scale));
+      const height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+      canvas.toBlob(blob => blob ? resolve({ image: blob, width }) : reject(new Error('照片無法處理。')), 'image/jpeg', .88);
+    };
+    image.onerror = () => { URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新拍攝。')); };
+    image.src = imageUrl;
+  });
+}
+function cleanSignText(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, ''); }
+function routePhotoContext(L, idx) {
+  const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
+  const forward = L.loop ? idx[1] === (idx[0] + 1) % L.st.length : idx[1] > idx[0];
+  const terminal = L.loop ? next : L.st[forward ? L.st.length - 1 : 0];
+  const increases = codeNum(next[0]) > codeNum(board[0]);
+  const targets = L.loop ? [next, off] : [terminal, next, off];
+  return {
+    line: L.zh, color: L.color, board, next, off, terminal,
+    trend: L.loop ? '跟著下一站 ' + next[2] + ' 的指示走' : '站號要往' + (increases ? '變大' : '變小') + '的方向走',
+    targets: targets.filter((station, index, list) => list.findIndex(item => item[1] === station[1]) === index)
+  };
+}
+function photoMatch(words, imageWidth, context) {
+  const candidates = context.targets.map((station, index) => ({ station, priority: index }));
+  let found = null;
+  for (const candidate of candidates) {
+    const target = cleanSignText(candidate.station[1]);
+    if (target.length < 2) continue;
+    const word = words.find(item => {
+      const value = cleanSignText(item.text);
+      return value.length >= 2 && (value.includes(target) || target.includes(value));
+    });
+    if (word) { found = { word, candidate }; break; }
+  }
+  if (!found || !found.word.bbox) return null;
+  const center = (found.word.bbox.x0 + found.word.bbox.x1) / 2;
+  const ratio = center / Math.max(1, imageWidth);
+  const side = ratio < .42 ? '左側' : ratio > .58 ? '右側' : '中間';
+  return { side, station: found.candidate.station, isClear: side !== '中間' };
+}
+function photoDirectionGuide(L, idx) {
+  const context = routePhotoContext(L, idx);
+  const box = el('section', 'photo-guide');
+  const head = el('div', 'photo-guide-head');
+  const icon = el('div', 'photo-guide-icon'); icon.appendChild(cameraIcon());
+  const copy = el('div');
+  copy.append(el('strong', null, '拍指示牌，確認該走哪一邊'), el('p', null, '本機讀取韓文站名，再和你的路線方向比對。照片不會上傳。'));
+  head.append(icon, copy);
+  const proof = el('div', 'photo-route-proof');
+  const line = el('span', 'photo-line', context.line); line.style.borderColor = context.color;
+  proof.append(line, el('span', null, '往 ' + context.terminal[2]), el('span', null, context.trend));
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = 'image/*'; input.capture = 'environment'; input.setAttribute('capture', 'environment'); input.hidden = true;
+  const action = el('button', 'photo-action', '拍照或選擇指示牌照片'); action.type = 'button';
+  const status = el('div', 'photo-status', '第一次使用會下載韓文辨識工具。辨識在此裝置完成，不需要 API。'); status.setAttribute('aria-live', 'polite');
+  const result = el('div', 'photo-result'); result.hidden = true; result.setAttribute('aria-live', 'polite');
+  action.onclick = () => input.click();
+  input.onchange = async () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    result.hidden = true; action.disabled = true; action.textContent = '正在讀取指示牌…';
+    status.textContent = '正在準備照片與韓文辨識工具。第一次可能需要一點時間。';
+    try {
+      const prepared = await shrinkForOcr(file);
+      const Tesseract = await loadTesseract();
+      const worker = await Tesseract.createWorker('kor+eng', 1, { logger: message => {
+        if (message.status === 'recognizing text' && Number.isFinite(message.progress)) status.textContent = '正在讀取站牌文字 ' + Math.round(message.progress * 100) + '%';
+      }});
+      const response = await worker.recognize(prepared.image);
+      await worker.terminate();
+      const match = photoMatch(response.data.words || [], prepared.width, context);
+      result.replaceChildren(); result.hidden = false;
+      if (match && match.isClear) {
+        result.classList.remove('warn');
+        result.append(el('div', 'photo-result-label', '照片比對結果'), el('strong', null, '往' + match.side + '的樓梯／通道走'), el('p', null, '畫面' + match.side + '讀到「' + match.station[2] + '」。你的路線需往 ' + context.terminal[2] + ' 方向，' + context.trend + '。請再確認箭頭也朝同一側。'));
+        status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
+      } else {
+        result.classList.add('warn');
+        result.append(el('div', 'photo-result-label', '需要再確認'), el('strong', null, '沒有讀到可比對的方向站名'), el('p', null, '請靠近指示牌重拍，讓箭頭與韓文終點站名都入鏡。你的方向是往 ' + context.terminal[2] + '，' + context.trend + '。'));
+        status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
+      }
+    } catch (error) {
+      result.replaceChildren(); result.hidden = false; result.classList.add('warn');
+      result.append(el('div', 'photo-result-label', '目前無法辨識'), el('strong', null, error.message || '照片辨識失敗'), el('p', null, '請重新拍攝清楚的指示牌，或依下方路線資訊確認終點方向。'));
+      status.textContent = '照片沒有上傳或保存。';
+    } finally {
+      action.disabled = false; action.textContent = '拍照或選擇另一張照片'; input.value = '';
+    }
+  };
+  box.append(head, proof, input, action, status, result);
+  return box;
+}
 function legBlock(L, idx, nextLine, transfer) {
   const n = L.st.length;
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
@@ -1106,6 +1232,7 @@ function legBlock(L, idx, nextLine, transfer) {
   ride.appendChild(r2);
   bd.appendChild(ride);
   bd.appendChild(stopList(L, idx));
+  bd.appendChild(photoDirectionGuide(L, idx));
 
   if (nextLine) {
     const x = el('div', 'xfer');
