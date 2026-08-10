@@ -1151,6 +1151,27 @@ function ocrScale(width, height) {
   const longest = Math.max(width, height);
   return longest < 1100 ? Math.min(5, 1500 / longest) : Math.min(1.35, 1800 / longest);
 }
+function canvasBlob(canvas, quality) {
+  return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('照片無法處理。')), 'image/jpeg', quality));
+}
+function otsuThreshold(pixels) {
+  const histogram = new Uint32Array(256);
+  let total = 0, sum = 0;
+  for (let i = 0; i < pixels.length; i += 4) { const tone = pixels[i]; histogram[tone]++; total++; sum += tone; }
+  let sumBackground = 0, weightBackground = 0, best = 0, varianceMax = 0;
+  for (let tone = 0; tone < 256; tone++) {
+    weightBackground += histogram[tone];
+    if (!weightBackground) continue;
+    const weightForeground = total - weightBackground;
+    if (!weightForeground) break;
+    sumBackground += tone * histogram[tone];
+    const meanBackground = sumBackground / weightBackground;
+    const meanForeground = (sum - sumBackground) / weightForeground;
+    const variance = weightBackground * weightForeground * (meanBackground - meanForeground) ** 2;
+    if (variance > varianceMax) { varianceMax = variance; best = tone; }
+  }
+  return best || 128;
+}
 function shrinkForOcr(file) {
   return new Promise((resolve, reject) => {
     const image = new Image();
@@ -1171,7 +1192,23 @@ function shrinkForOcr(file) {
         pixels.data[i] = tone; pixels.data[i + 1] = tone; pixels.data[i + 2] = tone;
       }
       context.putImageData(pixels, 0, 0);
-      canvas.toBlob(blob => blob ? resolve({ image: blob, width }) : reject(new Error('照片無法處理。')), 'image/jpeg', .88);
+      const binary = document.createElement('canvas'); binary.width = width; binary.height = height;
+      const binaryContext = binary.getContext('2d');
+      const binaryPixels = context.getImageData(0, 0, width, height);
+      const threshold = otsuThreshold(binaryPixels.data);
+      let average = 0;
+      for (let i = 0; i < binaryPixels.data.length; i += 4) average += binaryPixels.data[i];
+      average /= binaryPixels.data.length / 4;
+      const invert = average < 145;
+      for (let i = 0; i < binaryPixels.data.length; i += 4) {
+        const light = binaryPixels.data[i] > threshold;
+        const tone = (light === invert) ? 0 : 255;
+        binaryPixels.data[i] = tone; binaryPixels.data[i + 1] = tone; binaryPixels.data[i + 2] = tone;
+      }
+      binaryContext.putImageData(binaryPixels, 0, 0);
+      Promise.all([canvasBlob(canvas, .92), canvasBlob(binary, .92)])
+        .then(([image, highContrast]) => resolve({ image, highContrast, width }))
+        .catch(reject);
     };
     image.onerror = () => { URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新拍攝。')); };
     image.src = imageUrl;
@@ -1280,10 +1317,19 @@ function ocrItems(data) {
   if (data.text) add({ text: data.text }, 0);
   return items;
 }
+function mergeOcrData(...results) {
+  return {
+    text: results.map(result => result && result.text).filter(Boolean).join('\n'),
+    blocks: results.flatMap(result => result && result.blocks || []),
+    words: results.flatMap(result => result && result.words || []),
+    lines: results.flatMap(result => result && result.lines || [])
+  };
+}
 function signReading(data, contexts) {
   const items = ocrItems(data);
   const textParts = [...new Set(items.map(item => String(item.text || '').trim()).filter(Boolean))];
   const raw = textParts.join(' · ').slice(0, 72);
+  const korean = [...new Set(textParts.flatMap(part => part.match(/[가-힣]{2,}/g) || []))].join(' · ').slice(0, 48);
   const compact = textParts.join('').replace(/\s+/g, '').toLowerCase();
   const labels = [];
   const addLabel = label => { if (!labels.includes(label)) labels.push(label); };
@@ -1341,7 +1387,7 @@ function signReading(data, contexts) {
     });
   });
   const stations = [...stationMatches.values()].sort((a, b) => Number(b.onRoute) - Number(a.onRoute) || b.quality - a.quality || a.itemIndex - b.itemIndex).slice(0, 3);
-  return { items, compact, raw, labels, routeLines, stations, isTransfer: labels.includes('轉乘') };
+  return { items, compact, raw, korean, labels, routeLines, stations, isTransfer: labels.includes('轉乘') };
 }
 function analyzePhotoSign(data, imageWidth, context) {
   const items = ocrItems(data);
@@ -1390,10 +1436,19 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       }});
       await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
       const response = await worker.recognize(prepared.image, {}, { blocks: true });
+      let ocrData = response.data;
+      let reading = signReading(ocrData, [platformContext, transferContext]);
+      let context = reading.isTransfer ? transferContext : platformContext;
+      let analysis = context ? analyzePhotoSign(ocrData, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
+      if (!(analysis.clear && analysis.pairedOpposite)) {
+        status.textContent = '正在以高對比再確認站名…';
+        const highContrastResponse = await worker.recognize(prepared.highContrast, {}, { blocks: true });
+        ocrData = mergeOcrData(response.data, highContrastResponse.data);
+        reading = signReading(ocrData, [platformContext, transferContext]);
+        context = reading.isTransfer ? transferContext : platformContext;
+        analysis = context ? analyzePhotoSign(ocrData, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
+      }
       await worker.terminate();
-      const reading = signReading(response.data, [platformContext, transferContext]);
-      const context = reading.isTransfer ? transferContext : platformContext;
-      const analysis = context ? analyzePhotoSign(response.data, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
       result.replaceChildren(); result.hidden = false;
       const place = analysis.signKind === 'transfer' ? '轉乘通道' : '月台';
       const directionContext = analysis.signKind === 'transfer' ? transferContext : platformContext;
@@ -1421,10 +1476,10 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         result.classList.add('warn');
         const parsedStations = reading.stations.map(item => item.station[1] + '（' + item.station[2] + '）').join('、');
         const parsedTypes = [...reading.labels, ...reading.routeLines].join('・');
-        if (parsedStations || reading.raw) {
-          result.append(el('div', 'photo-result-label', parsedTypes || '讀到韓文'), el('strong', null, parsedStations || '讀到：' + reading.raw), el('p', null, parsedStations ? '這些站名不在目前要走的方向。請再拍含箭頭的整塊指示牌。' : '尚未能比對到站名，請讓指示牌填滿框內重拍。'));
+        if (parsedStations || reading.korean) {
+          result.append(el('div', 'photo-result-label', parsedTypes || '讀到韓文'), el('strong', null, parsedStations || '讀到：' + reading.korean), el('p', null, parsedStations ? '這些站名不在目前要走的方向。請再拍含箭頭的整塊指示牌。' : '尚未能比對到站名，請讓指示牌填滿框內重拍。'));
         } else {
-          result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到韓文'), el('p', null, '讓箭頭和站名一起入鏡。'));
+          result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到可用的韓文'), el('p', null, '讓指示牌填滿框內，避免拍到螢幕反光。'));
         }
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       }
