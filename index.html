@@ -293,7 +293,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 @media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.png');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:var(--glass-strong)}}
 .stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
-.photo-guide{margin-top:10px;overflow:hidden;border:1px solid rgba(171,207,198,.78);border-radius:8px;background:rgba(244,251,249,.56)}.photo-guide-summary{display:flex;align-items:center;justify-content:space-between;min-height:46px;padding:0 12px;color:var(--text);font-size:13px;font-weight:800;cursor:pointer;list-style:none}.photo-guide-summary::-webkit-details-marker{display:none}.photo-guide-summary::after{content:'+';color:var(--accent);font:700 20px/1 var(--mono)}.photo-guide[open] .photo-guide-summary{border-bottom:1px solid rgba(171,207,198,.6)}.photo-guide[open] .photo-guide-summary::after{content:'−'}.photo-guide-content{padding:12px}.photo-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}.photo-example{min-width:0}.photo-example-art{position:relative;display:grid;place-items:center;height:82px;overflow:hidden;border:1px solid rgba(171,207,198,.7);border-radius:6px;background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign{display:flex;align-items:center;justify-content:space-around;width:78%;height:42%;padding:0 7px;border-radius:3px;background:#34413f;color:#f8fffc;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.03em}.photo-example-sign i{display:block;width:1px;height:20px;background:rgba(255,255,255,.55)}.photo-example-sign b{font-size:16px;font-weight:500}.photo-example.bad .photo-example-sign{width:42%;transform:translateX(35%);opacity:.58}.photo-example-mark{position:absolute;right:7px;bottom:7px;display:grid;width:25px;height:25px;place-items:center;border-radius:50%;font:800 17px/1 var(--sans)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}.photo-example p{margin:5px 0 0;color:var(--text-muted);font-size:10px;line-height:1.4}.photo-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;width:100%;padding:0 12px;border:1px solid var(--accent);border-radius:7px;background:rgba(255,255,255,.8);color:var(--accent);font:700 13px var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.photo-action:hover{background:var(--accent);color:#fff}.photo-action:disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait}.photo-status{margin-top:8px;color:var(--text-faint);font-size:10px;line-height:1.55}.photo-result{margin-top:10px;padding:10px;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;background:rgba(255,255,255,.62)}.photo-result-label{color:var(--accent);font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}.photo-result strong{display:block;margin-top:2px;color:var(--text);font-size:15px;line-height:1.4}.photo-result p{margin:3px 0 0;color:var(--text-muted);font-size:11px;line-height:1.6}.photo-result.warn{border-left-color:#a86f26}.photo-result.warn .photo-result-label{color:#8e5e1f}@media (max-width:620px){.photo-guide-summary{min-height:48px;padding:0 11px}.photo-guide-content{padding:11px}.photo-action{min-height:46px}}
+.photo-guide{margin-top:10px;overflow:hidden;border:1px solid rgba(171,207,198,.78);border-bottom:2px solid rgba(143,192,181,.82);border-radius:8px;background:rgba(244,251,249,.56)}.photo-guide-summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0;cursor:pointer;list-style:none}.photo-guide-summary::-webkit-details-marker{display:none}.photo-guide-summary::after{content:'+';margin-left:0;color:var(--accent);font:700 14px/1 var(--mono)}.photo-guide[open] .photo-guide-summary{border-bottom:1px solid rgba(171,207,198,.6)}.photo-guide[open] .photo-guide-summary::after{content:'−'}.photo-guide-content{padding:12px 12px 14px}.photo-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}.photo-example{min-width:0}.photo-example-art{position:relative;display:grid;place-items:center;height:82px;overflow:hidden;border:1px solid rgba(171,207,198,.7);border-radius:6px;background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign{display:flex;align-items:center;justify-content:space-around;width:78%;height:42%;padding:0 7px;border-radius:3px;background:#34413f;color:#f8fffc;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.03em}.photo-example-sign i{display:block;width:1px;height:20px;background:rgba(255,255,255,.55)}.photo-example-sign b{font-size:16px;font-weight:500}.photo-example.bad .photo-example-sign{justify-content:center;width:54%;transform:translateX(31%);opacity:.62;white-space:nowrap}.photo-example.bad .photo-example-sign b,.photo-example.bad .photo-example-sign i{display:none}.photo-example-mark{position:absolute;right:7px;bottom:7px;display:grid;width:25px;height:25px;place-items:center;border-radius:50%;font:800 17px/1 var(--sans)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}.photo-example p{margin:5px 0 0;color:var(--text-muted);font-size:10px;line-height:1.4}.photo-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;width:100%;padding:0 12px;border:1px solid var(--accent);border-radius:7px;background:rgba(255,255,255,.8);color:var(--accent);font:700 13px var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.photo-action:hover{background:var(--accent);color:#fff}.photo-action:disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait}.photo-status{margin-top:8px;color:var(--text-faint);font-size:10px;line-height:1.55}.photo-result{margin-top:10px;padding:10px;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;background:rgba(255,255,255,.62)}.photo-result-label{color:var(--accent);font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}.photo-result strong{display:block;margin-top:2px;color:var(--text);font-size:15px;line-height:1.4}.photo-result p{margin:3px 0 0;color:var(--text-muted);font-size:11px;line-height:1.6}.photo-result.warn{border-left-color:#a86f26}.photo-result.warn .photo-result-label{color:#8e5e1f}.crop-sheet{position:fixed;z-index:70;inset:0;display:grid;place-items:center;padding:16px;background:rgba(15,31,29,.75)}.crop-panel{width:min(100%,640px);max-height:calc(100vh - 32px);overflow:auto;border:1px solid rgba(255,255,255,.4);border-radius:12px;background:#f8fcfb;box-shadow:0 24px 70px rgba(0,0,0,.32)}.crop-panel h2{margin:0;padding:14px 16px 3px;color:var(--text);font-size:16px;line-height:1.4}.crop-help{margin:0;padding:0 16px 12px;color:var(--text-muted);font-size:12px;line-height:1.55}.crop-viewport{display:grid;max-height:62vh;padding:0 12px;place-items:center;overflow:auto;background:#e5eeeb}.crop-wrap{position:relative;display:inline-block;max-width:100%;line-height:0}.crop-wrap img{display:block;max-width:100%;max-height:62vh;width:auto;height:auto}.crop-frame{position:absolute;border:2px solid #e9fff9;border-radius:4px;box-shadow:0 0 0 9999px rgba(8,21,19,.48),0 0 0 1px rgba(20,94,82,.8) inset;touch-action:none;cursor:move}.crop-frame::before{content:'把箭頭和站名一起框進來';position:absolute;top:-28px;left:50%;width:max-content;transform:translateX(-50%);color:#fff;font:700 11px/1.3 var(--sans);text-shadow:0 1px 3px rgba(0,0,0,.72)}.crop-handle{position:absolute;width:18px;height:18px;border:2px solid #e9fff9;border-radius:50%;background:var(--accent);touch-action:none}.crop-handle.nw{top:-10px;left:-10px}.crop-handle.ne{top:-10px;right:-10px}.crop-handle.sw{bottom:-10px;left:-10px}.crop-handle.se{right:-10px;bottom:-10px}.crop-controls{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;padding:12px}.crop-controls button{min-height:44px;border:1px solid var(--border-strong);border-radius:7px;background:#fff;color:var(--text-muted);font:700 13px var(--sans);cursor:pointer}.crop-controls .crop-confirm{border-color:var(--accent);background:var(--accent);color:#fff}@media (max-width:620px){.photo-guide-summary{min-height:44px;padding:10px 11px;font-size:10px}.photo-guide-content{padding:11px 11px 13px}.photo-action{min-height:46px}.crop-sheet{padding:0}.crop-panel{max-height:100vh;border-radius:0}.crop-viewport,.crop-wrap img{max-height:58vh}.crop-frame::before{top:-25px;font-size:10px}}
 </style>
 </head>
 <body>
@@ -582,6 +582,169 @@ LINES.find(line => line.id === 'DH').st.find(station => station[1] === '월래')
 LINES.find(line => line.id === 'B1').st.find(station => station[1] === '좌천').push('B1-jwacheon');
 LINES.find(line => line.id === 'DH').st.find(station => station[1] === '좌천').push('DH-jwacheon');
 
+/* ---------- current Seoul network corrections (2026-08) ---------- */
+// Keep branches separate in the graph.  They share the real junction station,
+// so search and route planning remain possible without pretending that every
+// Line 1 or Line 5 train continues onto every branch.
+const lineById = id => LINES.find(line => line.id === id);
+const S = (code, ko, zh, rom, lat, lng) => [code, ko, zh, rom, lat, lng];
+
+// Line 1: the original dataset stopped at Songnae and treated the Guro split
+// as one uninterrupted line.  Restore the Yeoncheon extension and its three
+// operating branches.  The 2023 extension uses official hyphenated codes.
+const L1 = lineById('1');
+const legacyLine1 = L1.st.map(station => station.slice());
+const guroIndex = legacyLine1.findIndex(station => station[0] === '141');
+L1.st = [
+  S('100-3', '연천', '漣川', 'Yeoncheon', 38.10167, 127.07389),
+  S('100-2', '전곡', '全谷', 'Jeongok', 38.0245, 127.0713),
+  S('100-1', '청산', '青山', 'Cheongsan', 37.99528, 127.07444),
+  S('100', '소요산', '逍遙山', 'Soyosan', 37.9488, 127.0611),
+  S('101', '동두천', '東豆川', 'Dongducheon', 37.9275, 127.0548),
+  S('102', '보산', '保山', 'Bosan', 37.9143, 127.0571),
+  S('103', '동두천중앙', '東豆川中央', 'Dongducheon Jungang', 37.9018, 127.0565),
+  S('104', '지행', '紙杏', 'Jihaeng', 37.8924, 127.0558),
+  S('105', '덕정', '德亭', 'Deokjeong', 37.8432, 127.0615),
+  S('106', '덕계', '德溪', 'Deokgye', 37.8187, 127.0568),
+  S('107', '양주', '楊州', 'Yangju', 37.7743, 127.0448),
+  S('108', '녹양', '綠楊', 'Nogyang', 37.7594, 127.0423),
+  S('109', '가능', '可能', 'Ganeung', 37.7486, 127.0442),
+  S('110', '의정부', '議政府', 'Uijeongbu', 37.7384, 127.0457),
+  S('111', '회룡', '回龍', 'Hoeryong', 37.7246, 127.0467),
+  ...legacyLine1.slice(0, guroIndex + 1)
+];
+L1.a = '漣川'; L1.b = '九老';
+
+const line1West = legacyLine1.slice(guroIndex);
+line1West.push(
+  S('151', '부개', '富開', 'Bugae', 37.4883, 126.7410),
+  S('152', '부평', '富平', 'Bupyeong', 37.4894, 126.7245),
+  S('153', '백운', '白雲', 'Baegun', 37.4835, 126.7072),
+  S('154', '동암', '銅岩', 'Dongam', 37.4714, 126.7029),
+  S('155', '간석', '間石', 'Ganseok', 37.4646, 126.6947),
+  S('156', '주안', '朱安', 'Juan', 37.4649, 126.6803),
+  S('157', '도화', '道禾', 'Dohwa', 37.4662, 126.6687),
+  S('158', '제물포', '濟物浦', 'Jemulpo', 37.4622, 126.6571),
+  S('159', '도원', '桃源', 'Dowon', 37.4683, 126.6425),
+  S('160', '동인천', '東仁川', 'Dongincheon', 37.4753, 126.6320),
+  S('161', '인천', '仁川', 'Incheon', 37.4767, 126.6169)
+);
+LINES.push(
+  { id: '1I', zh: '1號線 仁川支線', ko: '1호선 경인선', color: L1.color, loop: false, a: '九老', b: '仁川', st: line1West },
+  { id: '1P', zh: '1號線 京釜·長項線', ko: '1호선 경부·장항선', color: L1.color, loop: false, a: '九老', b: '新昌', st: [
+    legacyLine1[guroIndex],
+    S('P142', '가산디지털단지', '加山數碼園區', 'Gasan Digital Complex', 37.4811, 126.8823),
+    S('P143', '독산', '禿山', 'Doksan', 37.4665, 126.8890),
+    S('P144', '금천구청', '衿川區廳', 'Geumcheon-gu Office', 37.4555, 126.8937),
+    S('P145', '석수', '石水', 'Seoksu', 37.4350, 126.9023),
+    S('P146', '관악', '冠岳', 'Gwanak', 37.4192, 126.9081),
+    S('P147', '안양', '安養', 'Anyang', 37.4014, 126.9228),
+    S('P148', '명학', '鳴鶴', 'Myeonghak', 37.3844, 126.9353),
+    S('P149', '금정', '衿井', 'Geumjeong', 37.3722, 126.9434),
+    S('P150', '군포', '軍浦', 'Gunpo', 37.3539, 126.9485),
+    S('P151', '당정', '堂井', 'Dangjeong', 37.3440, 126.9488),
+    S('P152', '의왕', '義王', 'Uiwang', 37.3209, 126.9489),
+    S('P153', '성균관대', '成均館大', 'Sungkyunkwan Univ.', 37.3006, 126.9708),
+    S('P154', '화서', '華西', 'Hwaseo', 37.2839, 126.9898),
+    S('P155', '수원', '水原', 'Suwon', 37.2663, 127.0000),
+    S('P156', '세류', '細柳', 'Seryu', 37.2444, 127.0136),
+    S('P157', '병점', '餠店', 'Byeongjeom', 37.2068, 127.0332),
+    S('P158', '세마', '洗馬', 'Sema', 37.1876, 127.0431),
+    S('P159', '오산대', '烏山大', 'Osan Univ.', 37.1693, 127.0631),
+    S('P160', '오산', '烏山', 'Osan', 37.1454, 127.0668),
+    S('P161', '진위', '振威', 'Jinwi', 37.1098, 127.0624),
+    S('P162', '송탄', '松炭', 'Songtan', 37.0756, 127.0544),
+    S('P163', '서정리', '西井里', 'Seojeongni', 37.0566, 127.0531),
+    S('P164', '평택지제', '平澤芝制', 'PyeongtaekJije', 37.0189, 127.0705),
+    S('P165', '평택', '平澤', 'Pyeongtaek', 36.9912, 127.0850),
+    S('P166', '성환', '成歡', 'Seonghwan', 36.9156, 127.1264),
+    S('P167', '직산', '稷山', 'Jiksan', 36.8700, 127.1434),
+    S('P168', '두정', '斗井', 'Dujeong', 36.8336, 127.1486),
+    S('P169', '천안', '天安', 'Cheonan', 36.8100, 127.1460),
+    S('P170', '봉명', '鳳鳴', 'Bongmyeong', 36.7973, 127.1358),
+    S('P171', '쌍용', '雙龍', 'Ssangyong', 36.7939, 127.1214),
+    S('P172', '아산', '牙山', 'Asan', 36.7925, 127.1043),
+    S('P173', '탕정', '湯井', 'Tangjeong', 36.7912, 127.0887),
+    S('P174', '배방', '排芳', 'Baebang', 36.7772, 127.0528),
+    S('P175', '온양온천', '溫陽溫泉', 'Onyangoncheon', 36.7801, 127.0055),
+    S('P176', '신창', '新昌', 'Sinchang', 36.7691, 126.9510)
+  ]},
+  { id: '1G', zh: '1號線 光明接駁', ko: '1호선 광명셔틀', color: L1.color, loop: false, a: '衿川區廳', b: '光明', st: [
+    S('P144', '금천구청', '衿川區廳', 'Geumcheon-gu Office', 37.4555, 126.8937),
+    S('P144-1', '광명', '光明', 'Gwangmyeong', 37.4162, 126.8845)
+  ]},
+  { id: '1S', zh: '1號線 西東灘支線', ko: '1호선 서동탄지선', color: L1.color, loop: false, a: '餠店', b: '西東灘', st: [
+    S('P157', '병점', '餠店', 'Byeongjeom', 37.2068, 127.0332),
+    S('P157-1', '서동탄', '西東灘', 'Seodongtan', 37.1954, 127.0511)
+  ]}
+);
+
+// Line 3: Juyeop (310) had been omitted, which also shifted its first stations' coordinates.
+const L3 = lineById('3');
+L3.st.splice(0, 10,
+  S('309', '대화', '大化', 'Daehwa', 37.6761, 126.7474),
+  S('310', '주엽', '注葉', 'Juyeop', 37.6701, 126.7612),
+  S('311', '정발산', '鼎鉢山', 'Jeongbalsan', 37.6596, 126.7733),
+  S('312', '마두', '馬頭', 'Madu', 37.6521, 126.7777),
+  S('313', '백석', '白石', 'Baekseok', 37.6430, 126.7881),
+  S('314', '대곡', '大谷', 'Daegok', 37.6317, 126.8111),
+  S('315', '화정', '花井', 'Hwajeong', 37.6346, 126.8327),
+  S('316', '원당', '元堂', 'Wondang', 37.6532, 126.8430),
+  S('317', '원흥', '元興', 'Wonheung', 37.6507, 126.8731),
+  S('318', '삼송', '三松', 'Samsong', 37.6532, 126.8955),
+  S('319', '지축', '紙杻', 'Jichuk', 37.6481, 126.9138)
+);
+
+// Line 4: Jinjeop extension is open; Pungyang is still planned and deliberately excluded.
+const L4 = lineById('4');
+L4.st.unshift(
+  S('405', '진접', '榛接', 'Jinjeop', 37.7208, 127.2031),
+  S('406', '오남', '梧南', 'Onam', 37.7051, 127.1921),
+  S('408', '별내별가람', '別內別加藍', 'ByeollaeByeolgaram', 37.6677, 127.1274)
+);
+L4.st[3].splice(1, 3, '불암산', '佛巖山', 'Buramsan');
+L4.st.push(
+  S('441', '평촌', '坪村', 'Pyeongchon', 37.3943, 126.9639), S('442', '범계', '範溪', 'Beomgye', 37.3896, 126.9507),
+  S('443', '금정', '衿井', 'Geumjeong', 37.3722, 126.9434), S('444', '산본', '山本', 'Sanbon', 37.3584, 126.9330),
+  S('445', '수리산', '修理山', 'Surisan', 37.3506, 126.9250), S('446', '대야미', '大夜味', 'Daeyami', 37.3285, 126.9173),
+  S('447', '반월', '半月', 'Banwol', 37.3124, 126.9038), S('448', '상록수', '常綠樹', 'Sangnoksu', 37.3029, 126.8666),
+  S('449', '한대앞', '漢大前', 'Hanyang Univ. at Ansan', 37.3095, 126.8539), S('450', '중앙', '中央', 'Jungang', 37.3160, 126.8385),
+  S('451', '고잔', '古棧', 'Gojan', 37.3168, 126.8231), S('452', '초지', '草芝', 'Choji', 37.3206, 126.8061),
+  S('453', '안산', '安山', 'Ansan', 37.3270, 126.7888), S('454', '신길온천', '新吉溫泉', 'Singiloncheon', 37.3375, 126.7673),
+  S('455', '정왕', '正往', 'Jeongwang', 37.3518, 126.7420), S('456', '오이도', '烏耳島', 'Oido', 37.3624, 126.7387)
+);
+L4.a = '榛接'; L4.b = '烏耳島';
+
+// Line 5: Hanam extension and Macheon branch.
+const L5 = lineById('5');
+L5.st.push(S('554', '강일', '江一', 'Gangil', 37.5577, 127.1750), S('555', '미사', '渼沙', 'Misa', 37.5632, 127.1924), S('556', '하남풍산', '河南豐山', 'Hanam Pungsan', 37.5520, 127.2037), S('557', '하남시청', '河南市廳', 'Hanam City Hall', 37.5415, 127.2064), S('558', '하남검단산', '河南黔丹山', 'Hanam Geomdansan', 37.5396, 127.2230));
+L5.b = '河南黔丹山';
+LINES.push({ id: '5M', zh: '5號線 馬川支線', ko: '5호선 마천지선', color: L5.color, loop: false, a: '江東', b: '馬川', st: [
+  S('548', '강동', '江東', 'Gangdong', 37.5358, 127.1325), S('P549', '둔촌동', '遁村洞', 'Dunchon-dong', 37.5271, 127.1366),
+  S('P550', '올림픽공원', '奧林匹克公園', 'Olympic Park', 37.5164, 127.1285), S('P551', '방이', '芳荑', 'Bangi', 37.5082, 127.1268),
+  S('P552', '오금', '梧琴', 'Ogeum', 37.5022, 127.1281), S('P553', '개롱', '開籠', 'Gaerong', 37.4981, 127.1347),
+  S('P554', '거여', '巨餘', 'Geoyeo', 37.4930, 127.1460), S('P555', '마천', '馬川', 'Macheon', 37.4950, 127.1522)
+] });
+
+// Line 7: the Incheon extension is operating through Seongnam (Seoknam).
+const L7 = lineById('7');
+L7.st.push(S('757', '삼산체육관', '三山體育館', 'Samsan Gymnasium', 37.5092, 126.7420), S('758', '굴포천', '掘浦川', 'Gulpocheon', 37.5062, 126.7320), S('759', '부평구청', '富平區廳', 'Bupyeong-gu Office', 37.5074, 126.7221), S('760', '산곡', '山谷', 'Sangok', 37.5084, 126.7060), S('761', '석남', '石南', 'Seongnam', 37.5062, 126.6769));
+L7.b = '石南';
+
+// Shinbundang: only D07–D10 existed.  Add the operating Sinsa–Gwanggyo corridor.
+const LD = lineById('D');
+LD.st = [
+  S('D04', '신사', '新沙', 'Sinsa', 37.5163, 127.0201), S('D05', '논현', '論峴', 'Nonhyeon', 37.5111, 127.0214),
+  S('D06', '신논현', '新論峴', 'Sinnonhyeon', 37.5046, 127.0251), S('D07', '강남', '江南', 'Gangnam', 37.4972, 127.0279),
+  S('D08', '양재', '良才', 'Yangjae', 37.4842, 127.0346), S('D09', '양재시민의숲', '良才市民之林', 'Yangjae Citizen\'s Forest', 37.4700, 127.0384),
+  S('D10', '청계산입구', '清溪山入口', 'Cheonggyesan', 37.4472, 127.0557), S('D11', '판교', '板橋', 'Pangyo', 37.3948, 127.1112),
+  S('D12', '정자', '亭子', 'Jeongja', 37.3660, 127.1081), S('D13', '미금', '美金', 'Migeum', 37.3501, 127.1085),
+  S('D14', '동천', '東川', 'Dongcheon', 37.3378, 127.1028), S('D15', '수지구청', '水枝區廳', 'Suji-gu Office', 37.3226, 127.0948),
+  S('D16', '성복', '星福', 'Seongbok', 37.3135, 127.0804), S('D17', '상현', '上峴', 'Sanghyeon', 37.2979, 127.0694),
+  S('D18', '광교중앙', '光教中央', 'Gwanggyo Jungang', 37.2884, 127.0516), S('D19', '광교', '光教', 'Gwanggyo', 37.3020, 127.0445)
+];
+LD.a = '新沙'; LD.b = '光教';
+
 /* ---------- index ---------- */
 const LMAP = {}; LINES.forEach(l => LMAP[l.id] = l);
 const STATIONS = {};
@@ -864,7 +1027,7 @@ function locate({ automatic = false } = {}) {
   locating = true;
   if (!automatic) clearAutoLocationTimer();
   eb.replaceChildren();
-  if (!navigator.geolocation) { eb.appendChild(el('div', 'err', '這個瀏覽器無法使用定位，請改用下方站名搜尋。')); return; }
+  if (!navigator.geolocation) { eb.appendChild(el('div', 'err', '這個瀏覽器不支援定位。請改用下方搜尋找站。')); return; }
   if (!window.isSecureContext) { eb.appendChild(el('div', 'err', locationHelpMessage())); return; }
   btn.disabled = true; btn.lastChild.textContent = '定位中…';
   navigator.geolocation.getCurrentPosition(pos => {
@@ -987,7 +1150,7 @@ $('#go').onclick = () => {
     else legs.push({ li, idx: [si] });
   });
   const real = legs.filter(l => l.idx.length > 1);
-  if (!real.length) { box.appendChild(el('div', 'err', '這兩站相鄰或可直接轉乘，不用規劃路線。')); return; }
+  if (!real.length) { box.appendChild(el('div', 'err', '這兩站相鄰或可直接轉乘，不必換車。')); return; }
 
   let km = 0, stops = 0;
   real.forEach(l => {
@@ -1160,6 +1323,79 @@ function shrinkForOcr(file) {
         .catch(reject);
     };
     image.onerror = () => { URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新拍攝。')); };
+    image.src = imageUrl;
+  });
+}
+function cropPhoto(file) {
+  return new Promise((resolve, reject) => {
+    const imageUrl = URL.createObjectURL(file);
+    const sheet = el('div', 'crop-sheet');
+    const panel = el('section', 'crop-panel'); panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true'); panel.setAttribute('aria-label', '框選指示牌');
+    const title = el('h2', null, '框選指示牌');
+    const help = el('p', 'crop-help', '拖曳框線調整位置，把箭頭和站名一起框進來。');
+    const viewport = el('div', 'crop-viewport');
+    const wrap = el('div', 'crop-wrap');
+    const image = document.createElement('img'); image.alt = '選擇的指示牌照片';
+    const frame = el('div', 'crop-frame');
+    ['nw', 'ne', 'sw', 'se'].forEach(corner => {
+      const handle = el('span', 'crop-handle ' + corner); handle.dataset.handle = corner; frame.appendChild(handle);
+    });
+    wrap.append(image, frame); viewport.appendChild(wrap);
+    const controls = el('div', 'crop-controls');
+    const cancel = el('button', null, '取消'); cancel.type = 'button';
+    const confirm = el('button', 'crop-confirm', '使用框選範圍'); confirm.type = 'button';
+    controls.append(cancel, confirm); panel.append(title, help, viewport, controls); sheet.appendChild(panel); document.body.appendChild(sheet);
+    let crop = { x: .08, y: .13, w: .84, h: .25 };
+    let dragging = null;
+    const close = value => { URL.revokeObjectURL(imageUrl); sheet.remove(); resolve(value); };
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const drawFrame = () => {
+      frame.style.left = (crop.x * 100) + '%'; frame.style.top = (crop.y * 100) + '%';
+      frame.style.width = (crop.w * 100) + '%'; frame.style.height = (crop.h * 100) + '%';
+    };
+    const point = event => {
+      const rect = wrap.getBoundingClientRect();
+      return { x: clamp((event.clientX - rect.left) / rect.width, 0, 1), y: clamp((event.clientY - rect.top) / rect.height, 0, 1) };
+    };
+    frame.onpointerdown = event => {
+      event.preventDefault();
+      dragging = { mode: event.target.dataset.handle || 'move', start: point(event), crop: { ...crop } };
+      frame.setPointerCapture(event.pointerId);
+    };
+    frame.onpointermove = event => {
+      if (!dragging) return;
+      const now = point(event), dx = now.x - dragging.start.x, dy = now.y - dragging.start.y;
+      const start = dragging.crop, minSize = .12, right = start.x + start.w, bottom = start.y + start.h;
+      if (dragging.mode === 'move') {
+        crop.x = clamp(start.x + dx, 0, 1 - start.w); crop.y = clamp(start.y + dy, 0, 1 - start.h);
+        crop.w = start.w; crop.h = start.h;
+      } else {
+        crop = { ...start };
+        if (dragging.mode.includes('w')) { crop.x = clamp(start.x + dx, 0, right - minSize); crop.w = right - crop.x; }
+        if (dragging.mode.includes('e')) crop.w = clamp(start.w + dx, minSize, 1 - start.x);
+        if (dragging.mode.includes('n')) { crop.y = clamp(start.y + dy, 0, bottom - minSize); crop.h = bottom - crop.y; }
+        if (dragging.mode.includes('s')) crop.h = clamp(start.h + dy, minSize, 1 - start.y);
+      }
+      drawFrame();
+    };
+    frame.onpointerup = frame.onpointercancel = () => { dragging = null; };
+    cancel.onclick = () => close(null);
+    confirm.onclick = () => {
+      confirm.disabled = true; confirm.textContent = '正在裁切…';
+      const sourceWidth = image.naturalWidth * crop.w, sourceHeight = image.naturalHeight * crop.h;
+      const scale = Math.min(1, 2400 / Math.max(sourceWidth, sourceHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(sourceWidth * scale)); canvas.height = Math.max(1, Math.round(sourceHeight * scale));
+      const context = canvas.getContext('2d'); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
+      context.drawImage(image, image.naturalWidth * crop.x, image.naturalHeight * crop.y, sourceWidth, sourceHeight, 0, 0, canvas.width, canvas.height);
+      canvasBlob(canvas, .94).then(close).catch(error => { sheet.remove(); URL.revokeObjectURL(imageUrl); reject(error); });
+    };
+    image.onload = () => {
+      const ratio = image.naturalWidth / image.naturalHeight;
+      crop = ratio > 1.15 ? { x: .07, y: .1, w: .86, h: .28 } : ratio < .82 ? { x: .12, y: .16, w: .76, h: .6 } : { x: .1, y: .2, w: .8, h: .52 };
+      drawFrame();
+    };
+    image.onerror = () => { sheet.remove(); URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新選擇。')); };
     image.src = imageUrl;
   });
 }
@@ -1382,7 +1618,8 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     const item = el('div', 'photo-example ' + (good ? 'good' : 'bad'));
     const art = el('div', 'photo-example-art');
     const sign = el('div', 'photo-example-sign');
-    sign.append(el('b', null, '←'), el('span', null, '역명'), el('i'), el('span', null, 'Station'), el('b', null, '→'));
+    if (good) sign.append(el('b', null, '←'), el('span', null, '역명'), el('i'), el('span', null, 'Station'), el('b', null, '→'));
+    else sign.append(el('span', null, 'Station'));
     art.append(sign, el('span', 'photo-example-mark', good ? '✓' : '×'));
     item.append(art, el('p', null, label));
     return item;
@@ -1412,7 +1649,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       let analysis = context ? analyzePhotoSign(ocrData, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
       if (reading.isTransfer) analysis.signKind = 'transfer';
       if (!(analysis.clear && analysis.pairedOpposite)) {
-        status.textContent = '正在以高對比再確認站名…';
+        status.textContent = '再確認站名…';
         // 稀疏文字與整面直式指示牌需要不同的版面假設：第二輪以區塊模式讀取，
         // 可補回第一輪把站名拆散或漏掉的情況。
         await worker.setParameters({ tessedit_pageseg_mode: '6', preserve_interword_spaces: '1' });
@@ -1429,7 +1666,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       const directionContext = analysis.signKind === 'transfer' ? transferContext : platformContext;
       if (analysis.signKind === 'transfer' && !transferContext) {
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '轉乘指示牌'), el('strong', null, '請在轉乘步驟再拍一次'), el('p', null, '這段沒有下一段路線可比對。'));
+        result.append(el('div', 'photo-result-label', '這是轉乘指示牌'), el('strong', null, '目前這一段不用轉車'), el('p', null, '請拍月台上的方向牌，讓下一站或終點站名稱一起入鏡。'));
       } else if (analysis.clear && analysis.pairedOpposite) {
         const direction = analysis.clear;
         const opposite = analysis.pairedOpposite;
@@ -1460,21 +1697,33 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         const parsedStations = reading.stations.map(item => item.station[1] + '（' + item.station[2] + '）').join('、');
         const parsedTypes = [...reading.labels, ...reading.routeLines].join('・');
         if (parsedStations || reading.korean) {
-          result.append(el('div', 'photo-result-label', parsedTypes || '讀到韓文'), el('strong', null, parsedStations || '讀到：' + reading.korean), el('p', null, parsedStations ? '這些站名不在目前要走的方向。請再拍含箭頭的整塊指示牌。' : '尚未能比對到站名，請讓指示牌填滿框內重拍。'));
+          result.append(el('div', 'photo-result-label', parsedTypes || '讀到站牌文字'), el('strong', null, parsedStations || '讀到：' + reading.korean), el('p', null, parsedStations ? '牌面上的站名不在這一段要走的方向。請重拍含箭頭的整塊指示牌。' : '還無法比對站名。請把箭頭和站名一起拍清楚。'));
         } else {
-          result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到可用的韓文'), el('p', null, '讓指示牌填滿框內，避免拍到螢幕反光。'));
+          result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到可比對的站名'), el('p', null, '請讓整塊指示牌填滿畫面，避免反光或只拍到局部。'));
         }
       }
     } catch (error) {
       result.replaceChildren(); result.hidden = false; result.classList.add('warn');
-      result.append(el('div', 'photo-result-label', '目前無法辨識'), el('strong', null, error.message || '照片辨識失敗'), el('p', null, '請重新拍攝清楚的指示牌，或依下方路線資訊確認終點方向。'));
+      result.append(el('div', 'photo-result-label', '這次沒有完成辨識'), el('strong', null, '請再試一次'), el('p', null, '確認網路後重試，並讓整塊指示牌清楚入鏡。'));
     } finally {
       if (worker) await worker.terminate().catch(() => {});
       status.hidden = true; status.textContent = '';
       photoAction.disabled = false; photoAction.textContent = '選擇指示牌照片'; input.value = '';
     }
   };
-  input.onchange = () => readPhoto(input.files && input.files[0]);
+  input.onchange = async () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    try {
+      const cropped = await cropPhoto(file);
+      if (cropped) readPhoto(cropped);
+      else input.value = '';
+    } catch (error) {
+      result.replaceChildren(); result.hidden = false; result.classList.add('warn');
+      result.append(el('div', 'photo-result-label', '照片無法使用'), el('strong', null, '請重新選擇照片'), el('p', null, '請確認照片檔案完整後再試。'));
+      input.value = '';
+    }
+  };
   photoAction.onclick = () => input.click();
   content.append(examples, input, photoAction, status, result);
   box.append(summary, content);
