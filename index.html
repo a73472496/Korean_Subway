@@ -1157,7 +1157,7 @@ function photoDirectionGuide(L, idx) {
   const head = el('div', 'photo-guide-head');
   const icon = el('div', 'photo-guide-icon'); icon.appendChild(cameraIcon());
   const copy = el('div');
-  copy.append(el('strong', null, '拍指示牌，確認該走哪一邊'), el('p', null, '本機讀取韓文站名，再和你的路線方向比對。照片不會上傳。'));
+  copy.append(el('strong', null, '拍指示牌，確認該走哪一邊'), el('p', null, '本機讀取韓文終點站名並比對你的路線。看不到站號也能判斷方向。照片不會上傳。'));
   head.append(icon, copy);
   const proof = el('div', 'photo-route-proof');
   const line = el('span', 'photo-line', context.line); line.style.borderColor = context.color;
@@ -1189,7 +1189,7 @@ function photoDirectionGuide(L, idx) {
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else {
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '需要再確認'), el('strong', null, '沒有讀到可比對的方向站名'), el('p', null, '請靠近指示牌重拍，讓箭頭與韓文終點站名都入鏡。你的方向是往 ' + context.terminal[2] + '，' + context.trend + '。'));
+        result.append(el('div', 'photo-result-label', '需要再確認'), el('strong', null, '沒有讀到可比對的韓文終點站名'), el('p', null, '有些指示牌不會寫站號。請靠近指示牌重拍，讓箭頭與韓文終點站名都入鏡。你的方向是往 ' + context.terminal[2] + '，' + context.trend + '。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       }
     } catch (error) {
