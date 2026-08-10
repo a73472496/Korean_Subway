@@ -1103,17 +1103,30 @@ function loadTesseract() {
   });
   return tesseractLoader;
 }
+function ocrScale(width, height) {
+  const longest = Math.max(width, height);
+  return longest < 900 ? Math.min(4, 1200 / longest) : Math.min(1, 1600 / longest);
+}
 function shrinkForOcr(file) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     const imageUrl = URL.createObjectURL(file);
     image.onload = () => {
       URL.revokeObjectURL(imageUrl);
-      const scale = Math.min(1, 1600 / Math.max(image.naturalWidth, image.naturalHeight));
+      const scale = ocrScale(image.naturalWidth, image.naturalHeight);
       const width = Math.max(1, Math.round(image.naturalWidth * scale));
       const height = Math.max(1, Math.round(image.naturalHeight * scale));
       const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
-      canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+      const context = canvas.getContext('2d'); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
+      context.drawImage(image, 0, 0, width, height);
+      if (scale > 1) {
+        const pixels = context.getImageData(0, 0, width, height);
+        for (let i = 0; i < pixels.data.length; i += 4) {
+          const tone = Math.max(0, Math.min(255, ((pixels.data[i] * .299 + pixels.data[i + 1] * .587 + pixels.data[i + 2] * .114) - 128) * 1.22 + 128));
+          pixels.data[i] = tone; pixels.data[i + 1] = tone; pixels.data[i + 2] = tone;
+        }
+        context.putImageData(pixels, 0, 0);
+      }
       canvas.toBlob(blob => blob ? resolve({ image: blob, width }) : reject(new Error('照片無法處理。')), 'image/jpeg', .88);
     };
     image.onerror = () => { URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新拍攝。')); };
@@ -1121,6 +1134,13 @@ function shrinkForOcr(file) {
   });
 }
 function cleanSignText(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, ''); }
+function photoTextTarget(text, context) {
+  const value = cleanSignText(text);
+  return context.targets.find(station => {
+    const target = cleanSignText(station[1]);
+    return target.length >= 2 && (value.includes(target) || target.includes(value));
+  }) || null;
+}
 function routePhotoContext(L, idx) {
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
   const forward = L.loop ? idx[1] === (idx[0] + 1) % L.st.length : idx[1] > idx[0];
@@ -1181,11 +1201,17 @@ function photoDirectionGuide(L, idx) {
       }});
       const response = await worker.recognize(prepared.image);
       await worker.terminate();
-      const match = photoMatch(response.data.words || [], prepared.width, context);
+      const match = photoMatch([...(response.data.words || []), ...(response.data.lines || [])], prepared.width, context);
+      const textTarget = photoTextTarget(response.data.text, context);
       result.replaceChildren(); result.hidden = false;
       if (match && match.isClear) {
         result.classList.remove('warn');
         result.append(el('div', 'photo-result-label', '照片比對結果'), el('strong', null, '往' + match.side + '的樓梯／通道走'), el('p', null, '畫面' + match.side + '讀到「' + match.station[2] + '」。你的路線需往 ' + context.terminal[2] + ' 方向，' + context.trend + '。請再確認箭頭也朝同一側。'));
+        status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
+      } else if ((match && match.station) || textTarget) {
+        const target = match ? match.station : textTarget;
+        result.classList.remove('warn');
+        result.append(el('div', 'photo-result-label', '文字已比對'), el('strong', null, '跟著寫著「' + target[2] + '」的箭頭走'), el('p', null, '已讀到你的目標終點站名，但無法從照片確認它在左或右。這一段需往 ' + context.terminal[2] + '，' + context.trend + '。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else {
         result.classList.add('warn');
