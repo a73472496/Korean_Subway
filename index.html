@@ -292,7 +292,8 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 .locate,.go{border:1px solid rgba(21,93,84,.78);background:#287c73;box-shadow:0 7px 16px rgba(25,100,90,.22),inset 0 1px 0 rgba(255,255,255,.18)}.locate:hover,.go:hover{background:#1e685f;box-shadow:0 9px 18px rgba(25,100,90,.25),inset 0 1px 0 rgba(255,255,255,.18)}
 @media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.png');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:var(--glass-strong)}}
-.stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
+.stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
+.chip-kind{display:inline-flex;align-items:center;margin-left:6px;padding:1px 4px;border:1px solid currentColor;border-radius:3px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.04em;line-height:1.35;vertical-align:1px}.line-direction-guide{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:12px 0 0;padding:10px 12px;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:7px;background:var(--surface-subtle);color:var(--text-muted);font-size:12px;line-height:1.5}.line-direction-guide strong{color:var(--text);font-family:var(--mono);font-size:10px;letter-spacing:.05em}.line-direction-choice{padding:3px 6px;border:1px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-family:var(--mono);font-size:11px;font-weight:700}.line-direction-note{flex:1 1 260px}.data-freshness{margin:13px 0 0;color:var(--text-faint);font-family:var(--mono);font-size:10px;letter-spacing:.03em}.stop-list-remaining{color:var(--text-faint);font-family:var(--mono);font-size:10px;font-weight:700;white-space:nowrap}@media (max-width:620px){.line-direction-guide{align-items:flex-start}.line-direction-choice{font-size:10px}.stop-list-item{grid-template-columns:12px auto minmax(0,1fr);row-gap:2px}.stop-list-state{grid-column:3}.stop-list-remaining{grid-column:3}}
 .photo-guide{margin-top:10px;overflow:hidden;border:1px solid rgba(171,207,198,.78);border-bottom:2px solid rgba(143,192,181,.82);border-radius:8px;background:rgba(244,251,249,.56)}.photo-guide-summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0;cursor:pointer;list-style:none}.photo-guide-summary::-webkit-details-marker{display:none}.photo-guide-summary::after{content:'+';margin-left:0;color:var(--accent);font:700 14px/1 var(--mono)}.photo-guide[open] .photo-guide-summary{border-bottom:1px solid rgba(171,207,198,.6)}.photo-guide[open] .photo-guide-summary::after{content:'−'}.photo-guide-content{padding:12px 12px 14px}.photo-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}.photo-example{min-width:0}.photo-example-art{position:relative;display:grid;place-items:center;height:82px;overflow:hidden;border:1px solid rgba(171,207,198,.7);border-radius:6px;background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign{display:flex;align-items:center;justify-content:space-around;width:78%;height:42%;padding:0 7px;border-radius:3px;background:#34413f;color:#f8fffc;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.03em}.photo-example-sign i{display:block;width:1px;height:20px;background:rgba(255,255,255,.55)}.photo-example-sign b{font-size:16px;font-weight:500}.photo-example.bad .photo-example-sign{justify-content:center;width:54%;transform:translateX(31%);opacity:.62;white-space:nowrap}.photo-example.bad .photo-example-sign b,.photo-example.bad .photo-example-sign i{display:none}.photo-example-mark{position:absolute;right:7px;bottom:7px;display:grid;width:25px;height:25px;place-items:center;border-radius:50%;font:800 17px/1 var(--sans)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}.photo-example p{margin:5px 0 0;color:var(--text-muted);font-size:10px;line-height:1.4}.photo-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;width:100%;padding:0 12px;border:1px solid var(--accent);border-radius:7px;background:rgba(255,255,255,.8);color:var(--accent);font:700 13px var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.photo-action:hover{background:var(--accent);color:#fff}.photo-action:disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait}.photo-status{margin-top:8px;color:var(--text-faint);font-size:10px;line-height:1.55}.photo-result{margin-top:10px;padding:10px;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;background:rgba(255,255,255,.62)}.photo-result-label{color:var(--accent);font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}.photo-result strong{display:block;margin-top:2px;color:var(--text);font-size:15px;line-height:1.4}.photo-result p{margin:3px 0 0;color:var(--text-muted);font-size:11px;line-height:1.6}.photo-result.warn{border-left-color:#a86f26}.photo-result.warn .photo-result-label{color:#8e5e1f}.crop-sheet{position:fixed;z-index:70;inset:0;display:grid;place-items:center;padding:16px;background:rgba(15,31,29,.75)}.crop-panel{width:min(100%,640px);max-height:calc(100vh - 32px);overflow:auto;border:1px solid rgba(255,255,255,.4);border-radius:12px;background:#f8fcfb;box-shadow:0 24px 70px rgba(0,0,0,.32)}.crop-panel h2{margin:0;padding:14px 16px 3px;color:var(--text);font-size:16px;line-height:1.4}.crop-help{margin:0;padding:0 16px 12px;color:var(--text-muted);font-size:12px;line-height:1.55}.crop-viewport{display:grid;max-height:62vh;padding:0 12px;place-items:center;overflow:auto;background:#e5eeeb}.crop-wrap{position:relative;display:inline-block;max-width:100%;line-height:0}.crop-wrap img{display:block;max-width:100%;max-height:62vh;width:auto;height:auto}.crop-frame{position:absolute;border:2px solid #e9fff9;border-radius:4px;box-shadow:0 0 0 9999px rgba(8,21,19,.48),0 0 0 1px rgba(20,94,82,.8) inset;touch-action:none;cursor:move}.crop-frame::before{content:'把箭頭和站名一起框進來';position:absolute;top:-28px;left:50%;width:max-content;transform:translateX(-50%);color:#fff;font:700 11px/1.3 var(--sans);text-shadow:0 1px 3px rgba(0,0,0,.72)}.crop-handle{position:absolute;width:18px;height:18px;border:2px solid #e9fff9;border-radius:50%;background:var(--accent);touch-action:none}.crop-handle.nw{top:-10px;left:-10px}.crop-handle.ne{top:-10px;right:-10px}.crop-handle.sw{bottom:-10px;left:-10px}.crop-handle.se{right:-10px;bottom:-10px}.crop-controls{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;padding:12px}.crop-controls button{min-height:44px;border:1px solid var(--border-strong);border-radius:7px;background:#fff;color:var(--text-muted);font:700 13px var(--sans);cursor:pointer}.crop-controls .crop-confirm{border-color:var(--accent);background:var(--accent);color:#fff}@media (max-width:620px){.photo-guide-summary{min-height:44px;padding:10px 11px;font-size:10px}.photo-guide-content{padding:11px 11px 13px}.photo-action{min-height:46px}.crop-sheet{padding:0}.crop-panel{max-height:100vh;border-radius:0}.crop-viewport,.crop-wrap img{max-height:58vh}.crop-frame::before{top:-25px;font-size:10px}}
 </style>
 </head>
@@ -351,6 +352,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
       <div class="chips" id="busan-chips"></div>
     </div>
     <div id="lineres"></div>
+    <p class="data-freshness">資料更新：2026-08-11・路線與站號</p>
   </section>
 
   <section class="card" id="report">
@@ -562,7 +564,7 @@ const busanStationCode = (lineId, index) => {
   if (lineId === 'B2') return String(243 - index);
   if (lineId === 'B3') return String(317 - index);
   if (lineId === 'B4') return String(414 - index);
-  if (lineId === 'BGL') return String(21 - index);
+  if (lineId === 'BGL') return String(521 - index);
   if (lineId === 'DH') return 'K' + String(110 + index);
   return String(index + 1);
 };
@@ -930,10 +932,13 @@ function roundel(lineId, code, small) {
   d.setAttribute('aria-label', d.title);
   return d;
 }
-function row(st, meters) {
+function row(st, meters, preferredLineId) {
   const b = el('button', 'srow');
   const rds = el('div', 'roundels');
-  st.on.slice(0, 3).forEach(o => rds.appendChild(roundel(o.line, o.code, true)));
+  const servedBy = preferredLineId
+    ? st.on.slice().sort((left, right) => Number(right.line === preferredLineId) - Number(left.line === preferredLineId))
+    : st.on;
+  servedBy.slice(0, 3).forEach(o => rds.appendChild(roundel(o.line, o.code, true)));
   const t = el('div');
   t.appendChild(el('div', 'zh', st.zh));
   t.appendChild(el('span', 'citytag ' + st.city, st.city === 'busan' ? '釜山' : '首爾'));
@@ -1235,7 +1240,7 @@ function spine(L, end) {
   sp.style.color = L.color; sp.appendChild(el('div', 'node'));
   return sp;
 }
-function stopList(L, idx) {
+function stopList(L, idx, nextLine) {
   const list = el('details', 'stop-list');
   const summary = el('summary');
   summary.append(
@@ -1252,7 +1257,9 @@ function stopList(L, idx) {
     const names = el('div', 'stop-list-names');
     names.append(el('strong', null, s[2]), el('span', null, s[1]));
     const state = position === 0 ? '上車' : position === idx.length - 1 ? '下車' : '';
-    item.append(mark, el('span', 'stop-list-code', s[0]), names, el('span', 'stop-list-state', state));
+    const remaining = idx.length - position - 1;
+    const progress = position === idx.length - 1 ? (nextLine ? '到轉乘站' : '抵達目的地') : '還有 ' + remaining + ' 站';
+    item.append(mark, el('span', 'stop-list-code', s[0]), names, el('span', 'stop-list-state', state), el('span', 'stop-list-remaining', progress));
     items.appendChild(item);
   });
   list.append(summary, items);
@@ -1773,7 +1780,7 @@ function legBlock(L, idx, nextLine, nextIdx, transfer) {
   }
   ride.appendChild(r2);
   bd.appendChild(ride);
-  bd.appendChild(stopList(L, idx));
+  bd.appendChild(stopList(L, idx, nextLine));
   bd.appendChild(photoDirectionGuide(L, idx, nextLine, nextIdx));
 
   if (nextLine) {
@@ -1889,8 +1896,29 @@ const compareStationCodes = (a, b) => {
   if (aMain === 100 && bMain === 100) return bBranch - aBranch;
   return aMain - bMain || aBranch - bBranch;
 };
+const BRANCH_LINE_LABELS = new Map([
+  ['1P', '支線'], ['1G', '接駁'], ['1S', '支線'], ['2B', '支線'], ['2C', '支線'], ['5M', '支線']
+]);
+function lineDirectionGuide(line) {
+  if (line.id !== '1' && line.id !== '2') return null;
+  const guide = el('div', 'line-direction-guide');
+  guide.appendChild(el('strong', null, '搭車方向'));
+  if (line.id === '1') {
+    const first = line.st[0], last = line.st[line.st.length - 1];
+    guide.append(
+      el('span', 'line-direction-choice', '往 ' + first[2] + '・' + first[0]),
+      el('span', 'line-direction-choice', '往 ' + last[2] + '・' + last[0])
+    );
+  } else {
+    guide.appendChild(el('span', 'line-direction-note', '2號線為環狀線，先比對目的地的下一站。聖水、新亭支線在最下方。'));
+  }
+  return guide;
+}
 LINES.forEach(l => {
-  const c = el('button', 'chip', l.zh);
+  const c = el('button', 'chip');
+  c.appendChild(document.createTextNode(l.zh));
+  const branchLabel = BRANCH_LINE_LABELS.get(l.id);
+  if (branchLabel) c.appendChild(el('span', 'chip-kind', branchLabel));
   c.style.borderColor = l.color; c.style.color = l.color;
   c.dataset.id = l.id; c.setAttribute('aria-pressed', 'false');
   c.onclick = () => {
@@ -1902,7 +1930,9 @@ LINES.forEach(l => {
     if (open) return;
     c.setAttribute('aria-pressed', 'true'); c.style.background = l.color; c.style.color = '#fff';
     const w = el('div'); w.style.marginTop = '12px';
-    l.st.slice().sort(compareStationCodes).forEach(s => w.appendChild(row(stationFor(l, s))));
+    const guide = lineDirectionGuide(l);
+    if (guide) box.appendChild(guide);
+    l.st.slice().sort(compareStationCodes).forEach(s => w.appendChild(row(stationFor(l, s), undefined, l.id)));
     box.appendChild(w);
   };
   $(l.city === 'busan' ? '#busan-chips' : '#seoul-chips').appendChild(c);
