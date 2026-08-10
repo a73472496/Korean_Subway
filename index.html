@@ -1178,6 +1178,25 @@ function shrinkForOcr(file) {
   });
 }
 function cleanSignText(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, ''); }
+const SIGN_TERMINAL_ALIASES = {
+  '1': { a: [['의정부', '議政府'], ['소요산', '逍遙山']], b: [['인천', '仁川'], ['신창', '新昌'], ['서동탄', '西東灘']] },
+  '3': { a: [['대화', '大化']], b: [['오금', '梧琴']] },
+  '4': { a: [['당고개', '堂嶺'], ['진접', '榛接']], b: [['오이도', '梧耳島']] },
+  '5': { a: [['방화', '傍花']], b: [['상일동', '上一洞'], ['마천', '馬川']] },
+  '6': { a: [['응암', '鷹岩']], b: [['신내', '新內']] },
+  '7': { a: [['장암', '長岩']], b: [['부평구청', '富平區廳'], ['석남', '石南']] },
+  '8': { a: [['암사', '岩寺'], ['별내', '別內']], b: [['모란', '牡丹']] },
+  '9': { a: [['개화', '開花']], b: [['중앙보훈병원', '中央報勳醫院']] },
+  A: { a: [['서울역', '首爾站']], b: [['인천공항2터미널', '仁川機場2號航廈'], ['인천공항', '仁川機場']] },
+  D: { a: [['강남', '江南'], ['신사', '新沙']], b: [['광교', '光教']] },
+  UI: { a: [['북한산우이', '北漢山牛耳']], b: [['신설동', '新設洞']] },
+  B1: { a: [['노포', '老圃']], b: [['다대포해수욕장', '多大浦海水浴場']] },
+  B2: { a: [['양산', '梁山']], b: [['장산', '萇山']] },
+  B3: { a: [['대저', '大渚']], b: [['수영', '水營']] },
+  B4: { a: [['안평', '安平']], b: [['미남', '美南']] },
+  BGL: { a: [['사상', '沙上']], b: [['가야대', '加耶大']] },
+  DH: { a: [['부전', '釜田']], b: [['태화강', '太和江']] }
+};
 function routePhotoContext(L, idx) {
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
   const forward = L.loop ? idx[1] === (idx[0] + 1) % L.st.length : idx[1] > idx[0];
@@ -1185,7 +1204,7 @@ function routePhotoContext(L, idx) {
   const increases = codeNum(next[0]) > codeNum(board[0]);
   const targets = L.loop ? [next, off] : [terminal, next, off];
   return {
-    line: L.zh, color: L.color, board, next, off, terminal, stations: L.st, boardIndex: idx[0], forward, loop: L.loop,
+    id: L.id, line: L.zh, color: L.color, board, next, off, terminal, stations: L.st, boardIndex: idx[0], forward, loop: L.loop,
     trend: L.loop ? '跟著下一站 ' + next[2] + ' 的指示走' : '站號要往' + (increases ? '變大' : '變小') + '的方向走',
     targets: targets.filter((station, index, list) => list.findIndex(item => item[1] === station[1]) === index)
   };
@@ -1199,6 +1218,27 @@ function directionForStation(context, stationIndex) {
   if (stationIndex === context.boardIndex) return '目前位置';
   if (context.loop) return context.targets.some(station => station[1] === context.stations[stationIndex][1]) ? '路線方向' : '其他方向';
   return (context.forward ? stationIndex > context.boardIndex : stationIndex < context.boardIndex) ? '路線方向' : '反方向';
+}
+function terminalAliasMentions(items, imageWidth, context) {
+  if (context.loop || !SIGN_TERMINAL_ALIASES[context.id]) return [];
+  const aliases = SIGN_TERMINAL_ALIASES[context.id];
+  const routes = [
+    { direction: '路線方向', values: context.forward ? aliases.b : aliases.a },
+    { direction: '反方向', values: context.forward ? aliases.a : aliases.b }
+  ];
+  const matches = new Map();
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    routes.forEach(route => route.values.forEach(([ko, zh]) => {
+      if (!value.includes(cleanSignText(ko))) return;
+      const candidate = { station: [ko, ko, zh], stationIndex: -1, side: sideFromBox(item.bbox, imageWidth), direction: route.direction, quality: item.bbox ? (item.precision || 1) : 0, itemIndex };
+      const key = ko;
+      const previous = matches.get(key);
+      if (!previous || candidate.quality > previous.quality) matches.set(key, candidate);
+    }));
+  });
+  return [...matches.values()];
 }
 function photoStationMentions(items, imageWidth, context) {
   const mentions = new Map();
@@ -1214,6 +1254,11 @@ function photoStationMentions(items, imageWidth, context) {
       const previous = mentions.get(key);
       if (!previous || candidate.quality > previous.quality) mentions.set(key, candidate);
     });
+  });
+  terminalAliasMentions(items, imageWidth, context).forEach(candidate => {
+    const key = 'terminal:' + candidate.station[1];
+    const previous = mentions.get(key);
+    if (!previous || candidate.quality > previous.quality) mentions.set(key, candidate);
   });
   return [...mentions.values()].sort((a, b) => b.quality - a.quality || a.itemIndex - b.itemIndex);
 }
@@ -1248,7 +1293,13 @@ function signReading(data, contexts) {
   if (!hasExit && /가는곳|방면|direction/.test(compact)) addLabel('行車方向');
   if (!hasTransfer && /타는곳|승강장|platform/.test(compact)) addLabel('月台');
   if (hasExit) addLabel('出口');
+  if (/상행/.test(compact)) addLabel('上行方向');
+  if (/하행/.test(compact)) addLabel('下行方向');
+  if (/내선/.test(compact)) addLabel('內環方向');
+  if (/외선/.test(compact)) addLabel('外環方向');
   if (/엘리베이터|elevator/.test(compact)) addLabel('電梯');
+  if (/에스컬레이터|escalator/.test(compact)) addLabel('手扶梯');
+  if (/계단|stairs/.test(compact)) addLabel('樓梯');
   if (/화장실|toilet|restroom/.test(compact)) addLabel('洗手間');
   if (/개찰구|gate/.test(compact)) addLabel('閘門');
   const routeLines = [];
@@ -1273,6 +1324,21 @@ function signReading(data, contexts) {
       const previous = stationMatches.get(key);
       if (!previous || Number(candidate.onRoute) > Number(previous.onRoute) || candidate.quality > previous.quality) stationMatches.set(key, candidate);
     }));
+  });
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    Object.entries(SIGN_TERMINAL_ALIASES).forEach(([id, directions]) => {
+      const line = LINES.find(itemLine => itemLine.id === id);
+      if (!line) return;
+      Object.values(directions).flat().forEach(([ko, zh]) => {
+        if (!value.includes(cleanSignText(ko))) return;
+        const candidate = { station: [ko, ko, zh], line, onRoute: (contexts || []).some(context => context && context.id === id), itemIndex, quality: item.bbox ? (item.precision || 1) : 0 };
+        const key = 'terminal:' + ko;
+        const previous = stationMatches.get(key);
+        if (!previous || Number(candidate.onRoute) > Number(previous.onRoute) || candidate.quality > previous.quality) stationMatches.set(key, candidate);
+      });
+    });
   });
   const stations = [...stationMatches.values()].sort((a, b) => Number(b.onRoute) - Number(a.onRoute) || b.quality - a.quality || a.itemIndex - b.itemIndex).slice(0, 3);
   return { items, compact, raw, labels, routeLines, stations, isTransfer: labels.includes('轉乘') };
