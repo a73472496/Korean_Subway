@@ -1505,6 +1505,36 @@ function sideFromBox(box, imageWidth) {
   const ratio = (box.x0 + box.x1) / 2 / Math.max(1, imageWidth);
   return ratio < .42 ? '左側' : ratio > .58 ? '右側' : '中間';
 }
+function boxCenter(box) {
+  return box ? { x: (box.x0 + box.x1) / 2, y: (box.y0 + box.y1) / 2 } : null;
+}
+function arrowSideFromText(value) {
+  const text = String(value || '').replace(/\s+/g, '');
+  const left = /(?:←|↖|↙|⇦|⬅|⟵|◀|◁|‹|〈|《|<[-=]?)/.test(text);
+  const right = /(?:→|↗|↘|⇨|➡|⟶|▶|▷|›|〉|》|[-=]?>)/.test(text);
+  return left === right ? null : left ? '左側' : '右側';
+}
+function arrowSideForMention(items, mention) {
+  const ownItem = items[mention.itemIndex];
+  const ownArrow = ownItem && arrowSideFromText(ownItem.text);
+  if (ownArrow) return ownArrow;
+  if (!mention.bbox) return null;
+  const mentionCenter = boxCenter(mention.bbox);
+  let best = null;
+  items.forEach(item => {
+    if (!item.bbox) return;
+    const side = arrowSideFromText(item.text);
+    if (!side) return;
+    const center = boxCenter(item.bbox);
+    const mentionHeight = Math.max(1, mention.bbox.y1 - mention.bbox.y0);
+    const itemHeight = Math.max(1, item.bbox.y1 - item.bbox.y0);
+    const verticalDistance = Math.abs(center.y - mentionCenter.y);
+    if (verticalDistance > Math.max(mentionHeight, itemHeight) * 1.35) return;
+    const distance = Math.abs(center.x - mentionCenter.x) + verticalDistance * 2;
+    if (!best || distance < best.distance) best = { side, distance };
+  });
+  return best && best.side;
+}
 function directionForStation(context, stationIndex) {
   if (stationIndex === context.boardIndex) return '目前位置';
   if (context.loop) return context.routeIndexes.includes(stationIndex) ? '路線方向' : '反方向';
@@ -1523,7 +1553,7 @@ function terminalAliasMentions(items, imageWidth, context) {
     if (value.length < 2) return;
     routes.forEach(route => route.values.forEach(([ko, zh]) => {
       if (!matchesSignToken(value, ko, SIGN_ALIAS_ENGLISH[ko])) return;
-      const candidate = { station: [ko, ko, zh], stationIndex: -1, side: sideFromBox(item.bbox, imageWidth), direction: route.direction, quality: item.bbox ? (item.precision || 1) : 0, itemIndex };
+      const candidate = { station: [ko, ko, zh], stationIndex: -1, side: sideFromBox(item.bbox, imageWidth), direction: route.direction, quality: item.bbox ? (item.precision || 1) : 0, itemIndex, bbox: item.bbox || null };
       const key = ko;
       const previous = matches.get(key);
       if (!previous || candidate.quality > previous.quality) matches.set(key, candidate);
@@ -1543,7 +1573,7 @@ function photoStationMentions(items, imageWidth, context) {
       if (!matchesName && !matchesCode) return;
       const quality = item.bbox ? (item.precision || 1) : 0;
       const key = station[0];
-      const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex };
+      const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex, bbox: item.bbox || null };
       const previous = mentions.get(key);
       if (!previous || candidate.quality > previous.quality) mentions.set(key, candidate);
     });
@@ -1565,7 +1595,7 @@ function ocrItems(data) {
   const visitBlocks = node => {
     if (Array.isArray(node)) { node.forEach(visitBlocks); return; }
     if (!node || typeof node !== 'object') return;
-    const children = ['blocks', 'paragraphs', 'lines', 'words'].flatMap(key => Array.isArray(node[key]) ? node[key] : []);
+    const children = ['blocks', 'paragraphs', 'lines', 'words', 'symbols'].flatMap(key => Array.isArray(node[key]) ? node[key] : []);
     if (typeof node.text === 'string' && node.bbox) add(node, children.length ? 1 : 2);
     children.forEach(visitBlocks);
   };
@@ -1664,6 +1694,23 @@ function analyzePhotoSign(data, imageWidth, context) {
   const signText = items.map(item => String(item.text || '')).join(' ').replace(/\s+/g, '').toLowerCase();
   const signKind = /갈아타는곳|환승|transfer/.test(signText) ? 'transfer' : 'platform';
   const mentions = photoStationMentions(items, imageWidth, context);
+  mentions.forEach(mention => {
+    const arrowSide = arrowSideForMention(items, mention);
+    if (arrowSide) { mention.side = arrowSide; mention.sideSource = 'arrow'; }
+  });
+  const positioned = mentions.filter(item => item.bbox && item.direction !== '目前位置');
+  if (positioned.length >= 2) {
+    const xs = positioned.map(item => boxCenter(item.bbox).x);
+    const minX = Math.min(...xs), maxX = Math.max(...xs);
+    if (maxX - minX >= Math.max(24, imageWidth * .055)) {
+      positioned.forEach(item => {
+        if (item.sideSource === 'arrow') return;
+        const x = boxCenter(item.bbox).x;
+        item.side = Math.abs(x - minX) <= Math.abs(x - maxX) ? '左側' : '右側';
+        item.sideSource = 'relative';
+      });
+    }
+  }
   const planned = mentions.filter(item => item.direction === '路線方向');
   const opposite = mentions.filter(item => item.direction === '反方向');
   const clear = planned.find(item => item.side === '左側' || item.side === '右側') || null;
@@ -1787,12 +1834,21 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         );
       } else if (analysis.planned.length) {
         const direction = analysis.planned[0];
-        result.classList.remove('warn');
-        result.append(
-          el('div', 'photo-result-label', '找到正確方向'),
-          el('strong', null, (direction.side === '左側' || direction.side === '右側') ? '往' + direction.side + place + '走' : '跟著「' + direction.station[2] + '」的箭頭走'),
-          el('p', null, '讀到 ' + direction.station[1] + '（' + direction.station[2] + '）。' + ((direction.side === '左側' || direction.side === '右側') ? '另一側資訊不足，請到月台前再確認。' : '這張照片無法判斷左或右。'))
-        );
+        const hasSide = direction.side === '左側' || direction.side === '右側';
+        result.classList.toggle('warn', !hasSide);
+        if (hasSide) {
+          result.append(
+            el('div', 'photo-result-label', '找到正確方向'),
+            el('strong', null, '往' + direction.side + place + '走'),
+            el('p', null, '讀到 ' + direction.station[1] + '（' + direction.station[2] + '）。另一側資訊不足，請到月台前再確認。')
+          );
+        } else {
+          result.append(
+            el('div', 'photo-result-label', '站名正確，箭頭不清楚'),
+            el('strong', null, '暫時無法確認左或右'),
+            el('p', null, '已讀到 ' + direction.station[1] + '（' + direction.station[2] + '）。請把同一方向的箭頭一起框進來再試。')
+          );
+        }
       } else if (analysis.opposite.length) {
         const opposite = analysis.opposite[0];
         result.classList.add('warn');
