@@ -1134,13 +1134,6 @@ function shrinkForOcr(file) {
   });
 }
 function cleanSignText(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, ''); }
-function photoTextTarget(text, context) {
-  const value = cleanSignText(text);
-  return context.targets.find(station => {
-    const target = cleanSignText(station[1]);
-    return target.length >= 2 && (value.includes(target) || target.includes(value));
-  }) || null;
-}
 function routePhotoContext(L, idx) {
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
   const forward = L.loop ? idx[1] === (idx[0] + 1) % L.st.length : idx[1] > idx[0];
@@ -1148,28 +1141,48 @@ function routePhotoContext(L, idx) {
   const increases = codeNum(next[0]) > codeNum(board[0]);
   const targets = L.loop ? [next, off] : [terminal, next, off];
   return {
-    line: L.zh, color: L.color, board, next, off, terminal,
+    line: L.zh, color: L.color, board, next, off, terminal, stations: L.st, boardIndex: idx[0], forward, loop: L.loop,
     trend: L.loop ? '跟著下一站 ' + next[2] + ' 的指示走' : '站號要往' + (increases ? '變大' : '變小') + '的方向走',
     targets: targets.filter((station, index, list) => list.findIndex(item => item[1] === station[1]) === index)
   };
 }
-function photoMatch(words, imageWidth, context) {
-  const candidates = context.targets.map((station, index) => ({ station, priority: index }));
-  let found = null;
-  for (const candidate of candidates) {
-    const target = cleanSignText(candidate.station[1]);
-    if (target.length < 2) continue;
-    const word = words.find(item => {
-      const value = cleanSignText(item.text);
-      return value.length >= 2 && (value.includes(target) || target.includes(value));
+function sideFromBox(box, imageWidth) {
+  if (!box) return null;
+  const ratio = (box.x0 + box.x1) / 2 / Math.max(1, imageWidth);
+  return ratio < .42 ? '左側' : ratio > .58 ? '右側' : '中間';
+}
+function directionForStation(context, stationIndex) {
+  if (stationIndex === context.boardIndex) return '目前位置';
+  if (context.loop) return context.targets.some(station => station[1] === context.stations[stationIndex][1]) ? '路線方向' : '其他方向';
+  return (context.forward ? stationIndex > context.boardIndex : stationIndex < context.boardIndex) ? '路線方向' : '反方向';
+}
+function photoStationMentions(items, imageWidth, context) {
+  const mentions = new Map();
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    context.stations.forEach((station, stationIndex) => {
+      const target = cleanSignText(station[1]);
+      if (target.length < 2 || (!value.includes(target) && !target.includes(value))) return;
+      const quality = item.bbox ? (item.precision || 1) : 0;
+      const key = station[0];
+      const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex };
+      const previous = mentions.get(key);
+      if (!previous || candidate.quality > previous.quality) mentions.set(key, candidate);
     });
-    if (word) { found = { word, candidate }; break; }
-  }
-  if (!found || !found.word.bbox) return null;
-  const center = (found.word.bbox.x0 + found.word.bbox.x1) / 2;
-  const ratio = center / Math.max(1, imageWidth);
-  const side = ratio < .42 ? '左側' : ratio > .58 ? '右側' : '中間';
-  return { side, station: found.candidate.station, isClear: side !== '中間' };
+  });
+  return [...mentions.values()].sort((a, b) => b.quality - a.quality || a.itemIndex - b.itemIndex);
+}
+function analyzePhotoSign(data, imageWidth, context) {
+  const items = [
+    ...(data.words || []).map(item => ({ ...item, precision: 2 })),
+    ...(data.lines || []).map(item => ({ ...item, precision: 1 })),
+    ...(data.text ? [{ text: data.text, precision: 0 }] : [])
+  ];
+  const mentions = photoStationMentions(items, imageWidth, context);
+  const planned = mentions.filter(item => item.direction === '路線方向');
+  const opposite = mentions.filter(item => item.direction === '反方向');
+  return { mentions, planned, opposite, clear: planned.find(item => item.side === '左側' || item.side === '右側') || null };
 }
 function photoDirectionGuide(L, idx) {
   const context = routePhotoContext(L, idx);
@@ -1201,21 +1214,27 @@ function photoDirectionGuide(L, idx) {
       }});
       const response = await worker.recognize(prepared.image);
       await worker.terminate();
-      const match = photoMatch([...(response.data.words || []), ...(response.data.lines || [])], prepared.width, context);
-      const textTarget = photoTextTarget(response.data.text, context);
+      const analysis = analyzePhotoSign(response.data, prepared.width, context);
+      const seen = analysis.mentions.map(item => item.station[2]).join('、');
       result.replaceChildren(); result.hidden = false;
-      if (match && match.isClear) {
+      if (analysis.clear) {
+        const direction = analysis.clear;
         result.classList.remove('warn');
-        result.append(el('div', 'photo-result-label', '照片比對結果'), el('strong', null, '往' + match.side + '的樓梯／通道走'), el('p', null, '畫面' + match.side + '讀到「' + match.station[2] + '」。你的路線需往 ' + context.terminal[2] + ' 方向，' + context.trend + '。請再確認箭頭也朝同一側。'));
+        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '往' + direction.side + '的樓梯／通道走'), el('p', null, '照片讀到：' + seen + '。其中「' + direction.station[2] + '」符合你的路線方向。你需往 ' + context.terminal[2] + '，' + context.trend + '。請再確認箭頭也朝同一側。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
-      } else if ((match && match.station) || textTarget) {
-        const target = match ? match.station : textTarget;
+      } else if (analysis.planned.length) {
+        const direction = analysis.planned[0];
         result.classList.remove('warn');
-        result.append(el('div', 'photo-result-label', '文字已比對'), el('strong', null, '跟著寫著「' + target[2] + '」的箭頭走'), el('p', null, '已讀到你的目標終點站名，但無法從照片確認它在左或右。這一段需往 ' + context.terminal[2] + '，' + context.trend + '。'));
+        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '跟著寫著「' + direction.station[2] + '」的箭頭走'), el('p', null, '照片讀到：' + seen + '。其中「' + direction.station[2] + '」符合你的路線方向，但無法確認它在左或右。這一段需往 ' + context.terminal[2] + '，' + context.trend + '。'));
+        status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
+      } else if (analysis.opposite.length) {
+        const opposite = analysis.opposite[0];
+        result.classList.add('warn');
+        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '「' + opposite.station[2] + '」是反方向'), el('p', null, '照片讀到：' + seen + '。不要只跟著「' + opposite.station[2] + '」前進。請找寫著 ' + context.terminal[2] + ' 或其他正向站名的箭頭。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else {
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '需要再確認'), el('strong', null, '沒有讀到可比對的韓文終點站名'), el('p', null, '有些指示牌不會寫站號。請靠近指示牌重拍，讓箭頭與韓文終點站名都入鏡。你的方向是往 ' + context.terminal[2] + '，' + context.trend + '。'));
+        result.append(el('div', 'photo-result-label', '需要再確認'), el('strong', null, '沒有讀到可比對的韓文站名'), el('p', null, '請靠近指示牌重拍，讓箭頭與韓文站名都入鏡。你的方向是往 ' + context.terminal[2] + '，' + context.trend + '。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       }
     } catch (error) {
