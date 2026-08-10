@@ -1149,7 +1149,7 @@ function loadTesseract() {
 }
 function ocrScale(width, height) {
   const longest = Math.max(width, height);
-  return longest < 900 ? Math.min(4, 1200 / longest) : Math.min(1, 1600 / longest);
+  return longest < 1100 ? Math.min(5, 1500 / longest) : Math.min(1.35, 1800 / longest);
 }
 function shrinkForOcr(file) {
   return new Promise((resolve, reject) => {
@@ -1163,14 +1163,14 @@ function shrinkForOcr(file) {
       const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
       const context = canvas.getContext('2d'); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
       context.drawImage(image, 0, 0, width, height);
-      if (scale > 1) {
-        const pixels = context.getImageData(0, 0, width, height);
-        for (let i = 0; i < pixels.data.length; i += 4) {
-          const tone = Math.max(0, Math.min(255, ((pixels.data[i] * .299 + pixels.data[i + 1] * .587 + pixels.data[i + 2] * .114) - 128) * 1.22 + 128));
-          pixels.data[i] = tone; pixels.data[i + 1] = tone; pixels.data[i + 2] = tone;
-        }
-        context.putImageData(pixels, 0, 0);
+      const pixels = context.getImageData(0, 0, width, height);
+      const contrast = scale > 1 ? 1.42 : 1.26;
+      for (let i = 0; i < pixels.data.length; i += 4) {
+        const grey = pixels.data[i] * .299 + pixels.data[i + 1] * .587 + pixels.data[i + 2] * .114;
+        const tone = Math.max(0, Math.min(255, (grey - 128) * contrast + 128));
+        pixels.data[i] = tone; pixels.data[i + 1] = tone; pixels.data[i + 2] = tone;
       }
+      context.putImageData(pixels, 0, 0);
       canvas.toBlob(blob => blob ? resolve({ image: blob, width }) : reject(new Error('照片無法處理。')), 'image/jpeg', .88);
     };
     image.onerror = () => { URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新拍攝。')); };
@@ -1217,12 +1217,26 @@ function photoStationMentions(items, imageWidth, context) {
   });
   return [...mentions.values()].sort((a, b) => b.quality - a.quality || a.itemIndex - b.itemIndex);
 }
+function ocrItems(data) {
+  const items = [];
+  const add = (item, precision) => {
+    if (item && typeof item.text === 'string') items.push({ ...item, precision });
+  };
+  (data.words || []).forEach(item => add(item, 2));
+  (data.lines || []).forEach(item => add(item, 1));
+  const visitBlocks = node => {
+    if (Array.isArray(node)) { node.forEach(visitBlocks); return; }
+    if (!node || typeof node !== 'object') return;
+    const children = ['blocks', 'paragraphs', 'lines', 'words'].flatMap(key => Array.isArray(node[key]) ? node[key] : []);
+    if (typeof node.text === 'string' && node.bbox) add(node, children.length ? 1 : 2);
+    children.forEach(visitBlocks);
+  };
+  visitBlocks(data.blocks);
+  if (data.text) add({ text: data.text }, 0);
+  return items;
+}
 function analyzePhotoSign(data, imageWidth, context) {
-  const items = [
-    ...(data.words || []).map(item => ({ ...item, precision: 2 })),
-    ...(data.lines || []).map(item => ({ ...item, precision: 1 })),
-    ...(data.text ? [{ text: data.text, precision: 0 }] : [])
-  ];
+  const items = ocrItems(data);
   const signText = items.map(item => String(item.text || '')).join(' ').replace(/\s+/g, '').toLowerCase();
   const signKind = /갈아타는곳|환승|transfer/.test(signText) ? 'transfer' : 'platform';
   const mentions = photoStationMentions(items, imageWidth, context);
@@ -1249,7 +1263,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     proof.append(transferLine, el('span', null, '轉乘後往 ' + transferContext.terminal[2]));
   }
   const input = document.createElement('input');
-  input.type = 'file'; input.accept = 'image/*'; input.capture = 'environment'; input.setAttribute('capture', 'environment'); input.hidden = true;
+  input.type = 'file'; input.accept = 'image/*'; input.hidden = true;
   const actions = el('div', 'photo-action-row');
   const cameraAction = el('button', 'photo-action', '開啟相機'); cameraAction.type = 'button';
   const photoAction = el('button', 'photo-action photo-action-alt', '選擇照片'); photoAction.type = 'button';
@@ -1266,13 +1280,10 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       const worker = await Tesseract.createWorker('kor+eng', 1, { logger: message => {
         if (message.status === 'recognizing text' && Number.isFinite(message.progress)) status.textContent = '正在讀取站牌文字 ' + Math.round(message.progress * 100) + '%';
       }});
-      const response = await worker.recognize(prepared.image);
+      await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
+      const response = await worker.recognize(prepared.image, {}, { blocks: true });
       await worker.terminate();
-      const rawText = [
-        ...(response.data.words || []).map(item => ({ ...item, precision: 2 })),
-        ...(response.data.lines || []).map(item => ({ ...item, precision: 1 })),
-        ...(response.data.text ? [{ text: response.data.text, precision: 0 }] : [])
-      ];
+      const rawText = ocrItems(response.data);
       const compactText = rawText.map(item => String(item.text || '')).join(' ').replace(/\s+/g, '').toLowerCase();
       const isTransferSign = /갈아타는곳|환승|transfer/.test(compactText);
       const context = isTransferSign ? transferContext : platformContext;
