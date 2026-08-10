@@ -1207,7 +1207,7 @@ function photoStationMentions(items, imageWidth, context) {
     if (value.length < 2) return;
     context.stations.forEach((station, stationIndex) => {
       const target = cleanSignText(station[1]);
-      if (target.length < 2 || (!value.includes(target) && !target.includes(value))) return;
+      if (target.length < 2 || !value.includes(target)) return;
       const quality = item.bbox ? (item.precision || 1) : 0;
       const key = station[0];
       const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex };
@@ -1234,6 +1234,48 @@ function ocrItems(data) {
   visitBlocks(data.blocks);
   if (data.text) add({ text: data.text }, 0);
   return items;
+}
+function signReading(data, contexts) {
+  const items = ocrItems(data);
+  const textParts = [...new Set(items.map(item => String(item.text || '').trim()).filter(Boolean))];
+  const raw = textParts.join(' · ').slice(0, 72);
+  const compact = textParts.join('').replace(/\s+/g, '').toLowerCase();
+  const labels = [];
+  const addLabel = label => { if (!labels.includes(label)) labels.push(label); };
+  const hasTransfer = /갈아타는곳|환승|transfer/.test(compact);
+  const hasExit = /나가는곳|출구|wayout|exit/.test(compact);
+  if (hasTransfer) addLabel('轉乘');
+  if (!hasExit && /가는곳|방면|direction/.test(compact)) addLabel('行車方向');
+  if (!hasTransfer && /타는곳|승강장|platform/.test(compact)) addLabel('月台');
+  if (hasExit) addLabel('出口');
+  if (/엘리베이터|elevator/.test(compact)) addLabel('電梯');
+  if (/화장실|toilet|restroom/.test(compact)) addLabel('洗手間');
+  if (/개찰구|gate/.test(compact)) addLabel('閘門');
+  const routeLines = [];
+  const addLine = line => { if (line && !routeLines.includes(line.zh)) routeLines.push(line.zh); };
+  (contexts || []).forEach(context => {
+    if (context && compact.includes(String(context.line || '').replace(/\s+/g, '').toLowerCase())) addLine(LINES.find(line => line.st === context.stations));
+  });
+  LINES.forEach(line => {
+    const lineName = String(line.ko || '').replace(/\s+/g, '').toLowerCase();
+    if (lineName.length > 2 && compact.includes(lineName)) addLine(line);
+  });
+  const stationMatches = new Map();
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    LINES.forEach(line => line.st.forEach(station => {
+      const name = cleanSignText(station[1]);
+      if (name.length < 2 || !value.includes(name)) return;
+      const onRoute = (contexts || []).some(context => context && context.stations === line.st);
+      const candidate = { station, line, onRoute, itemIndex, quality: item.bbox ? (item.precision || 1) : 0 };
+      const key = station[1];
+      const previous = stationMatches.get(key);
+      if (!previous || Number(candidate.onRoute) > Number(previous.onRoute) || candidate.quality > previous.quality) stationMatches.set(key, candidate);
+    }));
+  });
+  const stations = [...stationMatches.values()].sort((a, b) => Number(b.onRoute) - Number(a.onRoute) || b.quality - a.quality || a.itemIndex - b.itemIndex).slice(0, 3);
+  return { items, compact, raw, labels, routeLines, stations, isTransfer: labels.includes('轉乘') };
 }
 function analyzePhotoSign(data, imageWidth, context) {
   const items = ocrItems(data);
@@ -1283,12 +1325,9 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
       const response = await worker.recognize(prepared.image, {}, { blocks: true });
       await worker.terminate();
-      const rawText = ocrItems(response.data);
-      const compactText = rawText.map(item => String(item.text || '')).join(' ').replace(/\s+/g, '').toLowerCase();
-      const isTransferSign = /갈아타는곳|환승|transfer/.test(compactText);
-      const context = isTransferSign ? transferContext : platformContext;
+      const reading = signReading(response.data, [platformContext, transferContext]);
+      const context = reading.isTransfer ? transferContext : platformContext;
       const analysis = context ? analyzePhotoSign(response.data, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
-      const seen = analysis.mentions.map(item => item.station[2]).join('、');
       result.replaceChildren(); result.hidden = false;
       const place = analysis.signKind === 'transfer' ? '轉乘通道' : '月台';
       const directionContext = analysis.signKind === 'transfer' ? transferContext : platformContext;
@@ -1314,7 +1353,13 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else {
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到站名'), el('p', null, '讓箭頭和韓文站名一起入鏡。'));
+        const parsedStations = reading.stations.map(item => item.station[1] + '（' + item.station[2] + '）').join('、');
+        const parsedTypes = [...reading.labels, ...reading.routeLines].join('・');
+        if (parsedStations || reading.raw) {
+          result.append(el('div', 'photo-result-label', parsedTypes || '讀到韓文'), el('strong', null, parsedStations || '讀到：' + reading.raw), el('p', null, parsedStations ? '這些站名不在目前要走的方向。請再拍含箭頭的整塊指示牌。' : '尚未能比對到站名，請讓指示牌填滿框內重拍。'));
+        } else {
+          result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到韓文'), el('p', null, '讓箭頭和站名一起入鏡。'));
+        }
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       }
     } catch (error) {
