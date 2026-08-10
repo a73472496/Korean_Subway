@@ -1196,7 +1196,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
   const head = el('div', 'photo-guide-head');
   const icon = el('div', 'photo-guide-icon'); icon.appendChild(cameraIcon());
   const copy = el('div');
-  copy.append(el('strong', null, '拍指示牌，確認該走哪一邊'), el('p', null, '本機讀取韓文站名後比對行程。月台與轉乘通道會分開判斷，資訊不足時不猜方向。照片不會上傳。'));
+  copy.append(el('strong', null, '拍指示牌，確認該走哪一邊'), el('p', null, '讀取站名後直接告訴你左或右。照片不會上傳。'));
   head.append(icon, copy);
   const proof = el('div', 'photo-route-proof');
   const line = el('span', 'photo-line', platformContext.line); line.style.borderColor = platformContext.color;
@@ -1239,27 +1239,27 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       const directionContext = analysis.signKind === 'transfer' ? transferContext : platformContext;
       if (analysis.signKind === 'transfer' && !transferContext) {
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '轉乘指示牌'), el('strong', null, '這一段沒有可比對的下一段轉乘'), el('p', null, '照片看起來是轉乘指示牌。請在有轉乘的路線步驟拍攝，或先確認下一段要搭的路線後再判斷左右。'));
+        result.append(el('div', 'photo-result-label', '轉乘指示牌'), el('strong', null, '請在轉乘步驟再拍一次'), el('p', null, '這段沒有下一段路線可比對。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else if (analysis.clear && analysis.pairedOpposite) {
         const direction = analysis.clear;
         const opposite = analysis.pairedOpposite;
         result.classList.remove('warn');
-        result.append(el('div', 'photo-result-label', '左右' + place + '已比對'), el('strong', null, '往' + direction.side + '側' + place + '方向走'), el('p', null, '照片讀到：' + seen + '。' + opposite.side + '的「' + opposite.station[2] + '」是反方向，' + direction.side + '的「' + direction.station[2] + '」符合你的行程。你需往 ' + directionContext.terminal[2] + '，' + directionContext.trend + '。'));
+        result.append(el('div', 'photo-result-label', '已比對'), el('strong', null, '往' + direction.side + '側' + place + '走'), el('p', null, direction.side + '「' + direction.station[2] + '」正確｜' + opposite.side + '「' + opposite.station[2] + '」反方向'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else if (analysis.planned.length) {
         const direction = analysis.planned[0];
         result.classList.remove('warn');
-        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '跟著寫著「' + direction.station[2] + '」的箭頭走'), el('p', null, '照片讀到：' + seen + '。其中「' + direction.station[2] + '」符合你的行程，但另一側站名不完整，無法安全判定左或右。這一段需往 ' + directionContext.terminal[2] + '，' + directionContext.trend + '。'));
+        result.append(el('div', 'photo-result-label', '找到正確方向'), el('strong', null, '跟著「' + direction.station[2] + '」的箭頭走'), el('p', null, '另一側看不清楚，無法判斷左或右。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else if (analysis.opposite.length) {
         const opposite = analysis.opposite[0];
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '「' + opposite.station[2] + '」是反方向'), el('p', null, '照片讀到：' + seen + '。不要只跟著「' + opposite.station[2] + '」前進。請找寫著 ' + directionContext.terminal[2] + ' 或其他正向站名的箭頭。'));
+        result.append(el('div', 'photo-result-label', '反方向'), el('strong', null, '不要往「' + opposite.station[2] + '」走'), el('p', null, '請找「' + directionContext.terminal[2] + '」方向。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else {
         result.classList.add('warn');
-        result.append(el('div', 'photo-result-label', '需要再確認'), el('strong', null, '沒有讀到可比對的韓文站名'), el('p', null, '請靠近指示牌重拍，讓箭頭與韓文站名都入鏡。你的方向是往 ' + directionContext.terminal[2] + '，' + directionContext.trend + '。'));
+        result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到站名'), el('p', null, '讓箭頭和韓文站名一起入鏡。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       }
     } catch (error) {
