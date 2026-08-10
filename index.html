@@ -1508,32 +1508,44 @@ function sideFromBox(box, imageWidth) {
 function boxCenter(box) {
   return box ? { x: (box.x0 + box.x1) / 2, y: (box.y0 + box.y1) / 2 } : null;
 }
-function arrowSideFromText(value) {
+function arrowDirectionFromText(value) {
   const text = String(value || '').replace(/\s+/g, '');
-  const left = /(?:←|↖|↙|⇦|⬅|⟵|◀|◁|‹|〈|《|<[-=]?)/.test(text);
-  const right = /(?:→|↗|↘|⇨|➡|⟶|▶|▷|›|〉|》|[-=]?>)/.test(text);
-  return left === right ? null : left ? '左側' : '右側';
+  if (/(?:↖|⇖|⬉)/.test(text)) return '左前方';
+  if (/(?:↗|⇗|⬈)/.test(text)) return '右前方';
+  const forward = /(?:↑|⇧|⬆|⟰|︿|\^)/.test(text);
+  const left = /(?:←|↙|⇦|⬅|⟵|◀|◁|‹|〈|《|<[-=]?)/.test(text);
+  const right = /(?:→|↘|⇨|➡|⟶|▶|▷|›|〉|》|[-=]?>)/.test(text);
+  const directions = [forward && '前進', left && '左側', right && '右側'].filter(Boolean);
+  return directions.length === 1 ? directions[0] : null;
 }
-function arrowSideForMention(items, mention) {
+function arrowDirectionForMention(items, mention) {
   const ownItem = items[mention.itemIndex];
-  const ownArrow = ownItem && arrowSideFromText(ownItem.text);
+  const ownArrow = ownItem && arrowDirectionFromText(ownItem.text);
   if (ownArrow) return ownArrow;
   if (!mention.bbox) return null;
   const mentionCenter = boxCenter(mention.bbox);
   let best = null;
   items.forEach(item => {
     if (!item.bbox) return;
-    const side = arrowSideFromText(item.text);
-    if (!side) return;
+    const direction = arrowDirectionFromText(item.text);
+    if (!direction) return;
     const center = boxCenter(item.bbox);
     const mentionHeight = Math.max(1, mention.bbox.y1 - mention.bbox.y0);
     const itemHeight = Math.max(1, item.bbox.y1 - item.bbox.y0);
     const verticalDistance = Math.abs(center.y - mentionCenter.y);
     if (verticalDistance > Math.max(mentionHeight, itemHeight) * 1.35) return;
     const distance = Math.abs(center.x - mentionCenter.x) + verticalDistance * 2;
-    if (!best || distance < best.distance) best = { side, distance };
+    if (!best || distance < best.distance) best = { direction, distance };
   });
-  return best && best.side;
+  return best && best.direction;
+}
+function movementForMention(mention) {
+  return mention && (mention.pathDirection || (mention.side === '左側' || mention.side === '右側' ? mention.side : null));
+}
+function movementInstruction(movement, place) {
+  if (movement === '前進') return '直走前往' + place;
+  if (movement === '左前方' || movement === '右前方') return '往' + movement + '走';
+  return movement ? '往' + movement + place + '走' : '';
 }
 function directionForStation(context, stationIndex) {
   if (stationIndex === context.boardIndex) return '目前位置';
@@ -1603,6 +1615,28 @@ function ocrItems(data) {
   if (data.text) add({ text: data.text }, 0);
   return items;
 }
+function ocrCodeTokens(items) {
+  const tokens = new Set();
+  items.forEach(item => {
+    const value = String(item.text || '').trim().toUpperCase().replace(/\s+/g, '');
+    if (/^(?:[A-Z]{1,3})?\d{1,3}(?:-\d)?$/.test(value)) tokens.add(value);
+  });
+  return [...tokens];
+}
+function lineBadgeCode(lineId) {
+  const id = String(lineId || '').toUpperCase();
+  if (/^[1-9]$/.test(id)) return id;
+  if (/^B[1-4]$/.test(id)) return id.slice(1);
+  if (/^2[BC]$/.test(id)) return '2';
+  return null;
+}
+function codeTokenMatchesStation(token, stationCode) {
+  const tokenValue = String(token || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  const stationValue = String(stationCode || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  if (!tokenValue || !stationValue) return false;
+  if (tokenValue === stationValue) return true;
+  return /^[A-Z]/.test(stationValue) && tokenValue === stationValue.replace(/^[A-Z]+/, '');
+}
 function mergeOcrData(...results) {
   return {
     text: results.map(result => result && result.text).filter(Boolean).join('\n'),
@@ -1613,6 +1647,7 @@ function mergeOcrData(...results) {
 }
 function signReading(data, contexts) {
   const items = ocrItems(data);
+  const codeTokens = ocrCodeTokens(items);
   const textParts = [...new Set(items.map(item => String(item.text || '').trim()).filter(Boolean))];
   const raw = textParts.join(' · ').slice(0, 72);
   const korean = [...new Set(textParts.flatMap(part => part.match(/[가-힣]{2,}/g) || []))].join(' · ').slice(0, 48);
@@ -1645,8 +1680,9 @@ function signReading(data, contexts) {
   const lineBadgeMatches = context => {
     if (!context) return false;
     const id = String(context.id || '');
-    const fullName = new RegExp(id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:호선|line)', 'i');
-    return fullName.test(compact) || (/^[1-9]$/.test(id) && items.some(item => cleanSignText(item.text) === id));
+    const badge = lineBadgeCode(id) || id;
+    const fullName = new RegExp(badge.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:호선|line)', 'i');
+    return fullName.test(compact) || codeTokens.includes(String(badge).toUpperCase());
   };
   (contexts || []).forEach(context => {
     if (context && compact.includes(String(context.line || '').replace(/\s+/g, '').toLowerCase())) addLine(LINES.find(line => line.st === context.stations));
@@ -1687,7 +1723,7 @@ function signReading(data, contexts) {
     });
   });
   const stations = [...stationMatches.values()].sort((a, b) => Number(b.onRoute) - Number(a.onRoute) || b.quality - a.quality || a.itemIndex - b.itemIndex).slice(0, 3);
-  return { items, compact, raw, korean, labels, routeLines, routeLineIds, stations, isExit: hasExit, isTransfer: labels.includes('轉乘') || lineBadgeMatches(transferContext) };
+  return { items, compact, raw, korean, labels, routeLines, routeLineIds, codeTokens, stations, isExit: hasExit, isTransfer: labels.includes('轉乘') || lineBadgeMatches(transferContext) };
 }
 function analyzePhotoSign(data, imageWidth, context) {
   const items = ocrItems(data);
@@ -1695,8 +1731,12 @@ function analyzePhotoSign(data, imageWidth, context) {
   const signKind = /갈아타는곳|환승|transfer/.test(signText) ? 'transfer' : 'platform';
   const mentions = photoStationMentions(items, imageWidth, context);
   mentions.forEach(mention => {
-    const arrowSide = arrowSideForMention(items, mention);
-    if (arrowSide) { mention.side = arrowSide; mention.sideSource = 'arrow'; }
+    const arrowDirection = arrowDirectionForMention(items, mention);
+    if (arrowDirection) {
+      mention.pathDirection = arrowDirection;
+      if (arrowDirection === '左側' || arrowDirection === '右側') mention.side = arrowDirection;
+      mention.sideSource = 'arrow';
+    }
   });
   const positioned = mentions.filter(item => item.bbox && item.direction !== '目前位置');
   if (positioned.length >= 2) {
@@ -1713,23 +1753,43 @@ function analyzePhotoSign(data, imageWidth, context) {
   }
   const planned = mentions.filter(item => item.direction === '路線方向');
   const opposite = mentions.filter(item => item.direction === '反方向');
-  const clear = planned.find(item => item.side === '左側' || item.side === '右側') || null;
-  const pairedOpposite = clear ? opposite.find(item => (item.side === '左側' || item.side === '右側') && item.side !== clear.side) || null : null;
+  const clear = planned.find(item => movementForMention(item)) || null;
+  const pairedOpposite = clear && (clear.side === '左側' || clear.side === '右側')
+    ? opposite.find(item => (item.side === '左側' || item.side === '右側') && item.side !== clear.side) || null
+    : null;
   return { signKind, mentions, planned, opposite, clear, pairedOpposite };
 }
 function photoComparison(reading, analysis, context) {
   const target = analysis.planned[0] || null;
   const reverse = analysis.opposite[0] || null;
-  const lineMatched = !!context && reading.routeLineIds.includes(context.id);
+  const expectedLineCode = context && lineBadgeCode(context.id);
+  const lineMatched = !!context && (reading.routeLineIds.includes(context.id) || !!expectedLineCode && reading.codeTokens.includes(expectedLineCode));
+  const otherLine = context && reading.routeLineIds.find(id => id !== context.id && lineBadgeCode(id) !== expectedLineCode);
   const targetMatched = !!target;
   const reverseMatched = !!reverse;
+  const stationCodeMatches = context ? context.stations.map((station, stationIndex) => ({ station, stationIndex, direction: directionForStation(context, stationIndex) }))
+    .filter(item => reading.codeTokens.some(token => codeTokenMatchesStation(token, item.station[0]))) : [];
+  const plannedCode = stationCodeMatches.find(item => item.direction === '路線方向') || null;
+  const reverseCode = stationCodeMatches.find(item => item.direction === '反方向') || null;
+  const currentCode = stationCodeMatches.find(item => item.direction === '目前位置') || null;
+  const lineCheck = otherLine
+    ? { label: '線號', value: '讀到' + (LINES.find(line => line.id === otherLine)?.zh || otherLine), state: 'bad' }
+    : { label: '線號', value: lineMatched ? (expectedLineCode || context.line) : '未讀到', state: lineMatched ? 'ok' : 'missing' };
+  const numberCheck = plannedCode
+    ? { label: '站號', value: plannedCode.station[0] + '・方向正確', state: 'ok' }
+    : reverseCode
+      ? { label: '站號', value: reverseCode.station[0] + '・反方向', state: 'bad' }
+      : currentCode
+        ? { label: '站號', value: currentCode.station[0] + '・目前站', state: 'missing' }
+        : { label: '站號', value: '未讀到', state: 'missing' };
   const checks = [
-    { label: '線號', value: context ? context.line : '未比對', state: lineMatched ? 'ok' : 'missing' },
+    lineCheck,
+    numberCheck,
     { label: '目標', value: targetMatched ? target.station[2] : '未讀到', state: targetMatched ? 'ok' : 'missing' },
     { label: '反向', value: reverseMatched ? reverse.station[2] : '未讀到', state: reverseMatched ? 'ok' : 'missing' }
   ];
   if (reading.isExit) checks.unshift({ label: '牌面', value: '出口', state: 'bad' });
-  return { target, reverse, lineMatched, targetMatched, reverseMatched, checks, isExit: reading.isExit };
+  return { target, reverse, lineMatched, targetMatched, reverseMatched, plannedCode, reverseCode, checks, isExit: reading.isExit };
 }
 function appendPhotoChecks(result, checks) {
   const list = el('div', 'photo-checks');
@@ -1834,12 +1894,12 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         );
       } else if (analysis.planned.length) {
         const direction = analysis.planned[0];
-        const hasSide = direction.side === '左側' || direction.side === '右側';
-        result.classList.toggle('warn', !hasSide);
-        if (hasSide) {
+        const movement = movementForMention(direction);
+        result.classList.toggle('warn', !movement);
+        if (movement) {
           result.append(
             el('div', 'photo-result-label', '找到正確方向'),
-            el('strong', null, '往' + direction.side + place + '走'),
+            el('strong', null, movementInstruction(movement, place)),
             el('p', null, '讀到 ' + direction.station[1] + '（' + direction.station[2] + '）。另一側資訊不足，請到月台前再確認。')
           );
         } else {
