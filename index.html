@@ -298,6 +298,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 .photo-guide{position:relative;box-shadow:inset 0 -2px 0 rgba(143,192,181,.92)}
 .photo-guide::after{content:'';position:absolute;z-index:2;right:0;bottom:0;left:0;height:2px;pointer-events:none;background:rgba(143,192,181,.92)}
 .photo-examples{grid-template-columns:repeat(3,minmax(0,1fr))}.photo-example.column .photo-example-art{background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign.column{width:52%;height:68%;padding:5px 3px;flex-wrap:wrap;align-content:center;gap:2px}.photo-example-sign.column i{height:16px}.photo-example.column .photo-example-mark{background:var(--accent);color:#fff}@media (max-width:620px){.photo-examples{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-example.bad{grid-column:1/-1}.photo-example.bad .photo-example-art{height:64px}.photo-example.column .photo-example-art{height:82px}}
+.photo-example-art::before{position:absolute;top:6px;left:6px;z-index:1;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.8);color:var(--text-muted);font:700 8px/1.35 var(--mono);letter-spacing:.03em}.photo-example.hanging .photo-example-art::before{content:'吊掛式'}.photo-example.column .photo-example-art::before{content:'柱面／牆面'}.photo-example.bad .photo-example-art{background:linear-gradient(145deg,rgba(250,237,234,.72),rgba(255,255,255,.72))}.photo-example.bad .photo-example-art::before{content:'不要這樣拍';color:#9b4b42}.photo-example.bad .photo-example-sign{background:#5b6462}.photo-example.bad .photo-example-art::after{content:'出口';position:absolute;top:29px;left:12px;padding:3px 5px;border-radius:3px;background:#f6d96a;color:#34413f;font:800 9px/1 var(--mono)}
 </style>
 </head>
 <body>
@@ -526,11 +527,11 @@ LINES.find(line => line.id === 'D').st.forEach(station => {
 /* ---------- Busan metro regional network ---------- */
 const BUSAN_LINES = [
   ['B1', '1號線', '부산 1호선', '#F06A00', '노포|범어사|남산|두실|구서|장전|부산대|온천장|명륜|동래|교대|연산|시청|양정|부전|서면|범내골|범일|좌천|부산진|초량|부산역|중앙|남포|자갈치|토성|동대신|서대신|대티|괴정|사하|당리|하단|신평|동매|장림|신장림|낫개|다대포항|다대포해수욕장'],
-  ['B2', '2號線', '부산 2호선', '#00A84D', '양산|남양산|부산대양산캠퍼스|증산|호포|금곡|동원|율리|화명|수정|덕천|구명|구남|모라|모덕|덕포|사상|감전|주례|냉정|개금|동의대|가야|부암|서면|전포|국제금융센터·부산은행|문현|지게골|못골|대연|경성대·부경대|남천|금련산|광안|수영|민락|센텀시티|벡스코|동백|해운대|중동|장산'],
+  ['B2', '2號線', '부산 2호선', '#81BF48', '양산|남양산|부산대양산캠퍼스|증산|호포|금곡|동원|율리|화명|수정|덕천|구명|구남|모라|모덕|덕포|사상|감전|주례|냉정|개금|동의대|가야|부암|서면|전포|국제금융센터·부산은행|문현|지게골|못골|대연|경성대·부경대|남천|금련산|광안|수영|민락|센텀시티|벡스코|동백|해운대|중동|장산'],
   ['B3', '3號線', '부산 3호선', '#BB8C00', '대저|체육공원|강서구청|구포|덕천|숙등|남산정|만덕|미남|사직|종합운동장|거제|연산|물만골|배산|망미|수영'],
-  ['B4', '4號線', '부산 4호선', '#217F55', '안평|고촌|윗반송|영산대|석대|반여농산물시장|금사|서동|명장|충렬사|낙민|수안|동래|미남'],
-  ['BGL', '金海輕軌', '부산김해경전철', '#6F2C91', '가야대|장신대|연지공원|박물관|수로왕릉|봉황|부원|김해시청|인제대|김해대학|지내|불암|대사|평강|대저|등구|덕두|김해국제공항|서부산유통지구|괘법르네시떼|사상'],
-  ['DH', '東海線', '동해선', '#0054A6', '부전|거제해맞이|거제|교대|동래|안락|부산원동|재송|센텀|벡스코|신해운대|송정|오시리아|기장|일광|좌천|월래|서생|남창|망양|덕하|개운포|태화강']
+  ['B4', '4號線', '부산 4호선', '#217DCB', '안평|고촌|윗반송|영산대|석대|반여농산물시장|금사|서동|명장|충렬사|낙민|수안|동래|미남'],
+  ['BGL', '金海輕軌', '부산김해경전철', '#8451A0', '가야대|장신대|연지공원|박물관|수로왕릉|봉황|부원|김해시청|인제대|김해대학|지내|불암|대사|평강|대저|등구|덕두|김해국제공항|서부산유통지구|괘법르네시떼|사상'],
+  ['DH', '東海線', '동해선', '#003DA5', '부전|거제해맞이|거제|교대|동래|안락|부산원동|재송|센텀|벡스코|신해운대|송정|오시리아|기장|일광|좌천|월래|서생|남창|망양|덕하|개운포|태화강']
 ];
 // KRIC station coordinates, ordered to match BUSAN_LINES.  Keeping them local
 // makes nearby-station lookup work on GitHub Pages without an API request.
@@ -1119,6 +1120,10 @@ function match(q) {
     || isRoman && item.roman.includes(roman)
     || item.codes.some(code => code.startsWith(q))).map(item => item.station);
 }
+function routeMatch(q, which) {
+  const city = which === 'to' && PICK.from ? PICK.from.city : null;
+  return match(q).filter(station => !city || station.city === city);
+}
 $('#q').oninput = e => {
   const box = $('#qres'); box.replaceChildren();
   if (!e.target.value.trim()) return;
@@ -1144,7 +1149,7 @@ function attach(input, which) {
   const renderSuggestions = value => {
     renderTimer = 0;
     if (input.value !== value || !value.trim()) return;
-    const hits = match(value).slice(0, 6);
+    const hits = routeMatch(value, which).slice(0, 6);
     if (!hits.length) return;
     list = el('div', 'sugg');
     hits.forEach(s => {
@@ -1184,7 +1189,7 @@ function fare(km) {
 
 $('#go').onclick = () => {
   const box = $('#routeres'); box.replaceChildren();
-  const pick = w => PICK[w] || (match((w === 'from' ? $('#fFrom') : $('#fTo')).value)[0] || null);
+  const pick = w => PICK[w] || (routeMatch((w === 'from' ? $('#fFrom') : $('#fTo')).value, w)[0] || null);
   const a = pick('from'), b = pick('to');
   if (!a || !b) { box.appendChild(el('div', 'err', '請從下方建議選擇起點與終點。')); return; }
   if (a.ko === b.ko) { box.appendChild(el('div', 'err', '起點與終點相同，請換一站。')); return; }
@@ -1688,9 +1693,9 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     return item;
   };
   examples.append(
-    example('hanging', '吊掛式：箭頭與站名一起入鏡'),
-    example('column', '柱面／牆面：拍完整方向區塊'),
-    example('bad', '不要只拍站名、出口或局部')
+    example('hanging', '正確：箭頭與站名完整入鏡'),
+    example('column', '正確：柱面／牆面方向牌也可以'),
+    example('bad', '錯誤：出口牌、只拍站名或裁掉箭頭')
   );
   const input = document.createElement('input');
   input.type = 'file'; input.accept = 'image/*'; input.hidden = true;
