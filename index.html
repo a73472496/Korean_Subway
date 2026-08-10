@@ -593,6 +593,9 @@ const S = (code, ko, zh, rom, lat, lng) => [code, ko, zh, rom, lat, lng];
 // as one uninterrupted line.  Restore the Yeoncheon extension and its three
 // operating branches.  The 2023 extension uses official hyphenated codes.
 const L1 = lineById('1');
+L1.zh = '1號線';
+const L2 = lineById('2');
+L2.zh = '2號線';
 const legacyLine1 = L1.st.map(station => station.slice());
 const guroIndex = legacyLine1.findIndex(station => station[0] === '141');
 L1.st = [
@@ -629,8 +632,11 @@ line1West.push(
   S('160', '동인천', '東仁川', 'Dongincheon', 37.4753, 126.6320),
   S('161', '인천', '仁川', 'Incheon', 37.4767, 126.6169)
 );
+// The Yeoncheon–Incheon corridor is the Line 1 main line.  The remaining
+// services below are true split branches and stay after it in the browser.
+L1.st = L1.st.concat(line1West.slice(1));
+L1.b = '仁川';
 LINES.push(
-  { id: '1I', zh: '1號線 仁川支線', ko: '1호선 경인선', color: L1.color, loop: false, a: '九老', b: '仁川', st: line1West },
   { id: '1P', zh: '1號線 京釜·長項線', ko: '1호선 경부·장항선', color: L1.color, loop: false, a: '九老', b: '新昌', st: [
     legacyLine1[guroIndex],
     S('P142', '가산디지털단지', '加山數碼園區', 'Gasan Digital Complex', 37.4811, 126.8823),
@@ -744,6 +750,16 @@ LD.st = [
   S('D18', '광교중앙', '光教中央', 'Gwanggyo Jungang', 37.2884, 127.0516), S('D19', '광교', '光教', 'Gwanggyo', 37.3020, 127.0445)
 ];
 LD.a = '新沙'; LD.b = '光教';
+
+// Keep each split service directly after its main line in the line browser.
+// Incheon is part of the regular Line 1 corridor, not a separate branch.
+const SEOUL_LINE_DISPLAY_ORDER = ['1', '1P', '1G', '1S', '2', '2B', '2C', '3', '4', '5', '5M', '6', '7', '8', '9', 'A', 'D', 'UI'];
+const displayOrder = new Map(SEOUL_LINE_DISPLAY_ORDER.map((id, index) => [id, index]));
+LINES.sort((left, right) => {
+  const leftOrder = left.city === 'busan' ? 100 : displayOrder.get(left.id) ?? 99;
+  const rightOrder = right.city === 'busan' ? 100 : displayOrder.get(right.id) ?? 99;
+  return leftOrder - rightOrder;
+});
 
 /* ---------- index ---------- */
 const LMAP = {}; LINES.forEach(l => LMAP[l.id] = l);
