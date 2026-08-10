@@ -751,9 +751,9 @@ LD.st = [
 ];
 LD.a = '新沙'; LD.b = '光教';
 
-// Keep each split service directly after its main line in the line browser.
+// Keep the regular lines first; show the split services together at the end.
 // Incheon is part of the regular Line 1 corridor, not a separate branch.
-const SEOUL_LINE_DISPLAY_ORDER = ['1', '1P', '1G', '1S', '2', '2B', '2C', '3', '4', '5', '5M', '6', '7', '8', '9', 'A', 'D', 'UI'];
+const SEOUL_LINE_DISPLAY_ORDER = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'D', 'UI', '1P', '1G', '1S', '2B', '2C', '5M'];
 const displayOrder = new Map(SEOUL_LINE_DISPLAY_ORDER.map((id, index) => [id, index]));
 LINES.sort((left, right) => {
   const leftOrder = left.city === 'busan' ? 100 : displayOrder.get(left.id) ?? 99;
@@ -1885,6 +1885,8 @@ const stationCodeSortKey = code => {
 const compareStationCodes = (a, b) => {
   const [aMain, aBranch] = stationCodeSortKey(a[0]);
   const [bMain, bBranch] = stationCodeSortKey(b[0]);
+  // The Yeoncheon extension's real travel order is 100-3 → 100-2 → 100-1 → 100.
+  if (aMain === 100 && bMain === 100) return bBranch - aBranch;
   return aMain - bMain || aBranch - bBranch;
 };
 LINES.forEach(l => {
