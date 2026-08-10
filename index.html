@@ -1182,7 +1182,9 @@ function analyzePhotoSign(data, imageWidth, context) {
   const mentions = photoStationMentions(items, imageWidth, context);
   const planned = mentions.filter(item => item.direction === '路線方向');
   const opposite = mentions.filter(item => item.direction === '反方向');
-  return { mentions, planned, opposite, clear: planned.find(item => item.side === '左側' || item.side === '右側') || null };
+  const clear = planned.find(item => item.side === '左側' || item.side === '右側') || null;
+  const pairedOpposite = clear ? opposite.find(item => (item.side === '左側' || item.side === '右側') && item.side !== clear.side) || null : null;
+  return { mentions, planned, opposite, clear, pairedOpposite };
 }
 function photoDirectionGuide(L, idx) {
   const context = routePhotoContext(L, idx);
@@ -1217,10 +1219,16 @@ function photoDirectionGuide(L, idx) {
       const analysis = analyzePhotoSign(response.data, prepared.width, context);
       const seen = analysis.mentions.map(item => item.station[2]).join('、');
       result.replaceChildren(); result.hidden = false;
-      if (analysis.clear) {
+      if (analysis.clear && analysis.pairedOpposite) {
+        const direction = analysis.clear;
+        const opposite = analysis.pairedOpposite;
+        result.classList.remove('warn');
+        result.append(el('div', 'photo-result-label', '左右月台已比對'), el('strong', null, '往' + direction.side + '月台方向走'), el('p', null, '照片讀到：' + seen + '。' + opposite.side + '的「' + opposite.station[2] + '」是反方向，' + direction.side + '的「' + direction.station[2] + '」符合你的路線方向。你需往 ' + context.terminal[2] + '，' + context.trend + '。'));
+        status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
+      } else if (analysis.clear) {
         const direction = analysis.clear;
         result.classList.remove('warn');
-        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '往' + direction.side + '的樓梯／通道走'), el('p', null, '照片讀到：' + seen + '。其中「' + direction.station[2] + '」符合你的路線方向。你需往 ' + context.terminal[2] + '，' + context.trend + '。請再確認箭頭也朝同一側。'));
+        result.append(el('div', 'photo-result-label', '照片文字比對'), el('strong', null, '往' + direction.side + '的標示方向走'), el('p', null, '照片讀到：' + seen + '。其中「' + direction.station[2] + '」符合你的路線方向。由於另一側沒有讀到反方向站名，請再確認箭頭或月台標示。'));
         status.textContent = '已在此裝置完成辨識，照片沒有上傳或保存。';
       } else if (analysis.planned.length) {
         const direction = analysis.planned[0];
