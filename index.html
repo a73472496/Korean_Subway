@@ -301,6 +301,13 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 .photo-examples{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.photo-example-art::before{position:absolute;top:6px;left:6px;z-index:1;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.8);color:var(--text-muted);font:700 8px/1.35 var(--mono);letter-spacing:.03em}.photo-example.hanging .photo-example-art::before{content:'吊掛式'}.photo-example.column .photo-example-art::before{content:'柱面／牆面'}.photo-example-sign.hanging{width:82%;height:38%;padding:0 6px}.photo-example-sign.column{width:45%;height:68%;padding:5px 3px;flex-direction:column;justify-content:center;gap:1px}.photo-example-sign.column i{width:72%;height:1px}.photo-example-sign.column b{font-size:14px;line-height:1}.photo-example-sign.column span{font-size:8px;line-height:1.1}.photo-example.bad .photo-example-art{background:linear-gradient(145deg,rgba(250,237,234,.72),rgba(255,255,255,.72))}.photo-example.bad .photo-example-sign{background:#5b6462}.photo-example.bad.hanging .photo-example-sign{width:54%;transform:translateX(30%);opacity:.66;white-space:nowrap}.photo-example.bad.column .photo-example-sign{width:45%;height:50%;transform:translateY(32%);opacity:.66}.photo-example.bad .photo-example-sign b,.photo-example.bad .photo-example-sign i{display:none}.photo-example.bad .photo-example-art::after{content:'出口';position:absolute;top:29px;left:11px;padding:3px 5px;border-radius:3px;background:#f6d96a;color:#34413f;font:800 9px/1 var(--mono)}.photo-example.bad.column .photo-example-art::after{content:'裁切'}.photo-example-mark{right:6px;bottom:6px;width:24px;height:24px;border:2px solid rgba(255,255,255,.9);box-shadow:0 1px 3px rgba(0,0,0,.12)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}@media (max-width:620px){.photo-examples{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.photo-example.bad{grid-column:auto}.photo-example.bad .photo-example-art{height:82px}.photo-example.column .photo-example-art{height:82px}}
 .crop-help{padding-bottom:8px}.crop-hint{margin:0;padding:0 16px 12px;color:var(--accent);font:700 11px/1.5 var(--sans)}.crop-frame{border-width:3px;border-radius:7px;background:linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px) 0 0/25% 100%,linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px) 0 0/100% 25%;cursor:grab}.crop-frame:active{cursor:grabbing}.crop-frame::before{padding:3px 6px;border-radius:4px;background:rgba(8,21,19,.7)}.crop-handle{z-index:2;width:30px;height:30px;border:3px solid #e9fff9;box-shadow:0 1px 4px rgba(0,0,0,.25)}.crop-handle.nw{top:-15px;left:-15px}.crop-handle.ne{top:-15px;right:-15px}.crop-handle.sw{bottom:-15px;left:-15px}.crop-handle.se{right:-15px;bottom:-15px}.crop-handle.n{top:-15px;left:50%;transform:translateX(-50%)}.crop-handle.e{top:50%;right:-15px;transform:translateY(-50%)}.crop-handle.s{bottom:-15px;left:50%;transform:translateX(-50%)}.crop-handle.w{top:50%;left:-15px;transform:translateY(-50%)}@media (max-width:620px){.crop-handle{width:34px;height:34px}.crop-handle.nw{top:-17px;left:-17px}.crop-handle.ne{top:-17px;right:-17px}.crop-handle.sw{bottom:-17px;left:-17px}.crop-handle.se{right:-17px;bottom:-17px}.crop-handle.n{top:-17px}.crop-handle.e{right:-17px}.crop-handle.s{bottom:-17px}.crop-handle.w{left:-17px}}
 .photo-checks{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.photo-check{padding:3px 6px;border:1px solid var(--border-strong);border-radius:4px;background:rgba(255,255,255,.68);color:var(--text-muted);font:700 10px/1.4 var(--mono)}.photo-check.ok{border-color:rgba(40,124,115,.42);color:var(--accent)}.photo-check.missing{color:var(--text-faint)}.photo-check.bad{border-color:rgba(184,92,80,.46);color:#a84a4a}
+/* Photo guide sampled from real Seoul platform signs. */
+.photo-samples{display:grid;gap:10px;margin:0 0 12px}.photo-sample-group{margin:0;padding:10px;border:1px solid rgba(166,199,191,.72);border-radius:8px;background:rgba(255,255,255,.42)}.photo-sample-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}.photo-sample-head strong{color:var(--text);font-size:12px;font-weight:850;letter-spacing:.01em}.photo-sample-head span{color:var(--text-faint);font-size:9px;line-height:1.4}.photo-sample-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.photo-sample{min-width:0;margin:0}.photo-sample-visual{position:relative;height:86px;overflow:hidden;border:1px solid rgba(142,174,167,.8);border-radius:7px;background:#dce6e3}.photo-sample-visual::after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}.photo-sample img{display:block;width:100%;height:100%;object-fit:cover}.photo-sample.good .photo-sample-visual{border-color:rgba(40,124,115,.74)}.photo-sample.bad .photo-sample-visual{border-color:rgba(184,92,80,.68)}.photo-sample.bad img{filter:saturate(.72) contrast(.92)}.photo-sample-state{position:absolute;z-index:1;top:6px;left:6px;display:inline-flex;align-items:center;min-height:21px;padding:2px 7px;border:1px solid rgba(255,255,255,.78);border-radius:999px;color:#fff;font-size:9px;font-weight:850;line-height:1;box-shadow:0 2px 7px rgba(12,30,27,.18)}.photo-sample.good .photo-sample-state{background:rgba(30,104,95,.94)}.photo-sample.bad .photo-sample-state{background:rgba(168,74,74,.94)}.photo-sample-state::before{display:grid;width:13px;height:13px;margin-right:4px;place-items:center;border:1px solid rgba(255,255,255,.68);border-radius:50%;font:900 9px/1 var(--sans)}.photo-sample.good .photo-sample-state::before{content:'✓'}.photo-sample.bad .photo-sample-state::before{content:'×'}.photo-sample figcaption{display:grid;gap:1px;padding-top:5px}.photo-sample figcaption strong{color:var(--text);font-size:10px;line-height:1.35}.photo-sample figcaption span{color:var(--text-muted);font-size:9px;line-height:1.45}.photo-sample.column .photo-sample-visual{height:118px}.photo-sample.column img{object-position:center 15%}.photo-sample.column.bad img{object-position:center 16%}.photo-sample-group.transfer{padding-bottom:9px}.photo-sample-group.transfer .photo-sample-visual{height:104px}.photo-sample-group.transfer .photo-sample img{object-position:center center}.photo-sample-group.transfer .photo-sample-state{background:rgba(41,49,47,.94)}.photo-sample-group.transfer .photo-sample-state::before{content:'↗';font-size:8px}.photo-sample-cues{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.photo-sample-cues span{padding:3px 6px;border:1px solid rgba(166,199,191,.7);border-radius:4px;background:rgba(255,255,255,.58);color:var(--text-muted);font:700 9px/1.35 var(--mono)}
+@media (min-width:700px){.photo-samples{grid-template-columns:1fr 1fr}.photo-sample-group.transfer{grid-column:1/-1}.photo-sample-group.transfer .photo-sample-visual{height:126px}}
+@media (max-width:420px){.photo-sample-head{align-items:flex-start;flex-direction:column;gap:1px}.photo-sample-pair{gap:6px}.photo-sample-visual{height:78px}.photo-sample.column .photo-sample-visual{height:108px}.photo-sample figcaption span{font-size:8.5px}.photo-sample-group{padding:8px}}
+.photo-sample-group.transfer .photo-sample-pair{grid-template-columns:1fr}
+.photo-samples{grid-template-columns:1fr}.photo-sample-group.transfer{grid-column:auto}
+@media (max-width:620px){.photo-sample-pair{grid-template-columns:1fr}.photo-sample-visual{height:102px}.photo-sample.column .photo-sample-visual{height:156px}.photo-sample-group.transfer .photo-sample-visual{height:116px}.photo-sample img,.photo-sample.column img,.photo-sample.column.bad img{object-fit:contain;object-position:center}.photo-sample figcaption{padding:5px 2px 2px}.photo-sample figcaption strong{font-size:10.5px}.photo-sample figcaption span{font-size:9px}}
 </style>
 </head>
 <body>
@@ -1930,29 +1937,43 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       document.createTextNode('牌上有「' + platformContext.next[2] + '／' + platformContext.off[2] + '」也可以；不要拍「往 ' + opposite[2] + '」或出口牌。')
     );
   }
-  const examples = el('div', 'photo-examples');
-  const example = (kind, correct, label) => {
-    const item = el('div', 'photo-example ' + kind + ' ' + (correct ? 'good' : 'bad'));
-    const art = el('div', 'photo-example-art');
-    const sign = el('div', 'photo-example-sign ' + kind);
-    if (kind === 'hanging') {
-      if (correct) sign.append(el('b', null, '←'), el('span', null, '역명'), el('i'), el('span', null, 'Station'), el('b', null, '→'));
-      else sign.append(el('span', null, 'Station'));
-    } else if (correct) {
-      sign.append(el('b', null, '↑'), el('span', null, '4호선'), el('i'), el('span', null, '역명'));
-    } else {
-      sign.append(el('span', null, '역명'));
-    }
-    art.append(sign, el('span', 'photo-example-mark', correct ? '✓' : '×'));
-    item.append(art, el('p', null, label));
-    return item;
+  const examples = el('div', 'photo-samples');
+  const sample = ({ src, alt, correct, title, note, kind = '', badge = '' }) => {
+    const figure = el('figure', 'photo-sample ' + kind + ' ' + (correct === false ? 'bad' : 'good'));
+    const visual = el('div', 'photo-sample-visual');
+    const image = document.createElement('img');
+    image.src = src; image.alt = alt; image.loading = 'lazy'; image.decoding = 'async';
+    visual.append(image, el('span', 'photo-sample-state', badge || (correct === false ? '不完整' : '完整')));
+    const caption = document.createElement('figcaption');
+    caption.append(el('strong', null, title), el('span', null, note));
+    figure.append(visual, caption);
+    return figure;
   };
-  examples.append(
-    example('hanging', true, '吊掛式：箭頭與站名完整入鏡'),
-    example('hanging', false, '吊掛式：只拍局部或出口牌'),
-    example('column', true, '柱面／牆面：方向區塊完整入鏡'),
-    example('column', false, '柱面／牆面：不要只拍站名')
-  );
+  const sampleGroup = (title, hint, items, kind = '') => {
+    const group = el('section', 'photo-sample-group ' + kind);
+    const head = el('div', 'photo-sample-head');
+    head.append(el('strong', null, title), el('span', null, hint));
+    const pair = el('div', 'photo-sample-pair');
+    items.forEach(item => pair.appendChild(sample(item)));
+    group.append(head, pair);
+    return group;
+  };
+  const hangingGroup = sampleGroup('吊掛式方向牌', '拍下整塊牌面', [
+    { src: 'assets/photo-guide-hanging-complete.webp', alt: '完整的吊掛式方向牌，左右箭頭、路線號與站名全部入鏡', correct: true, title: '左右資訊都拍到', note: '箭頭、線號、兩側站名都清楚' },
+    { src: 'assets/photo-guide-hanging-partial.webp', alt: '不完整的吊掛式方向牌，只拍到單側方向與站名', correct: false, title: '只有單側不夠', note: '無法和另一方向比較' }
+  ]);
+  const columnGroup = sampleGroup('柱面／牆面方向牌', '上下資訊一起拍', [
+    { src: 'assets/photo-guide-column-complete.webp', alt: '完整的柱面方向牌，箭頭、目前站與兩側站名全部入鏡', correct: true, title: '整個方向區塊入鏡', note: '箭頭、站號與兩側路線可比對', kind: 'column' },
+    { src: 'assets/photo-guide-column-partial.webp', alt: '不完整的柱面方向牌，只拍到其中一側箭頭與站名', correct: false, title: '不要只拍一邊', note: '缺少另一側站名與目前站', kind: 'column' }
+  ]);
+  const transferGroup = el('section', 'photo-sample-group transfer');
+  const transferHead = el('div', 'photo-sample-head');
+  transferHead.append(el('strong', null, '轉乘方向牌'), el('span', null, '換線時再拍這種'));
+  const transferShot = sample({ src: 'assets/photo-guide-transfer.webp', alt: '轉乘通道上完整的轉乘方向牌，包含 갈아타는 곳、箭頭、路線號與站名', correct: true, badge: '轉乘', title: '讓「갈아타는 곳」與箭頭入鏡', note: '同時拍到要轉乘的線號與方向站名' });
+  const transferCues = el('div', 'photo-sample-cues');
+  ['갈아타는 곳', '箭頭', '路線號', '方向站名'].forEach(cue => transferCues.appendChild(el('span', null, cue)));
+  transferGroup.append(transferHead, transferShot, transferCues);
+  examples.append(hangingGroup, columnGroup, transferGroup);
   const input = document.createElement('input');
   input.type = 'file'; input.accept = 'image/*'; input.hidden = true;
   const photoAction = el('button', 'photo-action', '選擇指示牌照片'); photoAction.type = 'button';
