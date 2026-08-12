@@ -779,6 +779,653 @@ LINES.sort((left, right) => {
   return leftOrder - rightOrder;
 });
 
+/* BEGIN GENERATED STATION NAME AUDIT OVERRIDES */
+// Generated from work/station-audit/final-audit.json (2026-08-12).
+// Station numbers are intentionally unchanged; this block only applies audited names.
+const AUDITED_STATION_NAME_FIXES = [
+  {
+    "lineId": "1",
+    "code": "109",
+    "matchKo": "가능",
+    "zh": "佳陵"
+  },
+  {
+    "lineId": "1",
+    "code": "119",
+    "matchKo": "광운대",
+    "zh": "光雲大學",
+    "en": "Kwangwoon Univ."
+  },
+  {
+    "lineId": "1",
+    "code": "122",
+    "matchKo": "외대앞",
+    "zh": "韓國外國語大學",
+    "en": "Hankuk Univ. of Foreign Studies"
+  },
+  {
+    "lineId": "1",
+    "code": "124",
+    "matchKo": "청량리",
+    "zh": "清涼里"
+  },
+  {
+    "lineId": "1",
+    "code": "127",
+    "matchKo": "동묘앞",
+    "zh": "東廟",
+    "en": "Dongmyo"
+  },
+  {
+    "lineId": "6",
+    "code": "627",
+    "matchKo": "효창공원앞",
+    "zh": "孝昌公園",
+    "en": "Hyochang Park"
+  },
+  {
+    "lineId": "6",
+    "code": "636",
+    "matchKo": "동묘앞",
+    "zh": "東廟",
+    "en": "Dongmyo"
+  },
+  {
+    "lineId": "4",
+    "code": "449",
+    "matchKo": "한대앞",
+    "zh": "漢陽大學"
+  },
+  {
+    "lineId": "2",
+    "code": "209",
+    "matchKo": "한양대",
+    "zh": "漢陽大學",
+    "en": "Hanyang Univ."
+  },
+  {
+    "lineId": "2",
+    "code": "212",
+    "matchKo": "건대입구",
+    "zh": "建國大學",
+    "en": "Konkuk Univ."
+  },
+  {
+    "lineId": "2",
+    "code": "223",
+    "matchKo": "교대",
+    "zh": "首爾教育大學",
+    "en": "Seoul Nat'l Univ. of Education (Court & Prosecutors' Office)"
+  },
+  {
+    "lineId": "2",
+    "code": "228",
+    "matchKo": "서울대입구",
+    "zh": "首爾大學",
+    "en": "Seoul Nat'l Univ. (Gwanak-gu Office)"
+  },
+  {
+    "lineId": "2",
+    "code": "239",
+    "matchKo": "홍대입구",
+    "zh": "弘益大學",
+    "en": "Hongik Univ."
+  },
+  {
+    "lineId": "2",
+    "code": "241",
+    "matchKo": "이대",
+    "zh": "梨花女子大學",
+    "en": "Ewha Womans Univ."
+  },
+  {
+    "lineId": "3",
+    "code": "332",
+    "matchKo": "동대입구",
+    "zh": "東國大學",
+    "en": "Dongguk Univ."
+  },
+  {
+    "lineId": "3",
+    "code": "340",
+    "matchKo": "교대",
+    "zh": "首爾教育大學",
+    "en": "Seoul Nat'l Univ. of Education (Court & Prosecutors' Office)"
+  },
+  {
+    "lineId": "4",
+    "code": "418",
+    "matchKo": "성신여대입구",
+    "zh": "誠信女子大學",
+    "en": "Sungshin Women's Univ. (Donam)"
+  },
+  {
+    "lineId": "4",
+    "code": "419",
+    "matchKo": "한성대입구",
+    "zh": "漢城大學",
+    "en": "Hansung Univ. (Samseongyo)"
+  },
+  {
+    "lineId": "4",
+    "code": "427",
+    "matchKo": "숙대입구",
+    "zh": "淑明女子大學",
+    "en": "Sookmyung Women's Univ. (Seoul Metropolitan Office of Education)"
+  },
+  {
+    "lineId": "4",
+    "code": "432",
+    "matchKo": "총신대입구",
+    "zh": "總神大學",
+    "en": "Chongshin Univ. (Isu)"
+  },
+  {
+    "lineId": "6",
+    "code": "640",
+    "matchKo": "고려대",
+    "zh": "高麗大學",
+    "en": "Korea Univ. (Jongam)"
+  },
+  {
+    "lineId": "7",
+    "code": "727",
+    "matchKo": "건대입구",
+    "zh": "建國大學",
+    "en": "Konkuk Univ."
+  },
+  {
+    "lineId": "7",
+    "code": "738",
+    "matchKo": "숭실대입구",
+    "zh": "崇實大學",
+    "en": "Soongsil Univ. (Salpijae)"
+  },
+  {
+    "lineId": "A",
+    "code": "A03",
+    "matchKo": "홍대입구",
+    "zh": "弘益大學",
+    "en": "Hongik Univ."
+  },
+  {
+    "lineId": "UI",
+    "code": "S120",
+    "matchKo": "성신여대입구",
+    "zh": "誠信女子大學",
+    "en": "Sungshin Women's Univ. (Donam)"
+  },
+  {
+    "lineId": "1P",
+    "code": "P153",
+    "matchKo": "성균관대",
+    "zh": "成均館大學"
+  },
+  {
+    "lineId": "1P",
+    "code": "P159",
+    "matchKo": "오산대",
+    "zh": "烏山大學"
+  },
+  {
+    "lineId": "B1",
+    "code": "124",
+    "matchKo": "교대",
+    "zh": "釜山教育大學",
+    "en": "Busan Nat'l Univ. of Edu."
+  },
+  {
+    "lineId": "UI",
+    "code": "S112",
+    "matchKo": "419민주묘지",
+    "ko": "4.19민주묘지",
+    "en": "April 19th National Cemetery (Duksung Women's Univ.)"
+  },
+  {
+    "lineId": "BGL",
+    "code": "504",
+    "matchKo": "김해국제공항",
+    "zh": "機場",
+    "ko": "공항",
+    "en": "Gimhae Int'l Airport"
+  },
+  {
+    "lineId": "BGL",
+    "code": "518",
+    "matchKo": "박물관",
+    "en": "Gimhae National Museum"
+  },
+  {
+    "lineId": "BGL",
+    "code": "506",
+    "matchKo": "등구",
+    "zh": "登龜"
+  },
+  {
+    "lineId": "3",
+    "code": "343",
+    "matchKo": "매봉",
+    "zh": "梅峰"
+  },
+  {
+    "lineId": "4",
+    "code": "408",
+    "matchKo": "별내별가람",
+    "zh": "別內星江"
+  },
+  {
+    "lineId": "4",
+    "code": "436",
+    "matchKo": "경마공원",
+    "zh": "首爾賽馬公園",
+    "en": "Seoul Racecourse Park"
+  },
+  {
+    "lineId": "5",
+    "code": "530",
+    "matchKo": "애오개",
+    "zh": "兒嶺"
+  },
+  {
+    "lineId": "6",
+    "code": "613",
+    "matchKo": "독바위",
+    "zh": "瓮岩"
+  },
+  {
+    "lineId": "6",
+    "code": "632",
+    "matchKo": "버티고개",
+    "zh": "波堤嶺"
+  },
+  {
+    "lineId": "7",
+    "code": "712",
+    "matchKo": "마들",
+    "zh": "馬得"
+  },
+  {
+    "lineId": "7",
+    "code": "740",
+    "matchKo": "장승배기",
+    "zh": "長丞拜基"
+  },
+  {
+    "lineId": "A",
+    "code": "A071",
+    "matchKo": "청라국제도시",
+    "zh": "青羅國際城",
+    "en": "Cheongna Int'l City"
+  },
+  {
+    "lineId": "DH",
+    "code": "K129",
+    "matchKo": "망양",
+    "zh": "望陽"
+  },
+  {
+    "lineId": "B1",
+    "code": "131",
+    "matchKo": "두실",
+    "zh": "斗實"
+  },
+  {
+    "lineId": "B1",
+    "code": "100",
+    "matchKo": "동매",
+    "zh": "東嵋"
+  },
+  {
+    "lineId": "B1",
+    "code": "097",
+    "matchKo": "낫개",
+    "zh": "納溉"
+  },
+  {
+    "lineId": "B2",
+    "code": "214",
+    "matchKo": "못골",
+    "zh": "池谷"
+  },
+  {
+    "lineId": "B4",
+    "code": "406",
+    "matchKo": "명장",
+    "zh": "鳴藏"
+  },
+  {
+    "lineId": "B4",
+    "code": "408",
+    "matchKo": "금사",
+    "zh": "錦絲"
+  },
+  {
+    "lineId": "3",
+    "code": "350",
+    "matchKo": "가락시장",
+    "en": "Garak Market"
+  },
+  {
+    "lineId": "7",
+    "code": "746",
+    "matchKo": "가산디지털단지",
+    "en": "Gasan Digital Complex"
+  },
+  {
+    "lineId": "9",
+    "code": "936",
+    "matchKo": "올림픽공원",
+    "en": "Olympic Park (Korea National Sport University)",
+    "zh": "奧林匹克公園"
+  },
+  {
+    "lineId": "1",
+    "code": "132",
+    "matchKo": "시청",
+    "en": "City Hall"
+  },
+  {
+    "lineId": "1",
+    "code": "133",
+    "matchKo": "서울역",
+    "en": "Seoul Station"
+  },
+  {
+    "lineId": "2",
+    "code": "201",
+    "matchKo": "시청",
+    "en": "City Hall"
+  },
+  {
+    "lineId": "2",
+    "code": "202",
+    "matchKo": "을지로입구",
+    "en": "Euljiro 1(il)ga"
+  },
+  {
+    "lineId": "2",
+    "code": "205",
+    "matchKo": "동대문역사문화공원",
+    "en": "Dongdaemun History & Culture Park(DDP)"
+  },
+  {
+    "lineId": "2",
+    "code": "218",
+    "matchKo": "종합운동장",
+    "en": "Sports Complex"
+  },
+  {
+    "lineId": "2",
+    "code": "232",
+    "matchKo": "구로디지털단지",
+    "en": "Guro Digital Complex"
+  },
+  {
+    "lineId": "2",
+    "code": "236",
+    "matchKo": "영등포구청",
+    "en": "Yeongdeungpogu Office"
+  },
+  {
+    "lineId": "3",
+    "code": "339",
+    "matchKo": "고속터미널",
+    "en": "Express Bus Terminal"
+  },
+  {
+    "lineId": "3",
+    "code": "341",
+    "matchKo": "남부터미널",
+    "en": "Nambu Bus Terminal (Seoul Arts Center)"
+  },
+  {
+    "lineId": "3",
+    "code": "351",
+    "matchKo": "경찰병원",
+    "en": "National Police Hospital"
+  },
+  {
+    "lineId": "4",
+    "code": "422",
+    "matchKo": "동대문역사문화공원",
+    "en": "Dongdaemun History & Culture Park(DDP)"
+  },
+  {
+    "lineId": "4",
+    "code": "426",
+    "matchKo": "서울역",
+    "en": "Seoul Station"
+  },
+  {
+    "lineId": "4",
+    "code": "437",
+    "matchKo": "대공원",
+    "en": "Seoul Grand Park"
+  },
+  {
+    "lineId": "4",
+    "code": "439",
+    "matchKo": "정부과천청사",
+    "en": "Government Complex Gwacheon"
+  },
+  {
+    "lineId": "5",
+    "code": "512",
+    "matchKo": "김포공항",
+    "en": "Gimpo Int'l Airport"
+  },
+  {
+    "lineId": "5",
+    "code": "523",
+    "matchKo": "영등포구청",
+    "en": "Yeongdeungpogu Office"
+  },
+  {
+    "lineId": "5",
+    "code": "524",
+    "matchKo": "영등포시장",
+    "en": "Yeongdeungpo Market"
+  },
+  {
+    "lineId": "5",
+    "code": "536",
+    "matchKo": "동대문역사문화공원",
+    "en": "Dongdaemun History & Culture Park(DDP)"
+  },
+  {
+    "lineId": "6",
+    "code": "619",
+    "matchKo": "월드컵경기장",
+    "en": "World Cup Stadium(Seongsan)"
+  },
+  {
+    "lineId": "6",
+    "code": "620",
+    "matchKo": "마포구청",
+    "en": "Mapogu Office"
+  },
+  {
+    "lineId": "6",
+    "code": "645",
+    "matchKo": "태릉입구",
+    "en": "Taereung"
+  },
+  {
+    "lineId": "7",
+    "code": "717",
+    "matchKo": "태릉입구",
+    "en": "Taereung"
+  },
+  {
+    "lineId": "7",
+    "code": "726",
+    "matchKo": "어린이대공원",
+    "en": "Children's Grand Park(Sejong Univ.)"
+  },
+  {
+    "lineId": "7",
+    "code": "730",
+    "matchKo": "강남구청",
+    "en": "Gangnamgu Office"
+  },
+  {
+    "lineId": "7",
+    "code": "734",
+    "matchKo": "고속터미널",
+    "en": "Express Bus Terminal"
+  },
+  {
+    "lineId": "7",
+    "code": "752",
+    "matchKo": "부천종합운동장",
+    "en": "Bucheon Stadium"
+  },
+  {
+    "lineId": "7",
+    "code": "755",
+    "matchKo": "부천시청",
+    "en": "Bucheon City Hall"
+  },
+  {
+    "lineId": "7",
+    "code": "761",
+    "matchKo": "석남",
+    "en": "Seongnam (Geobuk Market)"
+  },
+  {
+    "lineId": "8",
+    "code": "823",
+    "matchKo": "남한산성입구",
+    "en": "Namhansanseong(Seongnam Court & Prosecutors' Office)"
+  },
+  {
+    "lineId": "9",
+    "code": "902",
+    "matchKo": "김포공항",
+    "en": "Gimpo Int'l Airport"
+  },
+  {
+    "lineId": "9",
+    "code": "903",
+    "matchKo": "공항시장",
+    "en": "Airport Market"
+  },
+  {
+    "lineId": "9",
+    "code": "914",
+    "matchKo": "국회의사당",
+    "en": "National Assembly"
+  },
+  {
+    "lineId": "9",
+    "code": "923",
+    "matchKo": "고속터미널",
+    "en": "Express Bus Terminal"
+  },
+  {
+    "lineId": "9",
+    "code": "930",
+    "matchKo": "종합운동장",
+    "en": "Sports Complex"
+  },
+  {
+    "lineId": "9",
+    "code": "938",
+    "matchKo": "중앙보훈병원",
+    "en": "VHS Medical Center"
+  },
+  {
+    "lineId": "A",
+    "code": "A01",
+    "matchKo": "서울역",
+    "en": "Seoul Station"
+  },
+  {
+    "lineId": "A",
+    "code": "A05",
+    "matchKo": "김포공항",
+    "en": "Gimpo Int'l Airport"
+  },
+  {
+    "lineId": "A",
+    "code": "A09",
+    "matchKo": "공항화물청사",
+    "en": "Incheon Int'l Airport Cargo Terminal"
+  },
+  {
+    "lineId": "A",
+    "code": "A10",
+    "matchKo": "인천공항1터미널",
+    "en": "Incheon Int'l Airport Terminal 1"
+  },
+  {
+    "lineId": "A",
+    "code": "A11",
+    "matchKo": "인천공항2터미널",
+    "en": "Incheon Int'l Airport Terminal 2"
+  },
+  {
+    "lineId": "UI",
+    "code": "S111",
+    "matchKo": "솔밭공원",
+    "en": "Solbat Park"
+  },
+  {
+    "lineId": "UI",
+    "code": "S118",
+    "matchKo": "북한산보국문",
+    "en": "Bukhansan Bogungmun (Seokyeong Univ.)"
+  },
+  {
+    "lineId": "UI",
+    "code": "S119",
+    "matchKo": "정릉",
+    "en": "Jeongneung (Kookmin Univ.)"
+  },
+  {
+    "lineId": "1P",
+    "code": "P163",
+    "matchKo": "서정리",
+    "en": "Seojeong-ri"
+  },
+  {
+    "lineId": "1P",
+    "code": "P171",
+    "matchKo": "쌍용",
+    "en": "Ssangyong (Korea Nazarene Univ.)"
+  },
+  {
+    "lineId": "2C",
+    "code": "234-2",
+    "matchKo": "양천구청",
+    "en": "Yangcheon-gu Office"
+  },
+  {
+    "lineId": "5M",
+    "code": "P550",
+    "matchKo": "올림픽공원",
+    "zh": "奧林匹克公園",
+    "en": "Olympic Park (Korea National Sport University)"
+  },
+  {
+    "lineId": "DH",
+    "code": "K113",
+    "matchKo": "교대",
+    "zh": "釜山教育大學",
+    "en": "Busan Nat'l Univ. of Edu."
+  }
+];
+AUDITED_STATION_NAME_FIXES.forEach(fix => {
+  const line = LINES.find(item => item.id === fix.lineId);
+  if (!line) return;
+  const station = line.st.find(item => String(item[0]) === fix.code || item[1] === fix.matchKo);
+  if (!station) return;
+  if (fix.ko) station[1] = fix.ko;
+  if (fix.zh) station[2] = fix.zh;
+  if (fix.en) station[3] = fix.en;
+});
+/* END GENERATED STATION NAME AUDIT OVERRIDES */
+
 /* ---------- index ---------- */
 const LMAP = {}; LINES.forEach(l => LMAP[l.id] = l);
 const STATIONS = {};
