@@ -4,6 +4,7 @@
   "private": true,
   "description": "Korean metro station helper for Seoul and Busan with a reporting dashboard.",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   }
 }

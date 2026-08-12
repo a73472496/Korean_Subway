@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://bgwbdimfvvxapekdwwve.supabase.co wss://bgwbdimfvvxapekdwwve.supabase.co; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>管理後台｜KSW-METRO</title>
   <style>
     :root { --ink:#20302f; --muted:#647270; --line:rgba(255,255,255,.72); --bg:#edf4f3; --brand:#287c73; --brand-hover:#1e685f; --danger:#a84a4a; --glass:rgba(250,255,253,.34); --glass-shadow:0 18px 42px rgba(28,71,63,.12),0 2px 8px rgba(28,71,63,.05); }
@@ -13,6 +15,14 @@
     button { min-height:44px; border:1px solid rgba(21,93,84,.78); border-radius:8px; padding:10px 14px; cursor:pointer; background:var(--brand); color:white; font-weight:700; box-shadow:0 7px 16px rgba(25,100,90,.22),inset 0 1px 0 rgba(255,255,255,.18); } button:hover { background:var(--brand-hover); box-shadow:0 9px 18px rgba(25,100,90,.25),inset 0 1px 0 rgba(255,255,255,.18); } button.secondary { background:rgba(255,255,255,.82); color:var(--brand); border:1px solid rgba(156,190,181,.84); box-shadow:inset 0 1px 0 rgba(255,255,255,.84); } button.secondary:hover { background:rgba(242,250,248,.94); } button.danger { background:#fff5f4; color:var(--danger); border:1px solid #ebc8c4; box-shadow:none; } button.danger:hover { background:#fee8e6; }
     .hidden { display:none; } .report-head,.actions { display:flex; gap:10px; justify-content:space-between; align-items:start; flex-wrap:wrap; } .meta { color:var(--muted); font-size:.9rem; }
     .message { color:var(--danger); min-height:1.5em; } .tabs { display:flex; gap:8px; flex-wrap:wrap; } a { color:var(--brand); font-weight:700; } :focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
+    .report-data { display:grid; grid-template-columns:max-content minmax(0,1fr); gap:6px 14px; margin:14px 0; padding:12px; border:1px solid rgba(156,190,181,.5); border-radius:8px; background:rgba(255,255,255,.42); }
+    .report-data dt { color:var(--muted); font-size:.82rem; font-weight:700; } .report-data dd { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .stats-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:12px 0 18px; }
+    .metric { padding:15px; border:1px solid rgba(156,190,181,.5); border-radius:9px; background:rgba(255,255,255,.48); }
+    .metric span { display:block; color:var(--muted); font-size:.82rem; } .metric strong { display:block; margin-top:4px; font-size:2rem; line-height:1.1; }
+    .trend { width:100%; border-collapse:collapse; } .trend th,.trend td { padding:9px 6px; border-top:1px solid rgba(156,190,181,.4); text-align:left; }
+    .trend th:last-child,.trend td:last-child { text-align:right; } .stats-note { margin:12px 0 0; color:var(--muted); font-size:.82rem; }
+    @media (max-width:600px) { .report-data { grid-template-columns:1fr; gap:2px; } .report-data dd { margin-bottom:8px; } }
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .bar,.card { background:rgba(255,255,255,.92); } }
   </style>
 </head>
@@ -39,18 +49,53 @@
         <div><button id="refresh" class="secondary">重新整理</button> <button id="logout" class="danger">登出</button></div>
       </div>
       <p id="dashboardMessage" class="message"></p>
+      <section class="card" aria-labelledby="visitStatsTitle">
+        <h2 id="visitStatsTitle">來訪統計</h2>
+        <div class="stats-grid">
+          <div class="metric"><span>今日訪問次數</span><strong id="todayVisits">—</strong></div>
+          <div class="metric"><span>今日不重複訪客數</span><strong id="todayUnique">—</strong></div>
+        </div>
+        <h3>近 7 天</h3>
+        <table class="trend"><thead><tr><th scope="col">日期</th><th scope="col">不重複訪客</th></tr></thead><tbody id="visitTrend"><tr><td colspan="2" class="muted">載入中…</td></tr></tbody></table>
+        <p id="statsMessage" class="stats-note"></p>
+      </section>
       <div id="reports"></div>
     </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.111.0" integrity="sha384-fPWur1rx/DE6YtXP/x0MD6dd90RgnVsz5yX/DIg7CcVAnTBZsENWuIcpvVTM39ti" crossorigin="anonymous"></script>
   <script src="supabase-config.js"></script>
   <script src="supabase-client.js"></script>
   <script>
     const $ = selector => document.querySelector(selector);
     let client, reports = [], selectedStatus = 'all';
-    const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const message = (id, text = '') => $(id).textContent = text;
     const isAdmin = async () => { const { data, error } = await client.rpc('is_admin'); return !error && data === true; };
+    const node = (tag, className, text) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text != null) element.textContent = String(text);
+      return element;
+    };
+    async function loadStats() {
+      message('#statsMessage', '');
+      const { data, error } = await client.rpc('get_visit_stats');
+      if (error || !data) {
+        $('#todayVisits').textContent = '—'; $('#todayUnique').textContent = '—';
+        $('#visitTrend').replaceChildren(node('tr'));
+        const cell = node('td', 'muted', '目前無法載入統計。'); cell.colSpan = 2; $('#visitTrend tr').appendChild(cell);
+        message('#statsMessage', '請確認 Supabase 已套用最新版 schema。');
+        return;
+      }
+      $('#todayVisits').textContent = Number(data.today_visits || 0).toLocaleString('zh-TW');
+      $('#todayUnique').textContent = Number(data.today_unique || 0).toLocaleString('zh-TW');
+      const rows = Array.isArray(data.last_7_days) ? data.last_7_days : [];
+      $('#visitTrend').replaceChildren(...rows.map(item => {
+        const row = node('tr');
+        row.append(node('td', null, item.visit_date), node('td', null, Number(item.unique_visitors || 0).toLocaleString('zh-TW')));
+        return row;
+      }));
+      message('#statsMessage', '統計日期以韓國時間為準。同一瀏覽器分頁工作階段只計一次。');
+    }
     async function loadReports() {
       message('#dashboardMessage', '');
       const { data, error } = await client.from('reports').select('*').order('created_at', { ascending:false });
@@ -59,8 +104,31 @@
     }
     function render() {
       const shown = reports.filter(r => selectedStatus === 'all' || r.status === selectedStatus);
-      $('#reports').innerHTML = shown.length ? shown.map(r => `<article class="card" data-id="${r.id}"><div class="report-head"><div><h2>${esc(r.type)}</h2><p class="meta">${esc(r.station || '未填站名')} · ${new Date(r.created_at).toLocaleString('zh-TW')}</p></div><select class="status"><option value="new">新增</option><option value="doing">處理中</option><option value="done">已完成</option></select></div><p>${esc(r.body)}</p><p class="meta">聯絡方式：${esc(r.contact || '未提供')}</p><textarea class="note" placeholder="管理備註">${esc(r.note)}</textarea><div class="actions"><button class="save">儲存</button><button class="danger remove">刪除</button></div></article>`).join('') : '<section class="card muted">目前沒有回報。</section>';
-      shown.forEach(r => { const card = document.querySelector(`[data-id="${r.id}"]`); card.querySelector('.status').value = r.status; card.querySelector('.save').onclick = () => save(r.id, card); card.querySelector('.remove').onclick = () => remove(r.id); });
+      const fieldLabels = {
+        station:'車站', station_code:'站號', line_id:'路線', error_language:'錯誤語言', current_value:'目前內容',
+        suggested_value:'建議寫法', origin_station:'起點', destination_station:'終點', route_snapshot:'系統路線／時間',
+        route_issue_type:'路線問題', displayed_fare:'系統票價', user_reported_fare:'實際票價', payment_type:'付款方式',
+        has_location_permission:'定位權限', facility_issue_type:'設施問題', page_area:'發生頁面', device_type:'裝置',
+        search_snapshot:'搜尋結果', body:'說明', contact:'聯絡方式', page:'頁面'
+      };
+      if (!shown.length) { $('#reports').replaceChildren(node('section', 'card muted', '目前沒有回報。')); return; }
+      $('#reports').replaceChildren(...shown.map(report => {
+        const card = node('article', 'card');
+        const head = node('div', 'report-head'), heading = node('div');
+        heading.append(node('h2', null, report.type), node('p', 'meta', `${new Date(report.created_at).toLocaleString('zh-TW')} · ${report.category_key || '舊版回報'}`));
+        const status = node('select', 'status');
+        [['new','新增'],['doing','處理中'],['done','已完成']].forEach(([value, label]) => { const option = node('option', null, label); option.value = value; status.appendChild(option); });
+        status.value = report.status; head.append(heading, status);
+        const data = node('dl', 'report-data');
+        Object.entries(fieldLabels).filter(([key]) => report[key] !== '' && report[key] != null).forEach(([key, label]) => data.append(node('dt', null, label), node('dd', null, report[key])));
+        const note = node('textarea', 'note'); note.placeholder = '管理備註'; note.value = report.note || '';
+        const actions = node('div', 'actions'), saveButton = node('button', 'save', '儲存'), removeButton = node('button', 'danger remove', '刪除');
+        saveButton.type = removeButton.type = 'button';
+        saveButton.onclick = () => save(report.id, card); removeButton.onclick = () => remove(report.id);
+        actions.append(saveButton, removeButton);
+        card.append(head, data, node('p', 'meta', `瀏覽器：${report.user_agent || '未提供'}`), note, actions);
+        return card;
+      }));
     }
     async function save(id, card) {
       const { error } = await client.from('reports').update({ status:card.querySelector('.status').value, note:card.querySelector('.note').value, updated_at:new Date().toISOString() }).eq('id', id);
@@ -69,8 +137,8 @@
     async function remove(id) { if (!confirm('要刪除這則回報嗎？')) return; const { error } = await client.from('reports').delete().eq('id', id); if (error) return message('#dashboardMessage', '刪除沒有成功，請再試一次。'); await loadReports(); }
     $('#loginForm').onsubmit = async event => { event.preventDefault(); message('#loginMessage', ''); const { error } = await client.auth.signInWithPassword({ email:$('#email').value, password:$('#password').value }); if (error) return message('#loginMessage', '登入沒有成功，請確認 Email、密碼與網路連線後再試。'); await showDashboard(); };
     $('.filter').onclick = () => {}; document.querySelectorAll('.filter').forEach(btn => btn.onclick = () => { selectedStatus = btn.dataset.status; render(); });
-    $('#refresh').onclick = loadReports; $('#logout').onclick = async () => { await client.auth.signOut(); $('#dashboard').classList.add('hidden'); $('#login').classList.remove('hidden'); };
-    async function showDashboard() { if (!(await isAdmin())) { await client.auth.signOut(); return message('#loginMessage', '這個帳號沒有後台權限。'); } $('#login').classList.add('hidden'); $('#dashboard').classList.remove('hidden'); await loadReports(); }
+    $('#refresh').onclick = () => Promise.all([loadStats(), loadReports()]); $('#logout').onclick = async () => { await client.auth.signOut(); $('#dashboard').classList.add('hidden'); $('#login').classList.remove('hidden'); };
+    async function showDashboard() { if (!(await isAdmin())) { await client.auth.signOut(); return message('#loginMessage', '這個帳號沒有後台權限。'); } $('#login').classList.add('hidden'); $('#dashboard').classList.remove('hidden'); await Promise.all([loadStats(), loadReports()]); }
     (async () => { try { client = await window.supabaseReady; const { data:{session} } = await client.auth.getSession(); if (session) await showDashboard(); } catch (error) { message('#loginMessage', '系統暫時無法啟動，請重新整理後再試。'); } })();
   </script>
 </body>

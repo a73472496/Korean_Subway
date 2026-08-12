@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://bgwbdimfvvxapekdwwve.supabase.co wss://bgwbdimfvvxapekdwwve.supabase.co https://cdn.jsdelivr.net https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃</title>
 <meta name="description" content="KSW-METRO 提供首爾與釜山地鐵中文站名、韓文、拼音、站號、目前位置、路線規劃與轉乘資訊，讓旅遊搭乘地鐵更容易。">
 <meta name="robots" content="index,follow">
@@ -286,8 +288,8 @@ body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,
 .card:hover{border-color:rgba(255,255,255,.92);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),inset 0 -1px 0 rgba(123,174,162,.12),0 22px 48px rgba(28,71,63,.15),0 2px 8px rgba(28,71,63,.05);transform:translateY(-1px)}
 #location-panel{background:linear-gradient(135deg,rgba(237,253,248,.66),rgba(255,255,255,.38) 58%,rgba(239,250,247,.32));border-color:rgba(255,255,255,.76)}
 .fac,.report-hint,.dist,.stat,.ride{background:rgba(255,255,255,.34);border-color:rgba(255,255,255,.60);box-shadow:inset 0 1px 0 rgba(255,255,255,.48)}
-.timing-note{margin:8px 0 14px;color:var(--text-muted);font-size:11px;line-height:1.65}.timing-note strong{margin-right:5px;color:var(--text);font-size:11px}.ride-duration{margin-left:auto;color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:800;white-space:nowrap}.transfer-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.transfer-times span{padding:3px 7px;border:1px solid rgba(211,130,116,.48);border-radius:4px;background:rgba(255,255,255,.52);color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
-input[type=search],input[type=text],input[type=email],select,textarea{background:rgba(255,255,255,.88);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.90);color:var(--text)}.field label{background:rgba(250,255,253,.90)}
+.ride-duration{margin-left:auto;color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:800;white-space:nowrap}.transfer-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.transfer-times span{padding:3px 7px;border:1px solid rgba(211,130,116,.48);border-radius:4px;background:rgba(255,255,255,.52);color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
+input[type=search],input[type=text],input[type=email],input[type=number],select,textarea{background:rgba(255,255,255,.88);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.90);color:var(--text)}.field label{background:rgba(250,255,253,.90)}
 .swap,.ghost,.mini,.fac a,.fac button{background:rgba(255,255,255,.82);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.84);color:var(--accent)}
 .locate,.go{border:1px solid rgba(21,93,84,.78);background:#287c73;box-shadow:0 7px 16px rgba(25,100,90,.22),inset 0 1px 0 rgba(255,255,255,.18)}.locate:hover,.go:hover{background:#1e685f;box-shadow:0 9px 18px rgba(25,100,90,.25),inset 0 1px 0 rgba(255,255,255,.18)}
 @media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.webp');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
@@ -308,6 +310,7 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 .photo-sample-group.transfer .photo-sample-pair{grid-template-columns:1fr}
 .photo-samples{grid-template-columns:1fr}.photo-sample-group.transfer{grid-column:auto}
 @media (max-width:620px){.photo-sample-pair{grid-template-columns:1fr}.photo-sample-visual{height:102px}.photo-sample.column .photo-sample-visual{height:156px}.photo-sample-group.transfer .photo-sample-visual{height:116px}.photo-sample img,.photo-sample.column img,.photo-sample.column.bad img{object-fit:contain;object-position:center}.photo-sample figcaption{padding:5px 2px 2px}.photo-sample figcaption strong{font-size:10.5px}.photo-sample figcaption span{font-size:9px}}
+#report .report-grid{grid-template-columns:1fr!important}.report-intro{margin:-4px 0 18px;color:var(--text-muted);font-size:13px}.report-dynamic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.report-dynamic .field-wide{grid-column:1/-1}.report-dynamic input[type=number]{width:100%;min-height:48px;padding:11px 12px;border:1px solid rgba(156,190,181,.84);border-radius:8px;font:16px var(--sans)}.report-dynamic input[type=number]:focus{border-color:var(--accent);outline:3px solid rgba(40,124,115,.18)}.report-choice{margin:0 0 16px;padding:0;border:0}.report-choice legend{margin-bottom:8px;color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.05em}.report-options{display:flex;flex-wrap:wrap;gap:8px}.report-option{position:relative}.report-option input{position:absolute;opacity:0;pointer-events:none}.report-option span{display:inline-flex;align-items:center;min-height:42px;padding:8px 12px;border:1px solid rgba(156,190,181,.84);border-radius:7px;background:rgba(255,255,255,.82);color:var(--text-muted);font-size:13px;font-weight:700;cursor:pointer}.report-option input:checked+span{border-color:var(--accent);background:var(--accent);color:#fff}.report-option input:focus-visible+span{outline:3px solid rgba(40,124,115,.22);outline-offset:2px}.report-readonly{min-height:48px;padding:11px 12px;border:1px solid rgba(171,207,198,.72);border-radius:8px;background:rgba(244,249,248,.64);color:var(--text-muted);font-size:13px;white-space:pre-wrap}.report-help{margin:-8px 0 14px;color:var(--text-faint);font-size:11px}.report-required{color:#a84a4a}.report-entry{display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin-top:12px;padding:8px 12px;border:1px solid var(--border-strong);border-radius:7px;background:rgba(255,255,255,.76);color:var(--accent);font:700 12px var(--sans);cursor:pointer}.report-entry:hover{border-color:var(--accent);background:rgba(242,250,248,.92)}.report-station-field{position:relative}.report-station-field .sugg{top:calc(100% - 12px)}.report-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.report-context-note{margin:0 0 16px;padding:10px 12px;border-left:3px solid var(--accent);background:rgba(244,249,248,.7);color:var(--text-muted);font-size:12px}.report-grid>.field{grid-column:1/-1}@media(max-width:620px){.report-dynamic{grid-template-columns:1fr}.report-dynamic .field-wide{grid-column:1}.report-options{display:grid;grid-template-columns:1fr 1fr}.report-option span{width:100%;justify-content:center;text-align:center}.report-actions{display:grid;grid-template-columns:1fr}.report-actions>*{width:100%}}
 </style>
 </head>
 <body>
@@ -370,22 +373,22 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
 
   <section class="card" id="report">
     <div class="card-t">問題回報</div>
+    <p class="report-intro">先選問題類型，我們只會請你填處理這類問題需要的資訊。</p>
     <div class="report-grid">
       <div class="field"><label for="rType">類型</label>
         <select id="rType">
-          <option value="站名或翻譯錯誤">站名或翻譯錯誤</option>
-          <option value="路線規劃有誤">路線規劃有誤</option>
-          <option value="定位結果不準">定位結果不準</option>
-          <option value="電梯／廁所資訊">電梯／廁所資訊</option>
-          <option value="頁面操作問題">頁面操作問題</option>
-          <option value="其他建議">其他建議</option>
+          <option value="station_translation">站名／翻譯錯誤</option>
+          <option value="route_result">路線規劃結果錯誤</option>
+          <option value="fare">票價錯誤</option>
+          <option value="location">定位／附近車站不準</option>
+          <option value="facility">電梯／廁所／無障礙資訊</option>
+          <option value="ui">頁面操作／顯示問題</option>
+          <option value="other">其他建議</option>
         </select></div>
-      <div class="field"><label for="rStation">相關車站</label>
-        <input type="text" id="rStation" placeholder="例如 明洞 / 경복궁 / 424，可留空" autocomplete="off"></div>
-      <div class="field"><label for="rBody">說明</label>
-        <textarea id="rBody" placeholder="請描述你遇到的問題。如果路線有誤，請寫起點、終點和看到的結果。"></textarea></div>
-      <div class="field"><label for="rContact">聯絡方式</label>
-        <input type="email" id="rContact" placeholder="Email，可留空" autocomplete="email"></div>
+      <div id="reportDynamic" class="report-dynamic field-wide"></div>
+      <div class="field"><label for="rContact">聯絡方式（選填）</label>
+        <input type="text" id="rContact" placeholder="Email 或其他方便聯絡的方式" autocomplete="email"></div>
+      <div class="report-honeypot" aria-hidden="true"><label for="rWebsite">網站</label><input id="rWebsite" type="text" tabindex="-1" autocomplete="off"></div>
     </div>
     <div class="report-actions">
       <button class="go" id="sendReport">送出回報</button>
@@ -1027,6 +1030,12 @@ function show(st, meters, accuracy) {
     $('#fFrom').scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
   txt.appendChild(setTo);
+  const reportButton = el('button', 'mini', '回報這個站名');
+  reportButton.onclick = () => openReport('station_translation', {
+    source: 'station_search', station: st,
+    searchSnapshot: `查看車站：${stationLabel(st)}；站號：${stationCodes(st)}`
+  });
+  txt.appendChild(reportButton);
   hit.append(rds, txt);
   wrap.appendChild(hit);
   st.on.forEach(o => wrap.appendChild(stripFor(o.line, o.si)));
@@ -1162,6 +1171,20 @@ function routeMatch(q, which) {
   const city = which === 'to' && PICK.from ? PICK.from.city : null;
   return match(q).filter(station => !city || station.city === city);
 }
+const stationLabel = station => station ? `${station.zh}（${station.ko}）` : '';
+const stationCodes = station => station ? station.on.map(item => item.code).join('、') : '';
+const stationLines = station => station ? station.on.map(item => item.line).join('、') : '';
+const REPORT_CONTEXT = {
+  source: '', station: null, from: null, to: null, routeSnapshot: '', displayedFare: '', searchSnapshot: ''
+};
+function openReport(category, context = {}) {
+  Object.assign(REPORT_CONTEXT, {
+    source: '', station: null, from: null, to: null, routeSnapshot: '', displayedFare: '', searchSnapshot: ''
+  }, context);
+  $('#rType').value = category;
+  renderReportFields();
+  $('#report').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+}
 $('#q').oninput = e => {
   const box = $('#qres'); box.replaceChildren();
   if (!e.target.value.trim()) return;
@@ -1170,6 +1193,13 @@ $('#q').oninput = e => {
   const w = el('div'); w.style.marginTop = '8px';
   hits.forEach(s => w.appendChild(row(s)));
   box.appendChild(w);
+  const reportButton = el('button', 'report-entry', '回報這次搜尋結果');
+  reportButton.onclick = () => openReport('station_translation', {
+    source: 'station_search',
+    station: hits.length === 1 ? hits[0] : null,
+    searchSnapshot: `搜尋「${e.target.value.trim()}」；顯示：${hits.map(stationLabel).join('、')}`
+  });
+  box.appendChild(reportButton);
 };
 
 /* ---------- route planner ---------- */
@@ -1307,17 +1337,22 @@ $('#go').onclick = () => {
   const transferWait = transfers.reduce((sum, transfer) => sum + transfer.wait, 0);
   const totalMinutes = wholeMinutes(inTrain + startWait + stationWalk + transferWait);
   const fare = fareInfo(km, real);
+  const routeSnapshot = [
+    `${stationLabel(a)} → ${stationLabel(b)}`,
+    `總計約 ${totalMinutes} 分鐘；${stats(stops)}；轉乘 ${transferCount} 次`,
+    real.map(leg => {
+      const line = LINES[leg.li];
+      const first = line.st[leg.idx[0]], last = line.st[leg.idx[leg.idx.length - 1]];
+      return `${line.zh}：${first[2]} ${first[0]} → ${last[2]} ${last[0]}`;
+    }).join('\n')
+  ].join('\n');
+  Object.assign(REPORT_CONTEXT, { from: a, to: b, routeSnapshot, displayedFare: fare.label });
 
   const sum = el('div', 'summary');
   const stat = (lbl, v) => { const d = el('div', 'stat'); d.append(el('span', null, lbl), document.createTextNode(v)); return d; };
   sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('路程', stats(stops) + '・轉乘 ' + transferCount + ' 次'), stat('交通卡', fare.label));
   box.appendChild(sum);
-  const timing = el('div', 'timing-note');
-  timing.append(el('strong', null, '時間拆解'), document.createTextNode(' 行駛約 ' + wholeMinutes(inTrain) + ' 分鐘＋起點等候約 ' + startWait + ' 分鐘'));
-  if (transferCount) timing.append(document.createTextNode(' ＋ 轉乘預留約 ' + (stationWalk + transferWait) + ' 分鐘（站內步行 ' + stationWalk + ' 分鐘、等候 ' + transferWait + ' 分鐘）'));
-  timing.append(document.createTextNode('。依目前韓國時段的班距估算，非即時到站時間。'));
-  timing.appendChild(el('span', 'fare-note', fare.note));
-  box.appendChild(timing);
+  box.appendChild(el('div', 'fare-note', fare.note));
 
   const holder = el('div');
   real.forEach((l, k) => {
@@ -1328,6 +1363,11 @@ $('#go').onclick = () => {
   const lastLeg = real[real.length - 1], lastL = LINES[lastLeg.li];
   holder.appendChild(endBlock(lastL, lastL.st[lastLeg.idx.slice(-1)[0]]));
   box.appendChild(holder);
+  const reportButton = el('button', 'report-entry', '回報這個規劃結果');
+  reportButton.onclick = () => openReport('route_result', {
+    source: 'route_planner', from: a, to: b, routeSnapshot, displayedFare: fare.label
+  });
+  box.appendChild(reportButton);
   box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
 };
 function stats(n) { return n + ' 站'; }
@@ -1380,6 +1420,8 @@ function loadTesseract() {
   tesseractLoader = new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js';
+    script.integrity = 'sha384-r1ru3tcf6FhnCFR4B7pIFG+BhFF9LlFtz/P1y4pblWn3AGs9y3lBx5SKLNf4+rED';
+    script.crossOrigin = 'anonymous';
     script.async = true;
     script.onload = () => {
       if (window.Tesseract) resolve(window.Tesseract);
@@ -1927,14 +1969,11 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
   const content = el('div', 'photo-guide-content');
   const photoAim = el('p', 'photo-aim');
   if (platformContext.loop) {
-    photoAim.append(el('strong', null, '拍什麼：'), document.createTextNode('拍月台上有箭頭與下一站站名的方向牌，不要拍出口牌。'));
+    photoAim.append(el('strong', null, '請拍：'), document.createTextNode('整塊方向牌，讓箭頭和兩側站名一起入鏡。不要拍出口牌。'));
   } else {
-    const opposite = platformContext.stations[platformContext.forward ? 0 : platformContext.stations.length - 1];
     photoAim.append(
-      el('strong', null, '拍什麼：'),
-      document.createTextNode('吊掛、柱面或牆面方向牌都可以，重點是箭頭和站名一起入鏡。'),
-      document.createTextNode('拍「往 ' + platformContext.terminal[2] + '（' + platformContext.terminal[0] + '）」的月台方向牌。'),
-      document.createTextNode('牌上有「' + platformContext.next[2] + '／' + platformContext.off[2] + '」也可以；不要拍「往 ' + opposite[2] + '」或出口牌。')
+      el('strong', null, '請拍：'),
+      document.createTextNode('「往 ' + platformContext.terminal[2] + '」的整塊方向牌，讓箭頭和兩側站名一起入鏡。不要拍出口牌。')
     );
   }
   const examples = el('div', 'photo-samples');
@@ -2161,57 +2200,269 @@ function endBlock(L, s) {
 }
 
 /* ---------- issue report ---------- */
+const REPORT_TYPES = {
+  station_translation: '站名／翻譯錯誤', route_result: '路線規劃結果錯誤', fare: '票價錯誤',
+  location: '定位／附近車站不準', facility: '電梯／廁所／無障礙資訊',
+  ui: '頁面操作／顯示問題', other: '其他建議'
+};
+const REPORT_PICK = { station: null, from: null, to: null };
+const reportValue = id => document.getElementById(id)?.value.trim() || '';
+function reportField(id, label, options = {}) {
+  const wrap = el('div', 'field' + (options.wide ? ' field-wide' : '') + (options.station ? ' report-station-field' : ''));
+  const caption = el('label', null, label);
+  caption.htmlFor = id;
+  if (options.required) caption.appendChild(el('span', 'report-required', ' ＊'));
+  const input = options.textarea ? document.createElement('textarea') : document.createElement('input');
+  input.id = id;
+  input.type = options.type || 'text';
+  input.placeholder = options.placeholder || '';
+  input.autocomplete = options.autocomplete || 'off';
+  if (options.value != null) input.value = options.value;
+  if (options.min != null) input.min = options.min;
+  wrap.append(caption, input);
+  return { wrap, input };
+}
+function reportReadonly(id, label, value = '') {
+  const wrap = el('div', 'field field-wide');
+  const caption = el('label', null, label); caption.htmlFor = id;
+  const output = el('div', 'report-readonly', value || '選好欄位後會自動顯示');
+  output.id = id; output.setAttribute('role', 'status');
+  wrap.append(caption, output);
+  return { wrap, output };
+}
+function reportChoice(name, label, items, required = false) {
+  const fieldset = el('fieldset', 'report-choice field-wide');
+  const legend = el('legend', null, label);
+  if (required) legend.appendChild(el('span', 'report-required', ' ＊'));
+  const options = el('div', 'report-options');
+  items.forEach(([value, text]) => {
+    const option = el('label', 'report-option');
+    const input = document.createElement('input'); input.type = 'radio'; input.name = name; input.value = value;
+    option.append(input, el('span', null, text)); options.appendChild(option);
+  });
+  fieldset.append(legend, options);
+  return fieldset;
+}
+function setReportStation(key, station, input) {
+  REPORT_PICK[key] = station;
+  input.value = stationLabel(station);
+  if (key === 'station') updateTranslationCurrentValue();
+  if (key === 'from' || key === 'to') updateReportRouteSnapshot();
+}
+function attachReportStation(input, key, optional = false) {
+  let list = null, timer = 0, composing = false;
+  const close = () => { if (list) { list.remove(); list = null; } };
+  const render = value => {
+    if (input.value !== value || !value.trim()) return;
+    const pairedCity = key === 'to' && REPORT_PICK.from ? REPORT_PICK.from.city : null;
+    const hits = match(value).filter(station => !pairedCity || station.city === pairedCity).slice(0, 6);
+    if (!hits.length) return;
+    list = el('div', 'sugg');
+    hits.forEach(station => {
+      const button = row(station);
+      button.onclick = () => { setReportStation(key, station, input); close(); };
+      list.appendChild(button);
+    });
+    input.parentNode.appendChild(list);
+  };
+  input.oninput = event => {
+    REPORT_PICK[key] = null; close(); clearTimeout(timer);
+    if (!input.value.trim()) { if (!optional) updateReportRouteSnapshot(); return; }
+    if (!composing && !event.isComposing) { const value = input.value; timer = setTimeout(() => render(value), 120); }
+  };
+  input.addEventListener('compositionstart', () => { composing = true; clearTimeout(timer); });
+  input.addEventListener('compositionend', () => { composing = false; const value = input.value; timer = setTimeout(() => render(value), 120); });
+  input.onblur = () => setTimeout(close, 180);
+}
+function calculateReportRoute(from, to) {
+  if (!from || !to) return null;
+  if (from.city !== to.city) return { snapshot: '起點與終點位於不同城市，系統無法規劃。', fare: '' };
+  if (from.ko === to.ko) return { snapshot: '起點與終點相同。', fare: '' };
+  const result = plan(from, to);
+  if (!result) return { snapshot: '系統找不到可用路線。', fare: '' };
+  const legs = [];
+  result.path.forEach(id => {
+    const { li, si } = NODE[id], last = legs[legs.length - 1];
+    if (last && last.li === li) last.idx.push(si); else legs.push({ li, idx: [si] });
+  });
+  const real = legs.filter(leg => leg.idx.length > 1);
+  let km = 0, stops = 0;
+  real.forEach(leg => {
+    const line = LINES[leg.li];
+    for (let i = 0; i + 1 < leg.idx.length; i++) {
+      const left = line.st[leg.idx[i]], right = line.st[leg.idx[i + 1]];
+      km += Number.isFinite(left[4]) && Number.isFinite(left[5]) && Number.isFinite(right[4]) && Number.isFinite(right[5])
+        ? dist(left[4], left[5], right[4], right[5]) / 1000 : .9;
+      stops++;
+    }
+  });
+  km *= 1.15;
+  const transferCount = Math.max(0, real.length - 1);
+  const inTrain = real.reduce((sum, leg) => sum + legMinutes(LINES[leg.li], leg.idx), 0);
+  const startWait = real.length ? expectedWait(LINES[real[0].li]) : 0;
+  const transfers = real.slice(0, -1).map((leg, position) => {
+    const line = LINES[leg.li], off = line.st[leg.idx[leg.idx.length - 1]], station = stationFor(line, off);
+    return { walk: transferWalk(station), wait: expectedWait(LINES[real[position + 1].li]) };
+  });
+  const total = wholeMinutes(inTrain + startWait + transfers.reduce((sum, item) => sum + item.walk + item.wait, 0));
+  const fare = fareInfo(km, real);
+  const detail = real.map(leg => {
+    const line = LINES[leg.li], first = line.st[leg.idx[0]], last = line.st[leg.idx[leg.idx.length - 1]];
+    return `${line.zh}：${first[2]} ${first[0]} → ${last[2]} ${last[0]}`;
+  }).join('\n');
+  return { snapshot: `${stationLabel(from)} → ${stationLabel(to)}\n總計約 ${total} 分鐘；${stats(stops)}；轉乘 ${transferCount} 次\n${detail}`, fare: fare.label };
+}
+function updateReportRouteSnapshot() {
+  const snapshot = $('#rRouteSnapshot'), fare = $('#rDisplayedFare');
+  if (!snapshot && !fare) return;
+  const calculated = calculateReportRoute(REPORT_PICK.from, REPORT_PICK.to);
+  const text = calculated?.snapshot || REPORT_CONTEXT.routeSnapshot || '選好起點與終點後會自動顯示';
+  if (snapshot) snapshot.textContent = text;
+  if (fare) fare.textContent = calculated?.fare || REPORT_CONTEXT.displayedFare || '選好起點與終點後會自動顯示';
+}
+function updateTranslationCurrentValue() {
+  const output = $('#rCurrentValue'); if (!output) return;
+  const station = REPORT_PICK.station, language = document.querySelector('input[name="rErrorLanguage"]:checked')?.value;
+  if (!station || !language) { output.textContent = '選好車站與錯誤語言後會自動顯示'; return; }
+  const values = { zh: station.zh, ko: station.ko, en: station.rom, station_code: stationCodes(station) };
+  output.textContent = values[language] || '';
+}
+function appendReportStation(container, id, label, key, required, initial) {
+  const field = reportField(id, label, { required, station: true, placeholder: '輸入中文、韓文、拼音或站號' });
+  container.appendChild(field.wrap); attachReportStation(field.input, key, !required);
+  if (initial) setReportStation(key, initial, field.input);
+  return field.input;
+}
+function appendReportBody(container, required, minimum = 1, placeholder = '請描述你遇到的問題。') {
+  const field = reportField('rBody', required ? '說明' : '說明（選填）', { required, textarea: true, wide: true, placeholder });
+  field.input.dataset.minimum = String(minimum); container.appendChild(field.wrap);
+}
+function renderReportFields() {
+  const type = $('#rType').value, box = $('#reportDynamic');
+  box.replaceChildren(); REPORT_PICK.station = REPORT_PICK.from = REPORT_PICK.to = null;
+  if (REPORT_CONTEXT.source) box.appendChild(el('div', 'report-context-note field-wide', REPORT_CONTEXT.source === 'route_planner' ? '已帶入剛才的路線規劃結果。' : '已帶入剛才的站名搜尋結果。'));
+  if (type === 'station_translation') {
+    appendReportStation(box, 'rStation', '車站', 'station', true, REPORT_CONTEXT.station);
+    const choices = reportChoice('rErrorLanguage', '錯誤語言', [['zh','中文'],['ko','韓文'],['en','英文'],['station_code','站號']], true);
+    choices.addEventListener('change', updateTranslationCurrentValue); box.appendChild(choices);
+    box.appendChild(reportReadonly('rCurrentValue', '目前顯示的內容').wrap);
+    box.appendChild(reportField('rSuggestedValue', '你認為正確的寫法（選填）', { wide: true, placeholder: '不知道正確寫法也可以留空' }).wrap);
+    appendReportBody(box, true, 4, '請簡單說明哪裡不正確，至少 4 個字。');
+  } else if (type === 'route_result' || type === 'fare') {
+    appendReportStation(box, 'rFrom', '起點', 'from', true, REPORT_CONTEXT.from);
+    appendReportStation(box, 'rTo', '終點', 'to', true, REPORT_CONTEXT.to);
+    if (type === 'route_result') {
+      box.appendChild(reportReadonly('rRouteSnapshot', '系統顯示的路線／時間', REPORT_CONTEXT.routeSnapshot).wrap);
+      box.appendChild(reportChoice('rRouteIssueType', '問題類型', [['not_shortest','路線不是最短'],['too_many_transfers','轉乘次數過多'],['unreasonable_time','時間明顯不合理'],['other','其他']], true));
+      appendReportBody(box, true, 1, '請說明你覺得哪一段有問題。');
+    } else {
+      box.appendChild(reportReadonly('rDisplayedFare', '系統顯示金額', REPORT_CONTEXT.displayedFare).wrap);
+      box.appendChild(reportField('rUserFare', '實際金額（選填）', { type: 'number', min: 0, placeholder: '例如 1550' }).wrap);
+      box.appendChild(reportChoice('rPaymentType', '交通卡類型（選填）', [['transit_card','一般交通卡'],['cash','現金'],['other','其他']]));
+      appendReportBody(box, false, 0, '可補充票種、搭乘日期或現場看到的資訊。');
+    }
+    updateReportRouteSnapshot();
+  } else if (type === 'location') {
+    appendReportStation(box, 'rStation', '車站（選填）', 'station', false, REPORT_CONTEXT.station);
+    box.appendChild(reportChoice('rLocationPermission', '是否已允許瀏覽器定位權限', [['yes','是'],['no','否'],['unsure','不確定']], true));
+    appendReportBody(box, true, 1, '請說明你當時的位置與網站顯示的車站。');
+  } else if (type === 'facility') {
+    appendReportStation(box, 'rStation', '車站', 'station', true, REPORT_CONTEXT.station);
+    box.appendChild(reportChoice('rFacilityIssueType', '問題類型', [['cannot_open','連結打不開'],['wrong_content','連結內容錯誤'],['outdated','資訊過時'],['other','其他']], true));
+    appendReportBody(box, false, 0, '可補充設施名稱、出口或你看到的畫面。');
+  } else if (type === 'ui') {
+    box.appendChild(reportChoice('rPageArea', '發生頁面', [['home','首頁'],['station_search','找站名'],['route_planner','路線規劃'],['report_form','回報表單'],['other','其他']], true));
+    box.appendChild(reportChoice('rDeviceType', '裝置類型', [['mobile','手機'],['tablet','平板'],['desktop','電腦']], true));
+    appendReportBody(box, true, 4, '請描述按了什麼、看到什麼，至少 4 個字。');
+  } else {
+    appendReportBody(box, true, 4, '請寫下你的建議，至少 4 個字。');
+  }
+}
+function reportSelected(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+function reportPayload() {
+  const category = $('#rType').value, station = REPORT_PICK.station;
+  const calculated = calculateReportRoute(REPORT_PICK.from, REPORT_PICK.to);
+  return {
+    type: REPORT_TYPES[category], category_key: category,
+    station: stationLabel(station), station_code: stationCodes(station), line_id: stationLines(station),
+    error_language: reportSelected('rErrorLanguage'), current_value: $('#rCurrentValue')?.textContent || '',
+    suggested_value: reportValue('rSuggestedValue'), origin_station: stationLabel(REPORT_PICK.from),
+    destination_station: stationLabel(REPORT_PICK.to), route_snapshot: calculated?.snapshot || REPORT_CONTEXT.routeSnapshot || '',
+    route_issue_type: reportSelected('rRouteIssueType'), displayed_fare: calculated?.fare || REPORT_CONTEXT.displayedFare || '',
+    user_reported_fare: reportValue('rUserFare') === '' ? null : Number(reportValue('rUserFare')),
+    payment_type: reportSelected('rPaymentType'), has_location_permission: reportSelected('rLocationPermission'),
+    facility_issue_type: reportSelected('rFacilityIssueType'), page_area: reportSelected('rPageArea'),
+    device_type: reportSelected('rDeviceType'), search_snapshot: REPORT_CONTEXT.searchSnapshot || '',
+    body: reportValue('rBody'), contact: $('#rContact').value.trim(), page: location.href,
+    user_agent: navigator.userAgent, honeypot: $('#rWebsite').value
+  };
+}
+function focusReport(id, message) {
+  reportStatus(message, false); const target = document.getElementById(id) || document.querySelector(`[name="${id}"]`); target?.focus(); return false;
+}
+function validateReport() {
+  const type = $('#rType').value, body = reportValue('rBody');
+  if ($('#rWebsite').value) return focusReport('rType', '無法送出，請重新整理後再試。');
+  if (type === 'station_translation') {
+    if (!REPORT_PICK.station) return focusReport('rStation', '請從建議清單選擇車站。');
+    if (!reportSelected('rErrorLanguage')) return focusReport('rErrorLanguage', '請選擇錯誤的是中文、韓文、英文或站號。');
+    if (body.length < 4) return focusReport('rBody', '請用至少 4 個字說明哪裡不正確。');
+  } else if (type === 'route_result' || type === 'fare') {
+    if (!REPORT_PICK.from) return focusReport('rFrom', '請從建議清單選擇起點。');
+    if (!REPORT_PICK.to) return focusReport('rTo', '請從建議清單選擇終點。');
+    if (REPORT_PICK.from.city !== REPORT_PICK.to.city) return focusReport('rTo', '起點與終點必須在同一城市。');
+    if (type === 'route_result' && !reportSelected('rRouteIssueType')) return focusReport('rRouteIssueType', '請選擇路線規劃的問題類型。');
+    if (type === 'route_result' && !body) return focusReport('rBody', '請簡單說明哪一段有問題。');
+  } else if (type === 'location') {
+    if (!reportSelected('rLocationPermission')) return focusReport('rLocationPermission', '請選擇是否已允許定位權限。');
+    if (!body) return focusReport('rBody', '請說明你當時的位置與網站顯示的車站。');
+  } else if (type === 'facility') {
+    if (!REPORT_PICK.station) return focusReport('rStation', '請從建議清單選擇車站。');
+    if (!reportSelected('rFacilityIssueType')) return focusReport('rFacilityIssueType', '請選擇設施資訊的問題類型。');
+  } else if (type === 'ui') {
+    if (!reportSelected('rPageArea')) return focusReport('rPageArea', '請選擇發生問題的頁面。');
+    if (!reportSelected('rDeviceType')) return focusReport('rDeviceType', '請選擇使用的裝置類型。');
+    if (body.length < 4) return focusReport('rBody', '請用至少 4 個字描述操作問題。');
+  } else if (body.length < 4) return focusReport('rBody', '請寫下至少 4 個字的建議。');
+  return true;
+}
 function reportText() {
-  const type = $('#rType').value;
-  const station = $('#rStation').value.trim() || '未填';
-  const body = $('#rBody').value.trim();
-  const contact = $('#rContact').value.trim() || '未填';
-  return [
-    'KSW-METRO 問題回報',
-    '',
-    '類型：' + type,
-    '相關車站：' + station,
-    '說明：',
-    body || '未填',
-    '',
-    '聯絡方式：' + contact,
-    '頁面：' + location.href,
-    '時間：' + new Date().toLocaleString('zh-Hant', { hour12: false }),
-    '瀏覽器：' + navigator.userAgent
-  ].join('\n');
+  const payload = reportPayload();
+  const labels = [
+    ['類型', payload.type], ['車站', payload.station], ['錯誤語言', payload.error_language],
+    ['目前內容', payload.current_value], ['建議寫法', payload.suggested_value],
+    ['起點', payload.origin_station], ['終點', payload.destination_station], ['路線／時間', payload.route_snapshot],
+    ['路線問題', payload.route_issue_type], ['系統票價', payload.displayed_fare],
+    ['實際票價', payload.user_reported_fare == null ? '' : `₩${payload.user_reported_fare}`],
+    ['付款方式', payload.payment_type], ['定位權限', payload.has_location_permission],
+    ['設施問題', payload.facility_issue_type], ['發生頁面', payload.page_area], ['裝置', payload.device_type],
+    ['搜尋結果', payload.search_snapshot], ['說明', payload.body], ['聯絡方式', payload.contact || '未填'],
+    ['目前頁面', payload.page], ['時間', new Date().toLocaleString('zh-Hant', { hour12: false })], ['瀏覽器', payload.user_agent]
+  ];
+  return ['KSW-METRO 問題回報', '', ...labels.filter(([, value]) => value !== '').map(([label, value]) => `${label}：${value}`)].join('\n');
 }
 function reportStatus(message, ok) {
   const box = $('#reportMsg');
   box.replaceChildren(el('div', ok ? 'ok' : 'err', message));
 }
-function validateReport() {
-  if ($('#rBody').value.trim().length < 4) {
-    reportStatus('請寫下遇到的狀況（至少 4 個字），再送出或複製。', false);
-    $('#rBody').focus();
-    return false;
-  }
-  return true;
-}
-function reportPayload() {
-  return {
-    type: $('#rType').value,
-    station: $('#rStation').value.trim(),
-    body: $('#rBody').value.trim(),
-    contact: $('#rContact').value.trim(),
-    page: location.href,
-    user_agent: navigator.userAgent
-  };
-}
+$('#rType').onchange = () => { REPORT_CONTEXT.source = ''; renderReportFields(); reportStatus('', true); };
+renderReportFields();
 $('#sendReport').onclick = async () => {
   if (!validateReport()) return;
   const btn = $('#sendReport');
+  const enforceCooldown = !['localhost', '127.0.0.1'].includes(location.hostname);
+  const lastSent = enforceCooldown ? Number(localStorage.getItem('ksw-report-last-sent') || 0) : 0;
+  if (enforceCooldown && Date.now() - lastSent < 45000) return reportStatus('上一則回報剛送出，請稍候再送下一則。', false);
   btn.disabled = true;
   btn.textContent = '送出中…';
   try {
     await window.supabaseReady;
     const { error } = await window.supabaseClient.from('reports').insert(reportPayload());
     if (error) throw error;
-    $('#rBody').value = '';
+    if (enforceCooldown) localStorage.setItem('ksw-report-last-sent', String(Date.now()));
+    REPORT_CONTEXT.source = ''; REPORT_CONTEXT.station = REPORT_CONTEXT.from = REPORT_CONTEXT.to = null;
+    REPORT_CONTEXT.routeSnapshot = REPORT_CONTEXT.displayedFare = REPORT_CONTEXT.searchSnapshot = '';
+    renderReportFields();
     reportStatus('回報已送出，謝謝。', true);
   } catch (e) {
     reportStatus('暫時無法送出，請檢查網路後再試。若持續發生，可改用「複製回報內容」。', false);
@@ -2286,8 +2537,9 @@ LINES.forEach(l => {
   $(l.city === 'busan' ? '#busan-chips' : '#seoul-chips').appendChild(c);
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.111.0" integrity="sha384-fPWur1rx/DE6YtXP/x0MD6dd90RgnVsz5yX/DIg7CcVAnTBZsENWuIcpvVTM39ti" crossorigin="anonymous"></script>
 <script src="supabase-config.js"></script>
 <script src="supabase-client.js"></script>
+<script src="visit-tracker.js"></script>
 </body>
 </html>

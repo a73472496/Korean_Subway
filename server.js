@@ -4,7 +4,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const PORT = Number(process.env.PORT || 5173);
-const ADMIN_PIN = process.env.ADMIN_PIN || '1234';
+const ADMIN_PIN = process.env.ADMIN_PIN || '';
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const REPORTS_FILE = path.join(DATA_DIR, 'reports.json');
@@ -164,7 +164,13 @@ async function handleApi(req, res, url) {
 }
 
 function requireAdmin(req, res) {
-  if (req.headers['x-admin-pin'] === ADMIN_PIN) return true;
+  if (!ADMIN_PIN) {
+    sendJson(res, 503, { error: 'admin-pin-not-configured' });
+    return false;
+  }
+  const supplied = Buffer.from(String(req.headers['x-admin-pin'] || ''));
+  const expected = Buffer.from(ADMIN_PIN);
+  if (supplied.length === expected.length && crypto.timingSafeEqual(supplied, expected)) return true;
   sendJson(res, 401, { error: 'admin-pin-required' });
   return false;
 }
