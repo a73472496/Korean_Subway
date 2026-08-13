@@ -5,32 +5,47 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://bgwbdimfvvxapekdwwve.supabase.co wss://bgwbdimfvvxapekdwwve.supabase.co https://cdn.jsdelivr.net https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃</title>
-<meta name="description" content="KSW-METRO 提供首爾與釜山地鐵中文站名、韓文、拼音、站號、目前位置、路線規劃與轉乘資訊，讓旅遊搭乘地鐵更容易。">
+<title>KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃</title>
+<meta name="description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵。支援附近車站定位、起訖路線規劃與轉乘方向核對。">
 <meta name="robots" content="index,follow">
 <meta name="google-site-verification" content="V6M6qtd6EXiSxbtA9zm7MSVLifX_lTo-voDbykg0TOg">
 <link rel="canonical" href="https://ksw-metro.github.io/">
 <meta name="theme-color" content="#287c73">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KSW-METRO">
-<meta property="og:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃">
-<meta property="og:description" content="首爾與釜山地鐵的中文速查、路線規劃與轉乘資訊。">
+<meta property="og:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃">
+<meta property="og:description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵，支援路線規劃與轉乘方向核對。">
 <meta property="og:url" content="https://ksw-metro.github.io/">
+<meta property="og:image" content="https://ksw-metro.github.io/assets/og-ksw-metro.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="KSW-METRO 首爾・釜山地鐵中文查詢">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃">
-<meta name="twitter:description" content="首爾與釜山地鐵的中文速查、路線規劃與轉乘資訊。">
+<meta name="twitter:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃">
+<meta name="twitter:description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵，支援路線規劃與轉乘方向核對。">
+<meta name="twitter:image" content="https://ksw-metro.github.io/assets/og-ksw-metro.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "KSW-METRO",
-  "url": "https://ksw-metro.github.io/",
-  "description": "首爾與釜山地鐵中文查詢、路線規劃與轉乘資訊工具。",
-  "applicationCategory": "TravelApplication",
-  "operatingSystem": "Web",
-  "inLanguage": "zh-Hant",
-  "featureList": ["首爾地鐵查詢", "釜山地鐵查詢", "路線規劃", "中文、韓文與拼音站名對照", "站內設施搜尋"]
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "KSW-METRO",
+      "url": "https://ksw-metro.github.io/",
+      "inLanguage": "zh-Hant"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "KSW-METRO",
+      "url": "https://ksw-metro.github.io/",
+      "description": "首爾與釜山地鐵中文站名、站號與路線規劃工具。",
+      "applicationCategory": "TravelApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "zh-Hant",
+      "featureList": ["首爾地鐵查詢", "釜山地鐵查詢", "路線規劃", "中文、韓文與拼音站名對照", "站內設施搜尋"]
+    }
+  ]
 }
 </script>
 <style>
@@ -56,6 +71,8 @@ body{
 .eyebrow{font-size:11px;letter-spacing:.34em;color:var(--ink-3);font-weight:700}
 .masthead h1{font-size:clamp(30px,8vw,44px);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin:6px 0 10px}
 .masthead p{font-size:14px;color:var(--ink-2);max-width:44ch}
+.seo-home-links{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px!important;color:var(--ink-3)!important;font-size:12px!important}.seo-home-links a{color:var(--accent,#287c73);font-weight:700;text-decoration:none}.seo-home-links a:hover{text-decoration:underline}.seo-home-links span{color:var(--ink-3)}
+.station-page-link{display:inline-flex;align-items:center;min-height:32px;margin-top:6px;color:var(--accent,#287c73);font-size:12px;font-weight:800;text-decoration:none}.station-page-link:hover{text-decoration:underline}
 .railbar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin-top:16px}
 .railbar i{flex:1}
 
@@ -323,13 +340,15 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
     <div class="brand-row">
       <div class="eyebrow">KSW-METRO</div>
     </div>
-    <h1>首爾、釜山，我在哪一站？</h1>
-    <p>韓國地鐵中文速查：首爾與釜山的定位、轉乘查詢、站名中韓發音標註。</p>
+    <h1>首爾・釜山地鐵中文查詢與路線規劃</h1>
+    <p><strong>首爾、釜山，我在哪一站？</strong> 用中文、韓文、羅馬拼音或站號找站，再查附近車站、轉乘與搭車方向。</p>
     <nav class="quick-nav" aria-label="快速導覽">
       <a href="#station-search-panel">找站名</a>
+      <a href="#route-panel">路線規劃</a>
       <a href="#line-browser-panel">路線瀏覽</a>
       <a href="#travel-guide-panel">搭車須知</a>
     </nav>
+    <p class="seo-home-links"><a href="/seoul/">首爾地鐵中文站名與路線</a><span>・</span><a href="/busan/">釜山地鐵中文站名與路線</a><span>・</span><a href="/guide/korea-subway-station-number/">韓國地鐵站號怎麼看</a></p>
     <div class="railbar" id="railbar"></div>
   </header>
 
@@ -371,7 +390,7 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
       <div class="chips" id="busan-chips"></div>
     </div>
     <div id="lineres"></div>
-    <p class="data-freshness">資料更新：2026-08-11・路線與站號</p>
+    <p class="data-freshness">資料更新：2026-08-12・路線與站號</p>
   </section>
 
   <section class="card" id="report">
@@ -406,23 +425,24 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
     <details><summary>車票與交通卡</summary><div class="body">
       <b>T-money</b> 是最通用的儲值交通卡，便利商店（CU、GS25、7-11）都能買和加值，地鐵、公車、計程車、超商都能刷。
       <ul>
-        <li>單程票需另付 <b>₩500 押金</b>，出站後在「保證金退還機」退回。</li>
-        <li>基本車資約 <b>₩1,400 起</b>（交通卡），超過 10 公里每 5 公里加價。票價會調整，以站內公告為準。</li>
-        <li>短期旅客也可考慮氣候卡（기후동행카드）等無限搭乘票券。</li>
+        <li><b>首都圈地鐵</b>成人交通卡基本票價為 <b>₩1,550</b>；單次票、機場鐵路與附加區間另有規則。</li>
+        <li><b>釜山都市鐵道</b>成人交通卡第一區間為 <b>₩1,600</b>；輕軌、東海線與 QR 單次票請以現場公告為準。</li>
+        <li>短期旅客可考慮氣候卡（기후동행카드）等票券，但適用路線與票種會調整，購買前先查官方範圍。</li>
       </ul>
+      <p class="data-freshness">票價資訊更新：2026-08-12・<a href="https://english.seoul.go.kr/policy/transportation/modes-of-transport/subway/" target="_blank" rel="noopener noreferrer">首爾市票價說明</a>・<a href="https://www2.humetro.busan.kr/homepage/chs/page/subLocation.do?menu_no=100601040101" target="_blank" rel="noopener noreferrer">釜山交通公社票價說明</a></p>
     </div></details>
     <details><summary>怎麼確認方向對不對</summary><div class="body">
-      每一站都有 <b>三位數站號</b>，第一位是路線、後兩位是順序。月台上看下一站的號碼：
+      站號格式會依城市與系統不同，月台上優先看下一站或終點站名稱，再用站號交叉確認：
       <ul>
-        <li>號碼<b>變大</b>＝往站號大的終點方向。<b>變小</b>＝往站號小的終點方向。</li>
+        <li>多數同線區段可用號碼<b>變大／變小</b>輔助判斷；遇到分支、直通與不同系統時，站名更可靠。</li>
         <li>2 號線是環狀線，看終點站名或下一站名比看號碼準。</li>
         <li>上面的定位結果會直接畫出前後各兩站，對照月台指示牌最快。</li>
       </ul>
     </div></details>
     <details><summary>轉乘與營運時間</summary><div class="body">
       <ul>
-        <li>大約 <b>05:30 開始、24:00 前後收班</b>，末班車時間各線不同，週末要留意。</li>
-        <li>同一張交通卡在 <b>30 分鐘內</b>轉乘地鐵或公車有折扣，別在閘門外亂刷。</li>
+        <li>首末班車、班距與服務時段依路線、方向和日期而異，請在出發當日查看營運商公告或站內電子看板。</li>
+        <li>首都圈使用同一張交通卡轉乘時，通常需在下車後 <b>30 分鐘內</b>轉乘（21:00 至翌日 07:00 為 60 分鐘），且上下車都要感應；適用範圍以官方規定為準。</li>
         <li>轉乘站的通道有些長得誇張（例如鐘路3街、往十里），抓 5–10 分鐘比較保險。</li>
       </ul>
     </div></details>
@@ -1607,7 +1627,7 @@ function roundel(lineId, code, small) {
   d.setAttribute('aria-label', d.title);
   return d;
 }
-function row(st, meters, preferredLineId) {
+function row(st, meters, preferredLineId, includeStationPageLink = false) {
   const b = el('button', 'srow');
   const rds = el('div', 'roundels');
   const servedBy = preferredLineId
@@ -1621,7 +1641,16 @@ function row(st, meters, preferredLineId) {
   b.append(rds, t);
   if (meters != null) b.appendChild(el('div', 'far', fmt(meters)));
   b.onclick = () => show(st);
-  return b;
+  if (!includeStationPageLink) return b;
+
+  const wrap = el('div', 'srow-wrap');
+  const pageLink = document.createElement('a');
+  const primary = servedBy[0];
+  pageLink.className = 'station-page-link';
+  pageLink.href = `/${st.city}/station/${stationPageSlug(primary, st)}/`;
+  pageLink.textContent = `查看${st.zh}站完整資訊`;
+  wrap.append(b, pageLink);
+  return wrap;
 }
 
 /* ---------- strip map ---------- */
@@ -1820,6 +1849,12 @@ function match(q) {
     || left.sourceOrder - right.sourceOrder);
   return ranked.map(result => result.item.station);
 }
+function stationPageSlug(connection, station) {
+  const rom = String(station.rom || '').toLowerCase().normalize('NFKD').replace(/[’']/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'station';
+  const code = String(connection.code || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  return `${rom}-${code}`;
+}
 function routeMatch(q, which) {
   const city = which === 'to' && PICK.from ? PICK.from.city : null;
   return match(q).filter(station => !city || station.city === city);
@@ -1844,7 +1879,7 @@ $('#q').oninput = e => {
   const hits = match(e.target.value).slice(0, 8);
   if (!hits.length) { box.appendChild(el('div', 'empty', '找不到這個站。可試中文（明洞）、韓文（명동）或站號（424）。')); return; }
   const w = el('div'); w.style.marginTop = '8px';
-  hits.forEach(s => w.appendChild(row(s)));
+  hits.forEach(s => w.appendChild(row(s, undefined, undefined, true)));
   box.appendChild(w);
   const reportButton = el('button', 'report-entry', '回報這次搜尋結果');
   reportButton.onclick = () => openReport('station_translation', {
@@ -1860,6 +1895,15 @@ const PICK = { from: null, to: null };
 function setPick(which, st) {
   PICK[which] = st;
   (which === 'from' ? $('#fFrom') : $('#fTo')).value = st.zh + '（' + st.ko + '）';
+}
+function restorePlannerFromUrl() {
+  const raw = new URLSearchParams(location.search).get('from');
+  if (!raw) return;
+  const [city, lineId, code] = raw.split('|');
+  const line = LINES.find(item => (item.city || 'seoul') === city && item.id === lineId);
+  const station = line?.st.find(item => String(item[0]) === code);
+  if (!station) return;
+  setPick('from', stationFor(line, station));
 }
 function attach(input, which) {
   let list = null;
@@ -1895,6 +1939,7 @@ function attach(input, which) {
   input.onblur = () => { clearRenderTimer(); setTimeout(close, 180); };
 }
 attach($('#fFrom'), 'from'); attach($('#fTo'), 'to');
+restorePlannerFromUrl();
 $('#swap').onclick = () => {
   const a = PICK.from, b = PICK.to;
   PICK.from = PICK.to = null;

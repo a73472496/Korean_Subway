@@ -5,6 +5,7 @@
   "description": "Korean metro station helper for Seoul and Busan with a reporting dashboard.",
   "scripts": {
     "start": "node server.js",
+    "build:seo": "node scripts/generate-seo-pages.js",
     "test": "node --test"
   }
 }

@@ -14,6 +14,8 @@ const MIME = {
   '.js': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
@@ -177,12 +179,14 @@ function requireAdmin(req, res) {
 
 async function serveStatic(req, res, url) {
   const pathname = decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname);
-  const filePath = path.normalize(path.join(ROOT, pathname));
+  let filePath = path.normalize(path.join(ROOT, pathname));
   if (!filePath.startsWith(ROOT) || filePath.includes(`${path.sep}data${path.sep}`)) {
     send(res, 403, 'Forbidden', { 'Content-Type': 'text/plain; charset=utf-8' });
     return;
   }
   try {
+    const stat = await fs.stat(filePath);
+    if (stat.isDirectory()) filePath = path.join(filePath, 'index.html');
     const data = await fs.readFile(filePath);
     send(res, 200, data, { 'Content-Type': MIME[path.extname(filePath)] || 'application/octet-stream' });
   } catch {
