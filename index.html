@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://bgwbdimfvvxapekdwwve.supabase.co wss://bgwbdimfvvxapekdwwve.supabase.co https://cdn.jsdelivr.net https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://bgwbdimfvvxapekdwwve.supabase.co wss://bgwbdimfvvxapekdwwve.supabase.co https://cdn.jsdelivr.net https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃</title>
 <meta name="description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵。支援附近車站定位、起訖路線規劃與轉乘方向核對。">
@@ -2120,21 +2120,47 @@ function stopList(L, idx) {
   list.append(summary, items);
   return list;
 }
+const OCR_MODULE_TIMEOUT_MS = 30000;
+const OCR_WORKER_TIMEOUT_MS = 45000;
+const OCR_RECOGNITION_TIMEOUT_MS = 45000;
+function withOcrTimeout(promise, timeoutMs, message) {
+  let timer;
+  return new Promise((resolve, reject) => {
+    timer = window.setTimeout(() => {
+      const error = new Error(message);
+      error.code = 'OCR_TIMEOUT';
+      reject(error);
+    }, timeoutMs);
+    Promise.resolve(promise).then(
+      value => { window.clearTimeout(timer); resolve(value); },
+      error => { window.clearTimeout(timer); reject(error); }
+    );
+  });
+}
 let tesseractLoader;
 function loadTesseract() {
   if (window.Tesseract) return Promise.resolve(window.Tesseract);
   if (tesseractLoader) return tesseractLoader;
   tesseractLoader = new Promise((resolve, reject) => {
     const script = document.createElement('script');
+    let settled = false;
+    const finish = (value, error) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      if (error) { script.remove(); tesseractLoader = null; reject(error); }
+      else resolve(value);
+    };
+    const timer = window.setTimeout(() => finish(null, new Error('下載韓文辨識工具逾時，請確認網路後再試。')), OCR_MODULE_TIMEOUT_MS);
     script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js';
     script.integrity = 'sha384-r1ru3tcf6FhnCFR4B7pIFG+BhFF9LlFtz/P1y4pblWn3AGs9y3lBx5SKLNf4+rED';
     script.crossOrigin = 'anonymous';
     script.async = true;
     script.onload = () => {
-      if (window.Tesseract) resolve(window.Tesseract);
-      else { tesseractLoader = null; reject(new Error('OCR 模組沒有完成載入。')); }
+      if (window.Tesseract) finish(window.Tesseract);
+      else finish(null, new Error('OCR 模組沒有完成載入。'));
     };
-    script.onerror = () => { tesseractLoader = null; reject(new Error('無法下載韓文辨識工具。請確認網路後再試。')); };
+    script.onerror = () => finish(null, new Error('無法下載韓文辨識工具。請確認網路後再試。'));
     document.head.appendChild(script);
   });
   return tesseractLoader;
@@ -2728,16 +2754,34 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
   const readPhoto = async file => {
     if (!file) return;
     box.open = true; result.hidden = true; photoAction.disabled = true; photoAction.textContent = '正在讀取…';
-    status.hidden = false; status.textContent = '正在讀取站牌文字…';
+    status.hidden = false; status.textContent = '正在整理照片…';
     let worker;
+    let workerPromise;
+    const updateOcrStatus = message => {
+      const labels = {
+        'loading tesseract core': '正在啟動辨識工具…',
+        'initializing tesseract': '正在初始化辨識工具…',
+        'loading language traineddata': '正在下載韓文辨識資料…',
+        'initializing api': '正在準備辨識資料…',
+        'recognizing text': '正在讀取站牌文字…'
+      };
+      const label = labels[message.status] || '正在準備辨識…';
+      const progress = Number.isFinite(message.progress) ? ' ' + Math.round(message.progress * 100) + '%' : '';
+      status.textContent = label + progress;
+    };
     try {
-      const prepared = await shrinkForOcr(file);
+      const prepared = await withOcrTimeout(shrinkForOcr(file), OCR_MODULE_TIMEOUT_MS, '照片處理逾時，請重新選擇清楚的 JPG 或 PNG。');
+      status.textContent = '正在下載韓文辨識工具…';
       const Tesseract = await loadTesseract();
-      worker = await Tesseract.createWorker('kor+eng', 1, { logger: message => {
-        if (message.status === 'recognizing text' && Number.isFinite(message.progress)) status.textContent = '正在讀取站牌文字 ' + Math.round(message.progress * 100) + '%';
-      }});
+      workerPromise = Tesseract.createWorker('kor+eng', 1, { logger: updateOcrStatus });
+      try {
+        worker = await withOcrTimeout(workerPromise, OCR_WORKER_TIMEOUT_MS, '辨識工具啟動逾時，請確認網路後再試。');
+      } catch (error) {
+        if (error && error.code === 'OCR_TIMEOUT') workerPromise.then(lateWorker => lateWorker.terminate()).catch(() => {});
+        throw error;
+      }
       await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
-      const response = await worker.recognize(prepared.image, {}, { blocks: true });
+      const response = await withOcrTimeout(worker.recognize(prepared.image, {}, { blocks: true }), OCR_RECOGNITION_TIMEOUT_MS, '站牌文字讀取逾時，請重新拍攝較清楚的指示牌。');
       let ocrData = response.data;
       let reading = signReading(ocrData, [platformContext, transferContext]);
       let context = reading.isTransfer ? transferContext : platformContext;
@@ -2748,7 +2792,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         // 稀疏文字與整面直式指示牌需要不同的版面假設：第二輪以區塊模式讀取，
         // 可補回第一輪把站名拆散或漏掉的情況。
         await worker.setParameters({ tessedit_pageseg_mode: '6', preserve_interword_spaces: '1' });
-        const highContrastResponse = await worker.recognize(prepared.highContrast, {}, { blocks: true });
+        const highContrastResponse = await withOcrTimeout(worker.recognize(prepared.highContrast, {}, { blocks: true }), OCR_RECOGNITION_TIMEOUT_MS, '站牌文字讀取逾時，請重新拍攝較清楚的指示牌。');
         ocrData = mergeOcrData(response.data, highContrastResponse.data);
         reading = signReading(ocrData, [platformContext, transferContext]);
         context = reading.isTransfer ? transferContext : platformContext;
@@ -2825,7 +2869,14 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       if (comparison) appendPhotoChecks(result, comparison.checks);
     } catch (error) {
       result.replaceChildren(); result.hidden = false; result.classList.add('warn');
-      result.append(el('div', 'photo-result-label', '這次沒有完成辨識'), el('strong', null, '請再試一次'), el('p', null, '確認網路後重試，並讓整塊指示牌清楚入鏡。'));
+      const reason = String(error && error.message || '');
+      const isTimeout = error && error.code === 'OCR_TIMEOUT';
+      const message = isTimeout
+        ? reason
+        : reason.includes('照片')
+          ? reason
+          : '確認網路後重試，並讓整塊指示牌清楚入鏡。';
+      result.append(el('div', 'photo-result-label', isTimeout ? '讀取時間過久' : '這次沒有完成辨識'), el('strong', null, isTimeout ? '請確認網路後再試' : '請再試一次'), el('p', null, message));
     } finally {
       if (worker) await worker.terminate().catch(() => {});
       status.hidden = true; status.textContent = '';
