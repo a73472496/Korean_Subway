@@ -21,6 +21,18 @@ test('photo OCR exposes each loading phase and has bounded wait times', () => {
   assert.match(index, /站牌文字讀取逾時/);
 });
 
+test('photo OCR keeps its status UI available for consecutive photos', () => {
+  assert.match(index, /const OCR_STATUS_MIN_VISIBLE_MS = 560/);
+  assert.match(index, /function createPieProgress\(\{ progress = 0, size = 32, activeColor/);
+  assert.match(index, /document\.createElementNS\(ns, 'path'\)/);
+  assert.match(index, /M \$\{center\} \$\{center\} L \$\{startX\} \$\{startY\} A/);
+  assert.match(index, /const statusPulse = photoPie\.element/);
+  assert.match(index, /photoPie\.update\(visualProgress\)/);
+  assert.match(index, /status\.append\(statusHead\)/);
+  assert.match(index, /remainingStatusTime > 0/);
+  assert.doesNotMatch(index, /status\.hidden = true; status\.textContent = ''/);
+});
+
 test('photo OCR timeout rejects a stalled task with a useful error code', async () => {
   const source = index.match(/function withOcrTimeout\([\s\S]*?\r?\n}\r?\nlet tesseractLoader/)?.[0];
   assert.ok(source, 'withOcrTimeout source should exist');
