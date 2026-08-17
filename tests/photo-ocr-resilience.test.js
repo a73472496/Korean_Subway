@@ -35,6 +35,14 @@ test('photo OCR keeps its status UI available for consecutive photos', () => {
   assert.doesNotMatch(index, /status\.hidden = true; status\.textContent = ''/);
 });
 
+test('mobile photo input uses a native label association instead of a hidden scripted click', () => {
+  assert.match(index, /input\.type = 'file'; input\.accept = 'image\/\*'; input\.id = inputId; input\.className = 'photo-file-input'/);
+  assert.match(index, /photoAction\.htmlFor = inputId/);
+  assert.match(index, /photoAction\.textContent = busy \? '正在讀取…' : '拍照或選擇指示牌照片'/);
+  assert.doesNotMatch(index, /input\.hidden = true/);
+  assert.doesNotMatch(index, /photoAction\.onclick = \(\) => input\.click\(\)/);
+});
+
 test('photo OCR timeout rejects a stalled task with a useful error code', async () => {
   const source = index.match(/function withOcrTimeout\([\s\S]*?\r?\n}\r?\nlet tesseractLoader/)?.[0];
   assert.ok(source, 'withOcrTimeout source should exist');
