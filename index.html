@@ -3,40 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃</title>
-<meta name="description" content="KSW-METRO 提供首爾與釜山地鐵中文站名、韓文、拼音、站號、目前位置、路線規劃與轉乘資訊，讓旅遊搭乘地鐵更容易。">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://bgwbdimfvvxapekdwwve.supabase.co wss://bgwbdimfvvxapekdwwve.supabase.co https://cdn.jsdelivr.net https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃</title>
+<meta name="description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵。支援附近車站定位、起訖路線規劃與轉乘方向核對。">
 <meta name="robots" content="index,follow">
+<meta name="google-site-verification" content="V6M6qtd6EXiSxbtA9zm7MSVLifX_lTo-voDbykg0TOg">
 <link rel="canonical" href="https://ksw-metro.github.io/">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/ksw-metro-icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/ksw-metro-icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <meta name="theme-color" content="#287c73">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KSW-METRO">
-<meta property="og:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃">
-<meta property="og:description" content="首爾與釜山地鐵的中文速查、路線規劃與轉乘資訊。">
+<meta property="og:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃">
+<meta property="og:description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵，支援路線規劃與轉乘方向核對。">
 <meta property="og:url" content="https://ksw-metro.github.io/">
+<meta property="og:image" content="https://ksw-metro.github.io/assets/og-ksw-metro.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="KSW-METRO 首爾・釜山地鐵中文查詢">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://ksw-metro.github.io/assets/icons/ksw-metro-icon-512.png">
-<meta property="og:image:width" content="512">
-<meta property="og:image:height" content="512">
-<meta property="og:image:alt" content="KSW-METRO 品牌 Icon">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢與路線規劃">
-<meta name="twitter:description" content="首爾與釜山地鐵的中文速查、路線規劃與轉乘資訊。">
-<meta name="twitter:image" content="https://ksw-metro.github.io/assets/icons/ksw-metro-icon-512.png">
-<meta name="twitter:image:alt" content="KSW-METRO 品牌 Icon">
+<meta name="twitter:title" content="KSW-METRO｜首爾・釜山地鐵中文查詢、站名與路線規劃">
+<meta name="twitter:description" content="用中文、韓文、羅馬拼音或站號查首爾與釜山地鐵，支援路線規劃與轉乘方向核對。">
+<meta name="twitter:image" content="https://ksw-metro.github.io/assets/og-ksw-metro.png">
+<meta name="twitter:image:alt" content="KSW-METRO 首爾・釜山地鐵中文查詢">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "KSW-METRO",
-  "url": "https://ksw-metro.github.io/",
-  "description": "首爾與釜山地鐵中文查詢、路線規劃與轉乘資訊工具。",
-  "applicationCategory": "TravelApplication",
-  "operatingSystem": "Web",
-  "inLanguage": "zh-Hant",
-  "featureList": ["首爾地鐵查詢", "釜山地鐵查詢", "路線規劃", "中文、韓文與拼音站名對照", "站內設施搜尋"]
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "KSW-METRO",
+      "url": "https://ksw-metro.github.io/",
+      "inLanguage": "zh-Hant"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "KSW-METRO",
+      "url": "https://ksw-metro.github.io/",
+      "description": "首爾與釜山地鐵中文站名、站號與路線規劃工具。",
+      "applicationCategory": "TravelApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "zh-Hant",
+      "featureList": ["首爾地鐵查詢", "釜山地鐵查詢", "路線規劃", "中文、韓文與拼音站名對照", "站內設施搜尋"]
+    }
+  ]
 }
 </script>
 <style>
@@ -62,6 +79,8 @@ body{
 .eyebrow{font-size:11px;letter-spacing:.34em;color:var(--ink-3);font-weight:700}
 .masthead h1{font-size:clamp(30px,8vw,44px);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin:6px 0 10px}
 .masthead p{font-size:14px;color:var(--ink-2);max-width:44ch}
+.seo-home-links{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px!important;color:var(--ink-3)!important;font-size:12px!important}.seo-home-links a{color:var(--accent,#287c73);font-weight:700;text-decoration:none}.seo-home-links a:hover{text-decoration:underline}.seo-home-links span{color:var(--ink-3)}
+.station-page-link{display:inline-flex;align-items:center;min-height:32px;margin-top:6px;color:var(--accent,#287c73);font-size:12px;font-weight:800;text-decoration:none}.station-page-link:hover{text-decoration:underline}
 .railbar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin-top:16px}
 .railbar i{flex:1}
 
@@ -193,6 +212,8 @@ details{border-bottom:1px solid var(--hair)}
 .gicon{width:26px;height:26px;flex-shrink:0;stroke:var(--ink-2);stroke-width:1.6;fill:none;
   stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
 .icon-row b{color:var(--ink);display:block;font-size:14px;margin-bottom:2px}
+.icon-row p{margin:0;line-height:1.75}
+.icon-row .inline-em{display:inline;color:var(--ink);font-weight:700;white-space:nowrap}
 .icon-note{font-size:12px;color:var(--ink-3);border-top:1px dashed var(--hair);margin-top:14px;padding-top:11px}
 details:last-of-type{border-bottom:0}
 summary{cursor:pointer;padding:13px 2px;font-weight:800;font-size:15px;list-style:none;display:flex;
@@ -290,18 +311,52 @@ details{border-bottom-color:var(--border)}summary{min-height:52px;padding:12px 2
 
 /* Frosted platform glass: quiet surfaces over a pale transit-map haze. */
 :root{--glass:rgba(250,255,253,.34);--glass-strong:rgba(250,255,253,.82);--glass-border:rgba(255,255,255,.72);--glass-shadow:0 18px 42px rgba(28,71,63,.12),0 2px 8px rgba(28,71,63,.05)}
-body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,.74),rgba(237,244,243,.88)),url('assets/metro-glass-pattern.png');background-position:center,center;background-size:cover,cover;background-repeat:no-repeat;background-attachment:fixed,fixed}
+body{background-color:#edf4f3;background-image:linear-gradient(rgba(244,249,248,.74),rgba(237,244,243,.88)),url('assets/metro-glass-pattern.webp');background-position:center,center;background-size:cover,cover;background-repeat:no-repeat;background-attachment:fixed,fixed}
 .card{background:linear-gradient(135deg,rgba(255,255,255,.64),rgba(249,255,253,.36) 48%,var(--glass));border-color:var(--glass-border);box-shadow:inset 0 1px 0 rgba(255,255,255,.78),inset 0 -1px 0 rgba(123,174,162,.10),var(--glass-shadow);backdrop-filter:blur(28px) saturate(145%) brightness(1.04);-webkit-backdrop-filter:blur(28px) saturate(145%) brightness(1.04);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .card:hover{border-color:rgba(255,255,255,.92);box-shadow:inset 0 1px 0 rgba(255,255,255,.88),inset 0 -1px 0 rgba(123,174,162,.12),0 22px 48px rgba(28,71,63,.15),0 2px 8px rgba(28,71,63,.05);transform:translateY(-1px)}
 #location-panel{background:linear-gradient(135deg,rgba(237,253,248,.66),rgba(255,255,255,.38) 58%,rgba(239,250,247,.32));border-color:rgba(255,255,255,.76)}
 .fac,.report-hint,.dist,.stat,.ride{background:rgba(255,255,255,.34);border-color:rgba(255,255,255,.60);box-shadow:inset 0 1px 0 rgba(255,255,255,.48)}
-.timing-note{margin:8px 0 14px;color:var(--text-muted);font-size:11px;line-height:1.65}.timing-note strong{margin-right:5px;color:var(--text);font-size:11px}.ride-duration{margin-left:auto;color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:800;white-space:nowrap}.transfer-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.transfer-times span{padding:3px 7px;border:1px solid rgba(211,130,116,.48);border-radius:4px;background:rgba(255,255,255,.52);color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
-input[type=search],input[type=text],input[type=email],select,textarea{background:rgba(255,255,255,.88);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.90);color:var(--text)}.field label{background:rgba(250,255,253,.90)}
+.ride-duration{margin-left:auto;color:var(--accent);font-family:var(--mono);font-size:11px;font-weight:800;white-space:nowrap}.transfer-times{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.transfer-times span{padding:3px 7px;border:1px solid rgba(211,130,116,.48);border-radius:4px;background:rgba(255,255,255,.52);color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0}.summary .stat:first-child{border-color:rgba(99,157,145,.65);color:var(--accent);font-weight:800}
+input[type=search],input[type=text],input[type=email],input[type=number],select,textarea{background:rgba(255,255,255,.88);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.90);color:var(--text)}.field label{background:rgba(250,255,253,.90)}
 .swap,.ghost,.mini,.fac a,.fac button{background:rgba(255,255,255,.82);border-color:rgba(156,190,181,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.84);color:var(--accent)}
 .locate,.go{border:1px solid rgba(21,93,84,.78);background:#287c73;box-shadow:0 7px 16px rgba(25,100,90,.22),inset 0 1px 0 rgba(255,255,255,.18)}.locate:hover,.go:hover{background:#1e685f;box-shadow:0 9px 18px rgba(25,100,90,.25),inset 0 1px 0 rgba(255,255,255,.18)}
-@media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.png');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
+@media (max-width:620px){body{background-image:linear-gradient(rgba(244,249,248,.58),rgba(237,244,243,.76)),url('assets/metro-glass-pattern.webp');background-position:center,center top;background-size:cover,720px;background-attachment:scroll,scroll}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card{background:var(--glass-strong)}}
-.stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
+.stop-list{margin-top:10px;border:1px solid rgba(197,218,212,.92);border-radius:8px;background:rgba(255,255,255,.48);overflow:hidden}.stop-list summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0}.stop-list summary::after{margin-left:0;color:var(--accent);font-size:14px}.stop-list[open] summary{border-bottom:1px solid rgba(197,218,212,.82)}.stop-list-items{margin:0;padding:4px 12px 8px;list-style:none}.stop-list-item{display:grid;grid-template-columns:12px auto minmax(0,1fr) auto auto;align-items:center;column-gap:9px;min-height:46px;border-bottom:1px solid rgba(207,224,219,.72)}.stop-list-item:last-child{border-bottom:0}.stop-list-mark{width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:rgba(255,255,255,.9)}.stop-list-item:first-child .stop-list-mark,.stop-list-item:last-child .stop-list-mark{background:var(--accent)}.stop-list-code{color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700}.stop-list-names{display:flex;min-width:0;align-items:baseline;gap:7px}.stop-list-names strong{overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}.stop-list-names span{overflow:hidden;color:var(--text-faint);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.stop-list-state{color:var(--accent);font-size:10px;font-weight:800;white-space:nowrap}@media (max-width:620px){.stop-list summary{font-size:10px}.stop-list-items{padding-right:10px;padding-left:10px}.stop-list-item{column-gap:7px}.stop-list-names{display:block;line-height:1.3}.stop-list-names strong,.stop-list-names span{display:block}.stop-list-names span{margin-top:2px}.stop-list-code{font-size:10px}}
+.chip-kind{display:inline-flex;align-items:center;margin-left:6px;padding:1px 4px;border:1px solid currentColor;border-radius:3px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.04em;line-height:1.35;vertical-align:1px}.line-direction-guide{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:12px 0 0;padding:10px 12px;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:7px;background:var(--surface-subtle);color:var(--text-muted);font-size:12px;line-height:1.5}.line-direction-guide strong{color:var(--text);font-family:var(--mono);font-size:10px;letter-spacing:.05em}.line-direction-choice{padding:3px 6px;border:1px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-family:var(--mono);font-size:11px;font-weight:700}.line-direction-note{flex:1 1 260px}.data-freshness{margin:13px 0 0;color:var(--text-faint);font-family:var(--mono);font-size:10px;letter-spacing:.03em}.photo-aim{margin:0 0 10px;padding:8px 9px;border-left:3px solid var(--accent);border-radius:0 5px 5px 0;background:rgba(255,255,255,.56);color:var(--text-muted);font-size:11px;line-height:1.65}.photo-aim strong{margin-right:4px;color:var(--text);font-weight:800}@media (max-width:620px){.line-direction-guide{align-items:flex-start}.line-direction-choice{font-size:10px}.photo-aim{font-size:10px}}
+.loc-quality{margin-top:6px;color:var(--text-muted);font-size:11px;line-height:1.55}.loc-quality.warn{color:var(--danger);font-weight:700}.fare-note{display:block;margin-top:5px;color:var(--text-muted);font-size:11px}
+.photo-guide{margin-top:10px;overflow:hidden;border:1px solid rgba(171,207,198,.78);border-bottom:2px solid rgba(143,192,181,.82);border-radius:8px;background:rgba(244,251,249,.56)}.photo-guide-summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:10px 12px;color:var(--text-muted);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0;cursor:pointer;list-style:none}.photo-guide-summary::-webkit-details-marker{display:none}.photo-guide-summary::after{content:'+';margin-left:0;color:var(--accent);font:700 14px/1 var(--mono)}.photo-guide[open] .photo-guide-summary{border-bottom:1px solid rgba(171,207,198,.6)}.photo-guide[open] .photo-guide-summary::after{content:'−'}.photo-guide-content{padding:12px 12px 14px}.photo-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}.photo-example{min-width:0}.photo-example-art{position:relative;display:grid;place-items:center;height:82px;overflow:hidden;border:1px solid rgba(171,207,198,.7);border-radius:6px;background:linear-gradient(145deg,rgba(217,235,230,.74),rgba(255,255,255,.72))}.photo-example-sign{display:flex;align-items:center;justify-content:space-around;width:78%;height:42%;padding:0 7px;border-radius:3px;background:#34413f;color:#f8fffc;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.03em}.photo-example-sign i{display:block;width:1px;height:20px;background:rgba(255,255,255,.55)}.photo-example-sign b{font-size:16px;font-weight:500}.photo-example.bad .photo-example-sign{justify-content:center;width:54%;transform:translateX(31%);opacity:.62;white-space:nowrap}.photo-example.bad .photo-example-sign b,.photo-example.bad .photo-example-sign i{display:none}.photo-example-mark{position:absolute;right:7px;bottom:7px;display:grid;width:25px;height:25px;place-items:center;border-radius:50%;font:800 17px/1 var(--sans)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}.photo-example p{margin:5px 0 0;color:var(--text-muted);font-size:10px;line-height:1.4}.photo-action{display:inline-flex;align-items:center;justify-content:center;min-height:42px;width:100%;padding:0 12px;border:1px solid var(--accent);border-radius:7px;background:rgba(255,255,255,.8);color:var(--accent);font:700 13px var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.photo-action:hover{background:var(--accent);color:#fff}.photo-action:disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait}.photo-status{position:relative;display:grid;gap:9px;margin-top:10px;padding:11px;overflow:hidden;border:1px solid rgba(105,168,156,.62);border-radius:8px;background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(222,241,236,.6));box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 6px 16px rgba(37,102,92,.06);color:var(--text-muted)}.photo-status::before{position:absolute;top:0;right:-38%;bottom:0;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.58),transparent);content:'';transform:skewX(-18deg);animation:photo-status-scan 2.2s ease-in-out infinite}.photo-status-head{position:relative;z-index:1;display:flex;align-items:center;gap:8px}.photo-status-pulse{display:grid;flex:0 0 auto;width:26px;height:26px;place-items:center;border:1px solid rgba(40,124,115,.34);border-radius:7px;background:rgba(255,255,255,.68);color:var(--accent);font:800 13px/1 var(--mono);box-shadow:inset 0 1px 0 #fff}.photo-status-copy{display:grid;min-width:0;gap:1px}.photo-status-copy strong{overflow:hidden;color:var(--text);font-size:12px;line-height:1.35;text-overflow:ellipsis;white-space:nowrap}.photo-status-copy span{overflow:hidden;color:var(--text-faint);font:700 9px/1.4 var(--mono);letter-spacing:.02em;text-overflow:ellipsis;white-space:nowrap}.photo-status-steps{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.photo-status-step{display:grid;min-width:0;grid-template-columns:13px minmax(0,1fr);align-items:center;gap:4px;color:var(--text-faint);font:700 9px/1.2 var(--mono);letter-spacing:.01em}.photo-status-step i{display:grid;width:12px;height:12px;place-items:center;border:1px solid rgba(139,178,169,.75);border-radius:50%;background:rgba(255,255,255,.72);font:800 8px/1 var(--mono);font-style:normal}.photo-status-step.is-active{color:var(--accent)}.photo-status-step.is-active i{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 0 0 3px rgba(40,124,115,.12)}.photo-status-step.is-done{color:var(--text-muted)}.photo-status-step.is-done i{border-color:var(--accent);background:rgba(40,124,115,.13);color:var(--accent)}.photo-status-step.is-done i::after{content:'✓'}@keyframes photo-status-scan{0%,24%{transform:translateX(-175%) skewX(-18deg)}66%,100%{transform:translateX(390%) skewX(-18deg)}}@media (prefers-reduced-motion:reduce){.photo-status::before{animation:none}}.photo-result{margin-top:10px;padding:10px;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;background:rgba(255,255,255,.62)}.photo-result-label{color:var(--accent);font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}.photo-result strong{display:block;margin-top:2px;color:var(--text);font-size:15px;line-height:1.4}.photo-result p{margin:3px 0 0;color:var(--text-muted);font-size:11px;line-height:1.6}.photo-result.warn{border-left-color:#a86f26}.photo-result.warn .photo-result-label{color:#8e5e1f}.crop-sheet{position:fixed;z-index:70;inset:0;display:grid;place-items:center;padding:16px;background:rgba(15,31,29,.75)}.crop-panel{width:min(100%,640px);max-height:calc(100vh - 32px);overflow:auto;border:1px solid rgba(255,255,255,.4);border-radius:12px;background:#f8fcfb;box-shadow:0 24px 70px rgba(0,0,0,.32)}.crop-panel h2{margin:0;padding:14px 16px 3px;color:var(--text);font-size:16px;line-height:1.4}.crop-help{margin:0;padding:0 16px 12px;color:var(--text-muted);font-size:12px;line-height:1.55}.crop-viewport{display:grid;max-height:62vh;padding:0 12px;place-items:center;overflow:auto;background:#e5eeeb}.crop-wrap{position:relative;display:inline-block;max-width:100%;line-height:0}.crop-wrap img{display:block;max-width:100%;max-height:62vh;width:auto;height:auto}.crop-frame{position:absolute;border:2px solid #e9fff9;border-radius:4px;box-shadow:0 0 0 9999px rgba(8,21,19,.48),0 0 0 1px rgba(20,94,82,.8) inset;touch-action:none;cursor:move}.crop-frame::before{content:'把箭頭和站名一起框進來';position:absolute;top:-28px;left:50%;width:max-content;transform:translateX(-50%);color:#fff;font:700 11px/1.3 var(--sans);text-shadow:0 1px 3px rgba(0,0,0,.72)}.crop-handle{position:absolute;width:18px;height:18px;border:2px solid #e9fff9;border-radius:50%;background:var(--accent);touch-action:none}.crop-handle.nw{top:-10px;left:-10px}.crop-handle.ne{top:-10px;right:-10px}.crop-handle.sw{bottom:-10px;left:-10px}.crop-handle.se{right:-10px;bottom:-10px}.crop-controls{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;padding:12px}.crop-controls button{min-height:44px;border:1px solid var(--border-strong);border-radius:7px;background:#fff;color:var(--text-muted);font:700 13px var(--sans);cursor:pointer}.crop-controls .crop-confirm{border-color:var(--accent);background:var(--accent);color:#fff}@media (max-width:620px){.photo-guide-summary{min-height:44px;padding:10px 11px;font-size:10px}.photo-guide-content{padding:11px 11px 13px}.photo-action{min-height:46px}.photo-status{padding:10px}.photo-status-steps{gap:3px}.photo-status-step{font-size:8px;gap:3px}.photo-status-step i{width:11px;height:11px;font-size:7px}.crop-sheet{padding:0}.crop-panel{max-height:100vh;border-radius:0}.crop-viewport,.crop-wrap img{max-height:58vh}.crop-frame::before{top:-25px;font-size:10px}}
+.photo-guide{position:relative;box-shadow:inset 0 -2px 0 rgba(143,192,181,.92)}
+.photo-guide::after{content:'';position:absolute;z-index:2;right:0;bottom:0;left:0;height:2px;pointer-events:none;background:rgba(143,192,181,.92)}
+.photo-file-input{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.photo-action.is-disabled{border-color:var(--border-strong);background:rgba(255,255,255,.5);color:var(--text-faint);cursor:wait;pointer-events:none}
+.photo-examples{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.photo-example-art::before{position:absolute;top:6px;left:6px;z-index:1;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.8);color:var(--text-muted);font:700 8px/1.35 var(--mono);letter-spacing:.03em}.photo-example.hanging .photo-example-art::before{content:'吊掛式'}.photo-example.column .photo-example-art::before{content:'柱面／牆面'}.photo-example-sign.hanging{width:82%;height:38%;padding:0 6px}.photo-example-sign.column{width:45%;height:68%;padding:5px 3px;flex-direction:column;justify-content:center;gap:1px}.photo-example-sign.column i{width:72%;height:1px}.photo-example-sign.column b{font-size:14px;line-height:1}.photo-example-sign.column span{font-size:8px;line-height:1.1}.photo-example.bad .photo-example-art{background:linear-gradient(145deg,rgba(250,237,234,.72),rgba(255,255,255,.72))}.photo-example.bad .photo-example-sign{background:#5b6462}.photo-example.bad.hanging .photo-example-sign{width:54%;transform:translateX(30%);opacity:.66;white-space:nowrap}.photo-example.bad.column .photo-example-sign{width:45%;height:50%;transform:translateY(32%);opacity:.66}.photo-example.bad .photo-example-sign b,.photo-example.bad .photo-example-sign i{display:none}.photo-example.bad .photo-example-art::after{content:'出口';position:absolute;top:29px;left:11px;padding:3px 5px;border-radius:3px;background:#f6d96a;color:#34413f;font:800 9px/1 var(--mono)}.photo-example.bad.column .photo-example-art::after{content:'裁切'}.photo-example-mark{right:6px;bottom:6px;width:24px;height:24px;border:2px solid rgba(255,255,255,.9);box-shadow:0 1px 3px rgba(0,0,0,.12)}.photo-example.good .photo-example-mark{background:var(--accent);color:#fff}.photo-example.bad .photo-example-mark{background:#b85c50;color:#fff}@media (max-width:620px){.photo-examples{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.photo-example.bad{grid-column:auto}.photo-example.bad .photo-example-art{height:82px}.photo-example.column .photo-example-art{height:82px}}
+.crop-help{padding-bottom:8px}.crop-hint{margin:0;padding:0 16px 12px;color:var(--accent);font:700 11px/1.5 var(--sans)}.crop-frame{border-width:3px;border-radius:7px;background:linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px) 0 0/25% 100%,linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px) 0 0/100% 25%;cursor:grab}.crop-frame:active{cursor:grabbing}.crop-frame::before{padding:3px 6px;border-radius:4px;background:rgba(8,21,19,.7)}.crop-handle{z-index:2;width:30px;height:30px;border:3px solid #e9fff9;box-shadow:0 1px 4px rgba(0,0,0,.25)}.crop-handle.nw{top:-15px;left:-15px}.crop-handle.ne{top:-15px;right:-15px}.crop-handle.sw{bottom:-15px;left:-15px}.crop-handle.se{right:-15px;bottom:-15px}.crop-handle.n{top:-15px;left:50%;transform:translateX(-50%)}.crop-handle.e{top:50%;right:-15px;transform:translateY(-50%)}.crop-handle.s{bottom:-15px;left:50%;transform:translateX(-50%)}.crop-handle.w{top:50%;left:-15px;transform:translateY(-50%)}@media (max-width:620px){.crop-handle{width:34px;height:34px}.crop-handle.nw{top:-17px;left:-17px}.crop-handle.ne{top:-17px;right:-17px}.crop-handle.sw{bottom:-17px;left:-17px}.crop-handle.se{right:-17px;bottom:-17px}.crop-handle.n{top:-17px}.crop-handle.e{right:-17px}.crop-handle.s{bottom:-17px}.crop-handle.w{left:-17px}}
+.photo-checks{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.photo-check{padding:3px 6px;border:1px solid var(--border-strong);border-radius:4px;background:rgba(255,255,255,.68);color:var(--text-muted);font:700 10px/1.4 var(--mono)}.photo-check.ok{border-color:rgba(40,124,115,.42);color:var(--accent)}.photo-check.missing{color:var(--text-faint)}.photo-check.bad{border-color:rgba(184,92,80,.46);color:#a84a4a}
+/* Photo guide sampled from real Seoul platform signs. */
+.photo-samples{display:grid;gap:10px;margin:0 0 12px}.photo-sample-group{margin:0;padding:10px;border:1px solid rgba(166,199,191,.72);border-radius:8px;background:rgba(255,255,255,.42)}.photo-sample-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}.photo-sample-head strong{color:var(--text);font-size:12px;font-weight:850;letter-spacing:.01em}.photo-sample-head span{color:var(--text-faint);font-size:9px;line-height:1.4}.photo-sample-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.photo-sample{min-width:0;margin:0}.photo-sample-visual{position:relative;height:86px;overflow:hidden;border:1px solid rgba(142,174,167,.8);border-radius:7px;background:#dce6e3}.photo-sample-visual::after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}.photo-sample img{display:block;width:100%;height:100%;object-fit:cover}.photo-sample.good .photo-sample-visual{border-color:rgba(40,124,115,.74)}.photo-sample.bad .photo-sample-visual{border-color:rgba(184,92,80,.68)}.photo-sample.bad img{filter:saturate(.72) contrast(.92)}.photo-sample-state{position:absolute;z-index:1;top:6px;left:6px;display:inline-flex;align-items:center;min-height:21px;padding:2px 7px;border:1px solid rgba(255,255,255,.78);border-radius:999px;color:#fff;font-size:9px;font-weight:850;line-height:1;box-shadow:0 2px 7px rgba(12,30,27,.18)}.photo-sample.good .photo-sample-state{background:rgba(30,104,95,.94)}.photo-sample.bad .photo-sample-state{background:rgba(168,74,74,.94)}.photo-sample-state::before{display:grid;width:13px;height:13px;margin-right:4px;place-items:center;border:1px solid rgba(255,255,255,.68);border-radius:50%;font:900 9px/1 var(--sans)}.photo-sample.good .photo-sample-state::before{content:'✓'}.photo-sample.bad .photo-sample-state::before{content:'×'}.photo-sample figcaption{display:grid;gap:1px;padding-top:5px}.photo-sample figcaption strong{color:var(--text);font-size:10px;line-height:1.35}.photo-sample figcaption span{color:var(--text-muted);font-size:9px;line-height:1.45}.photo-sample.column .photo-sample-visual{height:118px}.photo-sample.column img{object-position:center 15%}.photo-sample.column.bad img{object-position:center 16%}.photo-sample-group.transfer{padding-bottom:9px}.photo-sample-group.transfer .photo-sample-visual{height:104px}.photo-sample-group.transfer .photo-sample img{object-position:center center}.photo-sample-group.transfer .photo-sample-state{background:rgba(41,49,47,.94)}.photo-sample-group.transfer .photo-sample-state::before{content:'↗';font-size:8px}.photo-sample-cues{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.photo-sample-cues span{padding:3px 6px;border:1px solid rgba(166,199,191,.7);border-radius:4px;background:rgba(255,255,255,.58);color:var(--text-muted);font:700 9px/1.35 var(--mono)}
+@media (min-width:700px){.photo-samples{grid-template-columns:1fr 1fr}.photo-sample-group.transfer{grid-column:1/-1}.photo-sample-group.transfer .photo-sample-visual{height:126px}}
+@media (max-width:420px){.photo-sample-head{align-items:flex-start;flex-direction:column;gap:1px}.photo-sample-pair{gap:6px}.photo-sample-visual{height:78px}.photo-sample.column .photo-sample-visual{height:108px}.photo-sample figcaption span{font-size:8.5px}.photo-sample-group{padding:8px}}
+.photo-sample-group.transfer .photo-sample-pair{grid-template-columns:1fr}
+.offline-ocr-prep{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;margin:0 0 12px;padding:12px;border:1px solid rgba(154,190,181,.72);border-radius:8px;background:rgba(255,255,255,.48)}.offline-ocr-prep[hidden]{display:none}.offline-ocr-copy{display:grid;min-width:0;gap:3px}.offline-ocr-kicker{color:#52736d;font:750 9px/1.2 var(--mono);letter-spacing:.075em}.offline-ocr-copy strong{color:#253b37;font-size:13px;font-weight:780;line-height:1.35}.offline-ocr-copy p{margin:0;color:#718580;font-size:10px;line-height:1.55}.offline-ocr-actions{display:grid;align-content:center;justify-items:end;gap:5px;min-width:126px}.offline-ocr-button{min-height:36px;padding:0 10px;border:1px solid var(--accent);border-radius:6px;background:rgba(255,255,255,.84);color:var(--accent);font:750 11px/1.2 var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.offline-ocr-button:hover:not(:disabled){background:var(--accent);color:#fff}.offline-ocr-button:disabled{border-color:rgba(105,168,156,.5);background:rgba(223,241,236,.7);color:#52736d;cursor:default}.offline-ocr-status{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:0;color:#718580;font:700 9px/1.3 var(--mono);letter-spacing:.01em;text-align:right}.offline-ocr-status .photo-status-pulse{width:16px;height:16px;flex:0 0 auto}.offline-app-install{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:9px;border-top:1px solid rgba(154,190,181,.5)}.offline-app-install[hidden]{display:none}.offline-app-copy{display:grid;min-width:0;gap:2px}.offline-app-copy strong{color:#46645f;font:750 10px/1.35 var(--sans)}.offline-app-copy span{color:#718580;font-size:9px;line-height:1.45}.offline-app-button{flex:0 0 auto;min-height:34px;padding:0 9px;border:1px solid rgba(40,124,115,.58);border-radius:6px;background:transparent;color:#287c73;font:750 10px/1.2 var(--sans);cursor:pointer}.offline-app-button:hover{background:rgba(40,124,115,.1)}.offline-ocr-prep.is-downloading{border-color:rgba(40,124,115,.58)}.offline-ocr-prep.is-ready{border-color:rgba(105,168,156,.56);background:rgba(235,248,244,.56)}.offline-ocr-prep.is-failed{border-color:rgba(184,92,80,.55)}.offline-ocr-prep.is-failed .offline-ocr-status{color:#a84a4a}@media (max-width:620px){.offline-ocr-prep{grid-template-columns:1fr;gap:10px;padding:11px}.offline-ocr-actions{justify-items:stretch;min-width:0}.offline-ocr-button{min-height:42px}.offline-ocr-status{justify-content:flex-start;text-align:left}.offline-app-install{align-items:flex-start}.offline-app-button{min-height:40px}}
+.photo-samples{grid-template-columns:1fr}.photo-sample-group.transfer{grid-column:auto}
+@media (max-width:620px){.photo-sample-pair{grid-template-columns:1fr}.photo-sample-visual{height:102px}.photo-sample.column .photo-sample-visual{height:156px}.photo-sample-group.transfer .photo-sample-visual{height:116px}.photo-sample img,.photo-sample.column img,.photo-sample.column.bad img{object-fit:contain;object-position:center}.photo-sample figcaption{padding:5px 2px 2px}.photo-sample figcaption strong{font-size:10.5px}.photo-sample figcaption span{font-size:9px}}
+#report .report-grid{grid-template-columns:1fr!important}.report-intro{margin:-4px 0 18px;color:var(--text-muted);font-size:13px}.report-dynamic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.report-dynamic .field-wide{grid-column:1/-1}.report-dynamic input[type=number]{width:100%;min-height:48px;padding:11px 12px;border:1px solid rgba(156,190,181,.84);border-radius:8px;font:16px var(--sans)}.report-dynamic input[type=number]:focus{border-color:var(--accent);outline:3px solid rgba(40,124,115,.18)}.report-choice{margin:0 0 16px;padding:0;border:0}.report-choice legend{margin-bottom:8px;color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.05em}.report-options{display:flex;flex-wrap:wrap;gap:8px}.report-option{position:relative}.report-option input{position:absolute;opacity:0;pointer-events:none}.report-option span{display:inline-flex;align-items:center;min-height:42px;padding:8px 12px;border:1px solid rgba(156,190,181,.84);border-radius:7px;background:rgba(255,255,255,.82);color:var(--text-muted);font-size:13px;font-weight:700;cursor:pointer}.report-option input:checked+span{border-color:var(--accent);background:var(--accent);color:#fff}.report-option input:focus-visible+span{outline:3px solid rgba(40,124,115,.22);outline-offset:2px}.report-readonly{min-height:48px;padding:11px 12px;border:1px solid rgba(171,207,198,.72);border-radius:8px;background:rgba(244,249,248,.64);color:var(--text-muted);font-size:13px;white-space:pre-wrap}.report-help{margin:-8px 0 14px;color:var(--text-faint);font-size:11px}.report-required{color:#a84a4a}.report-entry{display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin-top:12px;padding:8px 12px;border:1px solid var(--border-strong);border-radius:7px;background:rgba(255,255,255,.76);color:var(--accent);font:700 12px var(--sans);cursor:pointer}.report-entry:hover{border-color:var(--accent);background:rgba(242,250,248,.92)}.report-station-field{position:relative}.report-station-field .sugg{top:calc(100% - 12px)}.report-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.report-context-note{margin:0 0 16px;padding:10px 12px;border-left:3px solid var(--accent);background:rgba(244,249,248,.7);color:var(--text-muted);font-size:12px}.report-grid>.field{grid-column:1/-1}@media(max-width:620px){.report-dynamic{grid-template-columns:1fr}.report-dynamic .field-wide{grid-column:1}.report-options{display:grid;grid-template-columns:1fr 1fr}.report-option span{width:100%;justify-content:center;text-align:center}.report-actions{display:grid;grid-template-columns:1fr}.report-actions>*{width:100%}}
+</style>
+<style>
+/* Keep the anti-spam honeypot entirely outside the visual layout. */
+.report-honeypot{position:fixed!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;margin:-1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}.report-honeypot[hidden],#reportMsg:empty{display:none!important}
+.report-honeypot input{width:1px!important;min-width:0!important;min-height:0!important;height:1px!important;margin:0!important;padding:0!important;border:0!important}
+/* Compact status strip: sampled from a platform indicator rather than a generic AI process card. */
+.photo-status{--ocr-progress:14%;position:relative;display:block;margin-top:12px;padding:0;overflow:hidden;border:1px solid rgba(154,190,181,.72);border-radius:9px;background:rgba(250,253,252,.88);box-shadow:0 1px 0 rgba(255,255,255,.94),0 7px 18px rgba(33,91,83,.055)}.photo-status[hidden]{display:none}
+.photo-status::before{content:none}
+.photo-status-head{display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:10px;min-height:58px;padding:10px 12px}
+.photo-status-pulse{display:block;width:32px;height:32px;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;color:inherit}.photo-status-pulse circle,.photo-status-pulse path{shape-rendering:geometricPrecision}
+.photo-status-copy{display:grid;min-width:0;gap:2px}.photo-status-kicker{color:#52736d;font:750 9px/1.2 var(--mono);letter-spacing:.075em}.photo-status-copy strong{overflow:hidden;color:#253b37;font-size:13px;font-weight:780;line-height:1.32;text-overflow:ellipsis;white-space:nowrap}.photo-status-copy>span:last-child{overflow:hidden;color:#718580;font:500 10px/1.35 var(--sans);text-overflow:ellipsis;white-space:nowrap}.photo-status-live{position:relative;align-self:start;padding:2px 0 2px 9px;color:#52736d;font:750 9px/1.2 var(--mono);letter-spacing:.04em;white-space:nowrap}.photo-status-live::before{position:absolute;top:5px;left:0;width:5px;height:5px;border-radius:50%;background:#5eaa9c;content:''}
+@media(max-width:420px){.photo-status-head{grid-template-columns:30px minmax(0,1fr);gap:9px;min-height:55px;padding:10px 12px}.photo-status-pulse{width:30px;height:30px}.photo-status-live{display:none}.photo-status-copy strong{font-size:12px}.photo-status-copy>span:last-child{font-size:9px}}
+/* Keep the return control away from left-aligned cards and primary actions. */
+#back-to-top{right:20px;left:auto}
+@media(max-width:620px){#back-to-top{right:max(14px,env(safe-area-inset-right));left:auto;bottom:max(16px,env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body>
@@ -311,19 +366,21 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
     <div class="brand-row">
       <div class="eyebrow">KSW-METRO</div>
     </div>
-    <h1>首爾、釜山，我在哪一站？</h1>
-    <p>韓國地鐵中文速查：首爾與釜山的定位、轉乘查詢、站名中韓發音標註。</p>
+    <h1>首爾・釜山地鐵中文查詢與路線規劃</h1>
+    <p><strong>首爾、釜山，我在哪一站？</strong><br>用中文、韓文、羅馬拼音或站號找站，再查附近車站、轉乘與搭車方向。</p>
     <nav class="quick-nav" aria-label="快速導覽">
       <a href="#station-search-panel">找站名</a>
+      <a href="#route-panel">路線規劃</a>
       <a href="#line-browser-panel">路線瀏覽</a>
       <a href="#travel-guide-panel">搭車須知</a>
     </nav>
+    <p class="seo-home-links"><a href="/seoul/">首爾地鐵中文站名與路線</a><span>・</span><a href="/busan/">釜山地鐵中文站名與路線</a><span>・</span><a href="/guide/korea-subway-station-number/">韓國地鐵站號怎麼看</a></p>
     <div class="railbar" id="railbar"></div>
   </header>
 
   <section class="card" id="location-panel">
     <button class="locate" id="btn"><span class="dot"></span>更新目前位置</button>
-    <div class="note" id="note">第一次使用請允許定位。之後再次開啟時會自動更新附近車站。地下月台訊號較弱，結果可能不準。</div>
+    <div class="note" id="note">第一次使用請允許定位，之後會自動更新附近車站。</div>
     <div id="errbox"></div>
   </section>
 
@@ -359,26 +416,27 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
       <div class="chips" id="busan-chips"></div>
     </div>
     <div id="lineres"></div>
+    <p class="data-freshness">資料更新：2026-08-12・路線與站號</p>
   </section>
 
   <section class="card" id="report">
     <div class="card-t">問題回報</div>
+    <p class="report-intro">先選問題類型，我們只會請你填處理這類問題需要的資訊。</p>
     <div class="report-grid">
       <div class="field"><label for="rType">類型</label>
         <select id="rType">
-          <option value="站名或翻譯錯誤">站名或翻譯錯誤</option>
-          <option value="路線規劃有誤">路線規劃有誤</option>
-          <option value="定位結果不準">定位結果不準</option>
-          <option value="電梯／廁所資訊">電梯／廁所資訊</option>
-          <option value="頁面操作問題">頁面操作問題</option>
-          <option value="其他建議">其他建議</option>
+          <option value="station_translation">站名／翻譯錯誤</option>
+          <option value="route_result">路線規劃結果錯誤</option>
+          <option value="fare">票價錯誤</option>
+          <option value="location">定位／附近車站不準</option>
+          <option value="facility">電梯／廁所／無障礙資訊</option>
+          <option value="ui">頁面操作／顯示問題</option>
+          <option value="other">其他建議</option>
         </select></div>
-      <div class="field"><label for="rStation">相關車站</label>
-        <input type="text" id="rStation" placeholder="例如 明洞 / 경복궁 / 424，可留空" autocomplete="off"></div>
-      <div class="field"><label for="rBody">說明</label>
-        <textarea id="rBody" placeholder="請描述你遇到的問題。如果路線有誤，請寫起點、終點和看到的結果。"></textarea></div>
-      <div class="field"><label for="rContact">聯絡方式</label>
-        <input type="email" id="rContact" placeholder="Email，可留空" autocomplete="email"></div>
+      <div id="reportDynamic" class="report-dynamic field-wide"></div>
+      <div class="field"><label for="rContact">聯絡方式（選填）</label>
+        <input type="text" id="rContact" placeholder="Email 或其他方便聯絡的方式" autocomplete="email"></div>
+      <div class="report-honeypot" aria-hidden="true" hidden><label for="rWebsite">網站</label><input id="rWebsite" type="text" tabindex="-1" autocomplete="off"></div>
     </div>
     <div class="report-actions">
       <button class="go" id="sendReport">送出回報</button>
@@ -393,23 +451,24 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
     <details><summary>車票與交通卡</summary><div class="body">
       <b>T-money</b> 是最通用的儲值交通卡，便利商店（CU、GS25、7-11）都能買和加值，地鐵、公車、計程車、超商都能刷。
       <ul>
-        <li>單程票需另付 <b>₩500 押金</b>，出站後在「保證金退還機」退回。</li>
-        <li>基本車資約 <b>₩1,400 起</b>（交通卡），超過 10 公里每 5 公里加價。票價會調整，以站內公告為準。</li>
-        <li>短期旅客也可考慮氣候卡（기후동행카드）等無限搭乘票券。</li>
+        <li><b>首都圈地鐵</b>成人交通卡基本票價為 <b>₩1,550</b>；單次票、機場鐵路與附加區間另有規則。</li>
+        <li><b>釜山都市鐵道</b>成人交通卡第一區間為 <b>₩1,600</b>；輕軌、東海線與 QR 單次票請以現場公告為準。</li>
+        <li>短期旅客可考慮氣候卡（기후동행카드）等票券，但適用路線與票種會調整，購買前先查官方範圍。</li>
       </ul>
+      <p class="data-freshness">票價資訊更新：2026-08-12・<a href="https://english.seoul.go.kr/policy/transportation/modes-of-transport/subway/" target="_blank" rel="noopener noreferrer">首爾市票價說明</a>・<a href="https://www2.humetro.busan.kr/homepage/chs/page/subLocation.do?menu_no=100601040101" target="_blank" rel="noopener noreferrer">釜山交通公社票價說明</a></p>
     </div></details>
     <details><summary>怎麼確認方向對不對</summary><div class="body">
-      每一站都有 <b>三位數站號</b>，第一位是路線、後兩位是順序。月台上看下一站的號碼：
+      站號格式會依城市與系統不同，月台上優先看下一站或終點站名稱，再用站號交叉確認：
       <ul>
-        <li>號碼<b>變大</b>＝往站號大的終點方向。<b>變小</b>＝往站號小的終點方向。</li>
+        <li>多數同線區段可用號碼<b>變大／變小</b>輔助判斷；遇到分支、直通與不同系統時，站名更可靠。</li>
         <li>2 號線是環狀線，看終點站名或下一站名比看號碼準。</li>
         <li>上面的定位結果會直接畫出前後各兩站，對照月台指示牌最快。</li>
       </ul>
     </div></details>
     <details><summary>轉乘與營運時間</summary><div class="body">
       <ul>
-        <li>大約 <b>05:30 開始、24:00 前後收班</b>，末班車時間各線不同，週末要留意。</li>
-        <li>同一張交通卡在 <b>30 分鐘內</b>轉乘地鐵或公車有折扣，別在閘門外亂刷。</li>
+        <li>首末班車、班距與服務時段依路線、方向和日期而異，請在出發當日查看營運商公告或站內電子看板。</li>
+        <li>首都圈使用同一張交通卡轉乘時，通常需在下車後 <b>30 分鐘內</b>轉乘（21:00 至翌日 07:00 為 60 分鐘），且上下車都要感應；適用範圍以官方規定為準。</li>
         <li>轉乘站的通道有些長得誇張（例如鐘路3街、往十里），抓 5–10 分鐘比較保險。</li>
       </ul>
     </div></details>
@@ -420,7 +479,10 @@ input[type=search],input[type=text],input[type=email],select,textarea{background
       </div>
       <div class="icon-row">
         <svg class="gicon" viewBox="0 0 24 24"><circle cx="8" cy="5" r="2"/><path d="M5 21v-7H4v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5h-1v7"/><circle cx="17" cy="5" r="2"/><path d="M14.5 21v-6h-1v-5.2c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V15h-1v6"/></svg>
-        <div><b>洗手間</b>幾乎每站都有，位置大多在<b>閘門內側</b>，進站刷卡後再找最方便。月台上通常也有指標牌。</div>
+        <div>
+          <b>洗手間</b>
+          <p>幾乎每站都有，位置大多在 <span class="inline-em">閘門內側</span>。進站刷卡後再找最方便，月台上通常也有指標牌。</p>
+        </div>
       </div>
     </div></details>
 
@@ -529,11 +591,11 @@ LINES.find(line => line.id === 'D').st.forEach(station => {
 /* ---------- Busan metro regional network ---------- */
 const BUSAN_LINES = [
   ['B1', '1號線', '부산 1호선', '#F06A00', '노포|범어사|남산|두실|구서|장전|부산대|온천장|명륜|동래|교대|연산|시청|양정|부전|서면|범내골|범일|좌천|부산진|초량|부산역|중앙|남포|자갈치|토성|동대신|서대신|대티|괴정|사하|당리|하단|신평|동매|장림|신장림|낫개|다대포항|다대포해수욕장'],
-  ['B2', '2號線', '부산 2호선', '#00A84D', '양산|남양산|부산대양산캠퍼스|증산|호포|금곡|동원|율리|화명|수정|덕천|구명|구남|모라|모덕|덕포|사상|감전|주례|냉정|개금|동의대|가야|부암|서면|전포|국제금융센터·부산은행|문현|지게골|못골|대연|경성대·부경대|남천|금련산|광안|수영|민락|센텀시티|벡스코|동백|해운대|중동|장산'],
+  ['B2', '2號線', '부산 2호선', '#81BF48', '양산|남양산|부산대양산캠퍼스|증산|호포|금곡|동원|율리|화명|수정|덕천|구명|구남|모라|모덕|덕포|사상|감전|주례|냉정|개금|동의대|가야|부암|서면|전포|국제금융센터·부산은행|문현|지게골|못골|대연|경성대·부경대|남천|금련산|광안|수영|민락|센텀시티|벡스코|동백|해운대|중동|장산'],
   ['B3', '3號線', '부산 3호선', '#BB8C00', '대저|체육공원|강서구청|구포|덕천|숙등|남산정|만덕|미남|사직|종합운동장|거제|연산|물만골|배산|망미|수영'],
-  ['B4', '4號線', '부산 4호선', '#217F55', '안평|고촌|윗반송|영산대|석대|반여농산물시장|금사|서동|명장|충렬사|낙민|수안|동래|미남'],
-  ['BGL', '金海輕軌', '부산김해경전철', '#6F2C91', '가야대|장신대|연지공원|박물관|수로왕릉|봉황|부원|김해시청|인제대|김해대학|지내|불암|대사|평강|대저|등구|덕두|김해국제공항|서부산유통지구|괘법르네시떼|사상'],
-  ['DH', '東海線', '동해선', '#0054A6', '부전|거제해맞이|거제|교대|동래|안락|부산원동|재송|센텀|벡스코|신해운대|송정|오시리아|기장|일광|좌천|월래|서생|남창|망양|덕하|개운포|태화강']
+  ['B4', '4號線', '부산 4호선', '#217DCB', '안평|고촌|윗반송|영산대|석대|반여농산물시장|금사|서동|명장|충렬사|낙민|수안|동래|미남'],
+  ['BGL', '金海輕軌', '부산김해경전철', '#8451A0', '가야대|장신대|연지공원|박물관|수로왕릉|봉황|부원|김해시청|인제대|김해대학|지내|불암|대사|평강|대저|등구|덕두|김해국제공항|서부산유통지구|괘법르네시떼|사상'],
+  ['DH', '東海線', '동해선', '#003DA5', '부전|거제해맞이|거제|교대|동래|안락|부산원동|재송|센텀|벡스코|신해운대|송정|오시리아|기장|일광|좌천|월래|서생|남창|망양|덕하|개운포|태화강']
 ];
 // KRIC station coordinates, ordered to match BUSAN_LINES.  Keeping them local
 // makes nearby-station lookup work on GitHub Pages without an API request.
@@ -570,25 +632,851 @@ const busanStationCode = (lineId, index) => {
   if (lineId === 'B2') return String(243 - index);
   if (lineId === 'B3') return String(317 - index);
   if (lineId === 'B4') return String(414 - index);
-  if (lineId === 'BGL') return String(21 - index);
+  if (lineId === 'BGL') return String(521 - index);
   if (lineId === 'DH') return 'K' + String(110 + index);
   return String(index + 1);
 };
 BUSAN_LINES.forEach(([id, zh, ko, color, stations]) => {
   const names = stations.split('|');
   const englishNames = BUSAN_ENGLISH_LINES[id].split('|');
-  LINES.push({ id, zh, ko, color, city: 'busan', loop: false, a: names[0], b: names[names.length - 1],
-    st: names.map((name, index) => {
+  const stationRows = names.map((name, index) => {
       const [lat, lng] = BUSAN_COORDINATES[id][index];
       return [busanStationCode(id, index), name, BUSAN_NAME_OVERRIDES[name] || name, englishNames[index], lat, lng];
-    })
-  });
+    });
+  LINES.push({ id, zh, ko, color, city: 'busan', loop: false,
+    a: stationRows[0][2], b: stationRows[stationRows.length - 1][2], st: stationRows });
 });
 // KRIC's current Donghae-line record uses 월내역; fix the legacy spelling before indexing.
 LINES.find(line => line.id === 'DH').st.find(station => station[1] === '월래').splice(1, 3, '월내', '月內', 'Wollae');
 // The two Jwacheon stations are on opposite sides of Busan and are not an interchange.
 LINES.find(line => line.id === 'B1').st.find(station => station[1] === '좌천').push('B1-jwacheon');
 LINES.find(line => line.id === 'DH').st.find(station => station[1] === '좌천').push('DH-jwacheon');
+
+/* ---------- current Seoul network corrections (2026-08) ---------- */
+// Keep branches separate in the graph.  They share the real junction station,
+// so search and route planning remain possible without pretending that every
+// Line 1 or Line 5 train continues onto every branch.
+const lineById = id => LINES.find(line => line.id === id);
+const S = (code, ko, zh, rom, lat, lng) => [code, ko, zh, rom, lat, lng];
+
+// Line 1: the original dataset stopped at Songnae and treated the Guro split
+// as one uninterrupted line.  Restore the Yeoncheon extension and its three
+// operating branches.  The 2023 extension uses official hyphenated codes.
+const L1 = lineById('1');
+L1.zh = '1號線';
+const L2 = lineById('2');
+L2.zh = '2號線';
+const legacyLine1 = L1.st.map(station => station.slice());
+const guroIndex = legacyLine1.findIndex(station => station[0] === '141');
+L1.st = [
+  S('100-3', '연천', '漣川', 'Yeoncheon', 38.10167, 127.07389),
+  S('100-2', '전곡', '全谷', 'Jeongok', 38.0245, 127.0713),
+  S('100-1', '청산', '青山', 'Cheongsan', 37.99528, 127.07444),
+  S('100', '소요산', '逍遙山', 'Soyosan', 37.9488, 127.0611),
+  S('101', '동두천', '東豆川', 'Dongducheon', 37.9275, 127.0548),
+  S('102', '보산', '保山', 'Bosan', 37.9143, 127.0571),
+  S('103', '동두천중앙', '東豆川中央', 'Dongducheon Jungang', 37.9018, 127.0565),
+  S('104', '지행', '紙杏', 'Jihaeng', 37.8924, 127.0558),
+  S('105', '덕정', '德亭', 'Deokjeong', 37.8432, 127.0615),
+  S('106', '덕계', '德溪', 'Deokgye', 37.8187, 127.0568),
+  S('107', '양주', '楊州', 'Yangju', 37.7743, 127.0448),
+  S('108', '녹양', '綠楊', 'Nogyang', 37.7594, 127.0423),
+  S('109', '가능', '可能', 'Ganeung', 37.7486, 127.0442),
+  S('110', '의정부', '議政府', 'Uijeongbu', 37.7384, 127.0457),
+  S('111', '회룡', '回龍', 'Hoeryong', 37.7246, 127.0467),
+  ...legacyLine1.slice(0, guroIndex + 1)
+];
+L1.a = '漣川'; L1.b = '九老';
+
+const line1West = legacyLine1.slice(guroIndex);
+line1West.push(
+  S('151', '부개', '富開', 'Bugae', 37.4883, 126.7410),
+  S('152', '부평', '富平', 'Bupyeong', 37.4894, 126.7245),
+  S('153', '백운', '白雲', 'Baegun', 37.4835, 126.7072),
+  S('154', '동암', '銅岩', 'Dongam', 37.4714, 126.7029),
+  S('155', '간석', '間石', 'Ganseok', 37.4646, 126.6947),
+  S('156', '주안', '朱安', 'Juan', 37.4649, 126.6803),
+  S('157', '도화', '道禾', 'Dohwa', 37.4662, 126.6687),
+  S('158', '제물포', '濟物浦', 'Jemulpo', 37.4622, 126.6571),
+  S('159', '도원', '桃源', 'Dowon', 37.4683, 126.6425),
+  S('160', '동인천', '東仁川', 'Dongincheon', 37.4753, 126.6320),
+  S('161', '인천', '仁川', 'Incheon', 37.4767, 126.6169)
+);
+// The Yeoncheon–Incheon corridor is the Line 1 main line.  The remaining
+// services below are true split branches and stay after it in the browser.
+L1.st = L1.st.concat(line1West.slice(1));
+L1.b = '仁川';
+LINES.push(
+  { id: '1P', zh: '1號線 京釜·長項線', ko: '1호선 경부·장항선', color: L1.color, loop: false, a: '九老', b: '新昌', st: [
+    legacyLine1[guroIndex],
+    S('P142', '가산디지털단지', '加山數碼園區', 'Gasan Digital Complex', 37.4811, 126.8823),
+    S('P143', '독산', '禿山', 'Doksan', 37.4665, 126.8890),
+    S('P144', '금천구청', '衿川區廳', 'Geumcheon-gu Office', 37.4555, 126.8937),
+    S('P145', '석수', '石水', 'Seoksu', 37.4350, 126.9023),
+    S('P146', '관악', '冠岳', 'Gwanak', 37.4192, 126.9081),
+    S('P147', '안양', '安養', 'Anyang', 37.4014, 126.9228),
+    S('P148', '명학', '鳴鶴', 'Myeonghak', 37.3844, 126.9353),
+    S('P149', '금정', '衿井', 'Geumjeong', 37.3722, 126.9434),
+    S('P150', '군포', '軍浦', 'Gunpo', 37.3539, 126.9485),
+    S('P151', '당정', '堂井', 'Dangjeong', 37.3440, 126.9488),
+    S('P152', '의왕', '義王', 'Uiwang', 37.3209, 126.9489),
+    S('P153', '성균관대', '成均館大', 'Sungkyunkwan Univ.', 37.3006, 126.9708),
+    S('P154', '화서', '華西', 'Hwaseo', 37.2839, 126.9898),
+    S('P155', '수원', '水原', 'Suwon', 37.2663, 127.0000),
+    S('P156', '세류', '細柳', 'Seryu', 37.2444, 127.0136),
+    S('P157', '병점', '餠店', 'Byeongjeom', 37.2068, 127.0332),
+    S('P158', '세마', '洗馬', 'Sema', 37.1876, 127.0431),
+    S('P159', '오산대', '烏山大', 'Osan Univ.', 37.1693, 127.0631),
+    S('P160', '오산', '烏山', 'Osan', 37.1454, 127.0668),
+    S('P161', '진위', '振威', 'Jinwi', 37.1098, 127.0624),
+    S('P162', '송탄', '松炭', 'Songtan', 37.0756, 127.0544),
+    S('P163', '서정리', '西井里', 'Seojeongni', 37.0566, 127.0531),
+    S('P164', '평택지제', '平澤芝制', 'PyeongtaekJije', 37.0189, 127.0705),
+    S('P165', '평택', '平澤', 'Pyeongtaek', 36.9912, 127.0850),
+    S('P166', '성환', '成歡', 'Seonghwan', 36.9156, 127.1264),
+    S('P167', '직산', '稷山', 'Jiksan', 36.8700, 127.1434),
+    S('P168', '두정', '斗井', 'Dujeong', 36.8336, 127.1486),
+    S('P169', '천안', '天安', 'Cheonan', 36.8100, 127.1460),
+    S('P170', '봉명', '鳳鳴', 'Bongmyeong', 36.7973, 127.1358),
+    S('P171', '쌍용', '雙龍', 'Ssangyong', 36.7939, 127.1214),
+    S('P172', '아산', '牙山', 'Asan', 36.7925, 127.1043),
+    S('P173', '탕정', '湯井', 'Tangjeong', 36.7912, 127.0887),
+    S('P174', '배방', '排芳', 'Baebang', 36.7772, 127.0528),
+    S('P175', '온양온천', '溫陽溫泉', 'Onyangoncheon', 36.7801, 127.0055),
+    S('P176', '신창', '新昌', 'Sinchang', 36.7691, 126.9510)
+  ]},
+  { id: '1G', zh: '1號線 光明接駁', ko: '1호선 광명셔틀', color: L1.color, loop: false, a: '衿川區廳', b: '光明', st: [
+    S('P144', '금천구청', '衿川區廳', 'Geumcheon-gu Office', 37.4555, 126.8937),
+    S('P144-1', '광명', '光明', 'Gwangmyeong', 37.4162, 126.8845)
+  ]},
+  { id: '1S', zh: '1號線 西東灘支線', ko: '1호선 서동탄지선', color: L1.color, loop: false, a: '餠店', b: '西東灘', st: [
+    S('P157', '병점', '餠店', 'Byeongjeom', 37.2068, 127.0332),
+    S('P157-1', '서동탄', '西東灘', 'Seodongtan', 37.1954, 127.0511)
+  ]}
+);
+
+// Line 3: Juyeop (310) had been omitted, which also shifted its first stations' coordinates.
+const L3 = lineById('3');
+L3.st.splice(0, 10,
+  S('309', '대화', '大化', 'Daehwa', 37.6761, 126.7474),
+  S('310', '주엽', '注葉', 'Juyeop', 37.6701, 126.7612),
+  S('311', '정발산', '鼎鉢山', 'Jeongbalsan', 37.6596, 126.7733),
+  S('312', '마두', '馬頭', 'Madu', 37.6521, 126.7777),
+  S('313', '백석', '白石', 'Baekseok', 37.6430, 126.7881),
+  S('314', '대곡', '大谷', 'Daegok', 37.6317, 126.8111),
+  S('315', '화정', '花井', 'Hwajeong', 37.6346, 126.8327),
+  S('316', '원당', '元堂', 'Wondang', 37.6532, 126.8430),
+  S('317', '원흥', '元興', 'Wonheung', 37.6507, 126.8731),
+  S('318', '삼송', '三松', 'Samsong', 37.6532, 126.8955),
+  S('319', '지축', '紙杻', 'Jichuk', 37.6481, 126.9138)
+);
+
+// Line 4: Jinjeop extension is open; Pungyang is still planned and deliberately excluded.
+const L4 = lineById('4');
+L4.st.unshift(
+  S('405', '진접', '榛接', 'Jinjeop', 37.7208, 127.2031),
+  S('406', '오남', '梧南', 'Onam', 37.7051, 127.1921),
+  S('408', '별내별가람', '別內別加藍', 'ByeollaeByeolgaram', 37.6677, 127.1274)
+);
+L4.st[3].splice(1, 3, '불암산', '佛巖山', 'Buramsan');
+L4.st.push(
+  S('441', '평촌', '坪村', 'Pyeongchon', 37.3943, 126.9639), S('442', '범계', '範溪', 'Beomgye', 37.3896, 126.9507),
+  S('443', '금정', '衿井', 'Geumjeong', 37.3722, 126.9434), S('444', '산본', '山本', 'Sanbon', 37.3584, 126.9330),
+  S('445', '수리산', '修理山', 'Surisan', 37.3506, 126.9250), S('446', '대야미', '大夜味', 'Daeyami', 37.3285, 126.9173),
+  S('447', '반월', '半月', 'Banwol', 37.3124, 126.9038), S('448', '상록수', '常綠樹', 'Sangnoksu', 37.3029, 126.8666),
+  S('449', '한대앞', '漢大前', 'Hanyang Univ. at Ansan', 37.3095, 126.8539), S('450', '중앙', '中央', 'Jungang', 37.3160, 126.8385),
+  S('451', '고잔', '古棧', 'Gojan', 37.3168, 126.8231), S('452', '초지', '草芝', 'Choji', 37.3206, 126.8061),
+  S('453', '안산', '安山', 'Ansan', 37.3270, 126.7888), S('454', '신길온천', '新吉溫泉', 'Singiloncheon', 37.3375, 126.7673),
+  S('455', '정왕', '正往', 'Jeongwang', 37.3518, 126.7420), S('456', '오이도', '烏耳島', 'Oido', 37.3624, 126.7387)
+);
+L4.a = '榛接'; L4.b = '烏耳島';
+
+// Line 5: Hanam extension and Macheon branch.
+const L5 = lineById('5');
+L5.st.push(S('554', '강일', '江一', 'Gangil', 37.5577, 127.1750), S('555', '미사', '渼沙', 'Misa', 37.5632, 127.1924), S('556', '하남풍산', '河南豐山', 'Hanam Pungsan', 37.5520, 127.2037), S('557', '하남시청', '河南市廳', 'Hanam City Hall', 37.5415, 127.2064), S('558', '하남검단산', '河南黔丹山', 'Hanam Geomdansan', 37.5396, 127.2230));
+L5.b = '河南黔丹山';
+LINES.push({ id: '5M', zh: '5號線 馬川支線', ko: '5호선 마천지선', color: L5.color, loop: false, a: '江東', b: '馬川', st: [
+  S('548', '강동', '江東', 'Gangdong', 37.5358, 127.1325), S('P549', '둔촌동', '遁村洞', 'Dunchon-dong', 37.5271, 127.1366),
+  S('P550', '올림픽공원', '奧林匹克公園', 'Olympic Park', 37.5164, 127.1285), S('P551', '방이', '芳荑', 'Bangi', 37.5082, 127.1268),
+  S('P552', '오금', '梧琴', 'Ogeum', 37.5022, 127.1281), S('P553', '개롱', '開籠', 'Gaerong', 37.4981, 127.1347),
+  S('P554', '거여', '巨餘', 'Geoyeo', 37.4930, 127.1460), S('P555', '마천', '馬川', 'Macheon', 37.4950, 127.1522)
+] });
+
+// Line 7: the Incheon extension is operating through Seongnam (Seoknam).
+const L7 = lineById('7');
+L7.st.push(S('757', '삼산체육관', '三山體育館', 'Samsan Gymnasium', 37.5092, 126.7420), S('758', '굴포천', '掘浦川', 'Gulpocheon', 37.5062, 126.7320), S('759', '부평구청', '富平區廳', 'Bupyeong-gu Office', 37.5074, 126.7221), S('760', '산곡', '山谷', 'Sangok', 37.5084, 126.7060), S('761', '석남', '石南', 'Seongnam', 37.5062, 126.6769));
+L7.b = '石南';
+
+// Shinbundang: only D07–D10 existed.  Add the operating Sinsa–Gwanggyo corridor.
+const LD = lineById('D');
+LD.st = [
+  S('D04', '신사', '新沙', 'Sinsa', 37.5163, 127.0201), S('D05', '논현', '論峴', 'Nonhyeon', 37.5111, 127.0214),
+  S('D06', '신논현', '新論峴', 'Sinnonhyeon', 37.5046, 127.0251), S('D07', '강남', '江南', 'Gangnam', 37.4972, 127.0279),
+  S('D08', '양재', '良才', 'Yangjae', 37.4842, 127.0346), S('D09', '양재시민의숲', '良才市民之林', 'Yangjae Citizen\'s Forest', 37.4700, 127.0384),
+  S('D10', '청계산입구', '清溪山入口', 'Cheonggyesan', 37.4472, 127.0557), S('D11', '판교', '板橋', 'Pangyo', 37.3948, 127.1112),
+  S('D12', '정자', '亭子', 'Jeongja', 37.3660, 127.1081), S('D13', '미금', '美金', 'Migeum', 37.3501, 127.1085),
+  S('D14', '동천', '東川', 'Dongcheon', 37.3378, 127.1028), S('D15', '수지구청', '水枝區廳', 'Suji-gu Office', 37.3226, 127.0948),
+  S('D16', '성복', '星福', 'Seongbok', 37.3135, 127.0804), S('D17', '상현', '上峴', 'Sanghyeon', 37.2979, 127.0694),
+  S('D18', '광교중앙', '光教中央', 'Gwanggyo Jungang', 37.2884, 127.0516), S('D19', '광교', '光教', 'Gwanggyo', 37.3020, 127.0445)
+];
+LD.a = '新沙'; LD.b = '光教';
+
+// Keep the regular lines first; show the split services together at the end.
+// Incheon is part of the regular Line 1 corridor, not a separate branch.
+const SEOUL_LINE_DISPLAY_ORDER = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'D', 'UI', '1P', '1G', '1S', '2B', '2C', '5M'];
+const displayOrder = new Map(SEOUL_LINE_DISPLAY_ORDER.map((id, index) => [id, index]));
+LINES.sort((left, right) => {
+  const leftOrder = left.city === 'busan' ? 100 : displayOrder.get(left.id) ?? 99;
+  const rightOrder = right.city === 'busan' ? 100 : displayOrder.get(right.id) ?? 99;
+  return leftOrder - rightOrder;
+});
+
+/* BEGIN GENERATED STATION NAME AUDIT OVERRIDES */
+// Generated from work/station-audit/final-audit.json (2026-08-12).
+// Station numbers are intentionally unchanged; this block only applies audited names.
+const AUDITED_STATION_NAME_FIXES = [
+  {
+    "lineId": "1",
+    "code": "109",
+    "matchKo": "가능",
+    "zh": "佳陵"
+  },
+  {
+    "lineId": "1",
+    "code": "119",
+    "matchKo": "광운대",
+    "zh": "光雲大學",
+    "en": "Kwangwoon Univ."
+  },
+  {
+    "lineId": "1",
+    "code": "122",
+    "matchKo": "외대앞",
+    "zh": "韓國外國語大學",
+    "en": "Hankuk Univ. of Foreign Studies"
+  },
+  {
+    "lineId": "1",
+    "code": "124",
+    "matchKo": "청량리",
+    "zh": "清涼里"
+  },
+  {
+    "lineId": "1",
+    "code": "127",
+    "matchKo": "동묘앞",
+    "zh": "東廟",
+    "en": "Dongmyo"
+  },
+  {
+    "lineId": "6",
+    "code": "627",
+    "matchKo": "효창공원앞",
+    "zh": "孝昌公園",
+    "en": "Hyochang Park"
+  },
+  {
+    "lineId": "6",
+    "code": "636",
+    "matchKo": "동묘앞",
+    "zh": "東廟",
+    "en": "Dongmyo"
+  },
+  {
+    "lineId": "4",
+    "code": "449",
+    "matchKo": "한대앞",
+    "zh": "漢陽大學"
+  },
+  {
+    "lineId": "2",
+    "code": "209",
+    "matchKo": "한양대",
+    "zh": "漢陽大學",
+    "en": "Hanyang Univ."
+  },
+  {
+    "lineId": "2",
+    "code": "212",
+    "matchKo": "건대입구",
+    "zh": "建國大學",
+    "en": "Konkuk Univ."
+  },
+  {
+    "lineId": "2",
+    "code": "223",
+    "matchKo": "교대",
+    "zh": "首爾教育大學",
+    "en": "Seoul Nat'l Univ. of Education (Court & Prosecutors' Office)"
+  },
+  {
+    "lineId": "2",
+    "code": "228",
+    "matchKo": "서울대입구",
+    "zh": "首爾大學",
+    "en": "Seoul Nat'l Univ. (Gwanak-gu Office)"
+  },
+  {
+    "lineId": "2",
+    "code": "239",
+    "matchKo": "홍대입구",
+    "zh": "弘益大學",
+    "en": "Hongik Univ."
+  },
+  {
+    "lineId": "2",
+    "code": "241",
+    "matchKo": "이대",
+    "zh": "梨花女子大學",
+    "en": "Ewha Womans Univ."
+  },
+  {
+    "lineId": "3",
+    "code": "332",
+    "matchKo": "동대입구",
+    "zh": "東國大學",
+    "en": "Dongguk Univ."
+  },
+  {
+    "lineId": "3",
+    "code": "340",
+    "matchKo": "교대",
+    "zh": "首爾教育大學",
+    "en": "Seoul Nat'l Univ. of Education (Court & Prosecutors' Office)"
+  },
+  {
+    "lineId": "4",
+    "code": "418",
+    "matchKo": "성신여대입구",
+    "zh": "誠信女子大學",
+    "en": "Sungshin Women's Univ. (Donam)"
+  },
+  {
+    "lineId": "4",
+    "code": "419",
+    "matchKo": "한성대입구",
+    "zh": "漢城大學",
+    "en": "Hansung Univ. (Samseongyo)"
+  },
+  {
+    "lineId": "4",
+    "code": "427",
+    "matchKo": "숙대입구",
+    "zh": "淑明女子大學",
+    "en": "Sookmyung Women's Univ. (Seoul Metropolitan Office of Education)"
+  },
+  {
+    "lineId": "4",
+    "code": "432",
+    "matchKo": "총신대입구",
+    "zh": "總神大學",
+    "en": "Chongshin Univ. (Isu)"
+  },
+  {
+    "lineId": "6",
+    "code": "640",
+    "matchKo": "고려대",
+    "zh": "高麗大學",
+    "en": "Korea Univ. (Jongam)"
+  },
+  {
+    "lineId": "7",
+    "code": "727",
+    "matchKo": "건대입구",
+    "zh": "建國大學",
+    "en": "Konkuk Univ."
+  },
+  {
+    "lineId": "7",
+    "code": "738",
+    "matchKo": "숭실대입구",
+    "zh": "崇實大學",
+    "en": "Soongsil Univ. (Salpijae)"
+  },
+  {
+    "lineId": "A",
+    "code": "A03",
+    "matchKo": "홍대입구",
+    "zh": "弘益大學",
+    "en": "Hongik Univ."
+  },
+  {
+    "lineId": "UI",
+    "code": "S120",
+    "matchKo": "성신여대입구",
+    "zh": "誠信女子大學",
+    "en": "Sungshin Women's Univ. (Donam)"
+  },
+  {
+    "lineId": "1P",
+    "code": "P153",
+    "matchKo": "성균관대",
+    "zh": "成均館大學"
+  },
+  {
+    "lineId": "1P",
+    "code": "P159",
+    "matchKo": "오산대",
+    "zh": "烏山大學"
+  },
+  {
+    "lineId": "B1",
+    "code": "124",
+    "matchKo": "교대",
+    "zh": "釜山教育大學",
+    "en": "Busan Nat'l Univ. of Edu."
+  },
+  {
+    "lineId": "UI",
+    "code": "S112",
+    "matchKo": "419민주묘지",
+    "ko": "4.19민주묘지",
+    "en": "April 19th National Cemetery (Duksung Women's Univ.)"
+  },
+  {
+    "lineId": "BGL",
+    "code": "504",
+    "matchKo": "김해국제공항",
+    "zh": "機場",
+    "ko": "공항",
+    "en": "Gimhae Int'l Airport"
+  },
+  {
+    "lineId": "BGL",
+    "code": "518",
+    "matchKo": "박물관",
+    "en": "Gimhae National Museum"
+  },
+  {
+    "lineId": "BGL",
+    "code": "506",
+    "matchKo": "등구",
+    "zh": "登龜"
+  },
+  {
+    "lineId": "3",
+    "code": "343",
+    "matchKo": "매봉",
+    "zh": "梅峰"
+  },
+  {
+    "lineId": "4",
+    "code": "408",
+    "matchKo": "별내별가람",
+    "zh": "別內星江"
+  },
+  {
+    "lineId": "4",
+    "code": "436",
+    "matchKo": "경마공원",
+    "zh": "首爾賽馬公園",
+    "en": "Seoul Racecourse Park"
+  },
+  {
+    "lineId": "5",
+    "code": "530",
+    "matchKo": "애오개",
+    "zh": "兒嶺"
+  },
+  {
+    "lineId": "6",
+    "code": "613",
+    "matchKo": "독바위",
+    "zh": "瓮岩"
+  },
+  {
+    "lineId": "6",
+    "code": "632",
+    "matchKo": "버티고개",
+    "zh": "波堤嶺"
+  },
+  {
+    "lineId": "7",
+    "code": "712",
+    "matchKo": "마들",
+    "zh": "馬得"
+  },
+  {
+    "lineId": "7",
+    "code": "740",
+    "matchKo": "장승배기",
+    "zh": "長丞拜基"
+  },
+  {
+    "lineId": "A",
+    "code": "A071",
+    "matchKo": "청라국제도시",
+    "zh": "青羅國際城",
+    "en": "Cheongna Int'l City"
+  },
+  {
+    "lineId": "DH",
+    "code": "K129",
+    "matchKo": "망양",
+    "zh": "望陽"
+  },
+  {
+    "lineId": "B1",
+    "code": "131",
+    "matchKo": "두실",
+    "zh": "斗實"
+  },
+  {
+    "lineId": "B1",
+    "code": "100",
+    "matchKo": "동매",
+    "zh": "東嵋"
+  },
+  {
+    "lineId": "B1",
+    "code": "097",
+    "matchKo": "낫개",
+    "zh": "納溉"
+  },
+  {
+    "lineId": "B2",
+    "code": "214",
+    "matchKo": "못골",
+    "zh": "池谷"
+  },
+  {
+    "lineId": "B4",
+    "code": "406",
+    "matchKo": "명장",
+    "zh": "鳴藏"
+  },
+  {
+    "lineId": "B4",
+    "code": "408",
+    "matchKo": "금사",
+    "zh": "錦絲"
+  },
+  {
+    "lineId": "3",
+    "code": "350",
+    "matchKo": "가락시장",
+    "en": "Garak Market"
+  },
+  {
+    "lineId": "7",
+    "code": "746",
+    "matchKo": "가산디지털단지",
+    "en": "Gasan Digital Complex"
+  },
+  {
+    "lineId": "9",
+    "code": "936",
+    "matchKo": "올림픽공원",
+    "en": "Olympic Park (Korea National Sport University)",
+    "zh": "奧林匹克公園"
+  },
+  {
+    "lineId": "1",
+    "code": "132",
+    "matchKo": "시청",
+    "en": "City Hall"
+  },
+  {
+    "lineId": "1",
+    "code": "133",
+    "matchKo": "서울역",
+    "en": "Seoul Station"
+  },
+  {
+    "lineId": "2",
+    "code": "201",
+    "matchKo": "시청",
+    "en": "City Hall"
+  },
+  {
+    "lineId": "2",
+    "code": "202",
+    "matchKo": "을지로입구",
+    "en": "Euljiro 1(il)ga"
+  },
+  {
+    "lineId": "2",
+    "code": "205",
+    "matchKo": "동대문역사문화공원",
+    "en": "Dongdaemun History & Culture Park(DDP)"
+  },
+  {
+    "lineId": "2",
+    "code": "218",
+    "matchKo": "종합운동장",
+    "en": "Sports Complex"
+  },
+  {
+    "lineId": "2",
+    "code": "232",
+    "matchKo": "구로디지털단지",
+    "en": "Guro Digital Complex"
+  },
+  {
+    "lineId": "2",
+    "code": "236",
+    "matchKo": "영등포구청",
+    "en": "Yeongdeungpogu Office"
+  },
+  {
+    "lineId": "3",
+    "code": "339",
+    "matchKo": "고속터미널",
+    "en": "Express Bus Terminal"
+  },
+  {
+    "lineId": "3",
+    "code": "341",
+    "matchKo": "남부터미널",
+    "en": "Nambu Bus Terminal (Seoul Arts Center)"
+  },
+  {
+    "lineId": "3",
+    "code": "351",
+    "matchKo": "경찰병원",
+    "en": "National Police Hospital"
+  },
+  {
+    "lineId": "4",
+    "code": "422",
+    "matchKo": "동대문역사문화공원",
+    "en": "Dongdaemun History & Culture Park(DDP)"
+  },
+  {
+    "lineId": "4",
+    "code": "426",
+    "matchKo": "서울역",
+    "en": "Seoul Station"
+  },
+  {
+    "lineId": "4",
+    "code": "437",
+    "matchKo": "대공원",
+    "en": "Seoul Grand Park"
+  },
+  {
+    "lineId": "4",
+    "code": "439",
+    "matchKo": "정부과천청사",
+    "en": "Government Complex Gwacheon"
+  },
+  {
+    "lineId": "5",
+    "code": "512",
+    "matchKo": "김포공항",
+    "en": "Gimpo Int'l Airport"
+  },
+  {
+    "lineId": "5",
+    "code": "523",
+    "matchKo": "영등포구청",
+    "en": "Yeongdeungpogu Office"
+  },
+  {
+    "lineId": "5",
+    "code": "524",
+    "matchKo": "영등포시장",
+    "en": "Yeongdeungpo Market"
+  },
+  {
+    "lineId": "5",
+    "code": "536",
+    "matchKo": "동대문역사문화공원",
+    "en": "Dongdaemun History & Culture Park(DDP)"
+  },
+  {
+    "lineId": "6",
+    "code": "619",
+    "matchKo": "월드컵경기장",
+    "en": "World Cup Stadium(Seongsan)"
+  },
+  {
+    "lineId": "6",
+    "code": "620",
+    "matchKo": "마포구청",
+    "en": "Mapogu Office"
+  },
+  {
+    "lineId": "6",
+    "code": "645",
+    "matchKo": "태릉입구",
+    "en": "Taereung"
+  },
+  {
+    "lineId": "7",
+    "code": "717",
+    "matchKo": "태릉입구",
+    "en": "Taereung"
+  },
+  {
+    "lineId": "7",
+    "code": "726",
+    "matchKo": "어린이대공원",
+    "en": "Children's Grand Park(Sejong Univ.)"
+  },
+  {
+    "lineId": "7",
+    "code": "730",
+    "matchKo": "강남구청",
+    "en": "Gangnamgu Office"
+  },
+  {
+    "lineId": "7",
+    "code": "734",
+    "matchKo": "고속터미널",
+    "en": "Express Bus Terminal"
+  },
+  {
+    "lineId": "7",
+    "code": "752",
+    "matchKo": "부천종합운동장",
+    "en": "Bucheon Stadium"
+  },
+  {
+    "lineId": "7",
+    "code": "755",
+    "matchKo": "부천시청",
+    "en": "Bucheon City Hall"
+  },
+  {
+    "lineId": "7",
+    "code": "761",
+    "matchKo": "석남",
+    "en": "Seongnam (Geobuk Market)"
+  },
+  {
+    "lineId": "8",
+    "code": "823",
+    "matchKo": "남한산성입구",
+    "en": "Namhansanseong(Seongnam Court & Prosecutors' Office)"
+  },
+  {
+    "lineId": "9",
+    "code": "902",
+    "matchKo": "김포공항",
+    "en": "Gimpo Int'l Airport"
+  },
+  {
+    "lineId": "9",
+    "code": "903",
+    "matchKo": "공항시장",
+    "en": "Airport Market"
+  },
+  {
+    "lineId": "9",
+    "code": "914",
+    "matchKo": "국회의사당",
+    "en": "National Assembly"
+  },
+  {
+    "lineId": "9",
+    "code": "923",
+    "matchKo": "고속터미널",
+    "en": "Express Bus Terminal"
+  },
+  {
+    "lineId": "9",
+    "code": "930",
+    "matchKo": "종합운동장",
+    "en": "Sports Complex"
+  },
+  {
+    "lineId": "9",
+    "code": "938",
+    "matchKo": "중앙보훈병원",
+    "en": "VHS Medical Center"
+  },
+  {
+    "lineId": "A",
+    "code": "A01",
+    "matchKo": "서울역",
+    "en": "Seoul Station"
+  },
+  {
+    "lineId": "A",
+    "code": "A05",
+    "matchKo": "김포공항",
+    "en": "Gimpo Int'l Airport"
+  },
+  {
+    "lineId": "A",
+    "code": "A09",
+    "matchKo": "공항화물청사",
+    "en": "Incheon Int'l Airport Cargo Terminal"
+  },
+  {
+    "lineId": "A",
+    "code": "A10",
+    "matchKo": "인천공항1터미널",
+    "en": "Incheon Int'l Airport Terminal 1"
+  },
+  {
+    "lineId": "A",
+    "code": "A11",
+    "matchKo": "인천공항2터미널",
+    "en": "Incheon Int'l Airport Terminal 2"
+  },
+  {
+    "lineId": "UI",
+    "code": "S111",
+    "matchKo": "솔밭공원",
+    "en": "Solbat Park"
+  },
+  {
+    "lineId": "UI",
+    "code": "S118",
+    "matchKo": "북한산보국문",
+    "en": "Bukhansan Bogungmun (Seokyeong Univ.)"
+  },
+  {
+    "lineId": "UI",
+    "code": "S119",
+    "matchKo": "정릉",
+    "en": "Jeongneung (Kookmin Univ.)"
+  },
+  {
+    "lineId": "1P",
+    "code": "P163",
+    "matchKo": "서정리",
+    "en": "Seojeong-ri"
+  },
+  {
+    "lineId": "1P",
+    "code": "P171",
+    "matchKo": "쌍용",
+    "en": "Ssangyong (Korea Nazarene Univ.)"
+  },
+  {
+    "lineId": "2C",
+    "code": "234-2",
+    "matchKo": "양천구청",
+    "en": "Yangcheon-gu Office"
+  },
+  {
+    "lineId": "5M",
+    "code": "P550",
+    "matchKo": "올림픽공원",
+    "zh": "奧林匹克公園",
+    "en": "Olympic Park (Korea National Sport University)"
+  },
+  {
+    "lineId": "DH",
+    "code": "K113",
+    "matchKo": "교대",
+    "zh": "釜山教育大學",
+    "en": "Busan Nat'l Univ. of Edu."
+  }
+];
+AUDITED_STATION_NAME_FIXES.forEach(fix => {
+  const line = LINES.find(item => item.id === fix.lineId);
+  if (!line) return;
+  const station = line.st.find(item => String(item[0]) === fix.code || item[1] === fix.matchKo);
+  if (!station) return;
+  if (fix.ko) station[1] = fix.ko;
+  if (fix.zh) station[2] = fix.zh;
+  if (fix.en) station[3] = fix.en;
+});
+/* END GENERATED STATION NAME AUDIT OVERRIDES */
 
 /* ---------- index ---------- */
 const LMAP = {}; LINES.forEach(l => LMAP[l.id] = l);
@@ -631,7 +1519,7 @@ function facilityIcon(kind) {
 
 function facLinks(st) {
   const box = el('div', 'fac');
-  const query = st.ko + '역';
+  const query = st.ko.endsWith('역') ? st.ko : st.ko + '역';
   const mk = (icon, label, kw, className = '') => {
     const a = el('a', className);
     a.append(facilityIcon(icon), document.createTextNode(label));
@@ -641,7 +1529,7 @@ function facLinks(st) {
       a.target = '_self';
     } else {
       a.href = naverMapWebSearch(search);
-      a.target = '_blank'; a.rel = 'noopener';
+      a.target = '_blank'; a.rel = 'noopener noreferrer';
     }
     return a;
   };
@@ -701,7 +1589,6 @@ function transferWalk(station) {
   if (TRANSFER_WALK_OVERRIDES[key]) return TRANSFER_WALK_OVERRIDES[key];
   return new Set(station.on.map(connection => connection.line)).size >= 3 ? 5 : 4;
 }
-const XFER = 7; // 路徑尋找的固定權重。顯示總時間改由上方的逐站模型計算。
 const DWELL = 0.5;                  // 每站停靠
 // 以公開時刻／端到端行車時間校正。其餘路線以一般都市地鐵站距模型估算。
 const PACE = { A: 1.06, B1: 1.55, D: 1.09, UI: 2.14, BGL: 1.9, DH: 1.5 };
@@ -725,14 +1612,21 @@ LINES.forEach((l, li) => {
   if (l.loop && n > 2) link(nid(li, n - 1), nid(li, 0), hop(n - 1, 0), 'ride');
 });
 ALL.forEach(st => {
-  for (let i = 0; i < st.on.length; i++)
-    for (let j = i + 1; j < st.on.length; j++)
-      link(nid(st.on[i].li, st.on[i].si), nid(st.on[j].li, st.on[j].si), XFER, 'xfer');
+  for (let i = 0; i < st.on.length; i++) {
+    for (let j = i + 1; j < st.on.length; j++) {
+      const left = st.on[i], right = st.on[j];
+      const leftNode = nid(left.li, left.si), rightNode = nid(right.li, right.si);
+      // 轉乘成本與畫面顯示使用同一套「步行＋下一班等候」模型。
+      ADJ[leftNode].push({ to: rightNode, w: transferWalk(st) + expectedWait(LINES[right.li]), kind: 'xfer' });
+      ADJ[rightNode].push({ to: leftNode, w: transferWalk(st) + expectedWait(LINES[left.li]), kind: 'xfer' });
+    }
+  }
 });
 
 function plan(from, to) {
   const D = {}, P = {}, seen = {};
-  from.on.forEach(o => D[nid(o.li, o.si)] = 0);
+  // 起點候車時間也納入選線，避免路徑採固定權重、結果卻顯示另一套總時間。
+  from.on.forEach(o => D[nid(o.li, o.si)] = expectedWait(LINES[o.li]));
   const goal = new Set(to.on.map(o => nid(o.li, o.si)));
   while (true) {
     let u = -1, best = Infinity;
@@ -759,10 +1653,13 @@ function roundel(lineId, code, small) {
   d.setAttribute('aria-label', d.title);
   return d;
 }
-function row(st, meters) {
+function row(st, meters, preferredLineId, includeStationPageLink = false) {
   const b = el('button', 'srow');
   const rds = el('div', 'roundels');
-  st.on.slice(0, 3).forEach(o => rds.appendChild(roundel(o.line, o.code, true)));
+  const servedBy = preferredLineId
+    ? st.on.slice().sort((left, right) => Number(right.line === preferredLineId) - Number(left.line === preferredLineId))
+    : st.on;
+  servedBy.slice(0, 3).forEach(o => rds.appendChild(roundel(o.line, o.code, true)));
   const t = el('div');
   t.appendChild(el('div', 'zh', st.zh));
   t.appendChild(el('span', 'citytag ' + st.city, st.city === 'busan' ? '釜山' : '首爾'));
@@ -770,7 +1667,16 @@ function row(st, meters) {
   b.append(rds, t);
   if (meters != null) b.appendChild(el('div', 'far', fmt(meters)));
   b.onclick = () => show(st);
-  return b;
+  if (!includeStationPageLink) return b;
+
+  const wrap = el('div', 'srow-wrap');
+  const pageLink = document.createElement('a');
+  const primary = servedBy[0];
+  pageLink.className = 'station-page-link';
+  pageLink.href = `/${st.city}/station/${stationPageSlug(primary, st)}/`;
+  pageLink.textContent = `查看${st.zh}站完整資訊`;
+  wrap.append(b, pageLink);
+  return wrap;
 }
 
 /* ---------- strip map ---------- */
@@ -803,7 +1709,7 @@ function stripFor(lineId, idx) {
 }
 
 /* ---------- station panel ---------- */
-function show(st, meters) {
+function show(st, meters, accuracy) {
   const wrap = el('section', 'card');
   wrap.appendChild(el('div', 'card-t', meters == null ? '車站資訊' : '離你最近的車站'));
   const hit = el('div', 'hit');
@@ -812,9 +1718,15 @@ function show(st, meters) {
   const txt = el('div');
   txt.appendChild(el('div', 'name-zh', st.zh));
   txt.appendChild(el('span', 'citytag ' + st.city, st.city === 'busan' ? '釜山' : '首爾'));
-  txt.appendChild(el('div', 'name-ko', st.ko + '역'));
+  txt.appendChild(el('div', 'name-ko', st.ko.endsWith('역') ? st.ko : st.ko + '역'));
   txt.appendChild(el('div', 'name-rom rom', st.rom));
   if (meters != null) txt.appendChild(el('div', 'dist', '直線距離約 ' + fmt(meters)));
+  if (Number.isFinite(accuracy)) {
+    const uncertain = accuracy > 500;
+    txt.appendChild(el('div', 'loc-quality' + (uncertain ? ' warn' : ''), uncertain
+      ? '定位範圍約 ' + fmt(accuracy) + '，附近車站結果可能不準。請到出入口附近再更新。'
+      : '定位精度約 ' + fmt(accuracy) + '。地下月台訊號較弱時，結果可能有誤差。'));
+  }
   txt.appendChild(facLinks(st));
   const setFrom = el('button', 'mini', '以這站為起點規劃路線');
   setFrom.onclick = () => { setPick('from', st); $('#fTo').focus(); $('#fTo').scrollIntoView({ block: 'center' }); };
@@ -826,6 +1738,12 @@ function show(st, meters) {
     $('#fFrom').scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
   txt.appendChild(setTo);
+  const reportButton = el('button', 'mini', '回報這個站名');
+  reportButton.onclick = () => openReport('station_translation', {
+    source: 'station_search', station: st,
+    searchSnapshot: `查看車站：${stationLabel(st)}；站號：${stationCodes(st)}`
+  });
+  txt.appendChild(reportButton);
   hit.append(rds, txt);
   wrap.appendChild(hit);
   st.on.forEach(o => wrap.appendChild(stripFor(o.line, o.si)));
@@ -872,36 +1790,43 @@ function locate({ automatic = false } = {}) {
   locating = true;
   if (!automatic) clearAutoLocationTimer();
   eb.replaceChildren();
-  if (!navigator.geolocation) { eb.appendChild(el('div', 'err', '這個瀏覽器無法使用定位，請改用下方站名搜尋。')); return; }
-  if (!window.isSecureContext) { eb.appendChild(el('div', 'err', locationHelpMessage())); return; }
+  if (!navigator.geolocation) { locating = false; eb.appendChild(el('div', 'err', '這個瀏覽器不支援定位。請改用下方搜尋找站。')); return; }
+  if (!window.isSecureContext) { locating = false; eb.appendChild(el('div', 'err', locationHelpMessage())); return; }
   btn.disabled = true; btn.lastChild.textContent = '定位中…';
   navigator.geolocation.getCurrentPosition(pos => {
     locating = false;
     btn.disabled = false; btn.lastChild.textContent = '更新目前位置';
     const { latitude: la, longitude: lo } = pos.coords;
+    const accuracy = Number.isFinite(pos.coords.accuracy) ? Math.max(0, pos.coords.accuracy) : null;
     let best = null;
     ALL.forEach(s => {
       if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) return;
       const d = dist(la, lo, s.lat, s.lng);
       if (!best || d < best.d) best = { s, d };
     });
-    if (best.d > 20000) {
+    const distanceLowerBound = Math.max(0, best.d - (accuracy || 0));
+    if (distanceLowerBound > 20000) {
       clearAutoLocationTimer();
       const city = best.s.city === 'busan' ? '釜山' : '首爾';
       eb.appendChild(el('div', 'err', '附近找不到首爾或釜山地鐵站。最近的是' + city + '「' + best.s.zh + '」站，約 ' + fmt(best.d) + '。你仍可使用下方搜尋或路線規劃。'));
+      $('#note').textContent = '已完成定位，需要時可再更新目前位置。';
       return;
     }
     lastLocatedAt = Date.now();
-    $('#note').textContent = best.d <= AUTO_LOCATION_NEARBY_METERS
+    const effectiveDistance = Math.max(best.d, accuracy || 0);
+    $('#note').textContent = accuracy != null && accuracy > 500
+      ? '定位範圍約 ' + fmt(accuracy) + '，結果可能不準。請到出入口附近再更新。'
+      : effectiveDistance <= AUTO_LOCATION_NEARBY_METERS
       ? '已更新目前位置。靠近地鐵站時，每 5 分鐘會再更新一次。'
       : '已更新目前位置。離地鐵站較遠，暫不自動更新。需要時可手動更新。';
-    scheduleAutoLocation(best.d);
-    show(best.s, best.d);
+    scheduleAutoLocation(effectiveDistance);
+    show(best.s, best.d, accuracy);
   }, err => {
     locating = false;
     btn.disabled = false; btn.lastChild.textContent = '再試一次';
     const msg = { 1: locationHelpMessage(), 2: '收不到定位訊號。可走到閘門或出入口附近後再試。', 3: '定位逾時，請再試一次。' };
     eb.appendChild(el('div', 'err', msg[err.code] || '無法取得位置，請改用下方站名搜尋。'));
+    $('#note').textContent = '定位未完成。也可以直接使用下方搜尋或路線規劃。';
   }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 });
 }
 $('#btn').onclick = locate;
@@ -923,12 +1848,56 @@ document.addEventListener('visibilitychange', () => {
 })();
 
 /* ---------- search helpers ---------- */
+const normalizeRomanSearch = value => String(value || '').toLowerCase().replace(/[^a-z]/g, '');
+const SEARCH_INDEX = ALL.map(st => ({
+  station: st,
+  zh: String(st.zh || '').toLowerCase(),
+  ko: String(st.ko || '').toLowerCase(),
+  roman: normalizeRomanSearch(st.rom),
+  codes: st.on.map(o => String(o.code).toLowerCase())
+}));
 function match(q) {
   q = q.trim().toLowerCase();
   if (!q) return [];
-  return ALL.filter(s => s.zh.includes(q) || s.ko.includes(q)
-    || s.rom.toLowerCase().replace(/[^a-z]/g, '').includes(q.replace(/[^a-z]/g, '')) && /[a-z]/.test(q)
-    || s.on.some(o => o.code.toLowerCase().startsWith(q)));
+  const roman = normalizeRomanSearch(q);
+  const isRoman = /[a-z]/.test(q);
+  const ranked = SEARCH_INDEX.map((item, sourceOrder) => {
+    const exactName = item.zh === q || item.ko === q || isRoman && item.roman === roman;
+    const exactCode = item.codes.some(code => code === q);
+    const startsName = item.zh.startsWith(q) || item.ko.startsWith(q) || isRoman && item.roman.startsWith(roman);
+    const startsCode = item.codes.some(code => code.startsWith(q));
+    const containsName = item.zh.includes(q) || item.ko.includes(q) || isRoman && item.roman.includes(roman);
+    const score = exactName || exactCode ? 0 : startsName || startsCode ? 1 : containsName ? 2 : Infinity;
+    return { item, score, sourceOrder };
+  }).filter(result => Number.isFinite(result.score));
+  ranked.sort((left, right) => left.score - right.score
+    || Math.min(left.item.zh.length, left.item.ko.length) - Math.min(right.item.zh.length, right.item.ko.length)
+    || left.sourceOrder - right.sourceOrder);
+  return ranked.map(result => result.item.station);
+}
+function stationPageSlug(connection, station) {
+  const rom = String(station.rom || '').toLowerCase().normalize('NFKD').replace(/[’']/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'station';
+  const code = String(connection.code || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  return `${rom}-${code}`;
+}
+function routeMatch(q, which) {
+  const city = which === 'to' && PICK.from ? PICK.from.city : null;
+  return match(q).filter(station => !city || station.city === city);
+}
+const stationLabel = station => station ? `${station.zh}（${station.ko}）` : '';
+const stationCodes = station => station ? station.on.map(item => item.code).join('、') : '';
+const stationLines = station => station ? station.on.map(item => item.line).join('、') : '';
+const REPORT_CONTEXT = {
+  source: '', station: null, from: null, to: null, routeSnapshot: '', displayedFare: '', searchSnapshot: ''
+};
+function openReport(category, context = {}) {
+  Object.assign(REPORT_CONTEXT, {
+    source: '', station: null, from: null, to: null, routeSnapshot: '', displayedFare: '', searchSnapshot: ''
+  }, context);
+  $('#rType').value = category;
+  renderReportFields();
+  $('#report').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 }
 $('#q').oninput = e => {
   const box = $('#qres'); box.replaceChildren();
@@ -936,8 +1905,15 @@ $('#q').oninput = e => {
   const hits = match(e.target.value).slice(0, 8);
   if (!hits.length) { box.appendChild(el('div', 'empty', '找不到這個站。可試中文（明洞）、韓文（명동）或站號（424）。')); return; }
   const w = el('div'); w.style.marginTop = '8px';
-  hits.forEach(s => w.appendChild(row(s)));
+  hits.forEach(s => w.appendChild(row(s, undefined, undefined, true)));
   box.appendChild(w);
+  const reportButton = el('button', 'report-entry', '回報這次搜尋結果');
+  reportButton.onclick = () => openReport('station_translation', {
+    source: 'station_search',
+    station: hits.length === 1 ? hits[0] : null,
+    searchSnapshot: `搜尋「${e.target.value.trim()}」；顯示：${hits.map(stationLabel).join('、')}`
+  });
+  box.appendChild(reportButton);
 };
 
 /* ---------- route planner ---------- */
@@ -946,12 +1922,25 @@ function setPick(which, st) {
   PICK[which] = st;
   (which === 'from' ? $('#fFrom') : $('#fTo')).value = st.zh + '（' + st.ko + '）';
 }
+function restorePlannerFromUrl() {
+  const raw = new URLSearchParams(location.search).get('from');
+  if (!raw) return;
+  const [city, lineId, code] = raw.split('|');
+  const line = LINES.find(item => (item.city || 'seoul') === city && item.id === lineId);
+  const station = line?.st.find(item => String(item[0]) === code);
+  if (!station) return;
+  setPick('from', stationFor(line, station));
+}
 function attach(input, which) {
   let list = null;
+  let renderTimer = 0;
+  let composing = false;
   const close = () => { if (list) { list.remove(); list = null; } };
-  input.oninput = () => {
-    PICK[which] = null; close();
-    const hits = match(input.value).slice(0, 6);
+  const clearRenderTimer = () => { if (renderTimer) { clearTimeout(renderTimer); renderTimer = 0; } };
+  const renderSuggestions = value => {
+    renderTimer = 0;
+    if (input.value !== value || !value.trim()) return;
+    const hits = routeMatch(value, which).slice(0, 6);
     if (!hits.length) return;
     list = el('div', 'sugg');
     hits.forEach(s => {
@@ -961,9 +1950,22 @@ function attach(input, which) {
     });
     input.parentNode.appendChild(list);
   };
-  input.onblur = () => setTimeout(close, 180);
+  const scheduleSuggestions = () => {
+    clearRenderTimer();
+    const value = input.value;
+    if (!value.trim()) return;
+    renderTimer = setTimeout(() => renderSuggestions(value), 120);
+  };
+  input.oninput = event => {
+    PICK[which] = null; close();
+    if (!composing && !event.isComposing) scheduleSuggestions();
+  };
+  input.addEventListener('compositionstart', () => { composing = true; clearRenderTimer(); });
+  input.addEventListener('compositionend', () => { composing = false; scheduleSuggestions(); });
+  input.onblur = () => { clearRenderTimer(); setTimeout(close, 180); };
 }
 attach($('#fFrom'), 'from'); attach($('#fTo'), 'to');
+restorePlannerFromUrl();
 $('#swap').onclick = () => {
   const a = PICK.from, b = PICK.to;
   PICK.from = PICK.to = null;
@@ -971,17 +1973,53 @@ $('#swap').onclick = () => {
   if (b) setPick('from', b); if (a) setPick('to', a);
 };
 
-function fare(km) {
-  let w = 1400;
-  if (km > 10) w += Math.ceil((km - 10) / 5) * 100;
-  return '₩' + w.toLocaleString();
+function seoulTransitFare(km) {
+  let won = 1550;
+  if (km > 10) won += Math.ceil((Math.min(km, 50) - 10) / 5) * 100;
+  if (km > 50) won += Math.ceil((km - 50) / 8) * 100;
+  return won;
+}
+function shinbundangSurcharge(real) {
+  const indices = real.filter(leg => LINES[leg.li].id === 'D').flatMap(leg => leg.idx);
+  if (!indices.length) return 0;
+  const first = Math.min(...indices), last = Math.max(...indices);
+  // D04–D07（新沙–江南）、D07–D12（江南–亭子）、D12–D19（亭子–光教）分區加價。
+  if (last <= 3) return 700;
+  if (first >= 8) return 1000;
+  if (first >= 3 && last <= 8) return 1000;
+  if (first < 3 && last <= 8) return 1700;
+  if (first >= 3) return 1500;
+  return 2200;
+}
+function bglTransitFare(real) {
+  const indices = real.filter(leg => LINES[leg.li].id === 'BGL').flatMap(leg => leg.idx);
+  if (!indices.length) return 0;
+  const zone = index => index <= 8 ? 0 : index <= 13 ? 1 : 2;
+  const zones = indices.map(zone);
+  return Math.min(...zones) === 0 && Math.max(...zones) === 2 ? 1800 : 1600;
+}
+function fareInfo(km, real) {
+  const lineIds = new Set(real.map(leg => LINES[leg.li].id));
+  const city = LINES[real[0].li].city || 'seoul';
+  if (lineIds.has('A')) return { label: '依區間計費', note: '含機場鐵路，票價依搭乘區間與列車種類計算。' };
+  if (lineIds.has('1P')) return { label: '依區間計費', note: '含首都圈外的 1 號線區間，超距費率與首都圈內不同。' };
+  if (lineIds.has('DH')) return { label: '依區間計費', note: '含東海線，跨釜山／蔚山區間與轉乘會另計票價。' };
+  if (city === 'busan') {
+    const urbanFare = km > 10 ? 1800 : 1600;
+    const won = Math.max(urbanFare, bglTransitFare(real));
+    return { label: '約 ₩' + won.toLocaleString(), note: '成人交通卡估算。釜山都市鐵道以 10 公里分區，金海輕軌依區域計費。' };
+  }
+  const surcharge = shinbundangSurcharge(real);
+  const won = seoulTransitFare(km) + surcharge;
+  return { label: '約 ₩' + won.toLocaleString(), note: surcharge ? '已包含新盆唐線區間附加費。' : '成人交通卡估算，實際以閘門扣款為準。' };
 }
 
 $('#go').onclick = () => {
   const box = $('#routeres'); box.replaceChildren();
-  const pick = w => PICK[w] || (match((w === 'from' ? $('#fFrom') : $('#fTo')).value)[0] || null);
+  const pick = w => PICK[w] || (routeMatch((w === 'from' ? $('#fFrom') : $('#fTo')).value, w)[0] || null);
   const a = pick('from'), b = pick('to');
   if (!a || !b) { box.appendChild(el('div', 'err', '請從下方建議選擇起點與終點。')); return; }
+  if (a.city !== b.city) { box.appendChild(el('div', 'err', '首爾與釜山地鐵無法直接規劃。請將起點與終點選在同一城市。')); return; }
   if (a.ko === b.ko) { box.appendChild(el('div', 'err', '起點與終點相同，請換一站。')); return; }
   const res = plan(a, b);
   if (!res) { box.appendChild(el('div', 'err', '查不到可用路線，請確認兩站名稱後再試。')); return; }
@@ -995,7 +2033,7 @@ $('#go').onclick = () => {
     else legs.push({ li, idx: [si] });
   });
   const real = legs.filter(l => l.idx.length > 1);
-  if (!real.length) { box.appendChild(el('div', 'err', '這兩站相鄰或可直接轉乘，不用規劃路線。')); return; }
+  if (!real.length) { box.appendChild(el('div', 'err', '這兩站相鄰或可直接轉乘，不必換車。')); return; }
 
   let km = 0, stops = 0;
   real.forEach(l => {
@@ -1022,25 +2060,41 @@ $('#go').onclick = () => {
   const stationWalk = transfers.reduce((sum, transfer) => sum + transfer.walk, 0);
   const transferWait = transfers.reduce((sum, transfer) => sum + transfer.wait, 0);
   const totalMinutes = wholeMinutes(inTrain + startWait + stationWalk + transferWait);
+  const fare = fareInfo(km, real);
+  const routeSnapshot = [
+    `${stationLabel(a)} → ${stationLabel(b)}`,
+    `總計約 ${totalMinutes} 分鐘；${stats(stops)}；轉乘 ${transferCount} 次`,
+    real.map(leg => {
+      const line = LINES[leg.li];
+      const first = line.st[leg.idx[0]], last = line.st[leg.idx[leg.idx.length - 1]];
+      return `${line.zh}：${first[2]} ${first[0]} → ${last[2]} ${last[0]}`;
+    }).join('\n')
+  ].join('\n');
+  Object.assign(REPORT_CONTEXT, { from: a, to: b, routeSnapshot, displayedFare: fare.label });
 
   const sum = el('div', 'summary');
   const stat = (lbl, v) => { const d = el('div', 'stat'); d.append(el('span', null, lbl), document.createTextNode(v)); return d; };
-  sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('路程', stats(stops) + '・轉乘 ' + transferCount + ' 次'), stat('約', fare(km)));
+  sum.append(stat('總計約', totalMinutes + ' 分鐘'), stat('路程', stats(stops) + '・轉乘 ' + transferCount + ' 次'), stat('交通卡', fare.label));
   box.appendChild(sum);
-  const timing = el('div', 'timing-note');
-  timing.append(el('strong', null, '時間拆解'), document.createTextNode(' 行駛約 ' + wholeMinutes(inTrain) + ' 分鐘＋起點等候約 ' + startWait + ' 分鐘'));
-  if (transferCount) timing.append(document.createTextNode(' ＋ 轉乘預留約 ' + (stationWalk + transferWait) + ' 分鐘（站內步行 ' + stationWalk + ' 分鐘、等候 ' + transferWait + ' 分鐘）'));
-  timing.append(document.createTextNode('。依目前韓國時段的班距估算，非即時到站時間。'));
-  box.appendChild(timing);
+  box.appendChild(el('div', 'fare-note', fare.note));
 
   const holder = el('div');
   real.forEach((l, k) => {
     const nextLine = k < real.length - 1 ? LINES[real[k + 1].li] : null;
-    holder.appendChild(legBlock(LINES[l.li], l.idx, nextLine, transfers[k] || null));
+    const nextIdx = k < real.length - 1 ? real[k + 1].idx : null;
+    holder.appendChild(legBlock(LINES[l.li], l.idx, nextLine, nextIdx, transfers[k] || null));
   });
   const lastLeg = real[real.length - 1], lastL = LINES[lastLeg.li];
   holder.appendChild(endBlock(lastL, lastL.st[lastLeg.idx.slice(-1)[0]]));
   box.appendChild(holder);
+  const reportButton = el('button', 'report-entry', '回報這個規劃結果');
+  reportButton.onclick = () => openReport('route_result', {
+    source: 'route_planner', from: a, to: b, routeSnapshot, displayedFare: fare.label
+  });
+  box.appendChild(reportButton);
+  // Start the full offline OCR preparation as soon as a traveller has a route.
+  // It is ready while they walk to the platform, rather than after a photo is chosen.
+  warmOcrWorker();
   box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
 };
 function stats(n) { return n + ' 站'; }
@@ -1086,7 +2140,1118 @@ function stopList(L, idx) {
   list.append(summary, items);
   return list;
 }
-function legBlock(L, idx, nextLine, transfer) {
+const OCR_MODULE_TIMEOUT_MS = 30000;
+const OCR_WORKER_TIMEOUT_MS = 45000;
+const OCR_RECOGNITION_TIMEOUT_MS = 45000;
+const OCR_STATUS_MIN_VISIBLE_MS = 560;
+function createPieProgress({ progress = 0, size = 32, activeColor = '#2d8277', inactiveColor = '#dbe9e6' } = {}) {
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  const base = document.createElementNS(ns, 'circle');
+  const sector = document.createElementNS(ns, 'path');
+  const center = size / 2;
+  const radius = center;
+  const clamp = value => Math.max(0, Math.min(100, Number(value) || 0));
+  const coordinate = value => Math.round(value * 1000) / 1000;
+  const sectorPath = value => {
+    const normalized = clamp(value);
+    if (normalized <= 0) return '';
+    if (normalized >= 100) return `M ${center} ${center} m -${radius} 0 a ${radius} ${radius} 0 1 0 ${radius * 2} 0 a ${radius} ${radius} 0 1 0 -${radius * 2} 0`;
+    const startX = center;
+    const startY = 0;
+    const angle = -Math.PI / 2 + Math.PI * 2 * normalized / 100;
+    const endX = coordinate(center + radius * Math.cos(angle));
+    const endY = coordinate(center + radius * Math.sin(angle));
+    return `M ${center} ${center} L ${startX} ${startY} A ${radius} ${radius} 0 ${normalized > 50 ? 1 : 0} 1 ${endX} ${endY} Z`;
+  };
+  svg.setAttribute('class', 'photo-status-pulse');
+  svg.setAttribute('width', String(size));
+  svg.setAttribute('height', String(size));
+  svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  base.setAttribute('cx', String(center));
+  base.setAttribute('cy', String(center));
+  base.setAttribute('r', String(radius));
+  base.setAttribute('fill', inactiveColor);
+  sector.setAttribute('fill', activeColor);
+  svg.append(base, sector);
+  let current = clamp(progress);
+  let target = current;
+  let frame = 0;
+  let lastFrameAt = 0;
+  const draw = value => sector.setAttribute('d', sectorPath(value));
+  const tick = now => {
+    // Follow a moving target instead of restarting the animation for every OCR log event.
+    // OCR progress events can arrive in bursts, so cancelling/restarting here made the pie jitter.
+    const elapsed = Math.max(0, now - lastFrameAt);
+    lastFrameAt = now;
+    const catchUp = 1 - Math.exp(-elapsed / 115);
+    current += (target - current) * catchUp;
+    if (Math.abs(target - current) < 0.08) {
+      current = target;
+      draw(current);
+      frame = 0;
+      return;
+    }
+    draw(current);
+    frame = requestAnimationFrame(tick);
+  };
+  const update = (nextProgress, { animate = true } = {}) => {
+    const nextTarget = clamp(nextProgress);
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!animate || reducedMotion) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      current = target = nextTarget;
+      draw(current);
+      return;
+    }
+    target = nextTarget;
+    if (frame) return;
+    lastFrameAt = performance.now();
+    frame = requestAnimationFrame(tick);
+  };
+  draw(current);
+  return { element: svg, update };
+}
+function withOcrTimeout(promise, timeoutMs, message) {
+  let timer;
+  return new Promise((resolve, reject) => {
+    timer = window.setTimeout(() => {
+      const error = new Error(message);
+      error.code = 'OCR_TIMEOUT';
+      reject(error);
+    }, timeoutMs);
+    Promise.resolve(promise).then(
+      value => { window.clearTimeout(timer); resolve(value); },
+      error => { window.clearTimeout(timer); reject(error); }
+    );
+  });
+}
+let tesseractLoader;
+// Keep the heavy Korean + English OCR worker alive briefly.  The language data
+// remains in IndexedDB between visits; this cache removes the extra setup cost
+// for additional photos during the same trip without lowering OCR accuracy.
+const OCR_WORKER_IDLE_MS = 300000;
+const OCR_FIRST_WORKER_TIMEOUT_MS = 120000;
+const OCR_OFFLINE_PACK_KEY = 'ksw-metro-ocr-offline-v1';
+let tesseractWorker;
+let tesseractWorkerPromise;
+let tesseractWorkerStatusListener;
+let tesseractWorkerIdleTimer;
+function hasOcrOfflinePack() {
+  try { return window.localStorage.getItem(OCR_OFFLINE_PACK_KEY) === 'ready'; }
+  catch (_) { return false; }
+}
+function markOcrOfflinePackReady() {
+  try { window.localStorage.setItem(OCR_OFFLINE_PACK_KEY, 'ready'); }
+  catch (_) { /* Private browsing or restricted storage can still use this page session. */ }
+}
+function loadTesseract() {
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+  if (tesseractLoader) return tesseractLoader;
+  tesseractLoader = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    let settled = false;
+    const finish = (value, error) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      if (error) { script.remove(); tesseractLoader = null; reject(error); }
+      else resolve(value);
+    };
+    const timer = window.setTimeout(() => finish(null, new Error('下載韓文辨識工具逾時，請確認網路後再試。')), OCR_MODULE_TIMEOUT_MS);
+    script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js';
+    script.integrity = 'sha384-r1ru3tcf6FhnCFR4B7pIFG+BhFF9LlFtz/P1y4pblWn3AGs9y3lBx5SKLNf4+rED';
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+    script.onload = () => {
+      if (window.Tesseract) finish(window.Tesseract);
+      else finish(null, new Error('OCR 模組沒有完成載入。'));
+    };
+    script.onerror = () => finish(null, new Error('無法下載韓文辨識工具。請確認網路後再試。'));
+    document.head.appendChild(script);
+  });
+  return tesseractLoader;
+}
+function clearOcrWorkerRelease() {
+  if (tesseractWorkerIdleTimer) window.clearTimeout(tesseractWorkerIdleTimer);
+  tesseractWorkerIdleTimer = 0;
+}
+function scheduleOcrWorkerRelease() {
+  clearOcrWorkerRelease();
+  if (!tesseractWorker) return;
+  tesseractWorkerIdleTimer = window.setTimeout(() => {
+    const staleWorker = tesseractWorker;
+    tesseractWorker = null;
+    tesseractWorkerPromise = null;
+    tesseractWorkerStatusListener = null;
+    tesseractWorkerIdleTimer = 0;
+    if (staleWorker) staleWorker.terminate().catch(() => {});
+  }, OCR_WORKER_IDLE_MS);
+}
+function getTesseractWorker(statusListener) {
+  tesseractWorkerStatusListener = statusListener || null;
+  clearOcrWorkerRelease();
+  if (tesseractWorker) return Promise.resolve(tesseractWorker);
+  if (!tesseractWorkerPromise) {
+    tesseractWorkerPromise = loadTesseract()
+      .then(Tesseract => Tesseract.createWorker('kor+eng', 1, {
+        cacheMethod: 'write',
+        logger: message => { if (tesseractWorkerStatusListener) tesseractWorkerStatusListener(message); }
+      }))
+      .then(worker => {
+        tesseractWorker = worker;
+        markOcrOfflinePackReady();
+        scheduleOcrWorkerRelease();
+        return worker;
+      })
+      .catch(error => {
+        tesseractWorkerPromise = null;
+        throw error;
+      });
+  }
+  return tesseractWorkerPromise;
+}
+function warmOcrWorker(statusListener) {
+  return getTesseractWorker(statusListener)
+    .then(worker => { scheduleOcrWorkerRelease(); return worker; })
+    .catch(() => null);
+}
+const PWA_INSTALL_EVENT = 'ksw-pwa-install-change';
+let deferredPwaInstallPrompt = null;
+function isInstalledPwa() {
+  return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function pwaInstallMode() {
+  if (isInstalledPwa()) return 'installed';
+  return deferredPwaInstallPrompt ? 'available' : 'instructions';
+}
+function announcePwaInstallChange() {
+  window.dispatchEvent(new Event(PWA_INSTALL_EVENT));
+}
+window.addEventListener('beforeinstallprompt', event => {
+  event.preventDefault();
+  deferredPwaInstallPrompt = event;
+  announcePwaInstallChange();
+});
+window.addEventListener('appinstalled', () => {
+  deferredPwaInstallPrompt = null;
+  announcePwaInstallChange();
+});
+async function requestPwaInstall() {
+  if (isInstalledPwa()) return 'installed';
+  if (!deferredPwaInstallPrompt) return 'instructions';
+  const promptEvent = deferredPwaInstallPrompt;
+  deferredPwaInstallPrompt = null;
+  await promptEvent.prompt();
+  const choice = await promptEvent.userChoice;
+  announcePwaInstallChange();
+  return choice.outcome === 'accepted' ? 'accepted' : 'dismissed';
+}
+function registerPwa() {
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }, { once: true });
+}
+registerPwa();
+function ocrScale(width, height) {
+  const longest = Math.max(width, height);
+  return longest < 1100 ? Math.min(5, 1500 / longest) : Math.min(1.35, 1800 / longest);
+}
+function canvasBlob(canvas, quality) {
+  return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('照片無法處理。')), 'image/jpeg', quality));
+}
+function otsuThreshold(pixels) {
+  const histogram = new Uint32Array(256);
+  let total = 0, sum = 0;
+  for (let i = 0; i < pixels.length; i += 4) { const tone = pixels[i]; histogram[tone]++; total++; sum += tone; }
+  let sumBackground = 0, weightBackground = 0, best = 0, varianceMax = 0;
+  for (let tone = 0; tone < 256; tone++) {
+    weightBackground += histogram[tone];
+    if (!weightBackground) continue;
+    const weightForeground = total - weightBackground;
+    if (!weightForeground) break;
+    sumBackground += tone * histogram[tone];
+    const meanBackground = sumBackground / weightBackground;
+    const meanForeground = (sum - sumBackground) / weightForeground;
+    const variance = weightBackground * weightForeground * (meanBackground - meanForeground) ** 2;
+    if (variance > varianceMax) { varianceMax = variance; best = tone; }
+  }
+  return best || 128;
+}
+function shrinkForOcr(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    const imageUrl = URL.createObjectURL(file);
+    image.onload = () => {
+      URL.revokeObjectURL(imageUrl);
+      const scale = ocrScale(image.naturalWidth, image.naturalHeight);
+      const width = Math.max(1, Math.round(image.naturalWidth * scale));
+      const height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+      const context = canvas.getContext('2d'); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
+      context.drawImage(image, 0, 0, width, height);
+      const pixels = context.getImageData(0, 0, width, height);
+      const contrast = scale > 1 ? 1.42 : 1.26;
+      for (let i = 0; i < pixels.data.length; i += 4) {
+        const grey = pixels.data[i] * .299 + pixels.data[i + 1] * .587 + pixels.data[i + 2] * .114;
+        const tone = Math.max(0, Math.min(255, (grey - 128) * contrast + 128));
+        pixels.data[i] = tone; pixels.data[i + 1] = tone; pixels.data[i + 2] = tone;
+      }
+      context.putImageData(pixels, 0, 0);
+      const binary = document.createElement('canvas'); binary.width = width; binary.height = height;
+      const binaryContext = binary.getContext('2d');
+      const binaryPixels = context.getImageData(0, 0, width, height);
+      const threshold = otsuThreshold(binaryPixels.data);
+      let average = 0;
+      for (let i = 0; i < binaryPixels.data.length; i += 4) average += binaryPixels.data[i];
+      average /= binaryPixels.data.length / 4;
+      const invert = average < 145;
+      for (let i = 0; i < binaryPixels.data.length; i += 4) {
+        const light = binaryPixels.data[i] > threshold;
+        const tone = (light === invert) ? 0 : 255;
+        binaryPixels.data[i] = tone; binaryPixels.data[i + 1] = tone; binaryPixels.data[i + 2] = tone;
+      }
+      binaryContext.putImageData(binaryPixels, 0, 0);
+      Promise.all([canvasBlob(canvas, .92), canvasBlob(binary, .92)])
+        .then(([image, highContrast]) => resolve({ image, highContrast, width }))
+        .catch(reject);
+    };
+    image.onerror = () => { URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新拍攝。')); };
+    image.src = imageUrl;
+  });
+}
+function cropPhoto(file) {
+  return new Promise((resolve, reject) => {
+    const imageUrl = URL.createObjectURL(file);
+    const sheet = el('div', 'crop-sheet');
+    const panel = el('section', 'crop-panel'); panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true'); panel.setAttribute('aria-label', '框選指示牌');
+    const title = el('h2', null, '框選指示牌');
+    const help = el('p', 'crop-help', '把箭頭和站名一起框進來。');
+    const hint = el('p', 'crop-hint', '直接拖曳框內移動，拉四角或邊緣調整大小。');
+    const viewport = el('div', 'crop-viewport');
+    const wrap = el('div', 'crop-wrap');
+    const image = document.createElement('img'); image.alt = '選擇的指示牌照片';
+    const frame = el('div', 'crop-frame');
+    ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'].forEach(corner => {
+      const handle = el('span', 'crop-handle ' + corner); handle.dataset.handle = corner; frame.appendChild(handle);
+    });
+    wrap.append(image, frame); viewport.appendChild(wrap);
+    const controls = el('div', 'crop-controls');
+    const cancel = el('button', null, '取消'); cancel.type = 'button';
+    const confirm = el('button', 'crop-confirm', '使用框選範圍'); confirm.type = 'button';
+    controls.append(cancel, confirm); panel.append(title, help, hint, viewport, controls); sheet.appendChild(panel); document.body.appendChild(sheet);
+    let crop = { x: .08, y: .13, w: .84, h: .25 };
+    let dragging = null;
+    const close = value => { URL.revokeObjectURL(imageUrl); sheet.remove(); resolve(value); };
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const drawFrame = () => {
+      frame.style.left = (crop.x * 100) + '%'; frame.style.top = (crop.y * 100) + '%';
+      frame.style.width = (crop.w * 100) + '%'; frame.style.height = (crop.h * 100) + '%';
+    };
+    const point = event => {
+      const rect = wrap.getBoundingClientRect();
+      return { x: clamp((event.clientX - rect.left) / rect.width, 0, 1), y: clamp((event.clientY - rect.top) / rect.height, 0, 1) };
+    };
+    frame.onpointerdown = event => {
+      event.preventDefault();
+      dragging = { mode: event.target.dataset.handle || 'move', start: point(event), crop: { ...crop } };
+      frame.setPointerCapture(event.pointerId);
+    };
+    frame.onpointermove = event => {
+      if (!dragging) return;
+      const now = point(event), dx = now.x - dragging.start.x, dy = now.y - dragging.start.y;
+      const start = dragging.crop, minSize = .12, right = start.x + start.w, bottom = start.y + start.h;
+      if (dragging.mode === 'move') {
+        crop.x = clamp(start.x + dx, 0, 1 - start.w); crop.y = clamp(start.y + dy, 0, 1 - start.h);
+        crop.w = start.w; crop.h = start.h;
+      } else {
+        crop = { ...start };
+        if (dragging.mode.includes('w')) { crop.x = clamp(start.x + dx, 0, right - minSize); crop.w = right - crop.x; }
+        if (dragging.mode.includes('e')) crop.w = clamp(start.w + dx, minSize, 1 - start.x);
+        if (dragging.mode.includes('n')) { crop.y = clamp(start.y + dy, 0, bottom - minSize); crop.h = bottom - crop.y; }
+        if (dragging.mode.includes('s')) crop.h = clamp(start.h + dy, minSize, 1 - start.y);
+      }
+      drawFrame();
+    };
+    frame.onpointerup = frame.onpointercancel = () => { dragging = null; };
+    cancel.onclick = () => close(null);
+    confirm.onclick = () => {
+      confirm.disabled = true; confirm.textContent = '正在裁切…';
+      const sourceWidth = image.naturalWidth * crop.w, sourceHeight = image.naturalHeight * crop.h;
+      const scale = Math.min(1, 2400 / Math.max(sourceWidth, sourceHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(sourceWidth * scale)); canvas.height = Math.max(1, Math.round(sourceHeight * scale));
+      const context = canvas.getContext('2d'); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = 'high';
+      context.drawImage(image, image.naturalWidth * crop.x, image.naturalHeight * crop.y, sourceWidth, sourceHeight, 0, 0, canvas.width, canvas.height);
+      canvasBlob(canvas, .94).then(close).catch(error => { sheet.remove(); URL.revokeObjectURL(imageUrl); reject(error); });
+    };
+    image.onload = () => {
+      const ratio = image.naturalWidth / image.naturalHeight;
+      crop = ratio > 1.15 ? { x: .07, y: .1, w: .86, h: .28 } : ratio < .82 ? { x: .12, y: .16, w: .76, h: .6 } : { x: .1, y: .2, w: .8, h: .52 };
+      drawFrame();
+    };
+    image.onerror = () => { sheet.remove(); URL.revokeObjectURL(imageUrl); reject(new Error('照片讀取失敗，請重新選擇。')); };
+    image.src = imageUrl;
+  });
+}
+function cleanSignText(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, ''); }
+const SIGN_TERMINAL_ALIASES = {
+  '1': { a: [['의정부', '議政府'], ['소요산', '逍遙山']], b: [['인천', '仁川'], ['신창', '新昌'], ['서동탄', '西東灘']] },
+  '3': { a: [['대화', '大化']], b: [['오금', '梧琴']] },
+  '4': { a: [['당고개', '堂嶺'], ['진접', '榛接']], b: [['오이도', '梧耳島']] },
+  '5': { a: [['방화', '傍花']], b: [['상일동', '上一洞'], ['마천', '馬川']] },
+  '6': { a: [['응암', '鷹岩']], b: [['신내', '新內']] },
+  '7': { a: [['장암', '長岩']], b: [['부평구청', '富平區廳'], ['석남', '石南']] },
+  '8': { a: [['암사', '岩寺'], ['별내', '別內']], b: [['모란', '牡丹']] },
+  '9': { a: [['개화', '開花']], b: [['중앙보훈병원', '中央報勳醫院']] },
+  A: { a: [['서울역', '首爾站']], b: [['인천공항2터미널', '仁川機場2號航廈'], ['인천공항', '仁川機場']] },
+  D: { a: [['강남', '江南'], ['신사', '新沙']], b: [['광교', '光教']] },
+  UI: { a: [['북한산우이', '北漢山牛耳']], b: [['신설동', '新設洞']] },
+  B1: { a: [['노포', '老圃']], b: [['다대포해수욕장', '多大浦海水浴場']] },
+  B2: { a: [['양산', '梁山']], b: [['장산', '萇山']] },
+  B3: { a: [['대저', '大渚']], b: [['수영', '水營']] },
+  B4: { a: [['안평', '安平']], b: [['미남', '美南']] },
+  BGL: { a: [['사상', '沙上']], b: [['가야대', '加耶大']] },
+  DH: { a: [['부전', '釜田']], b: [['태화강', '太和江']] }
+};
+const SIGN_ALIAS_ENGLISH = {
+  '의정부': 'uijeongbu', '소요산': 'soyosan', '인천': 'incheon', '신창': 'sinchang', '연천': 'yeoncheon', '천안': 'cheonan',
+  '당고개': 'danggogae', '진접': 'jinjeop', '오이도': 'oido', '장암': 'jangam', '석남': 'seoknam',
+  '서울역': 'seoulstation', '인천공항': 'incheonairport', '인천공항2터미널': 'incheonairport2terminal',
+  '광교': 'gwanggyo', '북한산우이': 'bukhansanui', '노포': 'nopo', '다대포해수욕장': 'dadaepo beach',
+  '양산': 'yangsan', '장산': 'jangsan', '대저': 'daejeo', '수영': 'suyeong', '안평': 'anpyeong', '미남': 'minam'
+};
+function matchesSignToken(value, korean, english) {
+  const koreanToken = cleanSignText(korean);
+  const englishToken = cleanSignText(english);
+  return (koreanToken.length >= 2 && value.includes(koreanToken)) || (englishToken.length >= 4 && value.includes(englishToken));
+}
+function routePhotoContext(L, idx) {
+  const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
+  const forward = L.loop ? idx[1] === (idx[0] + 1) % L.st.length : idx[1] > idx[0];
+  const terminal = L.loop ? next : L.st[forward ? L.st.length - 1 : 0];
+  const increases = codeNum(next[0]) > codeNum(board[0]);
+  const targets = L.loop ? [next, off] : [terminal, next, off];
+  return {
+    id: L.id, line: L.zh, color: L.color, board, next, off, terminal, stations: L.st, boardIndex: idx[0], routeIndexes: idx, forward, loop: L.loop,
+    trend: L.loop ? '跟著下一站 ' + next[2] + ' 的指示走' : '站號要往' + (increases ? '變大' : '變小') + '的方向走',
+    targets: targets.filter((station, index, list) => list.findIndex(item => item[1] === station[1]) === index)
+  };
+}
+function sideFromBox(box, imageWidth) {
+  if (!box) return null;
+  const ratio = (box.x0 + box.x1) / 2 / Math.max(1, imageWidth);
+  return ratio < .42 ? '左側' : ratio > .58 ? '右側' : '中間';
+}
+function boxCenter(box) {
+  return box ? { x: (box.x0 + box.x1) / 2, y: (box.y0 + box.y1) / 2 } : null;
+}
+function arrowDirectionFromText(value) {
+  const text = String(value || '').replace(/\s+/g, '');
+  if (/(?:↖|⇖|⬉)/.test(text)) return '左前方';
+  if (/(?:↗|⇗|⬈)/.test(text)) return '右前方';
+  const forward = /(?:↑|⇧|⬆|⟰|︿|\^)/.test(text);
+  const left = /(?:←|↙|⇦|⬅|⟵|◀|◁|‹|〈|《|<[-=]?)/.test(text);
+  const right = /(?:→|↘|⇨|➡|⟶|▶|▷|›|〉|》|[-=]?>)/.test(text);
+  const directions = [forward && '前進', left && '左側', right && '右側'].filter(Boolean);
+  return directions.length === 1 ? directions[0] : null;
+}
+function arrowDirectionForMention(items, mention) {
+  const ownItem = items[mention.itemIndex];
+  const ownArrow = ownItem && arrowDirectionFromText(ownItem.text);
+  if (ownArrow) return ownArrow;
+  if (!mention.bbox) return null;
+  const mentionCenter = boxCenter(mention.bbox);
+  let best = null;
+  items.forEach(item => {
+    if (!item.bbox) return;
+    const direction = arrowDirectionFromText(item.text);
+    if (!direction) return;
+    const center = boxCenter(item.bbox);
+    const mentionHeight = Math.max(1, mention.bbox.y1 - mention.bbox.y0);
+    const itemHeight = Math.max(1, item.bbox.y1 - item.bbox.y0);
+    const verticalDistance = Math.abs(center.y - mentionCenter.y);
+    if (verticalDistance > Math.max(mentionHeight, itemHeight) * 1.35) return;
+    const distance = Math.abs(center.x - mentionCenter.x) + verticalDistance * 2;
+    if (!best || distance < best.distance) best = { direction, distance };
+  });
+  return best && best.direction;
+}
+function movementForMention(mention) {
+  return mention && (mention.pathDirection || (mention.side === '左側' || mention.side === '右側' ? mention.side : null));
+}
+function movementInstruction(movement, place) {
+  if (movement === '前進') return '直走前往' + place;
+  if (movement === '左前方' || movement === '右前方') return '往' + movement + '走';
+  return movement ? '往' + movement + place + '走' : '';
+}
+function directionForStation(context, stationIndex) {
+  if (stationIndex === context.boardIndex) return '目前位置';
+  if (context.loop) {
+    const count = context.stations.length;
+    const routeHops = context.forward ? (stationIndex - context.boardIndex + count) % count : (context.boardIndex - stationIndex + count) % count;
+    const reverseHops = count - routeHops;
+    if (routeHops === reverseHops) return '方向不明';
+    return routeHops < reverseHops ? '路線方向' : '反方向';
+  }
+  return (context.forward ? stationIndex > context.boardIndex : stationIndex < context.boardIndex) ? '路線方向' : '反方向';
+}
+function terminalAliasMentions(items, imageWidth, context) {
+  if (context.loop || !SIGN_TERMINAL_ALIASES[context.id]) return [];
+  const aliases = SIGN_TERMINAL_ALIASES[context.id];
+  const routes = [
+    { direction: '路線方向', values: context.forward ? aliases.b : aliases.a },
+    { direction: '反方向', values: context.forward ? aliases.a : aliases.b }
+  ];
+  const matches = new Map();
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    routes.forEach(route => route.values.forEach(([ko, zh]) => {
+      if (!matchesSignToken(value, ko, SIGN_ALIAS_ENGLISH[ko])) return;
+      const candidate = { station: [ko, ko, zh], stationIndex: -1, side: sideFromBox(item.bbox, imageWidth), direction: route.direction, quality: item.bbox ? (item.precision || 1) : 0, itemIndex, bbox: item.bbox || null, matchName: true, matchCode: false };
+      const key = ko;
+      const previous = matches.get(key);
+      if (!previous || candidate.quality > previous.quality) matches.set(key, candidate);
+    }));
+  });
+  return [...matches.values()];
+}
+function photoStationMentions(items, imageWidth, context) {
+  const mentions = new Map();
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    context.stations.forEach((station, stationIndex) => {
+      const code = cleanSignText(station[0]);
+      const matchesName = matchesSignToken(value, station[1], station[3]);
+      const validStationCode = /^(?:\d{3,4}|[a-z]{1,3}\d{1,4})$/.test(code);
+      const matchesCode = validStationCode && value === code;
+      if (!matchesName && !matchesCode) return;
+      const quality = item.bbox ? (item.precision || 1) : 0;
+      const key = station[0];
+      const candidate = { station, stationIndex, side: sideFromBox(item.bbox, imageWidth), direction: directionForStation(context, stationIndex), quality, itemIndex, bbox: item.bbox || null, matchName: matchesName, matchCode: matchesCode };
+      const previous = mentions.get(key);
+      if (!previous || candidate.quality > previous.quality) {
+        candidate.matchName ||= !!previous?.matchName;
+        candidate.matchCode ||= !!previous?.matchCode;
+        mentions.set(key, candidate);
+      } else {
+        previous.matchName ||= candidate.matchName;
+        previous.matchCode ||= candidate.matchCode;
+      }
+    });
+  });
+  terminalAliasMentions(items, imageWidth, context).forEach(candidate => {
+    const key = 'terminal:' + candidate.station[1];
+    const previous = mentions.get(key);
+    if (!previous || candidate.quality > previous.quality) mentions.set(key, candidate);
+  });
+  return [...mentions.values()].sort((a, b) => b.quality - a.quality || a.itemIndex - b.itemIndex);
+}
+function ocrItems(data) {
+  const items = [];
+  const add = (item, precision) => {
+    if (item && typeof item.text === 'string') items.push({ ...item, precision });
+  };
+  (data.words || []).forEach(item => add(item, 2));
+  (data.lines || []).forEach(item => add(item, 1));
+  const visitBlocks = node => {
+    if (Array.isArray(node)) { node.forEach(visitBlocks); return; }
+    if (!node || typeof node !== 'object') return;
+    const children = ['blocks', 'paragraphs', 'lines', 'words', 'symbols'].flatMap(key => Array.isArray(node[key]) ? node[key] : []);
+    if (typeof node.text === 'string' && node.bbox) add(node, children.length ? 1 : 2);
+    children.forEach(visitBlocks);
+  };
+  visitBlocks(data.blocks);
+  if (data.text) add({ text: data.text }, 0);
+  return items;
+}
+function ocrCodeTokens(items) {
+  const tokens = new Set();
+  items.forEach(item => {
+    const value = String(item.text || '').trim().toUpperCase().replace(/\s+/g, '');
+    if (/^(?:[A-Z]{1,3})?\d{1,3}(?:-\d)?$/.test(value)) tokens.add(value);
+  });
+  return [...tokens];
+}
+function lineBadgeCode(lineId) {
+  const id = String(lineId || '').toUpperCase();
+  if (/^[1-9]$/.test(id)) return id;
+  if (/^B[1-4]$/.test(id)) return id.slice(1);
+  if (/^1[PGS]$/.test(id)) return '1';
+  if (/^2[BC]$/.test(id)) return '2';
+  if (id === '5M') return '5';
+  return null;
+}
+function lineFamilyId(lineId) {
+  const id = String(lineId || '').toUpperCase();
+  if (/^1[PGS]$/.test(id)) return '1';
+  if (/^2[BC]$/.test(id)) return '2';
+  if (id === '5M') return '5';
+  return id;
+}
+function codeTokenMatchesStation(token, stationCode) {
+  const tokenValue = String(token || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  const stationValue = String(stationCode || '').toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  if (!tokenValue || !stationValue) return false;
+  if (tokenValue === stationValue) return true;
+  return /^[A-Z]/.test(stationValue) && tokenValue === stationValue.replace(/^[A-Z]+/, '');
+}
+function mergeOcrData(...results) {
+  return {
+    text: results.map(result => result && result.text).filter(Boolean).join('\n'),
+    blocks: results.flatMap(result => result && result.blocks || []),
+    words: results.flatMap(result => result && result.words || []),
+    lines: results.flatMap(result => result && result.lines || [])
+  };
+}
+function signReading(data, contexts) {
+  const items = ocrItems(data);
+  const codeTokens = ocrCodeTokens(items);
+  const textParts = [...new Set(items.map(item => String(item.text || '').trim()).filter(Boolean))];
+  const raw = textParts.join(' · ').slice(0, 72);
+  const korean = [...new Set(textParts.flatMap(part => part.match(/[가-힣]{2,}/g) || []))].join(' · ').slice(0, 48);
+  const compact = textParts.join('').replace(/\s+/g, '').toLowerCase();
+  const labels = [];
+  const addLabel = label => { if (!labels.includes(label)) labels.push(label); };
+  const hasTransfer = /갈아타는곳|환승|transfer/.test(compact);
+  const hasExit = /나가는곳|출구|wayout|exit/.test(compact);
+  if (hasTransfer) addLabel('轉乘');
+  if (!hasExit && /가는곳|방면|direction/.test(compact)) addLabel('行車方向');
+  if (!hasTransfer && /타는곳|승강장|platform/.test(compact)) addLabel('月台');
+  if (hasExit) addLabel('出口');
+  if (/상행/.test(compact)) addLabel('上行方向');
+  if (/하행/.test(compact)) addLabel('下行方向');
+  if (/내선/.test(compact)) addLabel('內環方向');
+  if (/외선/.test(compact)) addLabel('外環方向');
+  if (/엘리베이터|elevator/.test(compact)) addLabel('電梯');
+  if (/에스컬레이터|escalator/.test(compact)) addLabel('手扶梯');
+  if (/계단|stairs/.test(compact)) addLabel('樓梯');
+  if (/화장실|toilet|restroom/.test(compact)) addLabel('洗手間');
+  if (/개찰구|gate/.test(compact)) addLabel('閘門');
+  const routeLines = [], routeLineIds = [];
+  const addLine = line => {
+    if (!line) return;
+    if (!routeLines.includes(line.zh)) routeLines.push(line.zh);
+    if (!routeLineIds.includes(line.id)) routeLineIds.push(line.id);
+  };
+  const platformContext = contexts && contexts[0];
+  const transferContext = contexts && contexts[1];
+  const lineBadgeMatches = context => {
+    if (!context) return false;
+    const id = String(context.id || '');
+    const contextLine = LINES.find(line => line.id === id && line.st === context.stations) || LINES.find(line => line.id === id);
+    if (/부산/.test(compact) && contextLine && contextLine.city !== 'busan') return false;
+    const badge = lineBadgeCode(id) || id;
+    const fullName = new RegExp(badge.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:호선|line)', 'i');
+    return fullName.test(compact) || codeTokens.includes(String(badge).toUpperCase());
+  };
+  (contexts || []).forEach(context => {
+    if (context && compact.includes(String(context.line || '').replace(/\s+/g, '').toLowerCase())) addLine(LINES.find(line => line.st === context.stations));
+  });
+  LINES.forEach(line => {
+    const lineName = String(line.ko || '').replace(/\s+/g, '').toLowerCase();
+    if (/부산/.test(compact) && line.city !== 'busan') return;
+    if (lineName.length > 2 && compact.includes(lineName)) addLine(line);
+  });
+  if (lineBadgeMatches(platformContext)) addLine(LINES.find(line => line.id === platformContext.id));
+  if (lineBadgeMatches(transferContext)) addLine(LINES.find(line => line.id === transferContext.id));
+  const stationMatches = new Map();
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    LINES.forEach(line => line.st.forEach(station => {
+      const name = cleanSignText(station[1]);
+      if (name.length < 2 || !value.includes(name)) return;
+      const onRoute = (contexts || []).some(context => context && context.stations === line.st);
+      const candidate = { station, line, onRoute, itemIndex, quality: item.bbox ? (item.precision || 1) : 0 };
+      const key = station[1];
+      const previous = stationMatches.get(key);
+      if (!previous || Number(candidate.onRoute) > Number(previous.onRoute) || candidate.quality > previous.quality) stationMatches.set(key, candidate);
+    }));
+  });
+  items.forEach((item, itemIndex) => {
+    const value = cleanSignText(item.text);
+    if (value.length < 2) return;
+    Object.entries(SIGN_TERMINAL_ALIASES).forEach(([id, directions]) => {
+      const line = LINES.find(itemLine => itemLine.id === id);
+      if (!line) return;
+      Object.values(directions).flat().forEach(([ko, zh]) => {
+        if (!value.includes(cleanSignText(ko))) return;
+        const candidate = { station: [ko, ko, zh], line, onRoute: (contexts || []).some(context => context && context.id === id), itemIndex, quality: item.bbox ? (item.precision || 1) : 0 };
+        const key = 'terminal:' + ko;
+        const previous = stationMatches.get(key);
+        if (!previous || Number(candidate.onRoute) > Number(previous.onRoute) || candidate.quality > previous.quality) stationMatches.set(key, candidate);
+      });
+    });
+  });
+  const stations = [...stationMatches.values()].sort((a, b) => Number(b.onRoute) - Number(a.onRoute) || b.quality - a.quality || a.itemIndex - b.itemIndex).slice(0, 3);
+  return { items, compact, raw, korean, labels, routeLines, routeLineIds, codeTokens, stations, isExit: hasExit, isTransfer: hasTransfer };
+}
+function analyzePhotoSign(data, imageWidth, context) {
+  const items = ocrItems(data);
+  const signText = items.map(item => String(item.text || '')).join(' ').replace(/\s+/g, '').toLowerCase();
+  const signKind = /갈아타는곳|환승|transfer/.test(signText) ? 'transfer' : 'platform';
+  const mentions = photoStationMentions(items, imageWidth, context);
+  mentions.forEach(mention => {
+    const arrowDirection = arrowDirectionForMention(items, mention);
+    if (arrowDirection) {
+      mention.pathDirection = arrowDirection;
+      if (arrowDirection === '左側' || arrowDirection === '右側') mention.side = arrowDirection;
+      mention.sideSource = 'arrow';
+    }
+  });
+  const positionedPlanned = mentions.filter(item => item.bbox && item.direction === '路線方向');
+  const positionedOpposite = mentions.filter(item => item.bbox && item.direction === '反方向');
+  if (positionedPlanned.length && positionedOpposite.length) {
+    const averageX = list => list.reduce((sum, item) => sum + boxCenter(item.bbox).x, 0) / list.length;
+    const plannedX = averageX(positionedPlanned), oppositeX = averageX(positionedOpposite);
+    if (Math.abs(plannedX - oppositeX) >= Math.max(24, imageWidth * .055)) {
+      const plannedSide = plannedX < oppositeX ? '左側' : '右側';
+      const oppositeSide = plannedSide === '左側' ? '右側' : '左側';
+      positionedPlanned.forEach(item => {
+        if (item.sideSource !== 'arrow') { item.side = plannedSide; item.sideSource = 'relative'; }
+      });
+      positionedOpposite.forEach(item => {
+        if (item.sideSource !== 'arrow') { item.side = oppositeSide; item.sideSource = 'relative'; }
+      });
+    }
+  }
+  const planned = mentions.filter(item => item.direction === '路線方向');
+  const opposite = mentions.filter(item => item.direction === '反方向');
+  const clear = planned.find(item => movementForMention(item)) || null;
+  const pairedOpposite = clear && (clear.side === '左側' || clear.side === '右側')
+    ? opposite.find(item => (item.side === '左側' || item.side === '右側') && item.side !== clear.side) || null
+    : null;
+  return { signKind, mentions, planned, opposite, clear, pairedOpposite };
+}
+function photoComparison(reading, analysis, context, allowedLineIds) {
+  const target = analysis.planned[0] || null;
+  const reverse = analysis.opposite[0] || null;
+  const expectedLineCode = context && lineBadgeCode(context.id);
+  const lineMatched = !!context && (reading.routeLineIds.includes(context.id) || !!expectedLineCode && reading.codeTokens.includes(expectedLineCode));
+  const allowedLines = new Set((allowedLineIds || [context && context.id]).filter(Boolean));
+  const otherLine = context && reading.routeLineIds.find(id => !allowedLines.has(id) && lineFamilyId(id) !== lineFamilyId(context.id));
+  const targetMatched = !!target;
+  const reverseMatched = !!reverse;
+  const stationCodeMatches = context ? context.stations.map((station, stationIndex) => ({ station, stationIndex, direction: directionForStation(context, stationIndex) }))
+    .filter(item => reading.codeTokens.some(token => codeTokenMatchesStation(token, item.station[0]))) : [];
+  const plannedCode = stationCodeMatches.find(item => item.direction === '路線方向') || null;
+  const reverseCode = stationCodeMatches.find(item => item.direction === '反方向') || null;
+  const currentCode = stationCodeMatches.find(item => item.direction === '目前位置') || null;
+  const lineConflict = !!otherLine && !lineMatched;
+  const lineCheck = lineConflict
+    ? { label: '線號', value: '讀到' + (LINES.find(line => line.id === otherLine)?.zh || otherLine), state: 'bad' }
+    : { label: '線號', value: lineMatched ? (expectedLineCode || context.line) : '未讀到', state: lineMatched ? 'ok' : 'missing' };
+  const numberCheck = plannedCode
+    ? { label: '站號', value: plannedCode.station[0] + '・方向正確', state: 'ok' }
+    : reverseCode
+      ? { label: '站號', value: reverseCode.station[0] + (target ? '・反向參考' : '・反方向'), state: target ? 'missing' : 'bad' }
+      : currentCode
+        ? { label: '站號', value: currentCode.station[0] + '・目前站', state: 'missing' }
+        : { label: '站號', value: '未讀到', state: 'missing' };
+  const checks = [
+    lineCheck,
+    numberCheck,
+    { label: '目標', value: targetMatched ? target.station[2] : '未讀到', state: targetMatched ? 'ok' : 'missing' },
+    { label: '反向', value: reverseMatched ? reverse.station[2] : '未讀到', state: reverseMatched ? 'ok' : 'missing' }
+  ];
+  if (reading.isExit) checks.unshift({ label: '牌面', value: '出口', state: 'bad' });
+  return { target, reverse, lineMatched, targetMatched, reverseMatched, plannedCode, reverseCode, currentCode, otherLine, lineConflict, checks, isExit: reading.isExit };
+}
+function strictDirectionDecision(analysis, comparison) {
+  const target = analysis.planned[0] || null;
+  const movement = movementForMention(target);
+  const paired = analysis.pairedOpposite || null;
+  const hasArrow = !!target && target.sideSource === 'arrow' && !!target.pathDirection;
+  const hasName = !!target?.matchName;
+  const hasCode = !!target?.matchCode || !!comparison?.plannedCode;
+  const pairedNames = !!paired && !!target?.matchName && !!paired.matchName;
+  const lineConflict = !!comparison?.lineConflict;
+  const numberConflict = !!comparison?.reverseCode && !comparison?.plannedCode && !analysis.planned.length;
+  if (lineConflict || numberConflict) return { reliable: false, conflict: true, movement, target, paired, reason: 'conflict' };
+  if (!movement) return { reliable: false, conflict: false, movement: null, target, paired, reason: 'no-movement' };
+  if (hasArrow && hasName) return { reliable: true, conflict: false, movement, target, paired, reason: 'name-arrow' };
+  if (hasArrow && hasCode && comparison?.lineMatched) return { reliable: true, conflict: false, movement, target, paired, reason: 'number-line-arrow' };
+  if (pairedNames) return { reliable: true, conflict: false, movement, target, paired, reason: 'paired-names' };
+  return { reliable: false, conflict: false, movement, target, paired, reason: hasCode ? 'number-only' : 'single-evidence' };
+}
+function appendPhotoChecks(result, checks) {
+  const successfulChecks = checks.filter(check => check.state === 'ok');
+  if (!successfulChecks.length) return;
+  const list = el('div', 'photo-checks');
+  successfulChecks.forEach(check => list.appendChild(el('span', 'photo-check ' + check.state, check.label + '：' + check.value)));
+  result.appendChild(list);
+}
+function photoDirectionGuide(L, idx, nextLine, nextIdx) {
+  const platformContext = routePhotoContext(L, idx);
+  const transferContext = nextLine && nextIdx ? routePhotoContext(nextLine, nextIdx) : null;
+  const box = document.createElement('details'); box.className = 'photo-guide';
+  const summary = el('summary', 'photo-guide-summary', '拍月台方向牌，確認搭車方向');
+  const content = el('div', 'photo-guide-content');
+  const photoAim = el('p', 'photo-aim');
+  if (platformContext.loop) {
+    photoAim.append(el('strong', null, '請拍：'), document.createTextNode('整塊方向牌，讓箭頭和兩側站名一起入鏡。不要拍出口牌。'));
+  } else {
+    photoAim.append(
+      el('strong', null, '請拍：'),
+      document.createTextNode('「往 ' + platformContext.terminal[2] + '」的整塊方向牌，讓箭頭和兩側站名一起入鏡。不要拍出口牌。')
+    );
+  }
+  const offlinePrep = el('section', 'offline-ocr-prep');
+  const offlineCopy = el('div', 'offline-ocr-copy');
+  const offlineKicker = el('span', 'offline-ocr-kicker', 'OFFLINE READY');
+  const offlineTitle = el('strong', null, '出發前先準備方向辨識');
+  const offlineNote = el('p', null, '使用 Wi-Fi 下載完整韓文與英文辨識資料。照片只在此裝置內處理，不會上傳。');
+  offlineCopy.append(offlineKicker, offlineTitle, offlineNote);
+  const offlineActions = el('div', 'offline-ocr-actions');
+  const offlineButton = el('button', 'offline-ocr-button', '下載離線辨識資料');
+  offlineButton.type = 'button';
+  const offlineStatus = el('p', 'offline-ocr-status'); offlineStatus.setAttribute('aria-live', 'polite');
+  const offlinePie = createPieProgress({ progress: 0, size: 16, activeColor: '#2d8277', inactiveColor: '#dbe9e6' });
+  const offlineStatusText = el('span', null, '尚未下載');
+  offlineStatus.append(offlinePie.element, offlineStatusText);
+  offlineActions.append(offlineButton, offlineStatus);
+  const appInstall = el('div', 'offline-app-install');
+  const appInstallCopy = el('div', 'offline-app-copy');
+  const appInstallTitle = el('strong', null, '加入主畫面');
+  const appInstallHelp = el('span', null, '加入後，網站與已下載資料更容易保留。');
+  appInstallCopy.append(appInstallTitle, appInstallHelp);
+  const appInstallButton = el('button', 'offline-app-button', '加入主畫面');
+  appInstallButton.type = 'button';
+  appInstall.append(appInstallCopy, appInstallButton);
+  offlinePrep.append(offlineCopy, offlineActions, appInstall);
+  let appInstallFeedback = '';
+  const renderAppInstall = () => {
+    const mode = pwaInstallMode();
+    appInstall.hidden = mode === 'installed';
+    if (mode === 'installed') return;
+    if (mode === 'available') {
+      appInstallButton.disabled = false;
+      appInstallButton.textContent = '加入主畫面';
+      appInstallHelp.textContent = appInstallFeedback || '加入後，網站與已下載資料更容易保留。';
+    } else {
+      appInstallButton.disabled = false;
+      appInstallButton.textContent = '查看方式';
+      appInstallHelp.textContent = appInstallFeedback || 'iPhone 可在 Safari 的分享選單選「加入主畫面」。';
+    }
+  };
+  appInstallButton.addEventListener('click', async () => {
+    appInstallButton.disabled = true;
+    const outcome = await requestPwaInstall();
+    if (outcome === 'instructions') appInstallFeedback = 'iPhone：Safari 分享 → 加入主畫面。Android：瀏覽器選單 → 安裝應用程式。';
+    else if (outcome === 'accepted') appInstallFeedback = '完成後請從主畫面開啟 KSW-METRO。';
+    else if (outcome === 'dismissed') appInstallFeedback = '你可以稍後再從瀏覽器選單加入主畫面。';
+    renderAppInstall();
+  });
+  window.addEventListener(PWA_INSTALL_EVENT, renderAppInstall);
+  renderAppInstall();
+  let offlinePreparing = false;
+  let lastOfflineProgress = 0;
+  const setOfflinePackState = (state, label, progress) => {
+    offlinePrep.classList.remove('is-downloading', 'is-ready', 'is-failed');
+    if (state !== 'idle') offlinePrep.classList.add('is-' + state);
+    if (Number.isFinite(progress)) {
+      lastOfflineProgress = Math.max(lastOfflineProgress, progress);
+      offlinePie.update(lastOfflineProgress);
+    }
+    offlineStatusText.textContent = label;
+    const downloading = state === 'downloading';
+    const ready = state === 'ready';
+    offlineButton.disabled = downloading || ready;
+    offlineButton.textContent = downloading ? '正在準備…' : ready ? '已下載到此裝置' : state === 'failed' ? '重新下載辨識資料' : '下載離線辨識資料';
+    offlinePrep.hidden = ready;
+  };
+  const offlineOcrProgress = message => {
+    const progress = Number.isFinite(message.progress) ? message.progress : 0;
+    if (message.status === 'loading language traineddata') {
+      setOfflinePackState('downloading', '下載辨識資料 ' + Math.round(progress * 100) + '%', 16 + progress * 78);
+    } else if (message.status === 'initializing api') {
+      setOfflinePackState('downloading', '完成設定中', 96);
+    } else if (message.status === 'initializing tesseract') {
+      setOfflinePackState('downloading', '初始化辨識工具', 12);
+    }
+  };
+  const prepareOfflineOcr = async () => {
+    if (offlinePreparing) return;
+    if (hasOcrOfflinePack() && !tesseractWorker) {
+      lastOfflineProgress = 100;
+      setOfflinePackState('ready', '此裝置已準備好', 100);
+      return;
+    }
+    offlinePreparing = true;
+    lastOfflineProgress = 0;
+    offlinePie.update(0, { animate: false });
+    setOfflinePackState('downloading', '正在準備下載', 6);
+    try {
+      const timeout = tesseractWorker ? OCR_WORKER_TIMEOUT_MS : OCR_FIRST_WORKER_TIMEOUT_MS;
+      await withOcrTimeout(getTesseractWorker(offlineOcrProgress), timeout, '下載辨識資料逾時，請確認網路後再試。');
+      markOcrOfflinePackReady();
+      scheduleOcrWorkerRelease();
+      setOfflinePackState('ready', '此裝置已準備好', 100);
+    } catch (error) {
+      const message = String(error && error.message || '下載沒有完成，請確認網路後再試。');
+      setOfflinePackState('failed', message, lastOfflineProgress);
+    } finally {
+      offlinePreparing = false;
+    }
+  };
+  if (hasOcrOfflinePack()) {
+    lastOfflineProgress = 100;
+    setOfflinePackState('ready', '此裝置已準備好', 100);
+  } else {
+    setOfflinePackState('idle', '尚未下載', 0);
+  }
+  offlineButton.addEventListener('click', prepareOfflineOcr);
+  const examples = el('div', 'photo-samples');
+  const sample = ({ src, alt, correct, title, note, kind = '', badge = '' }) => {
+    const figure = el('figure', 'photo-sample ' + kind + ' ' + (correct === false ? 'bad' : 'good'));
+    const visual = el('div', 'photo-sample-visual');
+    const image = document.createElement('img');
+    image.src = src; image.alt = alt; image.loading = 'lazy'; image.decoding = 'async';
+    visual.append(image, el('span', 'photo-sample-state', badge || (correct === false ? '不完整' : '完整')));
+    const caption = document.createElement('figcaption');
+    caption.append(el('strong', null, title), el('span', null, note));
+    figure.append(visual, caption);
+    return figure;
+  };
+  const sampleGroup = (title, hint, items, kind = '') => {
+    const group = el('section', 'photo-sample-group ' + kind);
+    const head = el('div', 'photo-sample-head');
+    head.append(el('strong', null, title), el('span', null, hint));
+    const pair = el('div', 'photo-sample-pair');
+    items.forEach(item => pair.appendChild(sample(item)));
+    group.append(head, pair);
+    return group;
+  };
+  const hangingGroup = sampleGroup('吊掛式方向牌', '拍下整塊牌面', [
+    { src: 'assets/photo-guide-hanging-complete.webp', alt: '完整的吊掛式方向牌，左右箭頭、路線號與站名全部入鏡', correct: true, title: '左右資訊都拍到', note: '箭頭、線號、兩側站名都清楚' },
+    { src: 'assets/photo-guide-hanging-partial.webp', alt: '不完整的吊掛式方向牌，只拍到單側方向與站名', correct: false, title: '只有單側不夠', note: '無法和另一方向比較' }
+  ]);
+  const columnGroup = sampleGroup('柱面／牆面方向牌', '上下資訊一起拍', [
+    { src: 'assets/photo-guide-column-complete.webp', alt: '完整的柱面方向牌，箭頭、目前站與兩側站名全部入鏡', correct: true, title: '整個方向區塊入鏡', note: '箭頭、站號與兩側路線可比對', kind: 'column' },
+    { src: 'assets/photo-guide-column-partial.webp', alt: '不完整的柱面方向牌，只拍到其中一側箭頭與站名', correct: false, title: '不要只拍一邊', note: '缺少另一側站名與目前站', kind: 'column' }
+  ]);
+  const transferGroup = el('section', 'photo-sample-group transfer');
+  const transferHead = el('div', 'photo-sample-head');
+  transferHead.append(el('strong', null, '轉乘方向牌'), el('span', null, '換線時再拍這種'));
+  const transferShot = sample({ src: 'assets/photo-guide-transfer.webp', alt: '轉乘通道上完整的轉乘方向牌，包含 갈아타는 곳、箭頭、路線號與站名', correct: true, badge: '轉乘', title: '讓「갈아타는 곳」與箭頭入鏡', note: '同時拍到要轉乘的線號與方向站名' });
+  const transferCues = el('div', 'photo-sample-cues');
+  ['갈아타는 곳', '箭頭', '路線號', '方向站名'].forEach(cue => transferCues.appendChild(el('span', null, cue)));
+  transferGroup.append(transferHead, transferShot, transferCues);
+  examples.append(hangingGroup, columnGroup, transferGroup);
+  const input = document.createElement('input');
+  const inputId = 'direction-photo-' + Math.random().toString(36).slice(2);
+  input.type = 'file'; input.accept = 'image/*'; input.id = inputId; input.className = 'photo-file-input';
+  // A native label/input association keeps the file chooser a trusted mobile gesture.
+  // iOS and Android can then offer their own camera and photo-library choices.
+  const photoAction = el('label', 'photo-action', '拍照或選擇指示牌照片');
+  photoAction.htmlFor = inputId; photoAction.setAttribute('role', 'button'); photoAction.tabIndex = 0;
+  const setPhotoActionBusy = busy => {
+    input.disabled = busy;
+    photoAction.classList.toggle('is-disabled', busy);
+    photoAction.setAttribute('aria-disabled', String(busy));
+    photoAction.textContent = busy ? '正在讀取…' : '拍照或選擇指示牌照片';
+  };
+  photoAction.onkeydown = event => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    warmOcrWorker();
+    if (!input.disabled) input.click();
+  };
+  photoAction.onpointerdown = warmOcrWorker;
+  box.addEventListener('toggle', () => { if (box.open) prepareOfflineOcr(); });
+  const status = el('div', 'photo-status'); status.hidden = true; status.setAttribute('aria-live', 'polite');
+  const photoPie = createPieProgress({ progress: 0, size: 32, activeColor: '#2d8277', inactiveColor: '#dbe9e6' });
+  const statusPulse = photoPie.element;
+  const statusKicker = el('span', 'photo-status-kicker', '方向牌辨識');
+  const statusTitle = el('strong', null, '正在整理照片…');
+  const statusDetail = el('span', null, '準備讀取方向牌');
+  const statusCopy = el('div', 'photo-status-copy'); statusCopy.append(statusKicker, statusTitle, statusDetail);
+  const statusLive = el('span', 'photo-status-live', '處理中'); statusLive.setAttribute('aria-hidden', 'true');
+  const statusHead = el('div', 'photo-status-head'); statusHead.append(statusPulse, statusCopy, statusLive);
+  status.append(statusHead);
+  const stageProgress = { prepare: 18, tool: 46, read: 76, compare: 100 };
+  let lastOcrProgress = 0;
+  const setOcrStatus = (stage, title, detail, progress) => {
+    const requestedProgress = Number.isFinite(progress) ? progress : stageProgress[stage] || 0;
+    // OCR can emit late events from an earlier stage. Never show progress going backwards.
+    const visualProgress = Math.max(lastOcrProgress, stageProgress[stage] || 0, requestedProgress);
+    if (visualProgress === lastOcrProgress && requestedProgress < lastOcrProgress) return;
+    lastOcrProgress = visualProgress;
+    status.dataset.stage = stage;
+    photoPie.update(visualProgress);
+    statusTitle.textContent = title;
+    statusDetail.textContent = detail;
+  };
+  const result = el('div', 'photo-result'); result.hidden = true; result.setAttribute('aria-live', 'polite');
+  const readPhoto = async file => {
+    if (!file) return;
+    box.open = true; result.hidden = true; setPhotoActionBusy(true);
+    const statusShownAt = performance.now();
+    lastOcrProgress = 0;
+    photoPie.update(0, { animate: false });
+    status.hidden = false; setOcrStatus('prepare', '正在整理照片…', '準備讀取方向牌');
+    let worker;
+    const updateOcrStatus = message => {
+      const labels = {
+        'loading tesseract core': ['tool', '正在啟動辨識工具…', '第一次使用時需要一點時間'],
+        'initializing tesseract': ['tool', '正在初始化辨識工具…', '正在準備韓文辨識'],
+        'loading language traineddata': ['tool', '正在下載韓文辨識資料…', '即將開始讀取站牌'],
+        'initializing api': ['tool', '正在準備辨識資料…', '已完成工具設定'],
+        'recognizing text': ['read', '正在讀取站牌文字…', '正在找站名、線號與箭頭']
+      };
+      const [stage, label, detail] = labels[message.status] || ['tool', '正在準備辨識…', '請稍候'];
+      const progress = Number.isFinite(message.progress)
+        ? stage === 'read'
+          ? 76 + message.progress * 22
+          : message.status === 'loading language traineddata'
+            ? 22 + message.progress * 46
+            : undefined
+        : undefined;
+      setOcrStatus(stage, label, detail, progress);
+    };
+    try {
+      const prepared = await withOcrTimeout(shrinkForOcr(file), OCR_MODULE_TIMEOUT_MS, '照片處理逾時，請重新選擇清楚的 JPG 或 PNG。');
+      setOcrStatus('tool', '正在準備韓文辨識工具…', '已在選照片時同步載入');
+      const workerTimeout = tesseractWorker ? OCR_WORKER_TIMEOUT_MS : OCR_FIRST_WORKER_TIMEOUT_MS;
+      const workerTimeoutMessage = tesseractWorker
+        ? '辨識工具啟動逾時，請確認網路後再試。'
+        : '第一次下載韓文辨識資料逾時，請確認網路後再試。';
+      worker = await withOcrTimeout(getTesseractWorker(updateOcrStatus), workerTimeout, workerTimeoutMessage);
+      await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
+      const response = await withOcrTimeout(worker.recognize(prepared.image, {}, { blocks: true }), OCR_RECOGNITION_TIMEOUT_MS, '站牌文字讀取逾時，請重新拍攝較清楚的指示牌。');
+      let ocrData = response.data;
+      let reading = signReading(ocrData, [platformContext, transferContext]);
+      let context = reading.isTransfer ? transferContext : platformContext;
+      let analysis = context ? analyzePhotoSign(ocrData, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
+      if (reading.isTransfer) analysis.signKind = 'transfer';
+      if (!(analysis.clear && analysis.pairedOpposite)) {
+        setOcrStatus('read', '再確認站名…', '用另一種讀取方式確認');
+        // 稀疏文字與整面直式指示牌需要不同的版面假設：第二輪以區塊模式讀取，
+        // 可補回第一輪把站名拆散或漏掉的情況。
+        await worker.setParameters({ tessedit_pageseg_mode: '6', preserve_interword_spaces: '1' });
+        const highContrastResponse = await withOcrTimeout(worker.recognize(prepared.highContrast, {}, { blocks: true }), OCR_RECOGNITION_TIMEOUT_MS, '站牌文字讀取逾時，請重新拍攝較清楚的指示牌。');
+        ocrData = mergeOcrData(response.data, highContrastResponse.data);
+        reading = signReading(ocrData, [platformContext, transferContext]);
+        context = reading.isTransfer ? transferContext : platformContext;
+        analysis = context ? analyzePhotoSign(ocrData, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
+        if (reading.isTransfer) analysis.signKind = 'transfer';
+      }
+      setOcrStatus('compare', '正在比對方向…', '核對路線、站名與箭頭');
+      result.replaceChildren(); result.hidden = false;
+      const place = analysis.signKind === 'transfer' ? '轉乘通道' : '月台';
+      const directionContext = analysis.signKind === 'transfer' ? transferContext : platformContext;
+      const allowedLineIds = analysis.signKind === 'transfer' ? [platformContext.id, transferContext && transferContext.id] : [platformContext.id];
+      const comparison = directionContext ? photoComparison(reading, analysis, directionContext, allowedLineIds) : null;
+      const decision = comparison ? strictDirectionDecision(analysis, comparison) : null;
+      if (analysis.signKind === 'transfer' && !transferContext) {
+        result.classList.add('warn');
+        result.append(el('div', 'photo-result-label', '這是轉乘指示牌'), el('strong', null, '目前這一段不用轉車'), el('p', null, '請拍月台上的方向牌，讓下一站或終點站名稱一起入鏡。'));
+      } else if (comparison && comparison.isExit) {
+        result.classList.add('warn');
+        result.append(el('div', 'photo-result-label', '這是出口指示牌'), el('strong', null, '不能用來判斷搭車方向'), el('p', null, '請改拍月台、轉乘通道上的方向牌，並讓箭頭和站名一起入鏡。'));
+      } else if (decision && decision.conflict) {
+        result.classList.add('warn');
+        result.append(
+          el('div', 'photo-result-label', '辨識資料不一致'),
+          el('strong', null, '不要依這張照片前進'),
+          el('p', null, '圖片中的線號、站號或站名和規劃路線互相衝突。請重新拍攝完整指示牌。')
+        );
+      } else if (decision && decision.reliable && analysis.clear && analysis.pairedOpposite) {
+        const direction = analysis.clear;
+        const opposite = analysis.pairedOpposite;
+        result.classList.remove('warn');
+        result.append(
+          el('div', 'photo-result-label', '已讀到兩側站名・已比對'),
+          el('strong', null, '往' + direction.side + '側' + place + '走'),
+          el('p', null, direction.side + '：' + direction.station[1] + '（' + direction.station[2] + '）｜' + opposite.side + '：' + opposite.station[1] + '（' + opposite.station[2] + '）')
+        );
+      } else if (decision && decision.reliable && analysis.planned.length) {
+        const direction = analysis.planned[0];
+        const movement = movementForMention(direction);
+        result.classList.remove('warn');
+        result.append(
+          el('div', 'photo-result-label', '方向已通過交叉比對'),
+          el('strong', null, movementInstruction(movement, place)),
+          el('p', null, '已比對 ' + direction.station[1] + '（' + direction.station[2] + '）與箭頭' + (decision.reason === 'number-line-arrow' ? '、線號及站號。' : '。'))
+        );
+      } else if (analysis.planned.length) {
+        const direction = analysis.planned[0];
+        result.classList.add('warn');
+        const numberOnly = decision && decision.reason === 'number-only';
+        result.append(
+          el('div', 'photo-result-label', '證據不足'),
+          el('strong', null, '暫時不判斷方向'),
+          el('p', null, numberOnly
+            ? '已讀到 ' + direction.station[0] + '，但還需要相符的線號與箭頭。請重新拍完整指示牌。'
+            : '已讀到 ' + direction.station[1] + '（' + direction.station[2] + '），但箭頭或另一側站名不夠清楚。請重新拍攝。')
+        );
+      } else if (analysis.opposite.length) {
+        const opposite = analysis.opposite[0];
+        result.classList.add('warn');
+        result.append(
+          el('div', 'photo-result-label', '這一側是反方向'),
+          el('strong', null, '不要往「' + opposite.station[2] + '」走'),
+          el('p', null, '讀到 ' + opposite.station[1] + '（' + opposite.station[2] + '）。請找往「' + directionContext.terminal[2] + '」的箭頭。')
+        );
+      } else {
+        result.classList.add('warn');
+        const parsedStations = reading.stations.map(item => item.station[1] + '（' + item.station[2] + '）').join('、');
+        const parsedTypes = [...reading.labels, ...reading.routeLines].join('・');
+        if (parsedStations || reading.korean) {
+          result.append(el('div', 'photo-result-label', parsedTypes || '讀到站牌文字'), el('strong', null, parsedStations || '讀到：' + reading.korean), el('p', null, parsedStations ? '牌面上的站名不在這一段要走的方向。請重拍含箭頭的整塊指示牌。' : '還無法比對站名。請把箭頭和站名一起拍清楚。'));
+        } else {
+          result.append(el('div', 'photo-result-label', '請重拍'), el('strong', null, '沒有讀到可比對的站名'), el('p', null, '請讓整塊指示牌填滿畫面，避免反光或只拍到局部。'));
+        }
+      }
+      if (comparison) appendPhotoChecks(result, comparison.checks);
+    } catch (error) {
+      result.replaceChildren(); result.hidden = false; result.classList.add('warn');
+      const reason = String(error && error.message || '');
+      const isTimeout = error && error.code === 'OCR_TIMEOUT';
+      const isFirstDownloadTimeout = isTimeout && !worker && reason.includes('第一次下載韓文辨識資料');
+      const message = isTimeout
+        ? reason
+        : reason.includes('照片')
+          ? reason
+          : '確認網路後重試，並讓整塊指示牌清楚入鏡。';
+      result.append(
+        el('div', 'photo-result-label', isFirstDownloadTimeout ? '首次下載尚未完成' : isTimeout ? '讀取時間過久' : '這次沒有完成辨識'),
+        el('strong', null, isFirstDownloadTimeout ? '請保持網路連線後再試' : isTimeout ? '請確認網路後再試' : '請再試一次'),
+        el('p', null, message)
+      );
+    } finally {
+      if (worker) scheduleOcrWorkerRelease();
+      const remainingStatusTime = OCR_STATUS_MIN_VISIBLE_MS - (performance.now() - statusShownAt);
+      if (remainingStatusTime > 0) await new Promise(resolve => window.setTimeout(resolve, remainingStatusTime));
+      status.hidden = true;
+      setPhotoActionBusy(false); input.value = '';
+    }
+  };
+  input.onchange = async () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    try {
+      const cropped = await cropPhoto(file);
+      if (cropped) readPhoto(cropped);
+      else input.value = '';
+    } catch (error) {
+      result.replaceChildren(); result.hidden = false; result.classList.add('warn');
+      result.append(el('div', 'photo-result-label', '照片無法使用'), el('strong', null, '請重新選擇照片'), el('p', null, '請確認照片檔案完整後再試。'));
+      input.value = '';
+    }
+  };
+  content.append(photoAim, offlinePrep, examples, input, photoAction, status, result);
+  box.append(summary, content);
+  return box;
+}
+function legBlock(L, idx, nextLine, nextIdx, transfer) {
   const n = L.st.length;
   const board = L.st[idx[0]], next = L.st[idx[1]], off = L.st[idx[idx.length - 1]];
   const fwd = L.loop ? (idx[1] === (idx[0] + 1) % n) : idx[1] > idx[0];
@@ -1115,6 +3280,7 @@ function legBlock(L, idx, nextLine, transfer) {
   ride.appendChild(r2);
   bd.appendChild(ride);
   bd.appendChild(stopList(L, idx));
+  bd.appendChild(photoDirectionGuide(L, idx, nextLine, nextIdx));
 
   if (nextLine) {
     const x = el('div', 'xfer');
@@ -1142,57 +3308,269 @@ function endBlock(L, s) {
 }
 
 /* ---------- issue report ---------- */
+const REPORT_TYPES = {
+  station_translation: '站名／翻譯錯誤', route_result: '路線規劃結果錯誤', fare: '票價錯誤',
+  location: '定位／附近車站不準', facility: '電梯／廁所／無障礙資訊',
+  ui: '頁面操作／顯示問題', other: '其他建議'
+};
+const REPORT_PICK = { station: null, from: null, to: null };
+const reportValue = id => document.getElementById(id)?.value.trim() || '';
+function reportField(id, label, options = {}) {
+  const wrap = el('div', 'field' + (options.wide ? ' field-wide' : '') + (options.station ? ' report-station-field' : ''));
+  const caption = el('label', null, label);
+  caption.htmlFor = id;
+  if (options.required) caption.appendChild(el('span', 'report-required', ' ＊'));
+  const input = options.textarea ? document.createElement('textarea') : document.createElement('input');
+  input.id = id;
+  input.type = options.type || 'text';
+  input.placeholder = options.placeholder || '';
+  input.autocomplete = options.autocomplete || 'off';
+  if (options.value != null) input.value = options.value;
+  if (options.min != null) input.min = options.min;
+  wrap.append(caption, input);
+  return { wrap, input };
+}
+function reportReadonly(id, label, value = '') {
+  const wrap = el('div', 'field field-wide');
+  const caption = el('label', null, label); caption.htmlFor = id;
+  const output = el('div', 'report-readonly', value || '選好欄位後會自動顯示');
+  output.id = id; output.setAttribute('role', 'status');
+  wrap.append(caption, output);
+  return { wrap, output };
+}
+function reportChoice(name, label, items, required = false) {
+  const fieldset = el('fieldset', 'report-choice field-wide');
+  const legend = el('legend', null, label);
+  if (required) legend.appendChild(el('span', 'report-required', ' ＊'));
+  const options = el('div', 'report-options');
+  items.forEach(([value, text]) => {
+    const option = el('label', 'report-option');
+    const input = document.createElement('input'); input.type = 'radio'; input.name = name; input.value = value;
+    option.append(input, el('span', null, text)); options.appendChild(option);
+  });
+  fieldset.append(legend, options);
+  return fieldset;
+}
+function setReportStation(key, station, input) {
+  REPORT_PICK[key] = station;
+  input.value = stationLabel(station);
+  if (key === 'station') updateTranslationCurrentValue();
+  if (key === 'from' || key === 'to') updateReportRouteSnapshot();
+}
+function attachReportStation(input, key, optional = false) {
+  let list = null, timer = 0, composing = false;
+  const close = () => { if (list) { list.remove(); list = null; } };
+  const render = value => {
+    if (input.value !== value || !value.trim()) return;
+    const pairedCity = key === 'to' && REPORT_PICK.from ? REPORT_PICK.from.city : null;
+    const hits = match(value).filter(station => !pairedCity || station.city === pairedCity).slice(0, 6);
+    if (!hits.length) return;
+    list = el('div', 'sugg');
+    hits.forEach(station => {
+      const button = row(station);
+      button.onclick = () => { setReportStation(key, station, input); close(); };
+      list.appendChild(button);
+    });
+    input.parentNode.appendChild(list);
+  };
+  input.oninput = event => {
+    REPORT_PICK[key] = null; close(); clearTimeout(timer);
+    if (!input.value.trim()) { if (!optional) updateReportRouteSnapshot(); return; }
+    if (!composing && !event.isComposing) { const value = input.value; timer = setTimeout(() => render(value), 120); }
+  };
+  input.addEventListener('compositionstart', () => { composing = true; clearTimeout(timer); });
+  input.addEventListener('compositionend', () => { composing = false; const value = input.value; timer = setTimeout(() => render(value), 120); });
+  input.onblur = () => setTimeout(close, 180);
+}
+function calculateReportRoute(from, to) {
+  if (!from || !to) return null;
+  if (from.city !== to.city) return { snapshot: '起點與終點位於不同城市，系統無法規劃。', fare: '' };
+  if (from.ko === to.ko) return { snapshot: '起點與終點相同。', fare: '' };
+  const result = plan(from, to);
+  if (!result) return { snapshot: '系統找不到可用路線。', fare: '' };
+  const legs = [];
+  result.path.forEach(id => {
+    const { li, si } = NODE[id], last = legs[legs.length - 1];
+    if (last && last.li === li) last.idx.push(si); else legs.push({ li, idx: [si] });
+  });
+  const real = legs.filter(leg => leg.idx.length > 1);
+  let km = 0, stops = 0;
+  real.forEach(leg => {
+    const line = LINES[leg.li];
+    for (let i = 0; i + 1 < leg.idx.length; i++) {
+      const left = line.st[leg.idx[i]], right = line.st[leg.idx[i + 1]];
+      km += Number.isFinite(left[4]) && Number.isFinite(left[5]) && Number.isFinite(right[4]) && Number.isFinite(right[5])
+        ? dist(left[4], left[5], right[4], right[5]) / 1000 : .9;
+      stops++;
+    }
+  });
+  km *= 1.15;
+  const transferCount = Math.max(0, real.length - 1);
+  const inTrain = real.reduce((sum, leg) => sum + legMinutes(LINES[leg.li], leg.idx), 0);
+  const startWait = real.length ? expectedWait(LINES[real[0].li]) : 0;
+  const transfers = real.slice(0, -1).map((leg, position) => {
+    const line = LINES[leg.li], off = line.st[leg.idx[leg.idx.length - 1]], station = stationFor(line, off);
+    return { walk: transferWalk(station), wait: expectedWait(LINES[real[position + 1].li]) };
+  });
+  const total = wholeMinutes(inTrain + startWait + transfers.reduce((sum, item) => sum + item.walk + item.wait, 0));
+  const fare = fareInfo(km, real);
+  const detail = real.map(leg => {
+    const line = LINES[leg.li], first = line.st[leg.idx[0]], last = line.st[leg.idx[leg.idx.length - 1]];
+    return `${line.zh}：${first[2]} ${first[0]} → ${last[2]} ${last[0]}`;
+  }).join('\n');
+  return { snapshot: `${stationLabel(from)} → ${stationLabel(to)}\n總計約 ${total} 分鐘；${stats(stops)}；轉乘 ${transferCount} 次\n${detail}`, fare: fare.label };
+}
+function updateReportRouteSnapshot() {
+  const snapshot = $('#rRouteSnapshot'), fare = $('#rDisplayedFare');
+  if (!snapshot && !fare) return;
+  const calculated = calculateReportRoute(REPORT_PICK.from, REPORT_PICK.to);
+  const text = calculated?.snapshot || REPORT_CONTEXT.routeSnapshot || '選好起點與終點後會自動顯示';
+  if (snapshot) snapshot.textContent = text;
+  if (fare) fare.textContent = calculated?.fare || REPORT_CONTEXT.displayedFare || '選好起點與終點後會自動顯示';
+}
+function updateTranslationCurrentValue() {
+  const output = $('#rCurrentValue'); if (!output) return;
+  const station = REPORT_PICK.station, language = document.querySelector('input[name="rErrorLanguage"]:checked')?.value;
+  if (!station || !language) { output.textContent = '選好車站與錯誤語言後會自動顯示'; return; }
+  const values = { zh: station.zh, ko: station.ko, en: station.rom, station_code: stationCodes(station) };
+  output.textContent = values[language] || '';
+}
+function appendReportStation(container, id, label, key, required, initial) {
+  const field = reportField(id, label, { required, station: true, placeholder: '輸入中文、韓文、拼音或站號' });
+  container.appendChild(field.wrap); attachReportStation(field.input, key, !required);
+  if (initial) setReportStation(key, initial, field.input);
+  return field.input;
+}
+function appendReportBody(container, required, minimum = 1, placeholder = '請描述你遇到的問題。') {
+  const field = reportField('rBody', required ? '說明' : '說明（選填）', { required, textarea: true, wide: true, placeholder });
+  field.input.dataset.minimum = String(minimum); container.appendChild(field.wrap);
+}
+function renderReportFields() {
+  const type = $('#rType').value, box = $('#reportDynamic');
+  box.replaceChildren(); REPORT_PICK.station = REPORT_PICK.from = REPORT_PICK.to = null;
+  if (REPORT_CONTEXT.source) box.appendChild(el('div', 'report-context-note field-wide', REPORT_CONTEXT.source === 'route_planner' ? '已帶入剛才的路線規劃結果。' : '已帶入剛才的站名搜尋結果。'));
+  if (type === 'station_translation') {
+    appendReportStation(box, 'rStation', '車站', 'station', true, REPORT_CONTEXT.station);
+    const choices = reportChoice('rErrorLanguage', '錯誤語言', [['zh','中文'],['ko','韓文'],['en','英文'],['station_code','站號']], true);
+    choices.addEventListener('change', updateTranslationCurrentValue); box.appendChild(choices);
+    box.appendChild(reportReadonly('rCurrentValue', '目前顯示的內容').wrap);
+    box.appendChild(reportField('rSuggestedValue', '你認為正確的寫法（選填）', { wide: true, placeholder: '不知道正確寫法也可以留空' }).wrap);
+    appendReportBody(box, true, 4, '請簡單說明哪裡不正確，至少 4 個字。');
+  } else if (type === 'route_result' || type === 'fare') {
+    appendReportStation(box, 'rFrom', '起點', 'from', true, REPORT_CONTEXT.from);
+    appendReportStation(box, 'rTo', '終點', 'to', true, REPORT_CONTEXT.to);
+    if (type === 'route_result') {
+      box.appendChild(reportReadonly('rRouteSnapshot', '系統顯示的路線／時間', REPORT_CONTEXT.routeSnapshot).wrap);
+      box.appendChild(reportChoice('rRouteIssueType', '問題類型', [['not_shortest','路線不是最短'],['too_many_transfers','轉乘次數過多'],['unreasonable_time','時間明顯不合理'],['other','其他']], true));
+      appendReportBody(box, true, 1, '請說明你覺得哪一段有問題。');
+    } else {
+      box.appendChild(reportReadonly('rDisplayedFare', '系統顯示金額', REPORT_CONTEXT.displayedFare).wrap);
+      box.appendChild(reportField('rUserFare', '實際金額（選填）', { type: 'number', min: 0, placeholder: '例如 1550' }).wrap);
+      box.appendChild(reportChoice('rPaymentType', '交通卡類型（選填）', [['transit_card','一般交通卡'],['cash','現金'],['other','其他']]));
+      appendReportBody(box, false, 0, '可補充票種、搭乘日期或現場看到的資訊。');
+    }
+    updateReportRouteSnapshot();
+  } else if (type === 'location') {
+    appendReportStation(box, 'rStation', '車站（選填）', 'station', false, REPORT_CONTEXT.station);
+    box.appendChild(reportChoice('rLocationPermission', '是否已允許瀏覽器定位權限', [['yes','是'],['no','否'],['unsure','不確定']], true));
+    appendReportBody(box, true, 1, '請說明你當時的位置與網站顯示的車站。');
+  } else if (type === 'facility') {
+    appendReportStation(box, 'rStation', '車站', 'station', true, REPORT_CONTEXT.station);
+    box.appendChild(reportChoice('rFacilityIssueType', '問題類型', [['cannot_open','連結打不開'],['wrong_content','連結內容錯誤'],['outdated','資訊過時'],['other','其他']], true));
+    appendReportBody(box, false, 0, '可補充設施名稱、出口或你看到的畫面。');
+  } else if (type === 'ui') {
+    box.appendChild(reportChoice('rPageArea', '發生頁面', [['home','首頁'],['station_search','找站名'],['route_planner','路線規劃'],['report_form','回報表單'],['other','其他']], true));
+    box.appendChild(reportChoice('rDeviceType', '裝置類型', [['mobile','手機'],['tablet','平板'],['desktop','電腦']], true));
+    appendReportBody(box, true, 4, '請描述按了什麼、看到什麼，至少 4 個字。');
+  } else {
+    appendReportBody(box, true, 4, '請寫下你的建議，至少 4 個字。');
+  }
+}
+function reportSelected(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+function reportPayload() {
+  const category = $('#rType').value, station = REPORT_PICK.station;
+  const calculated = calculateReportRoute(REPORT_PICK.from, REPORT_PICK.to);
+  return {
+    type: REPORT_TYPES[category], category_key: category,
+    station: stationLabel(station), station_code: stationCodes(station), line_id: stationLines(station),
+    error_language: reportSelected('rErrorLanguage'), current_value: $('#rCurrentValue')?.textContent || '',
+    suggested_value: reportValue('rSuggestedValue'), origin_station: stationLabel(REPORT_PICK.from),
+    destination_station: stationLabel(REPORT_PICK.to), route_snapshot: calculated?.snapshot || REPORT_CONTEXT.routeSnapshot || '',
+    route_issue_type: reportSelected('rRouteIssueType'), displayed_fare: calculated?.fare || REPORT_CONTEXT.displayedFare || '',
+    user_reported_fare: reportValue('rUserFare') === '' ? null : Number(reportValue('rUserFare')),
+    payment_type: reportSelected('rPaymentType'), has_location_permission: reportSelected('rLocationPermission'),
+    facility_issue_type: reportSelected('rFacilityIssueType'), page_area: reportSelected('rPageArea'),
+    device_type: reportSelected('rDeviceType'), search_snapshot: REPORT_CONTEXT.searchSnapshot || '',
+    body: reportValue('rBody'), contact: $('#rContact').value.trim(), page: location.href,
+    user_agent: navigator.userAgent, honeypot: $('#rWebsite').value
+  };
+}
+function focusReport(id, message) {
+  reportStatus(message, false); const target = document.getElementById(id) || document.querySelector(`[name="${id}"]`); target?.focus(); return false;
+}
+function validateReport() {
+  const type = $('#rType').value, body = reportValue('rBody');
+  if ($('#rWebsite').value) return focusReport('rType', '無法送出，請重新整理後再試。');
+  if (type === 'station_translation') {
+    if (!REPORT_PICK.station) return focusReport('rStation', '請從建議清單選擇車站。');
+    if (!reportSelected('rErrorLanguage')) return focusReport('rErrorLanguage', '請選擇錯誤的是中文、韓文、英文或站號。');
+    if (body.length < 4) return focusReport('rBody', '請用至少 4 個字說明哪裡不正確。');
+  } else if (type === 'route_result' || type === 'fare') {
+    if (!REPORT_PICK.from) return focusReport('rFrom', '請從建議清單選擇起點。');
+    if (!REPORT_PICK.to) return focusReport('rTo', '請從建議清單選擇終點。');
+    if (REPORT_PICK.from.city !== REPORT_PICK.to.city) return focusReport('rTo', '起點與終點必須在同一城市。');
+    if (type === 'route_result' && !reportSelected('rRouteIssueType')) return focusReport('rRouteIssueType', '請選擇路線規劃的問題類型。');
+    if (type === 'route_result' && !body) return focusReport('rBody', '請簡單說明哪一段有問題。');
+  } else if (type === 'location') {
+    if (!reportSelected('rLocationPermission')) return focusReport('rLocationPermission', '請選擇是否已允許定位權限。');
+    if (!body) return focusReport('rBody', '請說明你當時的位置與網站顯示的車站。');
+  } else if (type === 'facility') {
+    if (!REPORT_PICK.station) return focusReport('rStation', '請從建議清單選擇車站。');
+    if (!reportSelected('rFacilityIssueType')) return focusReport('rFacilityIssueType', '請選擇設施資訊的問題類型。');
+  } else if (type === 'ui') {
+    if (!reportSelected('rPageArea')) return focusReport('rPageArea', '請選擇發生問題的頁面。');
+    if (!reportSelected('rDeviceType')) return focusReport('rDeviceType', '請選擇使用的裝置類型。');
+    if (body.length < 4) return focusReport('rBody', '請用至少 4 個字描述操作問題。');
+  } else if (body.length < 4) return focusReport('rBody', '請寫下至少 4 個字的建議。');
+  return true;
+}
 function reportText() {
-  const type = $('#rType').value;
-  const station = $('#rStation').value.trim() || '未填';
-  const body = $('#rBody').value.trim();
-  const contact = $('#rContact').value.trim() || '未填';
-  return [
-    'KSW-METRO 問題回報',
-    '',
-    '類型：' + type,
-    '相關車站：' + station,
-    '說明：',
-    body || '未填',
-    '',
-    '聯絡方式：' + contact,
-    '頁面：' + location.href,
-    '時間：' + new Date().toLocaleString('zh-Hant', { hour12: false }),
-    '瀏覽器：' + navigator.userAgent
-  ].join('\n');
+  const payload = reportPayload();
+  const labels = [
+    ['類型', payload.type], ['車站', payload.station], ['錯誤語言', payload.error_language],
+    ['目前內容', payload.current_value], ['建議寫法', payload.suggested_value],
+    ['起點', payload.origin_station], ['終點', payload.destination_station], ['路線／時間', payload.route_snapshot],
+    ['路線問題', payload.route_issue_type], ['系統票價', payload.displayed_fare],
+    ['實際票價', payload.user_reported_fare == null ? '' : `₩${payload.user_reported_fare}`],
+    ['付款方式', payload.payment_type], ['定位權限', payload.has_location_permission],
+    ['設施問題', payload.facility_issue_type], ['發生頁面', payload.page_area], ['裝置', payload.device_type],
+    ['搜尋結果', payload.search_snapshot], ['說明', payload.body], ['聯絡方式', payload.contact || '未填'],
+    ['目前頁面', payload.page], ['時間', new Date().toLocaleString('zh-Hant', { hour12: false })], ['瀏覽器', payload.user_agent]
+  ];
+  return ['KSW-METRO 問題回報', '', ...labels.filter(([, value]) => value !== '').map(([label, value]) => `${label}：${value}`)].join('\n');
 }
 function reportStatus(message, ok) {
   const box = $('#reportMsg');
   box.replaceChildren(el('div', ok ? 'ok' : 'err', message));
 }
-function validateReport() {
-  if ($('#rBody').value.trim().length < 4) {
-    reportStatus('請寫下遇到的狀況（至少 4 個字），再送出或複製。', false);
-    $('#rBody').focus();
-    return false;
-  }
-  return true;
-}
-function reportPayload() {
-  return {
-    type: $('#rType').value,
-    station: $('#rStation').value.trim(),
-    body: $('#rBody').value.trim(),
-    contact: $('#rContact').value.trim(),
-    page: location.href,
-    user_agent: navigator.userAgent
-  };
-}
+$('#rType').onchange = () => { REPORT_CONTEXT.source = ''; renderReportFields(); reportStatus('', true); };
+renderReportFields();
 $('#sendReport').onclick = async () => {
   if (!validateReport()) return;
   const btn = $('#sendReport');
+  const enforceCooldown = !['localhost', '127.0.0.1'].includes(location.hostname);
+  const lastSent = enforceCooldown ? Number(localStorage.getItem('ksw-report-last-sent') || 0) : 0;
+  if (enforceCooldown && Date.now() - lastSent < 45000) return reportStatus('上一則回報剛送出，請稍候再送下一則。', false);
   btn.disabled = true;
   btn.textContent = '送出中…';
   try {
     await window.supabaseReady;
     const { error } = await window.supabaseClient.from('reports').insert(reportPayload());
     if (error) throw error;
-    $('#rBody').value = '';
+    if (enforceCooldown) localStorage.setItem('ksw-report-last-sent', String(Date.now()));
+    REPORT_CONTEXT.source = ''; REPORT_CONTEXT.station = REPORT_CONTEXT.from = REPORT_CONTEXT.to = null;
+    REPORT_CONTEXT.routeSnapshot = REPORT_CONTEXT.displayedFare = REPORT_CONTEXT.searchSnapshot = '';
+    renderReportFields();
     reportStatus('回報已送出，謝謝。', true);
   } catch (e) {
     reportStatus('暫時無法送出，請檢查網路後再試。若持續發生，可改用「複製回報內容」。', false);
@@ -1225,10 +3603,29 @@ const stationCodeSortKey = code => {
 const compareStationCodes = (a, b) => {
   const [aMain, aBranch] = stationCodeSortKey(a[0]);
   const [bMain, bBranch] = stationCodeSortKey(b[0]);
+  // The Yeoncheon extension's real travel order is 100-3 → 100-2 → 100-1 → 100.
+  if (aMain === 100 && bMain === 100) return bBranch - aBranch;
   return aMain - bMain || aBranch - bBranch;
 };
+const BRANCH_LINE_LABELS = new Map([
+  ['1P', '支線'], ['1G', '接駁'], ['1S', '支線'], ['2B', '支線'], ['2C', '支線'], ['5M', '支線']
+]);
+function lineDirectionGuide(line) {
+  if (line.id !== '1') return null;
+  const guide = el('div', 'line-direction-guide');
+  guide.appendChild(el('strong', null, '搭車方向'));
+  const first = line.st[0], last = line.st[line.st.length - 1];
+  guide.append(
+    el('span', 'line-direction-choice', '往 ' + first[2] + '・' + first[0]),
+    el('span', 'line-direction-choice', '往 ' + last[2] + '・' + last[0])
+  );
+  return guide;
+}
 LINES.forEach(l => {
-  const c = el('button', 'chip', l.zh);
+  const c = el('button', 'chip');
+  c.appendChild(document.createTextNode(l.zh));
+  const branchLabel = BRANCH_LINE_LABELS.get(l.id);
+  if (branchLabel) c.appendChild(el('span', 'chip-kind', branchLabel));
   c.style.borderColor = l.color; c.style.color = l.color;
   c.dataset.id = l.id; c.setAttribute('aria-pressed', 'false');
   c.onclick = () => {
@@ -1240,14 +3637,17 @@ LINES.forEach(l => {
     if (open) return;
     c.setAttribute('aria-pressed', 'true'); c.style.background = l.color; c.style.color = '#fff';
     const w = el('div'); w.style.marginTop = '12px';
-    l.st.slice().sort(compareStationCodes).forEach(s => w.appendChild(row(stationFor(l, s))));
+    const guide = lineDirectionGuide(l);
+    if (guide) box.appendChild(guide);
+    l.st.slice().sort(compareStationCodes).forEach(s => w.appendChild(row(stationFor(l, s), undefined, l.id)));
     box.appendChild(w);
   };
   $(l.city === 'busan' ? '#busan-chips' : '#seoul-chips').appendChild(c);
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.111.0" integrity="sha384-fPWur1rx/DE6YtXP/x0MD6dd90RgnVsz5yX/DIg7CcVAnTBZsENWuIcpvVTM39ti" crossorigin="anonymous"></script>
 <script src="supabase-config.js"></script>
 <script src="supabase-client.js"></script>
+<script src="visit-tracker.js"></script>
 </body>
 </html>

@@ -1,0 +1,594 @@
+[
+  {
+    "lineId": "1",
+    "requestedPage": "首都圈電鐵1號線",
+    "resolvedTitle": "首都圈電鐵1號線",
+    "url": "https://zh.wikipedia.org/wiki/首都圈電鐵1號線",
+    "selectedTables": [
+      {
+        "tableIndex": 5,
+        "file": "1-5.csv",
+        "rows": 66,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "漣川开始 累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 6,
+        "file": "1-6.csv",
+        "rows": 36,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "漣川开始 累積距離",
+          "所在地",
+          "所在地.1",
+          "備註"
+        ]
+      },
+      {
+        "tableIndex": 7,
+        "file": "1-7.csv",
+        "rows": 3,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "漣川开始 累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 8,
+        "file": "1-8.csv",
+        "rows": 3,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "漣川开始 累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "2",
+    "requestedPage": "首爾地鐵2號線",
+    "resolvedTitle": "首爾地鐵2號線",
+    "url": "https://zh.wikipedia.org/wiki/首爾地鐵2號線",
+    "selectedTables": [
+      {
+        "tableIndex": 6,
+        "file": "2-6.csv",
+        "rows": 44,
+        "columns": [
+          "車站編號 / ↑ 往忠正路站方向",
+          "中文站名 / ↑ 往忠正路站方向",
+          "韓文站名 / ↑ 往忠正路站方向",
+          "英文站名 / ↑ 往忠正路站方向",
+          "接續路線 / ↑ 往忠正路站方向",
+          "站間距離 / ↑ 往忠正路站方向",
+          "累積距離 / ↑ 往忠正路站方向",
+          "所在地 / ↑ 往忠正路站方向",
+          "所在地 / ↑ 往忠正路站方向.1",
+          ""
+        ]
+      },
+      {
+        "tableIndex": 7,
+        "file": "2-7.csv",
+        "rows": 5,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 8,
+        "file": "2-8.csv",
+        "rows": 5,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "3",
+    "requestedPage": "首都圈電鐵3號線",
+    "resolvedTitle": "首都圈電鐵3號線",
+    "url": "https://zh.wikipedia.org/wiki/首都圈電鐵3號線",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "3-4.csv",
+        "rows": 45,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1",
+          "Unnamed: 10"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "4",
+    "requestedPage": "首都圈電鐵4號線",
+    "resolvedTitle": "首都圈电铁4号线",
+    "url": "https://zh.wikipedia.org/wiki/首都圈电铁4号线",
+    "selectedTables": [
+      {
+        "tableIndex": 3,
+        "file": "4-3.csv",
+        "rows": 52,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "急行",
+          "接續路線",
+          "接續路線.1",
+          "接續路線.2",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "5",
+    "requestedPage": "首爾地鐵5號線",
+    "resolvedTitle": "首尔地铁5号线",
+    "url": "https://zh.wikipedia.org/wiki/首尔地铁5号线",
+    "selectedTables": [
+      {
+        "tableIndex": 1,
+        "file": "5-1.csv",
+        "rows": 45,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 2,
+        "file": "5-2.csv",
+        "rows": 8,
+        "columns": [
+          "車站編號 / ↑ 與首爾地鐵5號線本線直通運行",
+          "中文站名 / ↑ 與首爾地鐵5號線本線直通運行",
+          "韓文站名 / ↑ 與首爾地鐵5號線本線直通運行",
+          "英文站名 / ↑ 與首爾地鐵5號線本線直通運行",
+          "接續路線 / ↑ 與首爾地鐵5號線本線直通運行",
+          "站間距離 / ↑ 與首爾地鐵5號線本線直通運行",
+          "營業距離 / ↑ 與首爾地鐵5號線本線直通運行",
+          "所在地 / ↑ 與首爾地鐵5號線本線直通運行",
+          "所在地 / ↑ 與首爾地鐵5號線本線直通運行.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "6",
+    "requestedPage": "首爾地鐵6號線",
+    "resolvedTitle": "首尔地铁6号线",
+    "url": "https://zh.wikipedia.org/wiki/首尔地铁6号线",
+    "selectedTables": [
+      {
+        "tableIndex": 5,
+        "file": "6-5.csv",
+        "rows": 40,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "7",
+    "requestedPage": "首爾地鐵7號線",
+    "resolvedTitle": "首爾地鐵7號線",
+    "url": "https://zh.wikipedia.org/wiki/首爾地鐵7號線",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "7-4.csv",
+        "rows": 53,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 5,
+        "file": "7-5.csv",
+        "rows": 3,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 6,
+        "file": "7-6.csv",
+        "rows": 9,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "8",
+    "requestedPage": "首都圈電鐵8號線",
+    "resolvedTitle": "首都圈電鐵8號線",
+    "url": "https://zh.wikipedia.org/wiki/首都圈電鐵8號線",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "8-4.csv",
+        "rows": 27,
+        "columns": [
+          "路線",
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "9",
+    "requestedPage": "首爾地鐵9號線",
+    "resolvedTitle": "首爾地鐵9號線",
+    "url": "https://zh.wikipedia.org/wiki/首爾地鐵9號線",
+    "selectedTables": [
+      {
+        "tableIndex": 3,
+        "file": "9-3.csv",
+        "rows": 39,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "急行",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "A",
+    "requestedPage": "仁川國際機場鐵道",
+    "resolvedTitle": "仁川國際機場鐵道",
+    "url": "https://zh.wikipedia.org/wiki/仁川國際機場鐵道",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "A-4.csv",
+        "rows": 14,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "直通",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "D",
+    "requestedPage": "新盆唐線",
+    "resolvedTitle": "新盆唐線",
+    "url": "https://zh.wikipedia.org/wiki/新盆唐線",
+    "selectedTables": [
+      {
+        "tableIndex": 3,
+        "file": "D-3.csv",
+        "rows": 16,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      },
+      {
+        "tableIndex": 4,
+        "file": "D-4.csv",
+        "rows": 5,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1",
+          "所在地.2"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "UI",
+    "requestedPage": "牛耳新設線",
+    "resolvedTitle": "首爾輕電鐵牛耳新設線",
+    "url": "https://zh.wikipedia.org/wiki/首爾輕電鐵牛耳新設線",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "UI-4.csv",
+        "rows": 15,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "B1",
+    "requestedPage": "釜山都市鐵道1號線",
+    "resolvedTitle": "釜山都市铁道1号线",
+    "url": "https://zh.wikipedia.org/wiki/釜山都市铁道1号线",
+    "selectedTables": [
+      {
+        "tableIndex": 3,
+        "file": "B1-3.csv",
+        "rows": 40,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "B2",
+    "requestedPage": "釜山都市铁道2号线",
+    "resolvedTitle": "釜山都市铁道2号线",
+    "url": "https://zh.wikipedia.org/wiki/釜山都市铁道2号线",
+    "selectedTables": [
+      {
+        "tableIndex": 5,
+        "file": "B2-5.csv",
+        "rows": 43,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "B3",
+    "requestedPage": "釜山都市铁道3号线",
+    "resolvedTitle": "釜山都市铁道3号线",
+    "url": "https://zh.wikipedia.org/wiki/釜山都市铁道3号线",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "B3-4.csv",
+        "rows": 17,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "B4",
+    "requestedPage": "釜山都市铁道4号线",
+    "resolvedTitle": "釜山都市铁道4号线",
+    "url": "https://zh.wikipedia.org/wiki/釜山都市铁道4号线",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "B4-4.csv",
+        "rows": 14,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "BGL",
+    "requestedPage": "釜山—金海轻电铁",
+    "resolvedTitle": "釜山—金海轻电铁",
+    "url": "https://zh.wikipedia.org/wiki/釜山—金海轻电铁",
+    "selectedTables": [
+      {
+        "tableIndex": 4,
+        "file": "BGL-4.csv",
+        "rows": 21,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "累積距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  },
+  {
+    "lineId": "DH",
+    "requestedPage": "广域电铁东海线",
+    "resolvedTitle": "广域电铁东海线",
+    "url": "https://zh.wikipedia.org/wiki/广域电铁东海线",
+    "selectedTables": [
+      {
+        "tableIndex": 1,
+        "file": "DH-1.csv",
+        "rows": 24,
+        "columns": [
+          "車站編號",
+          "中文站名",
+          "韓文站名",
+          "英文站名",
+          "接續路線",
+          "站間距離",
+          "營業距離",
+          "所在地",
+          "所在地.1"
+        ]
+      }
+    ]
+  }
+]
