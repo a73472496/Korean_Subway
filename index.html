@@ -344,7 +344,7 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
 </style>
 <style>
 /* Keep the anti-spam honeypot entirely outside the visual layout. */
-.report-honeypot{position:fixed!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;margin:-1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.report-honeypot{position:fixed!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;margin:-1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}.report-honeypot[hidden],#reportMsg:empty{display:none!important}
 .report-honeypot input{width:1px!important;min-width:0!important;min-height:0!important;height:1px!important;margin:0!important;padding:0!important;border:0!important}
 /* Compact status strip: sampled from a platform indicator rather than a generic AI process card. */
 .photo-status{--ocr-progress:14%;position:relative;display:block;margin-top:12px;padding:0;overflow:hidden;border:1px solid rgba(154,190,181,.72);border-radius:9px;background:rgba(250,253,252,.88);box-shadow:0 1px 0 rgba(255,255,255,.94),0 7px 18px rgba(33,91,83,.055)}.photo-status[hidden]{display:none}
@@ -435,7 +435,7 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
       <div id="reportDynamic" class="report-dynamic field-wide"></div>
       <div class="field"><label for="rContact">聯絡方式（選填）</label>
         <input type="text" id="rContact" placeholder="Email 或其他方便聯絡的方式" autocomplete="email"></div>
-      <div class="report-honeypot" aria-hidden="true"><label for="rWebsite">網站</label><input id="rWebsite" type="text" tabindex="-1" autocomplete="off"></div>
+      <div class="report-honeypot" aria-hidden="true" hidden><label for="rWebsite">網站</label><input id="rWebsite" type="text" tabindex="-1" autocomplete="off"></div>
     </div>
     <div class="report-actions">
       <button class="go" id="sendReport">送出回報</button>
