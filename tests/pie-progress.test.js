@@ -58,3 +58,9 @@ test('實心圓餅元件可自訂尺寸與色彩', () => {
   assert.equal(base.getAttribute('fill'), '#e5ecea');
   assert.equal(sector.getAttribute('fill'), '#135f56');
 });
+
+test('連續更新時維持同一個平滑動畫，而不是每次 OCR 訊息都重啟', () => {
+  assert.match(source, /let target = current/);
+  assert.match(source, /const catchUp = 1 - Math\.exp\(-elapsed \/ 115\)/);
+  assert.match(source, /if \(frame\) return/);
+});

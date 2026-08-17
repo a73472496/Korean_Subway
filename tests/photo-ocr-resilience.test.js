@@ -30,6 +30,8 @@ test('photo OCR keeps its status UI available for consecutive photos', () => {
   assert.match(index, /photoPie\.update\(visualProgress\)/);
   assert.match(index, /status\.append\(statusHead\)/);
   assert.match(index, /remainingStatusTime > 0/);
+  assert.match(index, /const visualProgress = Math\.max\(lastOcrProgress, stageProgress\[stage\] \|\| 0, requestedProgress\)/);
+  assert.match(index, /if \(visualProgress === lastOcrProgress && requestedProgress < lastOcrProgress\) return/);
   assert.doesNotMatch(index, /status\.hidden = true; status\.textContent = ''/);
 });
 

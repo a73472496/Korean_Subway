@@ -2164,23 +2164,39 @@ function createPieProgress({ progress = 0, size = 32, activeColor = '#2d8277', i
   sector.setAttribute('fill', activeColor);
   svg.append(base, sector);
   let current = clamp(progress);
+  let target = current;
   let frame = 0;
+  let lastFrameAt = 0;
   const draw = value => sector.setAttribute('d', sectorPath(value));
-  const update = (nextProgress, { animate = true } = {}) => {
-    const target = clamp(nextProgress);
-    cancelAnimationFrame(frame);
-    const start = current;
-    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const duration = animate && !reducedMotion ? 380 : 0;
-    if (!duration || start === target) { current = target; draw(current); return; }
-    const startedAt = performance.now();
-    const tick = now => {
-      const elapsed = Math.min(1, (now - startedAt) / duration);
-      const eased = 1 - Math.pow(1 - elapsed, 3);
-      current = start + (target - start) * eased;
+  const tick = now => {
+    // Follow a moving target instead of restarting the animation for every OCR log event.
+    // OCR progress events can arrive in bursts, so cancelling/restarting here made the pie jitter.
+    const elapsed = Math.max(0, now - lastFrameAt);
+    lastFrameAt = now;
+    const catchUp = 1 - Math.exp(-elapsed / 115);
+    current += (target - current) * catchUp;
+    if (Math.abs(target - current) < 0.08) {
+      current = target;
       draw(current);
-      if (elapsed < 1) frame = requestAnimationFrame(tick);
-    };
+      frame = 0;
+      return;
+    }
+    draw(current);
+    frame = requestAnimationFrame(tick);
+  };
+  const update = (nextProgress, { animate = true } = {}) => {
+    const nextTarget = clamp(nextProgress);
+    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!animate || reducedMotion) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      current = target = nextTarget;
+      draw(current);
+      return;
+    }
+    target = nextTarget;
+    if (frame) return;
+    lastFrameAt = performance.now();
     frame = requestAnimationFrame(tick);
   };
   draw(current);
@@ -2822,9 +2838,14 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
   const statusLive = el('span', 'photo-status-live', '處理中'); statusLive.setAttribute('aria-hidden', 'true');
   const statusHead = el('div', 'photo-status-head'); statusHead.append(statusPulse, statusCopy, statusLive);
   status.append(statusHead);
+  const stageProgress = { prepare: 18, tool: 46, read: 76, compare: 100 };
+  let lastOcrProgress = 0;
   const setOcrStatus = (stage, title, detail, progress) => {
-    const stageProgress = { prepare: 18, tool: 46, read: 76, compare: 100 };
-    const visualProgress = Number.isFinite(progress) ? progress : stageProgress[stage] || 0;
+    const requestedProgress = Number.isFinite(progress) ? progress : stageProgress[stage] || 0;
+    // OCR can emit late events from an earlier stage. Never show progress going backwards.
+    const visualProgress = Math.max(lastOcrProgress, stageProgress[stage] || 0, requestedProgress);
+    if (visualProgress === lastOcrProgress && requestedProgress < lastOcrProgress) return;
+    lastOcrProgress = visualProgress;
     status.dataset.stage = stage;
     photoPie.update(visualProgress);
     statusTitle.textContent = title;
@@ -2835,6 +2856,8 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     if (!file) return;
     box.open = true; result.hidden = true; photoAction.disabled = true; photoAction.textContent = '正在讀取…';
     const statusShownAt = performance.now();
+    lastOcrProgress = 0;
+    photoPie.update(0, { animate: false });
     status.hidden = false; setOcrStatus('prepare', '正在整理照片…', '準備讀取方向牌');
     let worker;
     let workerPromise;
