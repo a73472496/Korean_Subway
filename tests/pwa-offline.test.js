@@ -29,4 +29,5 @@ test('首頁會註冊離線快取，並提供安裝與 iPhone 手動加入主畫
   assert.match(index, /function requestPwaInstall\(\)/);
   assert.match(index, /加入主畫面/);
   assert.match(index, /Safari 分享 → 加入主畫面/);
+  assert.match(index, /offlinePrep\.hidden = ready;/);
 });

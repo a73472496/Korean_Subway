@@ -366,7 +366,7 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
       <div class="eyebrow">KSW-METRO</div>
     </div>
     <h1>首爾・釜山地鐵中文查詢與路線規劃</h1>
-    <p><strong>首爾、釜山，我在哪一站？</strong> 用中文、韓文、羅馬拼音或站號找站，再查附近車站、轉乘與搭車方向。</p>
+    <p><strong>首爾、釜山，我在哪一站？</strong><br>用中文、韓文、羅馬拼音或站號找站，再查附近車站、轉乘與搭車方向。</p>
     <nav class="quick-nav" aria-label="快速導覽">
       <a href="#station-search-panel">找站名</a>
       <a href="#route-panel">路線規劃</a>
@@ -379,7 +379,7 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
 
   <section class="card" id="location-panel">
     <button class="locate" id="btn"><span class="dot"></span>更新目前位置</button>
-    <div class="note" id="note">第一次使用請允許定位。之後再次開啟時會自動更新附近車站。地下月台訊號較弱，結果可能不準。</div>
+    <div class="note" id="note">第一次使用請允許定位，之後會自動更新附近車站。</div>
     <div id="errbox"></div>
   </section>
 
@@ -1808,7 +1808,7 @@ function locate({ automatic = false } = {}) {
       clearAutoLocationTimer();
       const city = best.s.city === 'busan' ? '釜山' : '首爾';
       eb.appendChild(el('div', 'err', '附近找不到首爾或釜山地鐵站。最近的是' + city + '「' + best.s.zh + '」站，約 ' + fmt(best.d) + '。你仍可使用下方搜尋或路線規劃。'));
-      $('#note').textContent = '已完成定位。需要時可再更新目前位置。';
+      $('#note').textContent = '已完成定位，需要時可再更新目前位置。';
       return;
     }
     lastLocatedAt = Date.now();
@@ -2881,8 +2881,10 @@ function strictDirectionDecision(analysis, comparison) {
   return { reliable: false, conflict: false, movement, target, paired, reason: hasCode ? 'number-only' : 'single-evidence' };
 }
 function appendPhotoChecks(result, checks) {
+  const successfulChecks = checks.filter(check => check.state === 'ok');
+  if (!successfulChecks.length) return;
   const list = el('div', 'photo-checks');
-  checks.forEach(check => list.appendChild(el('span', 'photo-check ' + check.state, check.label + '：' + check.value)));
+  successfulChecks.forEach(check => list.appendChild(el('span', 'photo-check ' + check.state, check.label + '：' + check.value)));
   result.appendChild(list);
 }
 function photoDirectionGuide(L, idx, nextLine, nextIdx) {
@@ -2962,6 +2964,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     const ready = state === 'ready';
     offlineButton.disabled = downloading || ready;
     offlineButton.textContent = downloading ? '正在準備…' : ready ? '已下載到此裝置' : state === 'failed' ? '重新下載辨識資料' : '下載離線辨識資料';
+    offlinePrep.hidden = ready;
   };
   const offlineOcrProgress = message => {
     const progress = Number.isFinite(message.progress) ? message.progress : 0;
