@@ -14,11 +14,13 @@ test('photo OCR permits WebAssembly without enabling JavaScript eval', () => {
 test('photo OCR exposes each loading phase and has bounded wait times', () => {
   assert.match(index, /const OCR_MODULE_TIMEOUT_MS = 30000/);
   assert.match(index, /const OCR_WORKER_TIMEOUT_MS = 45000/);
+  assert.match(index, /const OCR_FIRST_WORKER_TIMEOUT_MS = 120000/);
   assert.match(index, /const OCR_RECOGNITION_TIMEOUT_MS = 45000/);
-  assert.match(index, /正在下載韓文辨識工具/);
+  assert.match(index, /正在準備韓文辨識工具/);
   assert.match(index, /正在下載韓文辨識資料/);
   assert.match(index, /辨識工具啟動逾時/);
   assert.match(index, /站牌文字讀取逾時/);
+  assert.match(index, /第一次下載韓文辨識資料逾時/);
 });
 
 test('photo OCR keeps its status UI available for consecutive photos', () => {
@@ -56,7 +58,13 @@ test('photo OCR timeout rejects a stalled task with a useful error code', async 
   );
 });
 
-test('photo OCR cleans up a worker that finishes after a timeout', () => {
-  assert.match(index, /workerPromise\.then\(lateWorker => lateWorker\.terminate\(\)\)/);
-  assert.match(index, /if \(worker\) await worker\.terminate\(\)\.catch/);
+test('photo OCR warms and reuses the full Korean and English worker without reducing recognition data', () => {
+  assert.match(index, /const OCR_WORKER_IDLE_MS = 300000/);
+  assert.match(index, /Tesseract\.createWorker\('kor\+eng', 1, \{[\s\S]*?cacheMethod: 'write'/);
+  assert.match(index, /function warmOcrWorker\(\)/);
+  assert.match(index, /photoAction\.onpointerdown = warmOcrWorker/);
+  assert.match(index, /box\.addEventListener\('toggle', \(\) => \{ if \(box\.open\) warmOcrWorker\(\); \}\)/);
+  assert.match(index, /box\.appendChild\(reportButton\);\s*\/\/ Start the full offline OCR preparation[\s\S]*?warmOcrWorker\(\);/);
+  assert.match(index, /if \(worker\) scheduleOcrWorkerRelease\(\);/);
+  assert.doesNotMatch(index, /await worker\.terminate\(\); worker = null/);
 });

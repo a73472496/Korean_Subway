@@ -14,6 +14,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/ksw-metro-icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/ksw-metro-icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <meta name="theme-color" content="#287c73">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KSW-METRO">
@@ -349,6 +350,9 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
 .photo-status-pulse{display:block;width:32px;height:32px;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;color:inherit}.photo-status-pulse circle,.photo-status-pulse path{shape-rendering:geometricPrecision}
 .photo-status-copy{display:grid;min-width:0;gap:2px}.photo-status-kicker{color:#52736d;font:750 9px/1.2 var(--mono);letter-spacing:.075em}.photo-status-copy strong{overflow:hidden;color:#253b37;font-size:13px;font-weight:780;line-height:1.32;text-overflow:ellipsis;white-space:nowrap}.photo-status-copy>span:last-child{overflow:hidden;color:#718580;font:500 10px/1.35 var(--sans);text-overflow:ellipsis;white-space:nowrap}.photo-status-live{position:relative;align-self:start;padding:2px 0 2px 9px;color:#52736d;font:750 9px/1.2 var(--mono);letter-spacing:.04em;white-space:nowrap}.photo-status-live::before{position:absolute;top:5px;left:0;width:5px;height:5px;border-radius:50%;background:#5eaa9c;content:''}
 @media(max-width:420px){.photo-status-head{grid-template-columns:30px minmax(0,1fr);gap:9px;min-height:55px;padding:10px 12px}.photo-status-pulse{width:30px;height:30px}.photo-status-live{display:none}.photo-status-copy strong{font-size:12px}.photo-status-copy>span:last-child{font-size:9px}}
+/* Keep the return control away from left-aligned cards and primary actions. */
+#back-to-top{right:20px;left:auto}
+@media(max-width:620px){#back-to-top{right:max(14px,env(safe-area-inset-right));left:auto;bottom:max(16px,env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body>
@@ -2084,6 +2088,9 @@ $('#go').onclick = () => {
     source: 'route_planner', from: a, to: b, routeSnapshot, displayedFare: fare.label
   });
   box.appendChild(reportButton);
+  // Start the full offline OCR preparation as soon as a traveller has a route.
+  // It is ready while they walk to the platform, rather than after a photo is chosen.
+  warmOcrWorker();
   box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
 };
 function stats(n) { return n + ' 站'; }
@@ -2219,6 +2226,15 @@ function withOcrTimeout(promise, timeoutMs, message) {
   });
 }
 let tesseractLoader;
+// Keep the heavy Korean + English OCR worker alive briefly.  The language data
+// remains in IndexedDB between visits; this cache removes the extra setup cost
+// for additional photos during the same trip without lowering OCR accuracy.
+const OCR_WORKER_IDLE_MS = 300000;
+const OCR_FIRST_WORKER_TIMEOUT_MS = 120000;
+let tesseractWorker;
+let tesseractWorkerPromise;
+let tesseractWorkerStatusListener;
+let tesseractWorkerIdleTimer;
 function loadTesseract() {
   if (window.Tesseract) return Promise.resolve(window.Tesseract);
   if (tesseractLoader) return tesseractLoader;
@@ -2245,6 +2261,49 @@ function loadTesseract() {
     document.head.appendChild(script);
   });
   return tesseractLoader;
+}
+function clearOcrWorkerRelease() {
+  if (tesseractWorkerIdleTimer) window.clearTimeout(tesseractWorkerIdleTimer);
+  tesseractWorkerIdleTimer = 0;
+}
+function scheduleOcrWorkerRelease() {
+  clearOcrWorkerRelease();
+  if (!tesseractWorker) return;
+  tesseractWorkerIdleTimer = window.setTimeout(() => {
+    const staleWorker = tesseractWorker;
+    tesseractWorker = null;
+    tesseractWorkerPromise = null;
+    tesseractWorkerStatusListener = null;
+    tesseractWorkerIdleTimer = 0;
+    if (staleWorker) staleWorker.terminate().catch(() => {});
+  }, OCR_WORKER_IDLE_MS);
+}
+function getTesseractWorker(statusListener) {
+  tesseractWorkerStatusListener = statusListener || null;
+  clearOcrWorkerRelease();
+  if (tesseractWorker) return Promise.resolve(tesseractWorker);
+  if (!tesseractWorkerPromise) {
+    tesseractWorkerPromise = loadTesseract()
+      .then(Tesseract => Tesseract.createWorker('kor+eng', 1, {
+        cacheMethod: 'write',
+        logger: message => { if (tesseractWorkerStatusListener) tesseractWorkerStatusListener(message); }
+      }))
+      .then(worker => {
+        tesseractWorker = worker;
+        scheduleOcrWorkerRelease();
+        return worker;
+      })
+      .catch(error => {
+        tesseractWorkerPromise = null;
+        throw error;
+      });
+  }
+  return tesseractWorkerPromise;
+}
+function warmOcrWorker() {
+  return getTesseractWorker()
+    .then(worker => { scheduleOcrWorkerRelease(); return worker; })
+    .catch(() => null);
 }
 function ocrScale(width, height) {
   const longest = Math.max(width, height);
@@ -2843,8 +2902,11 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
   photoAction.onkeydown = event => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
+    warmOcrWorker();
     if (!input.disabled) input.click();
   };
+  photoAction.onpointerdown = warmOcrWorker;
+  box.addEventListener('toggle', () => { if (box.open) warmOcrWorker(); });
   const status = el('div', 'photo-status'); status.hidden = true; status.setAttribute('aria-live', 'polite');
   const photoPie = createPieProgress({ progress: 0, size: 32, activeColor: '#2d8277', inactiveColor: '#dbe9e6' });
   const statusPulse = photoPie.element;
@@ -2877,7 +2939,6 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     photoPie.update(0, { animate: false });
     status.hidden = false; setOcrStatus('prepare', '正在整理照片…', '準備讀取方向牌');
     let worker;
-    let workerPromise;
     const updateOcrStatus = message => {
       const labels = {
         'loading tesseract core': ['tool', '正在啟動辨識工具…', '第一次使用時需要一點時間'],
@@ -2887,20 +2948,23 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         'recognizing text': ['read', '正在讀取站牌文字…', '正在找站名、線號與箭頭']
       };
       const [stage, label, detail] = labels[message.status] || ['tool', '正在準備辨識…', '請稍候'];
-      const progress = Number.isFinite(message.progress) && stage === 'read' ? 76 + message.progress * 22 : undefined;
+      const progress = Number.isFinite(message.progress)
+        ? stage === 'read'
+          ? 76 + message.progress * 22
+          : message.status === 'loading language traineddata'
+            ? 22 + message.progress * 46
+            : undefined
+        : undefined;
       setOcrStatus(stage, label, detail, progress);
     };
     try {
       const prepared = await withOcrTimeout(shrinkForOcr(file), OCR_MODULE_TIMEOUT_MS, '照片處理逾時，請重新選擇清楚的 JPG 或 PNG。');
-      setOcrStatus('tool', '正在下載韓文辨識工具…', '第一次使用時需要一點時間');
-      const Tesseract = await loadTesseract();
-      workerPromise = Tesseract.createWorker('kor+eng', 1, { logger: updateOcrStatus });
-      try {
-        worker = await withOcrTimeout(workerPromise, OCR_WORKER_TIMEOUT_MS, '辨識工具啟動逾時，請確認網路後再試。');
-      } catch (error) {
-        if (error && error.code === 'OCR_TIMEOUT') workerPromise.then(lateWorker => lateWorker.terminate()).catch(() => {});
-        throw error;
-      }
+      setOcrStatus('tool', '正在準備韓文辨識工具…', '已在選照片時同步載入');
+      const workerTimeout = tesseractWorker ? OCR_WORKER_TIMEOUT_MS : OCR_FIRST_WORKER_TIMEOUT_MS;
+      const workerTimeoutMessage = tesseractWorker
+        ? '辨識工具啟動逾時，請確認網路後再試。'
+        : '第一次下載韓文辨識資料逾時，請確認網路後再試。';
+      worker = await withOcrTimeout(getTesseractWorker(updateOcrStatus), workerTimeout, workerTimeoutMessage);
       await worker.setParameters({ tessedit_pageseg_mode: '11', preserve_interword_spaces: '1' });
       const response = await withOcrTimeout(worker.recognize(prepared.image, {}, { blocks: true }), OCR_RECOGNITION_TIMEOUT_MS, '站牌文字讀取逾時，請重新拍攝較清楚的指示牌。');
       let ocrData = response.data;
@@ -2920,7 +2984,6 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
         analysis = context ? analyzePhotoSign(ocrData, prepared.width, context) : { signKind: 'transfer', mentions: [], planned: [], opposite: [], clear: null, pairedOpposite: null };
         if (reading.isTransfer) analysis.signKind = 'transfer';
       }
-      await worker.terminate(); worker = null;
       setOcrStatus('compare', '正在比對方向…', '核對路線、站名與箭頭');
       result.replaceChildren(); result.hidden = false;
       const place = analysis.signKind === 'transfer' ? '轉乘通道' : '月台';
@@ -2993,14 +3056,19 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       result.replaceChildren(); result.hidden = false; result.classList.add('warn');
       const reason = String(error && error.message || '');
       const isTimeout = error && error.code === 'OCR_TIMEOUT';
+      const isFirstDownloadTimeout = isTimeout && !worker && reason.includes('第一次下載韓文辨識資料');
       const message = isTimeout
         ? reason
         : reason.includes('照片')
           ? reason
           : '確認網路後重試，並讓整塊指示牌清楚入鏡。';
-      result.append(el('div', 'photo-result-label', isTimeout ? '讀取時間過久' : '這次沒有完成辨識'), el('strong', null, isTimeout ? '請確認網路後再試' : '請再試一次'), el('p', null, message));
+      result.append(
+        el('div', 'photo-result-label', isFirstDownloadTimeout ? '首次下載尚未完成' : isTimeout ? '讀取時間過久' : '這次沒有完成辨識'),
+        el('strong', null, isFirstDownloadTimeout ? '請保持網路連線後再試' : isTimeout ? '請確認網路後再試' : '請再試一次'),
+        el('p', null, message)
+      );
     } finally {
-      if (worker) await worker.terminate().catch(() => {});
+      if (worker) scheduleOcrWorkerRelease();
       const remainingStatusTime = OCR_STATUS_MIN_VISIBLE_MS - (performance.now() - statusShownAt);
       if (remainingStatusTime > 0) await new Promise(resolve => window.setTimeout(resolve, remainingStatusTime));
       status.hidden = true;
