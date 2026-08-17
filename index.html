@@ -14,6 +14,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/ksw-metro-icon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/ksw-metro-icon-180.png">
 <link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <meta name="theme-color" content="#287c73">
 <meta property="og:type" content="website">
@@ -335,6 +337,7 @@ input[type=search],input[type=text],input[type=email],input[type=number],select,
 @media (min-width:700px){.photo-samples{grid-template-columns:1fr 1fr}.photo-sample-group.transfer{grid-column:1/-1}.photo-sample-group.transfer .photo-sample-visual{height:126px}}
 @media (max-width:420px){.photo-sample-head{align-items:flex-start;flex-direction:column;gap:1px}.photo-sample-pair{gap:6px}.photo-sample-visual{height:78px}.photo-sample.column .photo-sample-visual{height:108px}.photo-sample figcaption span{font-size:8.5px}.photo-sample-group{padding:8px}}
 .photo-sample-group.transfer .photo-sample-pair{grid-template-columns:1fr}
+.offline-ocr-prep{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;margin:0 0 12px;padding:12px;border:1px solid rgba(154,190,181,.72);border-radius:8px;background:rgba(255,255,255,.48)}.offline-ocr-copy{display:grid;min-width:0;gap:3px}.offline-ocr-kicker{color:#52736d;font:750 9px/1.2 var(--mono);letter-spacing:.075em}.offline-ocr-copy strong{color:#253b37;font-size:13px;font-weight:780;line-height:1.35}.offline-ocr-copy p{margin:0;color:#718580;font-size:10px;line-height:1.55}.offline-ocr-actions{display:grid;align-content:center;justify-items:end;gap:5px;min-width:126px}.offline-ocr-button{min-height:36px;padding:0 10px;border:1px solid var(--accent);border-radius:6px;background:rgba(255,255,255,.84);color:var(--accent);font:750 11px/1.2 var(--sans);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}.offline-ocr-button:hover:not(:disabled){background:var(--accent);color:#fff}.offline-ocr-button:disabled{border-color:rgba(105,168,156,.5);background:rgba(223,241,236,.7);color:#52736d;cursor:default}.offline-ocr-status{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:0;color:#718580;font:700 9px/1.3 var(--mono);letter-spacing:.01em;text-align:right}.offline-ocr-status .photo-status-pulse{width:16px;height:16px;flex:0 0 auto}.offline-app-install{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:9px;border-top:1px solid rgba(154,190,181,.5)}.offline-app-install[hidden]{display:none}.offline-app-copy{display:grid;min-width:0;gap:2px}.offline-app-copy strong{color:#46645f;font:750 10px/1.35 var(--sans)}.offline-app-copy span{color:#718580;font-size:9px;line-height:1.45}.offline-app-button{flex:0 0 auto;min-height:34px;padding:0 9px;border:1px solid rgba(40,124,115,.58);border-radius:6px;background:transparent;color:#287c73;font:750 10px/1.2 var(--sans);cursor:pointer}.offline-app-button:hover{background:rgba(40,124,115,.1)}.offline-ocr-prep.is-downloading{border-color:rgba(40,124,115,.58)}.offline-ocr-prep.is-ready{border-color:rgba(105,168,156,.56);background:rgba(235,248,244,.56)}.offline-ocr-prep.is-failed{border-color:rgba(184,92,80,.55)}.offline-ocr-prep.is-failed .offline-ocr-status{color:#a84a4a}@media (max-width:620px){.offline-ocr-prep{grid-template-columns:1fr;gap:10px;padding:11px}.offline-ocr-actions{justify-items:stretch;min-width:0}.offline-ocr-button{min-height:42px}.offline-ocr-status{justify-content:flex-start;text-align:left}.offline-app-install{align-items:flex-start}.offline-app-button{min-height:40px}}
 .photo-samples{grid-template-columns:1fr}.photo-sample-group.transfer{grid-column:auto}
 @media (max-width:620px){.photo-sample-pair{grid-template-columns:1fr}.photo-sample-visual{height:102px}.photo-sample.column .photo-sample-visual{height:156px}.photo-sample-group.transfer .photo-sample-visual{height:116px}.photo-sample img,.photo-sample.column img,.photo-sample.column.bad img{object-fit:contain;object-position:center}.photo-sample figcaption{padding:5px 2px 2px}.photo-sample figcaption strong{font-size:10.5px}.photo-sample figcaption span{font-size:9px}}
 #report .report-grid{grid-template-columns:1fr!important}.report-intro{margin:-4px 0 18px;color:var(--text-muted);font-size:13px}.report-dynamic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.report-dynamic .field-wide{grid-column:1/-1}.report-dynamic input[type=number]{width:100%;min-height:48px;padding:11px 12px;border:1px solid rgba(156,190,181,.84);border-radius:8px;font:16px var(--sans)}.report-dynamic input[type=number]:focus{border-color:var(--accent);outline:3px solid rgba(40,124,115,.18)}.report-choice{margin:0 0 16px;padding:0;border:0}.report-choice legend{margin-bottom:8px;color:var(--text-muted);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.05em}.report-options{display:flex;flex-wrap:wrap;gap:8px}.report-option{position:relative}.report-option input{position:absolute;opacity:0;pointer-events:none}.report-option span{display:inline-flex;align-items:center;min-height:42px;padding:8px 12px;border:1px solid rgba(156,190,181,.84);border-radius:7px;background:rgba(255,255,255,.82);color:var(--text-muted);font-size:13px;font-weight:700;cursor:pointer}.report-option input:checked+span{border-color:var(--accent);background:var(--accent);color:#fff}.report-option input:focus-visible+span{outline:3px solid rgba(40,124,115,.22);outline-offset:2px}.report-readonly{min-height:48px;padding:11px 12px;border:1px solid rgba(171,207,198,.72);border-radius:8px;background:rgba(244,249,248,.64);color:var(--text-muted);font-size:13px;white-space:pre-wrap}.report-help{margin:-8px 0 14px;color:var(--text-faint);font-size:11px}.report-required{color:#a84a4a}.report-entry{display:inline-flex;align-items:center;justify-content:center;min-height:42px;margin-top:12px;padding:8px 12px;border:1px solid var(--border-strong);border-radius:7px;background:rgba(255,255,255,.76);color:var(--accent);font:700 12px var(--sans);cursor:pointer}.report-entry:hover{border-color:var(--accent);background:rgba(242,250,248,.92)}.report-station-field{position:relative}.report-station-field .sugg{top:calc(100% - 12px)}.report-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.report-context-note{margin:0 0 16px;padding:10px 12px;border-left:3px solid var(--accent);background:rgba(244,249,248,.7);color:var(--text-muted);font-size:12px}.report-grid>.field{grid-column:1/-1}@media(max-width:620px){.report-dynamic{grid-template-columns:1fr}.report-dynamic .field-wide{grid-column:1}.report-options{display:grid;grid-template-columns:1fr 1fr}.report-option span{width:100%;justify-content:center;text-align:center}.report-actions{display:grid;grid-template-columns:1fr}.report-actions>*{width:100%}}
@@ -2231,10 +2234,19 @@ let tesseractLoader;
 // for additional photos during the same trip without lowering OCR accuracy.
 const OCR_WORKER_IDLE_MS = 300000;
 const OCR_FIRST_WORKER_TIMEOUT_MS = 120000;
+const OCR_OFFLINE_PACK_KEY = 'ksw-metro-ocr-offline-v1';
 let tesseractWorker;
 let tesseractWorkerPromise;
 let tesseractWorkerStatusListener;
 let tesseractWorkerIdleTimer;
+function hasOcrOfflinePack() {
+  try { return window.localStorage.getItem(OCR_OFFLINE_PACK_KEY) === 'ready'; }
+  catch (_) { return false; }
+}
+function markOcrOfflinePackReady() {
+  try { window.localStorage.setItem(OCR_OFFLINE_PACK_KEY, 'ready'); }
+  catch (_) { /* Private browsing or restricted storage can still use this page session. */ }
+}
 function loadTesseract() {
   if (window.Tesseract) return Promise.resolve(window.Tesseract);
   if (tesseractLoader) return tesseractLoader;
@@ -2290,6 +2302,7 @@ function getTesseractWorker(statusListener) {
       }))
       .then(worker => {
         tesseractWorker = worker;
+        markOcrOfflinePackReady();
         scheduleOcrWorkerRelease();
         return worker;
       })
@@ -2300,11 +2313,49 @@ function getTesseractWorker(statusListener) {
   }
   return tesseractWorkerPromise;
 }
-function warmOcrWorker() {
-  return getTesseractWorker()
+function warmOcrWorker(statusListener) {
+  return getTesseractWorker(statusListener)
     .then(worker => { scheduleOcrWorkerRelease(); return worker; })
     .catch(() => null);
 }
+const PWA_INSTALL_EVENT = 'ksw-pwa-install-change';
+let deferredPwaInstallPrompt = null;
+function isInstalledPwa() {
+  return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function pwaInstallMode() {
+  if (isInstalledPwa()) return 'installed';
+  return deferredPwaInstallPrompt ? 'available' : 'instructions';
+}
+function announcePwaInstallChange() {
+  window.dispatchEvent(new Event(PWA_INSTALL_EVENT));
+}
+window.addEventListener('beforeinstallprompt', event => {
+  event.preventDefault();
+  deferredPwaInstallPrompt = event;
+  announcePwaInstallChange();
+});
+window.addEventListener('appinstalled', () => {
+  deferredPwaInstallPrompt = null;
+  announcePwaInstallChange();
+});
+async function requestPwaInstall() {
+  if (isInstalledPwa()) return 'installed';
+  if (!deferredPwaInstallPrompt) return 'instructions';
+  const promptEvent = deferredPwaInstallPrompt;
+  deferredPwaInstallPrompt = null;
+  await promptEvent.prompt();
+  const choice = await promptEvent.userChoice;
+  announcePwaInstallChange();
+  return choice.outcome === 'accepted' ? 'accepted' : 'dismissed';
+}
+function registerPwa() {
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }, { once: true });
+}
+registerPwa();
 function ocrScale(width, height) {
   const longest = Math.max(width, height);
   return longest < 1100 ? Math.min(5, 1500 / longest) : Math.min(1.35, 1800 / longest);
@@ -2849,6 +2900,110 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       document.createTextNode('「往 ' + platformContext.terminal[2] + '」的整塊方向牌，讓箭頭和兩側站名一起入鏡。不要拍出口牌。')
     );
   }
+  const offlinePrep = el('section', 'offline-ocr-prep');
+  const offlineCopy = el('div', 'offline-ocr-copy');
+  const offlineKicker = el('span', 'offline-ocr-kicker', 'OFFLINE READY');
+  const offlineTitle = el('strong', null, '出發前先準備方向辨識');
+  const offlineNote = el('p', null, '使用 Wi-Fi 下載完整韓文與英文辨識資料。照片只在此裝置內處理，不會上傳。');
+  offlineCopy.append(offlineKicker, offlineTitle, offlineNote);
+  const offlineActions = el('div', 'offline-ocr-actions');
+  const offlineButton = el('button', 'offline-ocr-button', '下載離線辨識資料');
+  offlineButton.type = 'button';
+  const offlineStatus = el('p', 'offline-ocr-status'); offlineStatus.setAttribute('aria-live', 'polite');
+  const offlinePie = createPieProgress({ progress: 0, size: 16, activeColor: '#2d8277', inactiveColor: '#dbe9e6' });
+  const offlineStatusText = el('span', null, '尚未下載');
+  offlineStatus.append(offlinePie.element, offlineStatusText);
+  offlineActions.append(offlineButton, offlineStatus);
+  const appInstall = el('div', 'offline-app-install');
+  const appInstallCopy = el('div', 'offline-app-copy');
+  const appInstallTitle = el('strong', null, '加入主畫面');
+  const appInstallHelp = el('span', null, '加入後，網站與已下載資料更容易保留。');
+  appInstallCopy.append(appInstallTitle, appInstallHelp);
+  const appInstallButton = el('button', 'offline-app-button', '加入主畫面');
+  appInstallButton.type = 'button';
+  appInstall.append(appInstallCopy, appInstallButton);
+  offlinePrep.append(offlineCopy, offlineActions, appInstall);
+  let appInstallFeedback = '';
+  const renderAppInstall = () => {
+    const mode = pwaInstallMode();
+    appInstall.hidden = mode === 'installed';
+    if (mode === 'installed') return;
+    if (mode === 'available') {
+      appInstallButton.disabled = false;
+      appInstallButton.textContent = '加入主畫面';
+      appInstallHelp.textContent = appInstallFeedback || '加入後，網站與已下載資料更容易保留。';
+    } else {
+      appInstallButton.disabled = false;
+      appInstallButton.textContent = '查看方式';
+      appInstallHelp.textContent = appInstallFeedback || 'iPhone 可在 Safari 的分享選單選「加入主畫面」。';
+    }
+  };
+  appInstallButton.addEventListener('click', async () => {
+    appInstallButton.disabled = true;
+    const outcome = await requestPwaInstall();
+    if (outcome === 'instructions') appInstallFeedback = 'iPhone：Safari 分享 → 加入主畫面。Android：瀏覽器選單 → 安裝應用程式。';
+    else if (outcome === 'accepted') appInstallFeedback = '完成後請從主畫面開啟 KSW-METRO。';
+    else if (outcome === 'dismissed') appInstallFeedback = '你可以稍後再從瀏覽器選單加入主畫面。';
+    renderAppInstall();
+  });
+  window.addEventListener(PWA_INSTALL_EVENT, renderAppInstall);
+  renderAppInstall();
+  let offlinePreparing = false;
+  let lastOfflineProgress = 0;
+  const setOfflinePackState = (state, label, progress) => {
+    offlinePrep.classList.remove('is-downloading', 'is-ready', 'is-failed');
+    if (state !== 'idle') offlinePrep.classList.add('is-' + state);
+    if (Number.isFinite(progress)) {
+      lastOfflineProgress = Math.max(lastOfflineProgress, progress);
+      offlinePie.update(lastOfflineProgress);
+    }
+    offlineStatusText.textContent = label;
+    const downloading = state === 'downloading';
+    const ready = state === 'ready';
+    offlineButton.disabled = downloading || ready;
+    offlineButton.textContent = downloading ? '正在準備…' : ready ? '已下載到此裝置' : state === 'failed' ? '重新下載辨識資料' : '下載離線辨識資料';
+  };
+  const offlineOcrProgress = message => {
+    const progress = Number.isFinite(message.progress) ? message.progress : 0;
+    if (message.status === 'loading language traineddata') {
+      setOfflinePackState('downloading', '下載辨識資料 ' + Math.round(progress * 100) + '%', 16 + progress * 78);
+    } else if (message.status === 'initializing api') {
+      setOfflinePackState('downloading', '完成設定中', 96);
+    } else if (message.status === 'initializing tesseract') {
+      setOfflinePackState('downloading', '初始化辨識工具', 12);
+    }
+  };
+  const prepareOfflineOcr = async () => {
+    if (offlinePreparing) return;
+    if (hasOcrOfflinePack() && !tesseractWorker) {
+      lastOfflineProgress = 100;
+      setOfflinePackState('ready', '此裝置已準備好', 100);
+      return;
+    }
+    offlinePreparing = true;
+    lastOfflineProgress = 0;
+    offlinePie.update(0, { animate: false });
+    setOfflinePackState('downloading', '正在準備下載', 6);
+    try {
+      const timeout = tesseractWorker ? OCR_WORKER_TIMEOUT_MS : OCR_FIRST_WORKER_TIMEOUT_MS;
+      await withOcrTimeout(getTesseractWorker(offlineOcrProgress), timeout, '下載辨識資料逾時，請確認網路後再試。');
+      markOcrOfflinePackReady();
+      scheduleOcrWorkerRelease();
+      setOfflinePackState('ready', '此裝置已準備好', 100);
+    } catch (error) {
+      const message = String(error && error.message || '下載沒有完成，請確認網路後再試。');
+      setOfflinePackState('failed', message, lastOfflineProgress);
+    } finally {
+      offlinePreparing = false;
+    }
+  };
+  if (hasOcrOfflinePack()) {
+    lastOfflineProgress = 100;
+    setOfflinePackState('ready', '此裝置已準備好', 100);
+  } else {
+    setOfflinePackState('idle', '尚未下載', 0);
+  }
+  offlineButton.addEventListener('click', prepareOfflineOcr);
   const examples = el('div', 'photo-samples');
   const sample = ({ src, alt, correct, title, note, kind = '', badge = '' }) => {
     const figure = el('figure', 'photo-sample ' + kind + ' ' + (correct === false ? 'bad' : 'good'));
@@ -2906,7 +3061,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
     if (!input.disabled) input.click();
   };
   photoAction.onpointerdown = warmOcrWorker;
-  box.addEventListener('toggle', () => { if (box.open) warmOcrWorker(); });
+  box.addEventListener('toggle', () => { if (box.open) prepareOfflineOcr(); });
   const status = el('div', 'photo-status'); status.hidden = true; status.setAttribute('aria-live', 'polite');
   const photoPie = createPieProgress({ progress: 0, size: 32, activeColor: '#2d8277', inactiveColor: '#dbe9e6' });
   const statusPulse = photoPie.element;
@@ -3088,7 +3243,7 @@ function photoDirectionGuide(L, idx, nextLine, nextIdx) {
       input.value = '';
     }
   };
-  content.append(photoAim, examples, input, photoAction, status, result);
+  content.append(photoAim, offlinePrep, examples, input, photoAction, status, result);
   box.append(summary, content);
   return box;
 }

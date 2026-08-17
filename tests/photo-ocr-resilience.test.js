@@ -61,10 +61,22 @@ test('photo OCR timeout rejects a stalled task with a useful error code', async 
 test('photo OCR warms and reuses the full Korean and English worker without reducing recognition data', () => {
   assert.match(index, /const OCR_WORKER_IDLE_MS = 300000/);
   assert.match(index, /Tesseract\.createWorker\('kor\+eng', 1, \{[\s\S]*?cacheMethod: 'write'/);
-  assert.match(index, /function warmOcrWorker\(\)/);
+  assert.match(index, /function warmOcrWorker\(statusListener\)/);
   assert.match(index, /photoAction\.onpointerdown = warmOcrWorker/);
-  assert.match(index, /box\.addEventListener\('toggle', \(\) => \{ if \(box\.open\) warmOcrWorker\(\); \}\)/);
+  assert.match(index, /box\.addEventListener\('toggle', \(\) => \{ if \(box\.open\) prepareOfflineOcr\(\); \}\)/);
   assert.match(index, /box\.appendChild\(reportButton\);\s*\/\/ Start the full offline OCR preparation[\s\S]*?warmOcrWorker\(\);/);
   assert.match(index, /if \(worker\) scheduleOcrWorkerRelease\(\);/);
   assert.doesNotMatch(index, /await worker\.terminate\(\); worker = null/);
+});
+
+test('offline OCR preparation uses the full local model and never sends a photo to a service', () => {
+  assert.match(index, /const OCR_OFFLINE_PACK_KEY = 'ksw-metro-ocr-offline-v1'/);
+  assert.match(index, /function hasOcrOfflinePack\(\)/);
+  assert.match(index, /function markOcrOfflinePackReady\(\)/);
+  assert.match(index, /出發前先準備方向辨識/);
+  assert.match(index, /下載離線辨識資料/);
+  assert.match(index, /照片只在此裝置內處理，不會上傳/);
+  assert.match(index, /offlineButton\.addEventListener\('click', prepareOfflineOcr\)/);
+  assert.match(index, /await withOcrTimeout\(getTesseractWorker\(offlineOcrProgress\)/);
+  assert.match(index, /Tesseract\.createWorker\('kor\+eng', 1/);
 });
